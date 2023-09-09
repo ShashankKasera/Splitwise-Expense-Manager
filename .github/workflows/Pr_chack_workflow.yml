@@ -53,3 +53,15 @@ jobs:
       - name: Detekt
         if: always()
         run: ./gradlew detektAll
+  danger:
+    runs-on: ubuntu-latest
+    name: "PR Sanity Check"
+    if: contains(github.head_ref,'renovate') == false
+    steps:
+      - uses: actions/checkout@v3
+      - name: Danger
+        uses: danger/kotlin@1.2.0
+        with:
+          args: --failOnErrors --no-publish-check
+        env:
+          GITHUB_TOKEN: ${{ secrets.ANDROID_PAT }}
