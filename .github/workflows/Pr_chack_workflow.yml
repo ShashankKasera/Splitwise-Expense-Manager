@@ -1,0 +1,54 @@
+name: Pull request CI checks
+
+on:
+  # Triggers the workflow when code is pushed on master branch
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+    branches:
+      - "release/*"
+      - "develop"
+      - "master"
+
+
+jobs:
+  lint:
+    name: Pr Chack
+    # The type of runner that the job will run on, this job will run on ubuntu machine
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the branch
+      - name: Check out branch
+        id: check_out_branch
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ANDROID_PAT }}
+
+      # Using JDK 11
+      - name: Set up JDK 11
+        id: set_up_jdk
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      # Cache Gradle Build Cache to improve workflow execution time
+      - name: Gradle Cache
+        id: gradle-cache
+        uses: ./.github/actions/gradle-cache
+        with:
+          key-prefix: gradle-lint
+
+      # run unit tests
+      - name: change wrapper permission
+        id: change_wrapper_permission
+        run: chmod +x ./gradlew
+
+      # run unit tests
+      - name: Run unit tests
+        id: run_unit_tests
+        run: ./gradlew testDebugUnitTest
+
+      - name: Detekt
+        if: always()
+        run: ./gradlew detektAll
