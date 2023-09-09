@@ -1,7 +1,7 @@
 name: Pull request CI checks
 
 on:
-  # Triggers the workflow when code is pushed on master branch
+  # Triggers the workflow on Pull request
   pull_request:
     types: [ opened, synchronize, reopened ]
     branches:
@@ -49,6 +49,7 @@ jobs:
         id: run_unit_tests
         run: ./gradlew testDebugUnitTest
 
+      # Run Detekt
       - name: Detekt
         if: always()
         run: ./gradlew detektAll
