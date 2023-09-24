@@ -2,3 +2,4 @@
 #2: Create a pr check workflow
 #3: Include danger for github in the project
 #7: code module added 
+#9: Dependencies added
