@@ -1,19 +1,18 @@
 plugins {
     id 'org.jetbrains.kotlin.android'
-    id 'com.android.application'
+    id 'com.android.library'
     id 'com.google.devtools.ksp'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
-    id 'com.google.gms.google-services'
 }
 
+
 android {
-    namespace 'com.example.splitwiseexpensemanager'
+    namespace 'com.example.splitwiseexpensemanager.authentication'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.splitwiseexpensemanager"
         minSdk 23
         targetSdk 34
         versionCode 1
@@ -39,28 +38,17 @@ android {
         jvmTarget = '1.8'
     }
 }
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
-}
-
-// Allow references to generated code
 kapt {
     correctErrorTypes true
 }
 
 dependencies {
 
-    implementation project(path: ':authentication')
-    implementation project(path: ':core')
-
     //android ui
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-
 
     //test libs
     testImplementation 'junit:junit:4.13.2'
@@ -110,7 +98,8 @@ dependencies {
     implementation "androidx.paging:paging-runtime:3.2.1"
 
     //Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-auth-ktx")
+    compileOnly(platform("com.google.firebase:firebase-bom:32.3.1"))
+    compileOnly("com.google.firebase:firebase-analytics-ktx")
+    compileOnly("com.google.firebase:firebase-auth-ktx")
+
 }

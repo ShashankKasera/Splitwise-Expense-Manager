@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.splitwiseexpensemanager'
+    namespace 'com.example.splitwiseexpensemanager.core'
     compileSdk 34
 
     defaultConfig {
@@ -21,6 +21,9 @@ android {
     }
 
     buildTypes {
+        debug{
+            minifyEnabled false
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "264353456008",
+    "project_id": "splitwise-expense-manager",
+    "storage_bucket": "splitwise-expense-manager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264353456008:android:66aeb7f703a964d3d0e43d",
+        "android_client_info": {
+          "package_name": "com.example.splitwiseexpensemanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRuSgYKiCZf_yMlsB06wpF3Kn4_JQZafQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
