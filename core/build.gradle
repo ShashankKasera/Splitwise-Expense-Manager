@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.splitwiseexpensemanager'
+    namespace 'com.example.splitwiseexpensemanager.core'
     compileSdk 34
 
     defaultConfig {
