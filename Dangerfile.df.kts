@@ -6,7 +6,7 @@ danger(args) {
     val modifiedFiled = git.modifiedFiles
     val allSourceFiles = modifiedFiled + createdFiles
     val bigPRThreshold = 1200
-    val prTitleRegex = Regex("^((#\\d)+(,(\\s)+)*)+:(\\s)+.*$")
+    val prTitleRegex = Regex("^((#\\d+)(,\\s+)*)+:\\s+.*\$")
 
     onGitHub {
         val prAdditionCount = pullRequest.additions ?: 0
