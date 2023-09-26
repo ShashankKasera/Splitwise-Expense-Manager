@@ -26,7 +26,8 @@
 <!--                android:value="" />-->
         </activity>
 
-        <activity android:name="com.example.authentication.LoginActivity">
+        <activity android:name="com.example.authentication.RegistrationActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

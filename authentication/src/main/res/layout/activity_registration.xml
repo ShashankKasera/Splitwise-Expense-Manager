@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.authentication.LoginActivity"
+    tools:context="com.example.authentication.RegistrationActivity"
     android:background="@drawable/main_gradient">
 
 
@@ -13,14 +13,73 @@
         android:layout_width="150dp"
         android:layout_height="200dp"
         android:src="@drawable/splitter"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_User"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="50dp"
+        app:cardElevation="8dp"
+        android:background="@color/primary"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginRight="34dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_logo">
+        <!-- Your CardView content goes here -->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_User"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/primary_mid">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_User_logo"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="30sp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:src="@drawable/user" />
+                </LinearLayout>
 
 
+            </androidx.cardview.widget.CardView>
+
+            <EditText
+                android:id="@+id/et_User"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:lines="1"
+                android:hint="Your Name"
+                android:inputType="text"
+                android:textColorHint="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/cv_User_logo" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_Email"
         android:layout_width="match_parent"
@@ -29,13 +88,13 @@
         app:cardCornerRadius="50dp"
         app:cardElevation="8dp"
         android:background="@color/primary"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="16dp"
         android:layout_marginLeft="34dp"
         android:layout_marginRight="34dp"
         app:cardPreventCornerOverlap="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_logo">
+        app:layout_constraintTop_toBottomOf="@+id/cv_User">
         <!-- Your CardView content goes here -->
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -164,11 +223,11 @@
             android:background="@color/white">
 
             <TextView
-                android:id="@+id/tv_login"
+                android:id="@+id/tv_Registration"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Login"
+                android:text="SING UP"
                 android:textSize="20dp"
                 android:textColor="@color/primary_dark" />
         </LinearLayout>
@@ -190,18 +249,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Dont't have an account?"
+            android:text="Already have an account?"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cv_login" />
 
         <TextView
-            android:id="@+id/tv_sing_up"
+            android:id="@+id/tv_Login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
-            android:text="Sing Up Now"
+            android:text="Login"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -211,9 +270,10 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_Contact_for_support"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Forget Password?"
+        android:text="Contect for Support"
         android:textColor="@color/white"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
