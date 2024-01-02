@@ -73,10 +73,11 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
-                android:lines="1"
                 android:hint="Your Name"
                 android:inputType="text"
+                android:lines="1"
                 android:textColorHint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cv_User_logo" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

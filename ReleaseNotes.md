@@ -9,3 +9,4 @@
 #18: Create Registration UI
 #20: Add Firebase Authentication
 #22: Add Firebase Authentication
+#24: Create Dashboard UI
