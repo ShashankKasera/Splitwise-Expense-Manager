@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.authentication.RegistrationActivity"
+    tools:context="com.example.authentication.registration.RegistrationActivity"
     android:background="@drawable/main_gradient">
 
 
@@ -281,4 +281,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <include
+        android:id="@+id/loader_Registration"
+        layout="@layout/loader"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
