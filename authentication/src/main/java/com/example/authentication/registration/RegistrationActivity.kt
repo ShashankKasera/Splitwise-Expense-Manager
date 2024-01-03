@@ -13,14 +13,19 @@ import androidx.lifecycle.lifecycleScope
 import com.example.authentication.MainActivity
 import com.example.authentication.login.LoginActivity
 import com.example.authentication.login.LoginViewModel
+import com.example.core.actionprocessor.ActionProcessor
+import com.example.core.actionprocessor.ActionType
+import com.example.core.actionprocessor.model.ActionRequestSchema
 import com.example.core.extension.gone
 import com.example.core.extension.visible
 import com.example.core.network.NetworkCallState
 import com.example.splitwiseexpensemanager.authentication.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+import javax.inject.Inject
+@AndroidEntryPoint
 class RegistrationActivity : AppCompatActivity() {
 
     private lateinit var userName: EditText
@@ -34,6 +39,8 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var sEmailAddress: String
     private lateinit var sPassword: String
 
+    @Inject
+    lateinit var actionProcessor: ActionProcessor
     private lateinit var auth: FirebaseAuth
     private val viewModel: RegistrationViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,17 +83,14 @@ class RegistrationActivity : AppCompatActivity() {
                     NetworkCallState.Success -> {
                         Log.i("hgk", "onCreate:Success")
                         loader.gone()
-
-                        val myIntent = Intent(this@RegistrationActivity, LoginActivity::class.java)
-                        startActivity(myIntent)
+                        actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name,))
                     }
                 }
             }
         }
 
         logInUpBtn.setOnClickListener {
-            val myIntent = Intent(this@RegistrationActivity, LoginActivity::class.java)
-            startActivity(myIntent)
+            actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name,))
         }
     }
 

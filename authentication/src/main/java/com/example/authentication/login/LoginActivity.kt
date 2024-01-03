@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.authentication.MainActivity
 import com.example.authentication.registration.RegistrationActivity
+import com.example.core.actionprocessor.ActionProcessor
+import com.example.core.actionprocessor.ActionType
+import com.example.core.actionprocessor.model.ActionRequestSchema
 import com.example.core.extension.gone
 import com.example.core.extension.visible
 import com.example.core.network.NetworkCallState
@@ -18,6 +21,7 @@ import com.example.core.network.NetworkCallState
 import com.example.splitwiseexpensemanager.authentication.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -33,7 +37,8 @@ class LoginActivity : AppCompatActivity() {
 
     private val viewModel:LoginViewModel by viewModels()
 
-
+    @Inject
+    lateinit var actionProcessor: ActionProcessor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,16 +76,14 @@ class LoginActivity : AppCompatActivity() {
                         Log.i("hgk", "onCreate:Success")
                         loader.gone()
 
-                        val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
-                        startActivity(myIntent)
+                        actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name,))
                     }
                 }
             }
         }
 
         singUpBtn.setOnClickListener {
-            val myIntent = Intent(this@LoginActivity, RegistrationActivity::class.java)
-            startActivity(myIntent)
+            actionProcessor.process(ActionRequestSchema(ActionType.REGISTRATION.name,))
         }
 
     }
