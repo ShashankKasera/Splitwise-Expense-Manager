@@ -1,18 +1,13 @@
 package com.example.authentication.registration
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.authentication.MainActivity
-import com.example.authentication.login.LoginActivity
-import com.example.authentication.login.LoginViewModel
 import com.example.core.actionprocessor.ActionProcessor
 import com.example.core.actionprocessor.ActionType
 import com.example.core.actionprocessor.model.ActionRequestSchema
@@ -21,7 +16,6 @@ import com.example.core.extension.visible
 import com.example.core.network.NetworkCallState
 import com.example.splitwiseexpensemanager.authentication.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject

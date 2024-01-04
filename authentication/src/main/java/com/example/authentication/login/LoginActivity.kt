@@ -1,6 +1,5 @@
 package com.example.authentication.login
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,8 +8,6 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.authentication.MainActivity
-import com.example.authentication.registration.RegistrationActivity
 import com.example.core.actionprocessor.ActionProcessor
 import com.example.core.actionprocessor.ActionType
 import com.example.core.actionprocessor.model.ActionRequestSchema
