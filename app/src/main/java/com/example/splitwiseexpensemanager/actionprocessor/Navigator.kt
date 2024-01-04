@@ -6,7 +6,7 @@ import com.example.authentication.login.LoginActivity
 import com.example.authentication.registration.RegistrationActivity
 import com.example.core.actionprocessor.model.ActionParams
 import com.example.core.extension.toBundle
-import com.example.splitwiseexpensemanager.MainActivity
+import com.example.splitwiseexpensemanager.activity.MainActivity
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
