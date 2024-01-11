@@ -1,5 +1,4 @@
 package com.example.authentication.login
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,32 +13,23 @@ import com.example.authentication.registration.RegistrationActivity
 import com.example.core.extension.gone
 import com.example.core.extension.visible
 import com.example.core.network.NetworkCallState
-
 import com.example.splitwiseexpensemanager.authentication.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
-
     private lateinit var emailAddress: EditText
     private lateinit var password: EditText
     private lateinit var loginBtn: TextView
     private lateinit var singUpBtn: TextView
     private lateinit var loader: View
-
     private lateinit var sEmailAddress: String
     private lateinit var sPassword: String
-
-    private val viewModel:LoginViewModel by viewModels()
-
-
-
+    private val viewModel: LoginViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
-
         emailAddress = findViewById(R.id.et_Email)
         password = findViewById(R.id.et_Password)
         loginBtn = findViewById(R.id.tv_login)
@@ -54,23 +44,24 @@ class LoginActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             viewModel.networkState.collect {
-                when(it){
+                when (it) {
                     is NetworkCallState.Error -> {
                         Log.i("hgk", "onCreate:Error ${it.errorMsg}")
                         loader.gone()
                     }
+
                     NetworkCallState.Init -> {
                         Log.i("hgk", "onCreate:init ")
-
                     }
+
                     NetworkCallState.Loading -> {
                         loader.visible()
                         Log.i("hgk", "onCreate:Loading")
                     }
+
                     NetworkCallState.Success -> {
                         Log.i("hgk", "onCreate:Success")
                         loader.gone()
-
                         val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(myIntent)
                     }
@@ -82,8 +73,5 @@ class LoginActivity : AppCompatActivity() {
             val myIntent = Intent(this@LoginActivity, RegistrationActivity::class.java)
             startActivity(myIntent)
         }
-
     }
-
-
 }

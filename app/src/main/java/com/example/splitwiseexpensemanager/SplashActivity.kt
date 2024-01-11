@@ -6,7 +6,6 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.example.authentication.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
-
 private const val SPLASH_DELAY: Long = 3000
 class SplashActivity : AppCompatActivity() {
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -14,16 +13,12 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
-
         Handler().postDelayed({
-
             val currentUser = auth.currentUser
             if (currentUser != null) {
-
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-            }
-            else{
+            } else {
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
             }
