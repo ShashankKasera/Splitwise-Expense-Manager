@@ -17,7 +17,6 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var emailAddress: EditText
     private lateinit var password: EditText
     private lateinit var singUpBtn: TextView
-
     private lateinit var sUserName: String
     private lateinit var sEmailAddress: String
     private lateinit var sPassword: String
@@ -27,29 +26,21 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
         supportActionBar?.hide()
-
         userName = findViewById(R.id.et_User)
         emailAddress = findViewById(R.id.et_Email)
         password = findViewById(R.id.et_Password)
         singUpBtn = findViewById(R.id.tv_Registration)
-
         auth = FirebaseAuth.getInstance()
-
         singUpBtn.setOnClickListener {
             sUserName = userName.text.toString().trim()
             sEmailAddress = emailAddress.text.toString().trim()
             sPassword = password.text.toString().trim()
-
             auth.createUserWithEmailAndPassword(sEmailAddress, sPassword)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("singup", "createUserWithEmail:success")
                         val user = auth.currentUser
                         updateUI(user)
                     } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w("singup", "createUserWithEmail:failure", task.exception)
                         Toast.makeText(
                             baseContext,
                             "Authentication failed.",
