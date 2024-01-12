@@ -6,5 +6,6 @@
 #11: Create Authentication Module
 #13: Add dependency in authentication module
 #16: Create login ui
-#18 Create Registration UI
-#20 Add Firebase Authentication
+#18: Create Registration UI
+#20: Add Firebase Authentication
+#22: Create Splash UI
