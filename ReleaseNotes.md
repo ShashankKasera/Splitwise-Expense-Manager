@@ -8,4 +8,4 @@
 #16: Create login ui
 #18: Create Registration UI
 #20: Add Firebase Authentication
-#22: Add Firebase Authentication
+#22: Create Splash UI
