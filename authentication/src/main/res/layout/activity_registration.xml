@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_gradient"
-    tools:context="com.example.authentication.RegistrationActivity">
+    tools:context="com.example.authentication.registration.RegistrationActivity"
+    android:background="@drawable/main_gradient">
+
 
     <ImageView
         android:id="@+id/iv_logo"
@@ -74,6 +75,7 @@
                 android:inputType="text"
                 android:lines="1"
                 android:textColorHint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cv_User_logo" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -277,4 +279,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <include
+        android:id="@+id/loader_Registration"
+        layout="@layout/loader"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
