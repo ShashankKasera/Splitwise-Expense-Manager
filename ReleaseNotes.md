@@ -9,6 +9,5 @@
 #18: Create Registration UI
 #20: Add Firebase Authentication
 #22: Create Splash UI
-#22: Add Firebase Authentication
 #24: Create Dashboard UI
 #25: Coroutine Add for Authentication
