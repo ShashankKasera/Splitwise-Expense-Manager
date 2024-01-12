@@ -1,3 +1,3 @@
 package com.example.core.extension
 
-val String.Companion.EMPTY: String get()  = ""
+val String.Companion.EMPTY: String get() = ""

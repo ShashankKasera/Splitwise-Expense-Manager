@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class RegistrationActionProcessor @Inject constructor(
     private val navigator: Navigator
-): Action {
+) : Action {
     override fun execute(params: ActionParams, callBack: ((Boolean) -> Unit)?) {
         navigator.navigate(Route.REGISTRATION, params)
     }
