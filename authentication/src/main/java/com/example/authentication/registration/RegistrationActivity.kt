@@ -1,5 +1,4 @@
 package com.example.authentication.registration
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -7,13 +6,18 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.authentication.login.LoginActivity
+import com.example.core.actionprocessor.ActionProcessor
+import com.example.core.actionprocessor.ActionType
+import com.example.core.actionprocessor.model.ActionRequestSchema
 import com.example.core.extension.gone
 import com.example.core.extension.visible
 import com.example.core.network.NetworkCallState
 import com.example.splitwiseexpensemanager.authentication.R
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+@AndroidEntryPoint
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var userName: EditText
     private lateinit var emailAddress: EditText
@@ -24,6 +28,9 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var sUserName: String
     private lateinit var sEmailAddress: String
     private lateinit var sPassword: String
+
+    @Inject
+    lateinit var actionProcessor: ActionProcessor
     private lateinit var auth: FirebaseAuth
     private val viewModel: RegistrationViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,15 +63,13 @@ class RegistrationActivity : AppCompatActivity() {
                     }
                     NetworkCallState.Success -> {
                         loader.gone()
-                        val myIntent = Intent(this@RegistrationActivity, LoginActivity::class.java)
-                        startActivity(myIntent)
+                        actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name,))
                     }
                 }
             }
         }
         logInUpBtn.setOnClickListener {
-            val myIntent = Intent(this@RegistrationActivity, LoginActivity::class.java)
-            startActivity(myIntent)
+            actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name,))
         }
     }
 }
