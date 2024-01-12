@@ -53,8 +53,6 @@ class LoginActivity : AppCompatActivity() {
                     }
                     NetworkCallState.Success -> {
                         loader.gone()
-                        val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
-                        startActivity(myIntent)
                     }
                 }
             }
