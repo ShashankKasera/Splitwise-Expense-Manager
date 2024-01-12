@@ -2,11 +2,11 @@ package com.example.splitwiseexpensemanager.actionprocessor
 
 import android.content.Context
 import android.content.Intent
-import com.example.authentication.MainActivity
 import com.example.authentication.login.LoginActivity
 import com.example.authentication.registration.RegistrationActivity
 import com.example.core.actionprocessor.model.ActionParams
 import com.example.core.extension.toBundle
+import com.example.splitwiseexpensemanager.MainActivity
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
