@@ -1,10 +1,7 @@
 package com.example.splitwiseexpensemanager
-
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import com.example.authentication.login.LoginActivity
 import com.example.core.actionprocessor.ActionProcessor
 import com.example.core.actionprocessor.ActionType
 import com.example.core.actionprocessor.model.ActionRequestSchema
@@ -23,9 +20,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
-
         Handler().postDelayed({
-
             val currentUser = auth.currentUser
             if (currentUser != null) {
                 actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name,))
@@ -33,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
             else{
                 actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name,))
             }
-
+            finish()
         }, SPLASH_DELAY)
 
     }
