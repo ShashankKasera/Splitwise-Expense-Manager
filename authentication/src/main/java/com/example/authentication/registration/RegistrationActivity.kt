@@ -48,18 +48,14 @@ class RegistrationActivity : AppCompatActivity() {
             viewModel.networkState.collect {
                 when (it) {
                     is NetworkCallState.Error -> {
-                        Log.i("hgk", "onCreate:Error ${it.errorMsg}")
                         loader.gone()
                     }
                     NetworkCallState.Init -> {
-                        Log.i("hgk", "onCreate:init ")
                     }
                     NetworkCallState.Loading -> {
                         loader.visible()
-                        Log.i("hgk", "onCreate:Loading")
                     }
                     NetworkCallState.Success -> {
-                        Log.i("hgk", "onCreate:Success")
                         loader.gone()
                         val myIntent = Intent(this@RegistrationActivity, LoginActivity::class.java)
                         startActivity(myIntent)
