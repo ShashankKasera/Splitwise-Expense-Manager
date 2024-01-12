@@ -14,10 +14,9 @@ class SplashActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         Handler().postDelayed({
-            // Start the main activity or another activity here
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish() // Finish the splash activity so the user can't go back to it
+            finish()
         }, SPLASH_DELAY)
     }
 }
