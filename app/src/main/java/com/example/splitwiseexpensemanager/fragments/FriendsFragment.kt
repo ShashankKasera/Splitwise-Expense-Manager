@@ -9,11 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.splitwiseexpensemanager.R
 import com.example.splitwiseexpensemanager.adapter.FriendAdapter
-import com.example.splitwiseexpensemanager.adapter.GroupAdapter
-
-
 class FriendsFragment : Fragment() {
-    lateinit var recyclerView : RecyclerView
+    lateinit var recyclerView: RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,7 +20,7 @@ class FriendsFragment : Fragment() {
 
         recyclerView = v.findViewById<View>(R.id.rv_friend) as RecyclerView
         val friendAdapter = FriendAdapter()
-        recyclerView.layoutManager = LinearLayoutManager(context,)
+        recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = friendAdapter
         return v
     }
