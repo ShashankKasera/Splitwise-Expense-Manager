@@ -14,3 +14,4 @@
 #27: Add Action Processor for navigation
 #29: Create Group Ui
 #31: Create Friend Screen Ui
+#33: Create Activity Screen Ui

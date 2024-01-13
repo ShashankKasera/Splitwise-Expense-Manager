@@ -6,12 +6,13 @@
     tools:context=".fragments.ActivityFragment"
     android:id="@+id/activity_fragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_activity"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Activity"
-        android:textSize="50dp"
-        android:layout_gravity="center"
-        android:textColor="@color/black" />
+        tools:itemCount="10"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        tools:listitem="@layout/activity_item" />
 
 </FrameLayout>
