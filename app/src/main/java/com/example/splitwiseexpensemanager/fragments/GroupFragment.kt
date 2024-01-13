@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.splitwiseexpensemanager.adapter.GroupAdapter
@@ -18,17 +17,17 @@ class GroupFragment : Fragment() {
 
     lateinit var RecyclerView :RecyclerView
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_group, container, false)
 
-        RecyclerView = v.findViewById<View>(R.id.rv_group) as RecyclerView
+        val recyclerView: RecyclerView = v.findViewById(R.id.rv_group)
         val groupAdapter = GroupAdapter()
-        RecyclerView.layoutManager = LinearLayoutManager(context,)
-        RecyclerView.adapter = groupAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = groupAdapter
+
         return v
     }
-
-
 }

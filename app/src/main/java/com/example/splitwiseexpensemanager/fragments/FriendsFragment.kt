@@ -13,19 +13,18 @@ import com.example.splitwiseexpensemanager.adapter.GroupAdapter
 
 
 class FriendsFragment : Fragment() {
-    lateinit var RecyclerView : RecyclerView
+    lateinit var recyclerView : RecyclerView
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_friends, container, false)
 
-        RecyclerView = v.findViewById<View>(R.id.rv_friend) as RecyclerView
+        recyclerView = v.findViewById<View>(R.id.rv_friend) as RecyclerView
         val friendAdapter = FriendAdapter()
-        RecyclerView.layoutManager = LinearLayoutManager(context,)
-        RecyclerView.adapter = friendAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context,)
+        recyclerView.adapter = friendAdapter
         return v
     }
-
-
 }

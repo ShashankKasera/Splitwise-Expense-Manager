@@ -2,7 +2,6 @@ package com.example.authentication.registration
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.authentication.registration.RegistrationUiState
 import com.example.core.network.NetworkCallState
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,15 +11,11 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class RegistrationViewModel @Inject constructor() : ViewModel() {
-
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val _networkState = MutableStateFlow<NetworkCallState>(NetworkCallState.Init)
     var networkState = _networkState.asStateFlow()
-
     private val _registrationUiState = MutableStateFlow<RegistrationUiState>(RegistrationUiState())
     val registrationUiState = _registrationUiState.asStateFlow()
-
-
     fun registration(email: String, password: String) {
         viewModelScope.launch {
             try {
