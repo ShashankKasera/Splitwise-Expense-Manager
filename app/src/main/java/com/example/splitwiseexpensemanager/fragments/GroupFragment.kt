@@ -21,11 +21,9 @@ class GroupFragment : Fragment() {
 
         RecyclerView = v.findViewById<View>(R.id.rv_group) as RecyclerView
         val groupAdapter = GroupAdapter()
-        RecyclerView.layoutManager = LinearLayoutManager(context,)
+        RecyclerView.layoutManager = LinearLayoutManager(context)
         RecyclerView.adapter = groupAdapter
 
         return v
     }
-
-
 }
