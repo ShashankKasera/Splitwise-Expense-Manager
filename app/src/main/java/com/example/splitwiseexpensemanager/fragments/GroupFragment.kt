@@ -12,6 +12,9 @@ import com.example.splitwiseexpensemanager.adapter.GroupAdapter
 
 
 class GroupFragment : Fragment() {
+
+
+    lateinit var recyclerView: RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -19,7 +22,7 @@ class GroupFragment : Fragment() {
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_group, container, false)
 
-        val recyclerView: RecyclerView = v.findViewById(R.id.rv_group)
+        recyclerView = v.findViewById(R.id.rv_group)
         val groupAdapter = GroupAdapter()
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = groupAdapter

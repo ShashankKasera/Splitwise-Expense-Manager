@@ -1,5 +1,6 @@
 package com.example.splitwiseexpensemanager.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ class GroupAdapter : RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        Log.i("njfnk", "onBindViewHolder: ")
     }
 
     override fun getItemCount(): Int {
