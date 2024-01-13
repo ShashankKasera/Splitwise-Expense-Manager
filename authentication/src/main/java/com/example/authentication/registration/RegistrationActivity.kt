@@ -1,7 +1,6 @@
 package com.example.authentication.registration
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -21,14 +20,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 @AndroidEntryPoint
 class RegistrationActivity : AppCompatActivity() {
-
     private lateinit var userName: EditText
     private lateinit var emailAddress: EditText
     private lateinit var password: EditText
     private lateinit var singUpBtn: TextView
     private lateinit var logInUpBtn: TextView
     private lateinit var loader: View
-
     private lateinit var sUserName: String
     private lateinit var sEmailAddress: String
     private lateinit var sPassword: String
@@ -41,7 +38,6 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
         supportActionBar?.hide()
-
         userName = findViewById(R.id.et_User)
         emailAddress = findViewById(R.id.et_Email)
         password = findViewById(R.id.et_Password)
@@ -49,43 +45,32 @@ class RegistrationActivity : AppCompatActivity() {
         logInUpBtn = findViewById(R.id.tv_Login)
         loader = findViewById(R.id.loader_Registration)
         auth = FirebaseAuth.getInstance()
-
         singUpBtn.setOnClickListener {
             sUserName = userName.text.toString().trim()
             sEmailAddress = emailAddress.text.toString().trim()
             sPassword = password.text.toString().trim()
-
             viewModel.registration(sEmailAddress, sPassword)
-
         }
-
         lifecycleScope.launch {
             viewModel.networkState.collect {
-                when(it){
+                when (it) {
                     is NetworkCallState.Error -> {
-                        Log.i("hgk", "onCreate:Error ${it.errorMsg}")
                         loader.gone()
                     }
                     NetworkCallState.Init -> {
-                        Log.i("hgk", "onCreate:init ")
-
                     }
                     NetworkCallState.Loading -> {
                         loader.visible()
-                        Log.i("hgk", "onCreate:Loading")
                     }
                     NetworkCallState.Success -> {
-                        Log.i("hgk", "onCreate:Success")
                         loader.gone()
                         actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name,))
                     }
                 }
             }
         }
-
         logInUpBtn.setOnClickListener {
             actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name,))
         }
     }
-
 }

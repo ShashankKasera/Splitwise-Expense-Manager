@@ -37,51 +37,40 @@
         </activity>
         <activity
             android:name=".activity.GroupDetailsActivity"
-            android:exported="true">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".activity.SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".activity.MainActivity"
-            android:exported="true">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".activity.CategoryActivity"
-            android:exported="true">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".activity.AddExpenseActivity"
-            android:exported="true">
+            android:exported="false">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name="com.example.authentication.registration.RegistrationActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.authentication.login.LoginActivity"
-            android:exported="false" />
     </application>
-
 </manifest>
