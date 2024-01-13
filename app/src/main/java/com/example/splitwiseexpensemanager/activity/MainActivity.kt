@@ -1,8 +1,9 @@
-package com.example.splitwiseexpensemanager
+package com.example.splitwiseexpensemanager.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.splitwiseexpensemanager.R
 import com.example.splitwiseexpensemanager.fragments.AccountFragment
 import com.example.splitwiseexpensemanager.fragments.ActivityFragment
 import com.example.splitwiseexpensemanager.fragments.FriendsFragment
