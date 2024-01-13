@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Splitwise Expense Manager"
 include ':app'
+include ':core'
+include ':authentication'
