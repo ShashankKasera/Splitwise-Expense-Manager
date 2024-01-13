@@ -19,10 +19,10 @@ class GroupFragment : Fragment() {
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_group, container, false)
 
-        RecyclerView = v.findViewById<View>(R.id.rv_group) as RecyclerView
+        val recyclerView: RecyclerView = v.findViewById(R.id.rv_group)
         val groupAdapter = GroupAdapter()
-        RecyclerView.layoutManager = LinearLayoutManager(context)
-        RecyclerView.adapter = groupAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = groupAdapter
 
         return v
     }
