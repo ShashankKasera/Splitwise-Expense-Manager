@@ -8,16 +8,14 @@ import com.example.splitwiseexpensemanager.R
 import com.example.splitwiseexpensemanager.adapter.SplitAmountAdapter
 
 class ExpensesDetailsActivity : AppCompatActivity() {
-    lateinit var RecyclerView : RecyclerView
+    lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_expenses_details)
 
-        RecyclerView = findViewById(R.id.rv_group_activity)
+        recyclerView = findViewById(R.id.rv_group_activity)
         val splitAmountAdapter = SplitAmountAdapter()
-        RecyclerView.layoutManager = LinearLayoutManager(this,)
-        RecyclerView.adapter = splitAmountAdapter
-
-
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = splitAmountAdapter
     }
 }
