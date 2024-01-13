@@ -18,3 +18,4 @@
 #35: Create Category Screen Ui
 #37: Create Add Expense Screen Ui
 #39: Create Group Details Screen Ui  
+#41: Create Expenses Details Screen Ui  
