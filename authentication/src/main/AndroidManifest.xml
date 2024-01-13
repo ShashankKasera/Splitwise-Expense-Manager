@@ -3,13 +3,6 @@
 
     <application>
         <activity
-            android:name="com.example.authentication.MainActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name="com.example.authentication.registration.RegistrationActivity"
             android:exported="false">
             <meta-data

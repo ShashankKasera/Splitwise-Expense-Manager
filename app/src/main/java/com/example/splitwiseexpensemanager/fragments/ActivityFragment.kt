@@ -9,23 +9,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.splitwiseexpensemanager.R
 import com.example.splitwiseexpensemanager.adapter.ActivityAdapter
-import com.example.splitwiseexpensemanager.adapter.FriendAdapter
-
 
 class ActivityFragment : Fragment() {
-    lateinit var RecyclerView : RecyclerView
+    lateinit var recyclerView: RecyclerView
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_activity, container, false)
 
-        RecyclerView = v.findViewById<View>(R.id.rv_activity) as RecyclerView
+        recyclerView = v.findViewById<View>(R.id.rv_activity) as RecyclerView
         val activityAdapter = ActivityAdapter()
-        RecyclerView.layoutManager = LinearLayoutManager(context,)
-        RecyclerView.adapter = activityAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = activityAdapter
         return v
     }
-
-
 }
