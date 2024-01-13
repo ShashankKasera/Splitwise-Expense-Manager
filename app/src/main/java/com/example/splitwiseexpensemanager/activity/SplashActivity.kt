@@ -12,29 +12,26 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 private const val SPLASH_DELAY: Long = 3000
+
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    @Inject
 
+    @Inject
     lateinit var actionProcessor: ActionProcessor
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
-
         Handler().postDelayed({
-
             val currentUser = auth.currentUser
             if (currentUser != null) {
-                actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name,))
+                actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
+            } else {
+                actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name))
             }
-            else{
-                actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name,))
-            }
-
+            finish()
         }, SPLASH_DELAY)
-
     }
 }

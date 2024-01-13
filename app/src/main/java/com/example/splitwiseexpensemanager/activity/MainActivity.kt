@@ -1,6 +1,7 @@
-package com.example.splitwiseexpensemanager.activity
+package com.example.splitwiseexpensemanager
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.splitwiseexpensemanager.R
@@ -12,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var bottomNav : BottomNavigationView
+    lateinit var bottomNav: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,20 +21,22 @@ class MainActivity : AppCompatActivity() {
         loadFragment(GroupFragment())
         bottomNav = findViewById(R.id.bottomNav) as BottomNavigationView
         bottomNav.setOnItemSelectedListener {
-
             when (it.itemId) {
                 R.id.group -> {
                     loadFragment(GroupFragment())
                     true
                 }
+
                 R.id.friends -> {
                     loadFragment(FriendsFragment())
                     true
                 }
+
                 R.id.activity -> {
                     loadFragment(ActivityFragment())
                     true
                 }
+
                 else -> {
                     loadFragment(AccountFragment())
                     true
@@ -41,9 +44,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    private  fun loadFragment(fragment: Fragment){
+
+    private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container,fragment)
+        transaction.replace(R.id.container, fragment)
         transaction.commit()
     }
 }
