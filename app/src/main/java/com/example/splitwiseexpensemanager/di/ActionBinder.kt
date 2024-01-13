@@ -1,18 +1,16 @@
 package com.example.splitwiseexpensemanager.di
 
-import com.example.splitwiseexpensemanager.actionprocessor.actions.LoginActionProcessor
+import com.example.splitwiseexpensemanager.actionprocessor.action.LoginActionProcessor
 import com.example.core.actionprocessor.Action
 import com.example.core.actionprocessor.ActionType
 import com.example.splitwiseexpensemanager.actionprocessor.action.RegistrationActionProcessor
-import com.example.splitwiseexpensemanager.actionprocessor.actions.DashboardActionProcessor
+import com.example.splitwiseexpensemanager.actionprocessor.action.DashboardActionProcessor
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoMap
-import javax.inject.Singleton
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
