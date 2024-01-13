@@ -11,11 +11,11 @@ import com.example.splitwiseexpensemanager.R
 import com.example.splitwiseexpensemanager.adapter.ActivityAdapter
 import com.example.splitwiseexpensemanager.adapter.FriendAdapter
 
-
 class ActivityFragment : Fragment() {
     lateinit var RecyclerView : RecyclerView
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_activity, container, false)
@@ -26,6 +26,4 @@ class ActivityFragment : Fragment() {
         RecyclerView.adapter = activityAdapter
         return v
     }
-
-
 }

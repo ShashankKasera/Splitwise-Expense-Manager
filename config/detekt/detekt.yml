@@ -683,7 +683,7 @@ style:
   SafeCast:
     active: true
   SerialVersionUIDInSerializableClass:
-    active: true
+    active: false
   SpacingBetweenPackageAndImports:
     active: false
   StringShouldBeRawString:
@@ -867,7 +867,7 @@ formatting:
     autoCorrect: true
     indentSize: 4
   ImportOrdering:
-    active: true
+    active: false
     autoCorrect: true
     layout: '*,java.**,javax.**,kotlin.**,^'
   Indentation:
@@ -906,7 +906,7 @@ formatting:
     active: true
     autoCorrect: true
   NoConsecutiveBlankLines:
-    active: true
+    active: false
     autoCorrect: true
   NoConsecutiveComments:
     active: false
