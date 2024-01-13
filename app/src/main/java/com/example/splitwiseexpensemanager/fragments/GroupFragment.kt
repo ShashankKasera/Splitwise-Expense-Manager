@@ -1,11 +1,15 @@
 package com.example.splitwiseexpensemanager.fragments
 
+import com.example.splitwiseexpensemanager.R
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.splitwiseexpensemanager.R
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.splitwiseexpensemanager.adapter.GroupAdapter
+
 
 class GroupFragment : Fragment() {
     override fun onCreateView(
@@ -13,7 +17,13 @@ class GroupFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_group, container, false)
+        val v: View = inflater.inflate(R.layout.fragment_group, container, false)
+
+        val recyclerView: RecyclerView = v.findViewById(R.id.rv_group)
+        val groupAdapter = GroupAdapter()
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = groupAdapter
+
+        return v
     }
 }
