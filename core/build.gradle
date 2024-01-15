@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.splitwiseexpensemanager.core'
+    namespace 'com.shashank.splitterexpensemanager.core'
     compileSdk 34
 
     defaultConfig {

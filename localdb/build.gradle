@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.localdb'
+    namespace 'com.shashank.splitterexpensemanager.localdb'
     compileSdk 34
 
     defaultConfig {

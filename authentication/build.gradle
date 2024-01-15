@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.splitwiseexpensemanager.authentication'
+    namespace 'com.shashank.splitterexpensemanager.authentication'
     compileSdk 34
 
     defaultConfig {
