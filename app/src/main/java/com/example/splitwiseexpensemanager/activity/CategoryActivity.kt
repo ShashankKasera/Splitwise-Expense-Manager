@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.splitwiseexpensemanager.R
 import com.example.splitwiseexpensemanager.adapter.CategoryAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CategoryActivity : AppCompatActivity() {
 
     lateinit var recyclerView: RecyclerView
