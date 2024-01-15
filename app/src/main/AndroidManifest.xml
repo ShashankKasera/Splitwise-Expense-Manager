@@ -14,7 +14,7 @@
         android:theme="@style/Theme.SplitwiseExpenseManager"
         tools:targetApi="31">
         <activity
-            android:name=".activity.TotalActivity"
+            android:name=".feature.total.TotalActivity"
             android:exported="false" >
 
             <meta-data
@@ -22,7 +22,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.ExpensesDetailsActivity"
+            android:name=".feature.expensesdetails.ExpensesDetailsActivity"
             android:exported="true">
 
 
@@ -31,31 +31,15 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.GroupDetailsActivity"
+            android:name=".feature.groupdetails.GroupDetailsActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.SplashActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-
-        <activity
-            android:name=".activity.MainActivity"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.CategoryActivity"
-            android:exported="true" >
-
+            android:name=".feature.splash.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -65,8 +49,23 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
-            android:name=".activity.AddExpenseActivity"
+            android:name=".feature.DashboardActivity"
+            android:exported="false" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".feature.category.CategoryActivity"
+            android:exported="false" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".feature.addexpense.AddExpenseActivity"
             android:exported="false">
 
             <meta-data
