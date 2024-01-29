@@ -7,17 +7,20 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.google.firebase.auth.FirebaseAuth
+import com.shashank.splitterexpensemanager.authentication.R
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
-import com.shashank.splitterexpensemanager.authentication.R
-import com.google.firebase.auth.FirebaseAuth
+import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+
 @AndroidEntryPoint
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var userName: EditText
@@ -57,20 +60,25 @@ class RegistrationActivity : AppCompatActivity() {
                     is NetworkCallState.Error -> {
                         loader.gone()
                     }
+
                     NetworkCallState.Init -> {
                     }
+
                     NetworkCallState.Loading -> {
                         loader.visible()
                     }
+
                     NetworkCallState.Success -> {
                         loader.gone()
-                        actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name,))
+
+                        viewModel.insertPerson(Person(1, sUserName, sEmailAddress, "imahe"))
+                        actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name))
                     }
                 }
             }
         }
         logInUpBtn.setOnClickListener {
-            actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name,))
+            actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name))
         }
     }
 }
