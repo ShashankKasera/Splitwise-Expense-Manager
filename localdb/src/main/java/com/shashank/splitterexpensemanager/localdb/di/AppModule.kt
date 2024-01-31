@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.shashank.splitterexpensemanager.core.ROOM_DB
 import com.shashank.splitterexpensemanager.localdb.room.SplitterDatabase
 import com.shashank.splitterexpensemanager.localdb.room.dao.CategoryDao
+import com.shashank.splitterexpensemanager.localdb.room.dao.GroupDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.PersonDao
 import dagger.Module
 import dagger.Provides
@@ -32,5 +33,9 @@ class AppModule {
     @Singleton
     @Provides
     fun getCategoryDao(db: SplitterDatabase): CategoryDao = db.getCategoryDao()
+
+    @Singleton
+    @Provides
+    fun getGroupDao(db: SplitterDatabase): GroupDao = db.getGroupDao()
 }
 
