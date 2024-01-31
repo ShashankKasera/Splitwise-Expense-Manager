@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.shashank.splitterexpensemanager"
-        minSdk 24
+        minSdk 27
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -110,4 +110,5 @@ dependencies {
 
     //lottie
     implementation "com.airbnb.android:lottie:6.1.0"
+
 }

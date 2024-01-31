@@ -1,6 +1,7 @@
 package com.shashank.splitterexpensemanager.authentication.registration
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -71,7 +72,10 @@ class RegistrationActivity : AppCompatActivity() {
                     NetworkCallState.Success -> {
                         loader.gone()
 
-                        viewModel.insertPerson(Person(1, sUserName, sEmailAddress, "imahe"))
+                        viewModel.insertPerson(Person(null, sUserName, sEmailAddress, "imahe"))
+                        viewModel.personLiveData.observe(this@RegistrationActivity) {
+                            Log.i("gyug", "onCreate: $it")
+                        }
                         actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name))
                     }
                 }
