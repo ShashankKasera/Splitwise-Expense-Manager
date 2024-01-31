@@ -5,7 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Group(
-    @PrimaryKey(autoGenerate = true) var id: Long,
+    @PrimaryKey(autoGenerate = true)
+    var id: Long?,
     var groupName: String,
     var groupImage: String,
 )

@@ -76,7 +76,7 @@ class RegistrationActivity : AppCompatActivity() {
                         viewModel.personLiveData.observe(this@RegistrationActivity) {
                             Log.i("gyug", "onCreate: $it")
                         }
-                        actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name))
+                        actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
                     }
                 }
             }
