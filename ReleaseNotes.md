@@ -7,3 +7,4 @@
 #59: Save group in database
 #61: Save Group Member in database
 #63: Save Expenses in Database 
+#65: Create new group UI
