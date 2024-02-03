@@ -7,6 +7,8 @@ import com.shashank.splitterexpensemanager.authentication.registration.Registrat
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionParams
 import com.shashank.splitterexpensemanager.core.extension.toBundle
 import com.shashank.splitterexpensemanager.feature.DashboardActivity
+import com.shashank.splitterexpensemanager.feature.addgroup.AddGroupActivity
+import com.shashank.splitterexpensemanager.feature.addgroupmember.AddGroupMemberActivity
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
@@ -20,6 +22,8 @@ class DefaultNavigator @Inject constructor(@ActivityContext private val context:
             Route.DASH_BOARD -> Intent(context, DashboardActivity::class.java)
             Route.LOGIN -> Intent(context, LoginActivity::class.java)
             Route.REGISTRATION -> Intent(context, RegistrationActivity::class.java)
+            Route.ADD_GROUP_MEMBER -> Intent(context, AddGroupMemberActivity::class.java)
+            Route.ADD_GROUP -> Intent(context, AddGroupActivity::class.java)
         }.apply {
             actionParams?.data?.toBundle()?.let {
                 putExtras(it)
@@ -33,5 +37,7 @@ class DefaultNavigator @Inject constructor(@ActivityContext private val context:
 enum class Route {
     DASH_BOARD,
     LOGIN,
-    REGISTRATION
+    REGISTRATION,
+    ADD_GROUP_MEMBER,
+    ADD_GROUP
 }

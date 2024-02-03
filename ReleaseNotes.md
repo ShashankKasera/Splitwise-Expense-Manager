@@ -8,3 +8,4 @@
 #61: Save Group Member in database
 #63: Save Expenses in Database 
 #65: Create new group UI
+#67: Group Create

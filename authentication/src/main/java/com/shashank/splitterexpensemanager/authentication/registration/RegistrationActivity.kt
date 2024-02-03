@@ -72,7 +72,7 @@ class RegistrationActivity : AppCompatActivity() {
                     NetworkCallState.Success -> {
                         loader.gone()
 
-                        viewModel.insertPerson(Person(null, sUserName, sEmailAddress, "imahe"))
+                        viewModel.insertPerson(Person(null, sUserName, sEmailAddress, null))
                         viewModel.personLiveData.observe(this@RegistrationActivity) {
                             Log.i("gyug", "onCreate: $it")
                         }

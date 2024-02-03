@@ -1,5 +1,7 @@
 package com.shashank.splitterexpensemanager.di
 
+import com.shashank.splitterexpensemanager.actionprocessor.action.AddGroupActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.AddGroupMemberActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.LoginActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.Action
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
@@ -35,4 +37,14 @@ internal abstract class ActionsMultiBinderModule {
     @IntoMap
     @ActionTypeKey(ActionType.REGISTRATION)
     internal abstract fun bindRegistrationAction(action: RegistrationActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.ADD_GROUP_MEMBER)
+    internal abstract fun bindAddGroupMemberAction(action: AddGroupMemberActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.ADD_GROUP)
+    internal abstract fun bindAddGroupAction(action: AddGroupActionProcessor): Action
 }
