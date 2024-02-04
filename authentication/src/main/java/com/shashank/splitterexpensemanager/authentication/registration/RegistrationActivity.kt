@@ -73,7 +73,7 @@ class RegistrationActivity : AppCompatActivity() {
                         loader.gone()
 
                         viewModel.insertPerson(Person(null, sUserName, sEmailAddress, "imahe"))
-                        actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name))
+                        actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
                     }
                 }
             }

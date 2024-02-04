@@ -14,6 +14,7 @@ import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.shashank.splitterexpensemanager.authentication.R
+import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -61,6 +62,7 @@ class LoginActivity : AppCompatActivity() {
 
                     NetworkCallState.Success -> {
                         loader.gone()
+                        viewModel.insertPerson(Person(null, null, sEmailAddress, "image"))
                         actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
                     }
                 }
