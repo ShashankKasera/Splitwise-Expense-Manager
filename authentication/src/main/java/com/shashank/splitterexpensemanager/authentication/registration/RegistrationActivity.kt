@@ -1,7 +1,6 @@
 package com.shashank.splitterexpensemanager.authentication.registration
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -41,6 +40,7 @@ class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
+
         supportActionBar?.hide()
         userName = findViewById(R.id.et_User)
         emailAddress = findViewById(R.id.et_Email)
@@ -73,10 +73,7 @@ class RegistrationActivity : AppCompatActivity() {
                         loader.gone()
 
                         viewModel.insertPerson(Person(null, sUserName, sEmailAddress, "imahe"))
-                        viewModel.personLiveData.observe(this@RegistrationActivity) {
-                            Log.i("gyug", "onCreate: $it")
-                        }
-                        actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name))
+                        actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
                     }
                 }
             }

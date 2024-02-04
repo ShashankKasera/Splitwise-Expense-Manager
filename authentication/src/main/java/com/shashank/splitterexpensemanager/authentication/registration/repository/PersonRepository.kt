@@ -6,10 +6,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 class PersonRepository @Inject constructor(var personDao: PersonDao) {
     suspend fun insertPerson(person: Person) = withContext(Dispatchers.IO) {
-        personDao.insertPerson(person)
-    }
-    suspend fun insertAllPerson(vararg person: Person) = withContext(Dispatchers.IO) {
-        personDao.insertAllPerson(*person)
+        personDao.insertAllPerson(person)
     }
     fun loadAllPerson() = personDao.loadAllPerson()
 }
