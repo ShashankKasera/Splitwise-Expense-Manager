@@ -1,7 +1,6 @@
 package com.shashank.splitterexpensemanager.authentication.registration
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView

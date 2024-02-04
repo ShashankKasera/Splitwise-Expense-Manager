@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
+        android:weightSum="10"
         android:background="@color/primary_mid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,6 +23,7 @@
             android:layout_gravity="center"
             android:layout_width="40dp"
             android:layout_height="30dp"
+            android:layout_weight="2"
             android:layout_marginLeft="8dp"
             android:src="@drawable/back_icon"/>
 
@@ -32,8 +34,19 @@
             android:text="Create a group"
             android:textColor="@color/white"
             android:textSize="24dp"
+            android:layout_weight="7"
             android:layout_marginLeft="16dp"
             android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/tv_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:layout_gravity="right|center"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:layout_marginLeft="16dp"/>
     </LinearLayout>
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civ_group_image"
@@ -86,229 +99,15 @@
         app:layout_constraintTop_toBottomOf="@+id/civ_group_image" />
 
 
-    <HorizontalScrollView
-        android:id="@+id/hsv_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:foregroundGravity="center_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_group_type">
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="8"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_group_type">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_trip"
-                android:layout_width="70dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="4dp"
-                android:layout_weight="2"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/civ_trip"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/trip_png"
-                        app:civ_circle_background_color="@color/primary_mid" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="4dp"
-                        android:text="@string/trip"
-                        android:textColor="@color/black"
-                        android:textSize="16dp" />
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_home"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="4dp"
-                android:layout_weight="2"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/civ_home"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/home_rent_icon_png"
-                        app:civ_circle_background_color="@color/primary_mid" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="4dp"
-                        android:text="@string/home"
-                        android:textColor="@color/black"
-                        android:textSize="16dp" />
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_couple"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="4dp"
-                android:layout_weight="2"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/civ_couple"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/couple_png"
-                        app:civ_circle_background_color="@color/primary_mid" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="4dp"
-                        android:text="@string/couple"
-                        android:textColor="@color/black"
-                        android:textSize="16dp" />
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_other"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="16dp"
-                android:layout_weight="2"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/civ_other"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/other_png"
-                        app:civ_circle_background_color="@color/primary_mid" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="4dp"
-                        android:text="@string/other"
-                        android:textColor="@color/black"
-                        android:textSize="16dp" />
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-
-        </LinearLayout>
-
-    </HorizontalScrollView>
-
-    <TextView
-        android:id="@+id/tv_group_member"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Group Member"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hsv_group" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_group_member"
+        android:id="@+id/rv_group_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_group_member"
-        tools:itemCount="20"
-        tools:listitem="@layout/group_member_item" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_group_type"
+        tools:itemCount="10"
+        tools:listitem="@layout/group_type_item" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_settle_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="24dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/main_gradient">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:gravity="center"
-                android:padding="4dp"
-                android:text="Add Member"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:textSize="16dp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
