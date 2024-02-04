@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.google.firebase.auth.FirebaseAuth
 import com.shashank.splitterexpensemanager.authentication.login.repository.LoginRepository
-import com.shashank.splitterexpensemanager.authentication.registration.repository.RegistrationRepository
 import com.shashank.splitterexpensemanager.localdb.model.Category
 import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.lifecycle.HiltViewModel
