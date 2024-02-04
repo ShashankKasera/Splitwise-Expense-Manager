@@ -5,19 +5,18 @@ import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.google.firebase.auth.FirebaseAuth
 import com.shashank.splitterexpensemanager.localdb.model.Person
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import com.shashank.splitterexpensemanager.authentication.registration.repository.RegistrationRepository
 import com.shashank.splitterexpensemanager.localdb.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 
 @HiltViewModel
-class RegistrationViewModel @Inject constructor(var registrationRepository: RegistrationRepository) : ViewModel() {
+class RegistrationViewModel @Inject constructor(var registrationRepository: RegistrationRepository) :
+    ViewModel() {
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val _networkState = MutableStateFlow<NetworkCallState>(NetworkCallState.Init)
     var networkState = _networkState.asStateFlow()
@@ -43,9 +42,8 @@ class RegistrationViewModel @Inject constructor(var registrationRepository: Regi
     suspend fun insertPerson(person: Person) = viewModelScope.launch {
         registrationRepository.insertPerson(person)
     }
+
     suspend fun insertAllCategory(vararg category: Category) = viewModelScope.launch {
         registrationRepository.insertAllCategory(*category)
     }
-
-
 }

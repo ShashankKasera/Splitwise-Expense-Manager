@@ -73,29 +73,34 @@ class RegistrationActivity : AppCompatActivity() {
                     NetworkCallState.Success -> {
                         loader.gone()
 
-                        viewModel.insertPerson(Person(null,sUserName,sEmailAddress,"image"))
+                        viewModel.insertPerson(Person(null, sUserName, sEmailAddress, "image"))
                         viewModel.insertAllCategory(
-                        Category(null, "Game", R.drawable.game_icon_png),
-                        Category(null, "Movie", R.drawable.movie_icon_png),
-                        Category(null, "Music", R.drawable.music_icon_png),
-                        Category(null, "Sports", R.drawable.sport_icon_png),
-                        Category(null, "Dinig Out", R.drawable.dining_icon_png),
-                        Category(null, "Groceries", R.drawable.groceries_icon_png),
-                        Category(null, "Liquor", R.drawable.liquor_icon_png),
-                        Category(null, "Electronics", R.drawable.electronics_icon_png),
-                        Category(null, "furniture", R.drawable.furniture_icon_png),
-                        Category(null, "Household supplies", R.drawable.household_supplies_png),
-                        Category(null, "Maintenance", R.drawable.maintenance_icon_png),
-                        Category(null, "Mortgage", R.drawable.mortgage_icon_png),
-                        Category(null, "Pets", R.drawable.pets_icon_png),
-                        Category(null, "Rent", R.drawable.home_rent_icon_png),
-                        Category(null, "Childcare", R.drawable.childcare_icon_png),
-                        Category(null, "Clothing", R.drawable.clothing_icon_png),
-                        Category(null, "Education", R.drawable.education_icon_png),
-                        Category(null, "Gift", R.drawable.gift_icon_png),
-                        Category(null, "Insurance", R.drawable.insurance_icon_ing),
-                        Category(null, "Medical expenses", R.drawable.medical_expenses_icon_png),
-                        Category(null, "Taxes", R.drawable.taxes_icon_png))
+                            Category(null, "Game", R.drawable.game_icon_png),
+                            Category(null, "Movie", R.drawable.movie_icon_png),
+                            Category(null, "Music", R.drawable.music_icon_png),
+                            Category(null, "Sports", R.drawable.sport_icon_png),
+                            Category(null, "Dinig Out", R.drawable.dining_icon_png),
+                            Category(null, "Groceries", R.drawable.groceries_icon_png),
+                            Category(null, "Liquor", R.drawable.liquor_icon_png),
+                            Category(null, "Electronics", R.drawable.electronics_icon_png),
+                            Category(null, "furniture", R.drawable.furniture_icon_png),
+                            Category(null, "Household supplies", R.drawable.household_supplies_png),
+                            Category(null, "Maintenance", R.drawable.maintenance_icon_png),
+                            Category(null, "Mortgage", R.drawable.mortgage_icon_png),
+                            Category(null, "Pets", R.drawable.pets_icon_png),
+                            Category(null, "Rent", R.drawable.home_rent_icon_png),
+                            Category(null, "Childcare", R.drawable.childcare_icon_png),
+                            Category(null, "Clothing", R.drawable.clothing_icon_png),
+                            Category(null, "Education", R.drawable.education_icon_png),
+                            Category(null, "Gift", R.drawable.gift_icon_png),
+                            Category(null, "Insurance", R.drawable.insurance_icon_ing),
+                            Category(
+                                null,
+                                "Medical expenses",
+                                R.drawable.medical_expenses_icon_png
+                            ),
+                            Category(null, "Taxes", R.drawable.taxes_icon_png)
+                        )
                         actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
                     }
                 }

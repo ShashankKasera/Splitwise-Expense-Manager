@@ -7,7 +7,11 @@ import com.shashank.splitterexpensemanager.localdb.room.dao.PersonDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-class RegistrationRepository @Inject constructor(var personDao: PersonDao,var categoryDao: CategoryDao) {
+
+class RegistrationRepository @Inject constructor(
+    var personDao: PersonDao,
+    var categoryDao: CategoryDao
+) {
     suspend fun insertPerson(person: Person) = withContext(Dispatchers.IO) {
         personDao.insertPerson(person)
     }

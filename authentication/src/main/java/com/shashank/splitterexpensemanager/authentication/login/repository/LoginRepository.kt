@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class LoginRepository @Inject constructor(var personDao : PersonDao, var categoryDao: CategoryDao) {
+class LoginRepository @Inject constructor(var personDao: PersonDao, var categoryDao: CategoryDao) {
     suspend fun insertPerson(person: Person) = withContext(Dispatchers.IO) {
         personDao.insertPerson(person)
     }

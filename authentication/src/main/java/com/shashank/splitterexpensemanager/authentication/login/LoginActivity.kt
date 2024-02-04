@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
                     NetworkCallState.Success -> {
                         loader.gone()
 
-                        viewModel.insertPerson(Person(null,null,sEmailAddress,"image"))
+                        viewModel.insertPerson(Person(null, null, sEmailAddress, "image"))
 
                         viewModel.insertAllCategory(
                             Category(null, "Game", R.drawable.game_icon_png),
@@ -86,7 +86,11 @@ class LoginActivity : AppCompatActivity() {
                             Category(null, "Education", R.drawable.education_icon_png),
                             Category(null, "Gift", R.drawable.gift_icon_png),
                             Category(null, "Insurance", R.drawable.insurance_icon_ing),
-                            Category(null, "Medical expenses", R.drawable.medical_expenses_icon_png),
+                            Category(
+                                null,
+                                "Medical expenses",
+                                R.drawable.medical_expenses_icon_png
+                            ),
                             Category(null, "Taxes", R.drawable.taxes_icon_png)
                         )
                         actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
