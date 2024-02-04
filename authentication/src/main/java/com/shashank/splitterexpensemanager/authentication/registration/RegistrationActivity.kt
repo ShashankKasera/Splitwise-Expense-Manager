@@ -40,6 +40,7 @@ class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
+
         supportActionBar?.hide()
         userName = findViewById(R.id.et_User)
         emailAddress = findViewById(R.id.et_Email)
@@ -71,7 +72,7 @@ class RegistrationActivity : AppCompatActivity() {
                     NetworkCallState.Success -> {
                         loader.gone()
 
-                        viewModel.insertPerson(Person(1, sUserName, sEmailAddress, "imahe"))
+                        viewModel.insertPerson(Person(null, sUserName, sEmailAddress, "imahe"))
                         actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name))
                     }
                 }
