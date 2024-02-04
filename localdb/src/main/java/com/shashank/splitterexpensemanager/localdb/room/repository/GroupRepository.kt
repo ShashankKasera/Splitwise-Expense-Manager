@@ -14,4 +14,6 @@ class GroupRepository @Inject constructor(var groupDao: GroupDao) {
         groupDao.insertAllGroup(*group)
     }
     fun loadAllGroup() = groupDao.loadAllGroup()
+    fun loadGroup(groupId:Long) = groupDao.loadGroup(groupId)
+
 }

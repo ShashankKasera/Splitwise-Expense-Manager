@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.addgroup.AddGroupActivity"
+    tools:context=".feature.addgroup.ui.AddGroupActivity"
     android:background="@drawable/main_gradient">
 
     <LinearLayout
@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@id/ll_toolbar" />
 
     <TextView
-        android:id="@+id/tv_group_name"
+        android:id="@+id/tv_group_name_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -83,7 +83,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/civ_group_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/civ_group_image"
-        app:layout_constraintTop_toBottomOf="@+id/tv_group_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_group_name_text" />
 
     <TextView
         android:id="@+id/tv_group_type"

@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.feature.addgroup.ui.model.GroupType
 import de.hdodenhof.circleimageview.CircleImageView
 
 class GroupTypeAdapter(

@@ -11,11 +11,13 @@ import javax.inject.Inject
 @HiltViewModel
 class GroupViewModel @Inject constructor(var groupRepository: GroupRepository) :
     ViewModel() {
-    var groupLiveData = groupRepository.loadAllGroup()
+    var allGroupLiveData = groupRepository.loadAllGroup()
 
     suspend fun insertGroup(group: Group) = viewModelScope.launch {
         groupRepository.insertGroup(group)
     }
+
+     fun groupLiveData(groupId: Long) =  groupRepository.loadGroup(groupId)
 
     suspend fun insertAllGroup(vararg group: Group) = viewModelScope.launch {
         groupRepository.insertAllGroup(*group)

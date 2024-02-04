@@ -28,6 +28,7 @@
                 android:background="@drawable/wave_shap">
 
                 <TextView
+                    android:id="@+id/tv_group_Name_in_detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -49,10 +50,21 @@
                     android:src="@drawable/group"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Expenses here yet"
+                    android:layout_marginLeft="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/civ_group" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_amount"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-60dp">
@@ -248,6 +260,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_group_activity"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -255,4 +268,32 @@
         app:layout_constraintTop_toBottomOf="@+id/cv_top"
         tools:itemCount="10"
         tools:listitem="@layout/activity_item" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cv_top">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_add_group_member"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:civ_circle_background_color="@color/primary_mid"
+            android:src="@drawable/add_group_membe_png"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Add Group Members"
+            android:gravity="center"
+            android:textColor="@color/primary_mid"
+            android:layout_marginLeft="8dp"/>
+    </LinearLayout>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

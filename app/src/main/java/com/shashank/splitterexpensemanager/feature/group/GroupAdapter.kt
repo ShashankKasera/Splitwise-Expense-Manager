@@ -6,11 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.localdb.model.Group
 
-class GroupAdapter : RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
+class GroupAdapter(var groups: List<Group>, private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
 
+    interface OnItemClickListener {
+        fun onItemClick(id: Long)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.group_item, parent, false)
 
@@ -18,15 +23,22 @@ class GroupAdapter : RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.i("njfnk", "onBindViewHolder: ")
+        Log.i("njfnk", "onBindViewHolder: $groups")
+        holder.ivGroupName.text=groups[position].groupName
+        holder.clGroup.setOnClickListener {
+            onItemClickListener.onItemClick(groups[position].id?:0)
+        }
+
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return groups.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val clGroup: ConstraintLayout = itemView.findViewById(R.id.cl_group)
         val ivGroup: ImageView = itemView.findViewById(R.id.iv_group_icon)
+        val ivGroupName: TextView = itemView.findViewById(R.id.tv_group_name)
         val tvNoExpenses: TextView = itemView.findViewById(R.id.tv_no_expenses)
         val tvOveOrOved: TextView = itemView.findViewById(R.id.tv_ove_or_oved)
         val tvYouOweFist: TextView = itemView.findViewById(R.id.tv_you_owe_fist)
