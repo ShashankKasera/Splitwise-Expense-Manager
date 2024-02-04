@@ -21,20 +21,7 @@ class CategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
 
-        lifecycleScope.launch {
-            viewModel.insertAllCategory(
-                Category(null, "Home", "imahe"),
-                Category(null, "stor", "imahe"),
-                Category(null, "car", "imahe"),
-                Category(null, "game", "imahe"),
-                Category(null, "food", "imahe"),
-                Category(null, "mobile", "imahe")
-            )
 
-            viewModel.categoryLiveData.observe(this@CategoryActivity) {
-                Log.i("gyug", "onCreate: $it")
-            }
-        }
 
         recyclerView = findViewById(R.id.rv_category)
         val categoryAdapter = CategoryAdapter()

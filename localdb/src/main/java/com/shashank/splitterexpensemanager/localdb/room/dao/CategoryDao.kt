@@ -11,7 +11,7 @@ import com.shashank.splitterexpensemanager.localdb.model.Category
 @Dao
 interface CategoryDao {
     @Insert
-    suspend fun insertCategory(category: Category)
+    fun insertCategory(category: Category)
 
     @Update
     suspend fun upDateCategory(category: Category)

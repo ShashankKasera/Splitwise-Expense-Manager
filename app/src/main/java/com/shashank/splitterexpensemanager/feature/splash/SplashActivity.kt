@@ -26,12 +26,12 @@ class SplashActivity : AppCompatActivity() {
         supportActionBar?.hide()
         Handler().postDelayed({
             val currentUser = auth.currentUser
-           /* if (currentUser != null) {
+            if (currentUser != null) {
                 actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
             } else {
                 actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name))
-            }*/
-            actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name))
+            }
+
             finish()
         }, SPLASH_DELAY)
     }

@@ -3,7 +3,7 @@ package com.shashank.splitterexpensemanager.feature.category
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.localdb.model.Category
-import com.shashank.splitterexpensemanager.localdb.room.repository.CategoryRepository
+import com.shashank.splitterexpensemanager.feature.category.data.CategoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
