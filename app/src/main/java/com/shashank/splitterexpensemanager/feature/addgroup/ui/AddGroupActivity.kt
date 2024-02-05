@@ -1,4 +1,4 @@
-package com.shashank.splitterexpensemanager.feature.addgroup.ui
+package com.shashank.splitterexpensemanager.feature.addgroup
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
-import com.shashank.splitterexpensemanager.feature.addgroup.ui.model.GroupType
-import com.shashank.splitterexpensemanager.feature.addgroup.GroupTypeAdapter
+import com.shashank.splitterexpensemanager.feature.group.GroupViewModel
 import com.shashank.splitterexpensemanager.localdb.model.Group
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
@@ -24,32 +23,18 @@ class AddGroupActivity : AppCompatActivity() {
     lateinit var actionProcessor: ActionProcessor
     lateinit var recyclerView: RecyclerView
     private var groupTypeList = ArrayList<GroupType>()
-    private val viewModel: AddGroupViewModel by viewModels()
-    private lateinit var addMember: TextView
+    private val viewModel: GroupViewModel by viewModels()
     private lateinit var groupName: EditText
-    private lateinit var groupImage: CircleImageView
     private lateinit var tvDone: TextView
 
     private lateinit var sGroupName: String
     private lateinit var sGroupType: String
-
-    private val groupTypeAdapter = GroupTypeAdapter(
-            groupTypeList,
-            object : GroupTypeAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int, data: GroupType) {
-                    sGroupType = data.name
-                }
-            }
-        )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_group)
 
-        addMember = findViewById(R.id.tv_add_member)
         groupName = findViewById(R.id.et_group_name)
-        groupImage = findViewById(R.id.civ_group_image)
         tvDone = findViewById(R.id.tv_done)
-
         recyclerViewSetup()
         tvDone.setOnClickListener {
             createGroup()
@@ -82,9 +67,18 @@ class AddGroupActivity : AppCompatActivity() {
         groupTypeList.add(GroupType("Trip", R.drawable.trip_png))
 
         recyclerView = findViewById(R.id.rv_group_type)
-
+        val groupTypeAdapter =
+            GroupTypeAdapter(
+                groupTypeList,
+                object : GroupTypeAdapter.OnItemClickListener {
+                    override fun onItemClick(position: Int, data: GroupType) {
+                        sGroupType = data.name
+                    }
+                }
+            )
         recyclerView.adapter = groupTypeAdapter
-        val layoutManager = LinearLayoutManager(this@AddGroupActivity, LinearLayoutManager.HORIZONTAL, true)
+        val layoutManager =
+            LinearLayoutManager(this@AddGroupActivity, LinearLayoutManager.HORIZONTAL, true)
         recyclerView.layoutManager = layoutManager
     }
 }
