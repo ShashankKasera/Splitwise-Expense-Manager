@@ -10,13 +10,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
-import com.shashank.splitterexpensemanager.localdb.room.repository.PersonRepository
+import com.shashank.splitterexpensemanager.authentication.registration.repository.RegistrationRepository
+import com.shashank.splitterexpensemanager.localdb.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 
 @HiltViewModel
-class RegistrationViewModel @Inject constructor(var personRepository: PersonRepository) :
+class RegistrationViewModel @Inject constructor(var registrationRepository: RegistrationRepository) :
     ViewModel() {
-    var personLiveData = personRepository.loadAllPerson()
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val _networkState = MutableStateFlow<NetworkCallState>(NetworkCallState.Init)
     var networkState = _networkState.asStateFlow()
@@ -40,6 +40,10 @@ class RegistrationViewModel @Inject constructor(var personRepository: PersonRepo
     }
 
     suspend fun insertPerson(person: Person) = viewModelScope.launch {
-        personRepository.insertPerson(person)
+        registrationRepository.insertPerson(person)
+    }
+
+    suspend fun insertAllCategory(vararg category: Category) = viewModelScope.launch {
+        registrationRepository.insertAllCategory(*category)
     }
 }
