@@ -2,7 +2,6 @@ package com.shashank.splitterexpensemanager.feature.group
 
 import com.shashank.splitterexpensemanager.R
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,8 +34,6 @@ class GroupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_group, container, false)
-
-
         recyclerView = v.findViewById(R.id.rv_group)
         addGroup = v.findViewById(R.id.tv_add_group)
 
@@ -44,22 +41,24 @@ class GroupFragment : Fragment() {
             actionProcessor.process(ActionRequestSchema(ActionType.ADD_GROUP.name))
         }
         lifecycleScope.launch {
-
-            viewModel.allGroupLiveData.observe(viewLifecycleOwner) {
-                val groupAdapter = GroupAdapter(it,
+            viewModel.allGroupLiveData.observe(
+                viewLifecycleOwner
+            ) {
+                val groupAdapter = GroupAdapter(
+                    it,
                     object : GroupAdapter.OnItemClickListener {
                         override fun onItemClick(id: Long) {
-                            actionProcessor.process(ActionRequestSchema(ActionType.GROUP_DETAILS.name,
-                                hashMapOf(
-                                    ID to id
+                            actionProcessor.process(
+                                ActionRequestSchema(
+                                    ActionType.GROUP_DETAILS.name,
+                                    hashMapOf(
+                                        ID to id
+                                    )
                                 )
-                            ))
+                            )
                         }
-
-
                     }
                 )
-                Log.i("jkgtn", "onCreateView: $it")
                 recyclerView.layoutManager = LinearLayoutManager(context)
                 recyclerView.adapter = groupAdapter
             }

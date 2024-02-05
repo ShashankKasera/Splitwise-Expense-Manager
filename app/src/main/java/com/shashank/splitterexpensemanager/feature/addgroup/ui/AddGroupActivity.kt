@@ -1,4 +1,4 @@
-package com.shashank.splitterexpensemanager.feature.addgroup
+package com.shashank.splitterexpensemanager.feature.addgroup.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
-import com.shashank.splitterexpensemanager.feature.group.GroupViewModel
+import com.shashank.splitterexpensemanager.feature.addgroup.GroupTypeAdapter
 import com.shashank.splitterexpensemanager.localdb.model.Group
+import com.shashank.splitterexpensemanager.localdb.model.GroupType
 import dagger.hilt.android.AndroidEntryPoint
-import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,7 +23,7 @@ class AddGroupActivity : AppCompatActivity() {
     lateinit var actionProcessor: ActionProcessor
     lateinit var recyclerView: RecyclerView
     private var groupTypeList = ArrayList<GroupType>()
-    private val viewModel: GroupViewModel by viewModels()
+    private val viewModel: AddGroupViewModel by viewModels()
     private lateinit var groupName: EditText
     private lateinit var tvDone: TextView
 
@@ -40,16 +40,7 @@ class AddGroupActivity : AppCompatActivity() {
             createGroup()
             finish()
         }
-
-        lifecycleScope.launch {
-            viewModel.groupType.collect{
-                groupTypeList.addAll(it)
-                groupTypeAdapter.notifyDataSetChanged()
-            }
-        }
-
     }
-
     private fun createGroup() {
         sGroupName = groupName.text.toString().trim()
 

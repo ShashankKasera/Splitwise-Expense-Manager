@@ -9,3 +9,4 @@
 #63: Save Expenses in Database 
 #65: Create new group UI
 #67: Group Create
+#69: Showing groups in ui

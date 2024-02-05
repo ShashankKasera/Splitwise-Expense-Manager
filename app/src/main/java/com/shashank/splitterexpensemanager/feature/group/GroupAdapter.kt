@@ -1,6 +1,5 @@
 package com.shashank.splitterexpensemanager.feature.group
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,24 +10,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.localdb.model.Group
 
-class GroupAdapter(var groups: List<Group>, private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
-
+class GroupAdapter(var groups: List<Group>, private val onItemClickListener: OnItemClickListener) :
+    RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
     interface OnItemClickListener {
         fun onItemClick(id: Long)
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.group_item, parent, false)
-
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.i("njfnk", "onBindViewHolder: $groups")
-        holder.ivGroupName.text=groups[position].groupName
+        holder.ivGroupName.text = groups[position].groupName
         holder.clGroup.setOnClickListener {
-            onItemClickListener.onItemClick(groups[position].id?:0)
+            onItemClickListener.onItemClick(groups[position].id ?: 0)
         }
-
     }
 
     override fun getItemCount(): Int {

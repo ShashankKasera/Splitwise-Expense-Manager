@@ -23,9 +23,8 @@ interface GroupDao {
     fun insertAllGroup(vararg group: Group)
 
     @Query("Select * from `Group`")
-    fun loadAllGroup(): List<Group>
+    fun loadAllGroup(): LiveData<List<Group>>
 
     @Query("Select * from `Group` where id = :groupId")
-    fun loadGroup(groupId:Long): LiveData<Group>
-
+    fun loadGroup(groupId: Long): LiveData<Group>
 }

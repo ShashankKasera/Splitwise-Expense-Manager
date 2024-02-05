@@ -1,11 +1,13 @@
 package com.shashank.splitterexpensemanager.feature.addgroup.data
 
 import com.shashank.splitterexpensemanager.localdb.model.Group
-import com.shashank.splitterexpensemanager.localdb.model.GroupType
-import kotlinx.coroutines.flow.Flow
+import com.shashank.splitterexpensemanager.localdb.room.dao.GroupDao
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-interface AddGroupRepository {
-    fun insertGroup(group: Group) : Flow<Unit>
-    fun getGroupTypeList() : Flow<List<GroupType>>
-
+class AddGroupRepository @Inject constructor(var groupDao: GroupDao) {
+    suspend fun insertGroup(group: Group) = withContext(Dispatchers.IO) {
+        groupDao.insertGroup(group)
+    }
 }
