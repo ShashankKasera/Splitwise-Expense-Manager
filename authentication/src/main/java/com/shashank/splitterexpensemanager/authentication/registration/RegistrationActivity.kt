@@ -1,7 +1,6 @@
 package com.shashank.splitterexpensemanager.authentication.registration
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -73,7 +72,7 @@ class RegistrationActivity : AppCompatActivity() {
                     NetworkCallState.Success -> {
                         loader.gone()
 
-                        viewModel.insertPerson(Person(null, sUserName, sEmailAddress, "image"))
+                        viewModel.insertPerson(Person(null, sUserName, sEmailAddress, null))
                         viewModel.insertAllCategory(
                             Category(null, "Game", R.drawable.game_icon_png),
                             Category(null, "Movie", R.drawable.movie_icon_png),

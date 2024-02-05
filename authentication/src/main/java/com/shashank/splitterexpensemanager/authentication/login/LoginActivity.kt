@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
                     NetworkCallState.Success -> {
                         loader.gone()
 
-                        viewModel.insertPerson(Person(null, null, sEmailAddress, "image"))
+                        viewModel.insertPerson(Person(null, null, sEmailAddress, null))
 
                         viewModel.insertAllCategory(
                             Category(null, "Game", R.drawable.game_icon_png),

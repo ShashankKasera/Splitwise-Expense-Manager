@@ -36,6 +36,16 @@
             android:textSize="20dp"
             android:layout_weight="8"
             android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/tv_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:layout_gravity="right|center"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_marginLeft="16dp"/>
     </LinearLayout>
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civ_group_image"
