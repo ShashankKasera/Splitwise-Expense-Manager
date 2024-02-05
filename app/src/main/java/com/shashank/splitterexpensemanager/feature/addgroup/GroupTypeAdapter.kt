@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
 import de.hdodenhof.circleimageview.CircleImageView
 
-class GroupTypeAdapter(var groupTypeList:List<GroupType>
+class GroupTypeAdapter(
+    var groupTypeList: List<GroupType>
 ) : RecyclerView.Adapter<GroupTypeAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
