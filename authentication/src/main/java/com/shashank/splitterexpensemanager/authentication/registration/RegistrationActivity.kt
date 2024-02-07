@@ -21,7 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var userName: EditText

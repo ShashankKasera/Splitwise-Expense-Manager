@@ -7,5 +7,3 @@ data class ActionRequestSchema(
     val action: String?,
     var data: Map<String, Any>? = null,
 ) : Serializable
-
-
