@@ -5,11 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
-import kotlinx.coroutines.launch
 
 class FriendsFragment : Fragment() {
     lateinit var recyclerView: RecyclerView
@@ -22,18 +20,13 @@ class FriendsFragment : Fragment() {
         val v: View = inflater.inflate(R.layout.fragment_friends, container, false)
 
         recyclerView = v.findViewById<View>(R.id.rv_friend) as RecyclerView
-
-        lifecycleScope.launch {
-
-        }
         recyclerViewSetUp()
         return v
     }
 
-    fun recyclerViewSetUp(){
+    fun recyclerViewSetUp() {
         val friendAdapter = FriendAdapter()
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = friendAdapter
     }
-
 }

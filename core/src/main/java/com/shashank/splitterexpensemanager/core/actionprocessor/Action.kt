@@ -11,7 +11,8 @@ enum class ActionType {
     ADD_GROUP,
     GROUP_DETAILS,
     CREATE_FRIENDS,
-    ADD_FRIENDS
+    ADD_FRIENDS,
+    GROUP_MEMBER,
 }
 
 interface Action {

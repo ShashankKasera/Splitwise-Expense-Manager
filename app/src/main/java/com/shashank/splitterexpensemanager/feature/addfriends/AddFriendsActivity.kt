@@ -23,6 +23,7 @@ class AddFriendsActivity : AppCompatActivity() {
     private val viewModel: AddFriendsViewModel by viewModels()
     lateinit var recyclerView: RecyclerView
     lateinit var tvAddFriends: TextView
+
     @Inject
     lateinit var actionProcessor: ActionProcessor
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,31 +37,32 @@ class AddFriendsActivity : AppCompatActivity() {
             actionProcessor.process(ActionRequestSchema(ActionType.CREATE_FRIENDS.name))
         }
 
-        viewModel.allPersonLiveData.observe(this@AddFriendsActivity){person->
-            viewModel.allGroupMemberLiveData.observe(this@AddFriendsActivity){groupMember->
-                val activityAdapter = AddFriendsAdapter(
+        viewModel.allPersonLiveData.observe(this@AddFriendsActivity) { person ->
+            viewModel.allGroupMemberLiveData.observe(this@AddFriendsActivity) { groupMember ->
+                val addFriendsAdapter = AddFriendsAdapter(
                     person,
                     groupMember,
                     object : AddFriendsAdapter.OnItemClickListener {
                         override fun onItemClick(position: Int, data: Person, isChecked: Boolean) {
                             lifecycleScope.launch {
                                 if (isChecked) {
-                                    viewModel.insertGroupMember(GroupMember(null,data.id?:0,id?:0))
-                                }else{
-                                    viewModel.deleteGroupMember(data.id?:0)
+                                    viewModel.insertGroupMember(
+                                        GroupMember(
+                                            null,
+                                            data.id ?: 0,
+                                            id ?: 0
+                                        )
+                                    )
+                                } else {
+                                    viewModel.deleteGroupMember(data.id ?: 0)
                                 }
-
                             }
                         }
-                    })
+                    }
+                )
                 recyclerView.layoutManager = LinearLayoutManager(this@AddFriendsActivity)
-                recyclerView.adapter = activityAdapter
+                recyclerView.adapter = addFriendsAdapter
             }
-
         }
-
-
     }
-
-
 }

@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.feature.addfriends.data.AddFriendsRepository
 import com.shashank.splitterexpensemanager.localdb.model.GroupMember
-import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,7 +19,7 @@ class AddFriendsViewModel @Inject constructor(
         addFriendsRepository.insertGroupMember(groupMember)
     }
 
-    suspend fun deleteGroupMember(PersonId: Long) = viewModelScope.launch {
-        addFriendsRepository.deleteGroupMember(PersonId)
+    suspend fun deleteGroupMember(personId: Long) = viewModelScope.launch {
+        addFriendsRepository.deleteGroupMember(personId)
     }
 }

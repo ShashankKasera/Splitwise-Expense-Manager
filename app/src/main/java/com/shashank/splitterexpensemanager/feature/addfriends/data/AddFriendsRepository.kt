@@ -1,7 +1,6 @@
 package com.shashank.splitterexpensemanager.feature.addfriends.data
 
 import com.shashank.splitterexpensemanager.localdb.model.GroupMember
-import com.shashank.splitterexpensemanager.localdb.model.Person
 import com.shashank.splitterexpensemanager.localdb.room.dao.GroupMemberDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.PersonDao
 import kotlinx.coroutines.Dispatchers

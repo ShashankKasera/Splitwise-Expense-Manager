@@ -7,6 +7,7 @@ import com.shashank.splitterexpensemanager.authentication.registration.Registrat
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionParams
 import com.shashank.splitterexpensemanager.core.extension.toBundle
 import com.shashank.splitterexpensemanager.feature.DashboardActivity
+import com.shashank.splitterexpensemanager.feature.groupmember.GroupMemberActivity
 import com.shashank.splitterexpensemanager.feature.addfriends.AddFriendsActivity
 import com.shashank.splitterexpensemanager.feature.addgroup.ui.AddGroupActivity
 import com.shashank.splitterexpensemanager.feature.createfriens.CreateFriendsActivity
@@ -28,6 +29,7 @@ class DefaultNavigator @Inject constructor(@ActivityContext private val context:
             Route.GROUP_DETAILS -> Intent(context, GroupDetailsActivity::class.java)
             Route.CREATE_FRIENDS -> Intent(context, CreateFriendsActivity::class.java)
             Route.ADD_FRIENDS -> Intent(context, AddFriendsActivity::class.java)
+            Route.GROUP_MEMBER -> Intent(context, GroupMemberActivity::class.java)
         }.apply {
             actionParams?.data?.toBundle()?.let {
                 putExtras(it)
@@ -45,5 +47,6 @@ enum class Route {
     ADD_GROUP,
     GROUP_DETAILS,
     CREATE_FRIENDS,
-    ADD_FRIENDS
+    ADD_FRIENDS,
+    GROUP_MEMBER
 }

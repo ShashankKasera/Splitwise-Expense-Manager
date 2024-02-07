@@ -11,6 +11,4 @@ class CreateFriendsRepository @Inject constructor(var personDao: PersonDao, var 
     suspend fun insertPerson(person: Person) = withContext(Dispatchers.IO) {
         personDao.insertPerson(person)
     }
-
-
 }
