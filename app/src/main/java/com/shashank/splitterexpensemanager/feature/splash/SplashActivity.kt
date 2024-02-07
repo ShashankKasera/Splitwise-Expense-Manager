@@ -17,7 +17,6 @@ private const val SPLASH_DELAY: Long = 3000
 class SplashActivity : AppCompatActivity() {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-
     @Inject
     lateinit var actionProcessor: ActionProcessor
     override fun onCreate(savedInstanceState: Bundle?) {

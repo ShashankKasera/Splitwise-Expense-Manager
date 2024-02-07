@@ -15,7 +15,6 @@ import dagger.hilt.android.components.ActivityComponent
 class ActivityModule {
     @Provides
     fun provideActionProcessor(processor: DefaultActionProcessor): ActionProcessor = processor
-
     @Provides
     fun provideNavigator(navigator: DefaultNavigator): Navigator = navigator
 }
