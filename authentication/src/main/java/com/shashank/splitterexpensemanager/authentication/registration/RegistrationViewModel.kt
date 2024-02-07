@@ -42,7 +42,6 @@ class RegistrationViewModel @Inject constructor(var registrationRepository: Regi
     suspend fun insertPerson(person: Person) = viewModelScope.launch {
         registrationRepository.insertPerson(person)
     }
-
     suspend fun insertAllCategory(vararg category: Category) = viewModelScope.launch {
         registrationRepository.insertAllCategory(*category)
     }

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
-import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

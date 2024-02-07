@@ -1,5 +1,4 @@
 package com.shashank.splitterexpensemanager.authentication.login
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
@@ -37,7 +36,6 @@ class LoginViewModel @Inject constructor(var loginRepository: LoginRepository) :
             }
         }
     }
-
     suspend fun insertPerson(person: Person) = viewModelScope.launch {
         loginRepository.insertPerson(person)
     }
