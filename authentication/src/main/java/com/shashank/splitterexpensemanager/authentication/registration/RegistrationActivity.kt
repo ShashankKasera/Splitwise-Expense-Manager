@@ -20,8 +20,6 @@ import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-
 @AndroidEntryPoint
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var userName: EditText
@@ -33,7 +31,6 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var sUserName: String
     private lateinit var sEmailAddress: String
     private lateinit var sPassword: String
-
     @Inject
     lateinit var actionProcessor: ActionProcessor
     private lateinit var auth: FirebaseAuth

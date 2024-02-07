@@ -12,23 +12,19 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
     @Singleton
     @Provides
     fun getDbName(): String = ROOM_DB
-
     @Singleton
     @Provides
     fun getRoomDb(@ApplicationContext context: Context, name: String): SplitterDatabase =
         Room.databaseBuilder(context, SplitterDatabase::class.java, name).fallbackToDestructiveMigration().build()
-
     @Singleton
     @Provides
     fun getPersonDao(db: SplitterDatabase): PersonDao = db.getPersonDao()
-
     @Singleton
     @Provides
     fun getCategoryDao(db: SplitterDatabase): CategoryDao = db.getCategoryDao()
