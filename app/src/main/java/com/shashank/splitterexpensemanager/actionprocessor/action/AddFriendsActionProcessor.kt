@@ -6,10 +6,10 @@ import com.shashank.splitterexpensemanager.core.actionprocessor.Action
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionParams
 import javax.inject.Inject
 
-class AddGroupMemberActionProcessor @Inject constructor(
+class AddFriendsActionProcessor @Inject constructor(
     private val navigator: Navigator
 ) : Action {
     override fun execute(params: ActionParams, callBack: ((Boolean) -> Unit)?) {
-        navigator.navigate(Route.ADD_GROUP_MEMBER, params)
+        navigator.navigate(Route.ADD_FRIENDS, params)
     }
 }

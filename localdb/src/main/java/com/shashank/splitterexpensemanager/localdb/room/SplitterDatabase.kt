@@ -15,7 +15,7 @@ import com.shashank.splitterexpensemanager.localdb.room.dao.PersonDao
 
 @Database(
     entities = [Person::class, Category::class, Group::class, GroupMember::class, Expenses::class],
-    version = 8,
+    version = 9,
     exportSchema = false
 )
 abstract class SplitterDatabase : RoomDatabase() {
