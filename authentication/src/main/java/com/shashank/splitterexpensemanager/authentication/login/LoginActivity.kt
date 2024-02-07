@@ -18,7 +18,6 @@ import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var emailAddress: EditText
@@ -62,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
 
                     NetworkCallState.Success -> {
                         loader.gone()
-                        viewModel.insertPerson(Person(null, null, sEmailAddress, "image"))
+                        viewModel.insertPerson(Person(null, null, sEmailAddress, ""))
                         actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
                     }
                 }

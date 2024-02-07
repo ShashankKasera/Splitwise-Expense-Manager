@@ -19,8 +19,6 @@ import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-
 @AndroidEntryPoint
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var userName: EditText
@@ -72,7 +70,7 @@ class RegistrationActivity : AppCompatActivity() {
                     NetworkCallState.Success -> {
                         loader.gone()
 
-                        viewModel.insertPerson(Person(null, sUserName, sEmailAddress, "imahe"))
+                        viewModel.insertPerson(Person(null, sUserName, sEmailAddress, ""))
                         actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
                     }
                 }
