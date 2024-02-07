@@ -26,7 +26,8 @@ class AppModule {
     @Singleton
     @Provides
     fun getRoomDb(@ApplicationContext context: Context, name: String): SplitterDatabase =
-        Room.databaseBuilder(context, SplitterDatabase::class.java, name).fallbackToDestructiveMigration().build()
+        Room.databaseBuilder(context, SplitterDatabase::class.java, name)
+            .fallbackToDestructiveMigration().build()
 
     @Singleton
     @Provides

@@ -10,14 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
 
 class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.category_item, parent, false)
         return ViewHolder(view)
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.i("reghj", "onBindViewHolder: ")
+        Log.i("onBindViewHolder", "onBindViewHolder: ")
     }
     override fun getItemCount(): Int {
         return 10

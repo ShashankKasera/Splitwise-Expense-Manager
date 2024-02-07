@@ -21,7 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var userName: EditText
@@ -93,11 +92,7 @@ class RegistrationActivity : AppCompatActivity() {
                             Category(null, "Education", R.drawable.education_icon_png),
                             Category(null, "Gift", R.drawable.gift_icon_png),
                             Category(null, "Insurance", R.drawable.insurance_icon_ing),
-                            Category(
-                                null,
-                                "Medical expenses",
-                                R.drawable.medical_expenses_icon_png
-                            ),
+                            Category(null, "Medical expenses", R.drawable.medical_expenses_icon_png),
                             Category(null, "Taxes", R.drawable.taxes_icon_png)
                         )
                         actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
