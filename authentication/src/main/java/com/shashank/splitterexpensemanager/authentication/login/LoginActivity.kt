@@ -85,11 +85,11 @@ class LoginActivity : AppCompatActivity() {
                             Category(null, "Clothing", R.drawable.clothing_icon_png),
                             Category(null, "Education", R.drawable.education_icon_png),
                             Category(null, "Gift", R.drawable.gift_icon_png),
-                            Category(null, "Insurance", R.drawable.insurance_icon_ing),
+                            Category(null, "Insurance", R.drawable.insurence_icon_ing),
                             Category(
                                 null,
                                 "Medical expenses",
-                                R.drawable.medical_expenses_icon_png
+                                R.drawable.medical_expences_icon_png
                             ),
                             Category(null, "Taxes", R.drawable.taxes_icon_png)
                         )

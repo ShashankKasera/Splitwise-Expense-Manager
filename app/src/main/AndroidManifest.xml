@@ -22,7 +22,8 @@
             android:exported="false" />
         <activity
             android:name=".feature.addfriends.AddFriendsActivity"
-            android:exported="false"></activity>
+            android:exported="false">
+        </activity>
         <activity
             android:name=".feature.addgroup.ui.AddGroupActivity"
             android:exported="false" />

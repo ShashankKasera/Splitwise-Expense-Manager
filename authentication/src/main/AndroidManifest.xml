@@ -3,18 +3,19 @@
 
     <application>
         <activity
-            android:name="com.shashank.splitterexpensemanager.authentication.registration.RegistrationActivity"
+            android:name=".login.LoginActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.shashank.splitterexpensemanager.authentication.login.LoginActivity"
+            android:name=".registration.RegistrationActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
     </application>
+
 </manifest>

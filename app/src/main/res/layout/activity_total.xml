@@ -28,7 +28,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/dining_icon"
+                android:src="@drawable/rameshwarm"
                 />
             <TextView
                 android:layout_width="wrap_content"
