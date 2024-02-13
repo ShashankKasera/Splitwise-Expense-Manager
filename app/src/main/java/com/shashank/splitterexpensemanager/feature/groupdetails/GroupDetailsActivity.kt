@@ -2,13 +2,16 @@ package com.shashank.splitterexpensemanager.feature.groupdetails
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
-import com.shashank.splitterexpensemanager.core.ID
+import com.shashank.splitterexpensemanager.core.GROUP_ID
+import com.shashank.splitterexpensemanager.core.PERSON_ID
+import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
@@ -26,16 +29,19 @@ class GroupDetailsActivity : AppCompatActivity() {
     lateinit var tvAddExpenses: TextView
     lateinit var llAddGroupMember: LinearLayout
 
+    @Inject
+    lateinit var sharedPref: SharedPref
     private val viewModel: GroupDetailViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_details)
-        var id: Long = intent.extras?.getLong(ID) ?: 0
+        var groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
+        var personId: Long = sharedPref.getValue(PERSON_ID, 0L) as Long
         init()
-        navigationForAddFriends(id)
-        navigationForGroupMember(id)
-        navigationForAddExpenses(id)
-        getData(id)
+        navigationForAddFriends(groupId)
+        navigationForGroupMember(groupId)
+        navigationForAddExpenses(groupId)
+        getData(groupId, personId)
     }
 
     private fun init() {
@@ -45,49 +51,51 @@ class GroupDetailsActivity : AppCompatActivity() {
         llAddGroupMember = findViewById(R.id.ll_group_member)
     }
 
-    private fun navigationForAddFriends(id: Long) {
+    private fun navigationForAddFriends(groupId: Long) {
         llAddGroupMember.setOnClickListener {
             actionProcessor.process(
                 ActionRequestSchema(
                     ActionType.ADD_FRIENDS.name,
                     hashMapOf(
-                        ID to (id)
+                        GROUP_ID to (groupId)
                     )
                 )
             )
         }
     }
 
-    private fun navigationForGroupMember(id: Long) {
+    private fun navigationForGroupMember(groupId: Long) {
         tvGroupName.setOnClickListener {
             actionProcessor.process(
                 ActionRequestSchema(
                     ActionType.GROUP_MEMBER.name,
                     hashMapOf(
-                        ID to (id)
+                        GROUP_ID to (groupId)
                     )
                 )
             )
         }
     }
 
-    private fun navigationForAddExpenses(id: Long) {
+    private fun navigationForAddExpenses(groupId: Long) {
         tvAddExpenses.setOnClickListener {
             actionProcessor.process(
                 ActionRequestSchema(
                     ActionType.ADD_EXPENSES.name,
                     hashMapOf(
-                        ID to (id)
+                        GROUP_ID to (groupId),
                     )
                 )
             )
         }
     }
 
-    private fun getData(id: Long) {
+    private fun getData(groupId: Long, personId: Long) {
+        Log.i("rnmlkns", "getData: $personId  $groupId")
         lifecycleScope.launch {
-            viewModel.groupLiveData(id).observe(this@GroupDetailsActivity) {
-                tvGroupName.text = it.groupName
+            viewModel.getGroup(groupId)
+            viewModel.group.collect {
+                if (it != null) tvGroupName.text = it.groupName
             }
         }
     }

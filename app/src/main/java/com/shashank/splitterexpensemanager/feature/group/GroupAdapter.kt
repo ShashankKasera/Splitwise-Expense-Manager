@@ -8,9 +8,12 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
-import com.shashank.splitterexpensemanager.localdb.model.Group
+import com.shashank.splitterexpensemanager.model.Group
 
-class GroupAdapter(var groups: List<Group>, private val onItemClickListener: OnItemClickListener) :
+class GroupAdapter(
+    private val groups: List<Group>,
+    private val onItemClickListener: OnItemClickListener
+) :
     RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
     interface OnItemClickListener {
         fun onItemClick(id: Long)

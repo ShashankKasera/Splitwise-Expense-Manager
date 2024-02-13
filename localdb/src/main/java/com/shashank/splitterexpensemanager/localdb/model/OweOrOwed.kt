@@ -26,9 +26,9 @@ import androidx.room.PrimaryKey
 )
 data class OweOrOwed(
     @PrimaryKey(autoGenerate = true)
-    var id: Long,
+    var id: Long?,
     var personOweId: Long,
     var personOwedId: Long,
     var groupId: Long,
-    var amount: Long,
+    var amount: Double,
 )

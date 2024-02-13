@@ -12,3 +12,4 @@
 #69: Showing groups in ui
 #71: Add Group Members 
 #73: Showing Category in UI
+#75: Add Expenses

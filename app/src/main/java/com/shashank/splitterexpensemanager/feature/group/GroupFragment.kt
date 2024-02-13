@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.shashank.splitterexpensemanager.core.ID
+import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
@@ -38,21 +38,24 @@ class GroupFragment : Fragment() {
         addGroup = v.findViewById(R.id.tv_add_group)
 
         addGroup.setOnClickListener {
-            actionProcessor.process(ActionRequestSchema(ActionType.ADD_GROUP.name))
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.ADD_GROUP.name,
+                )
+            )
         }
         lifecycleScope.launch {
-            viewModel.allGroupLiveData.observe(
-                viewLifecycleOwner
-            ) {
+            viewModel.getAllGroup()
+            viewModel.allGroup.collect {
                 val groupAdapter = GroupAdapter(
                     it,
                     object : GroupAdapter.OnItemClickListener {
-                        override fun onItemClick(id: Long) {
+                        override fun onItemClick(groupId: Long) {
                             actionProcessor.process(
                                 ActionRequestSchema(
                                     ActionType.GROUP_DETAILS.name,
                                     hashMapOf(
-                                        ID to id
+                                        GROUP_ID to groupId,
                                     )
                                 )
                             )
@@ -63,10 +66,6 @@ class GroupFragment : Fragment() {
                 recyclerView.adapter = groupAdapter
             }
         }
-
-
-
-
         return v
     }
 }

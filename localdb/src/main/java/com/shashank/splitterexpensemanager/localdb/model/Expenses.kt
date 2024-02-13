@@ -29,7 +29,7 @@ data class Expenses(
     var personId: Long,
     var groupId: Long,
     var categoryId: Long,
-    var amount: Int,
+    var amount: Double,
     var name: String,
     var date: String,
     var time: String,

@@ -84,4 +84,5 @@ dependencies {
 
     //paging
     implementation "androidx.paging:paging-runtime:3.2.1"
+    implementation "androidx.security:security-crypto:1.1.0-alpha06"
 }

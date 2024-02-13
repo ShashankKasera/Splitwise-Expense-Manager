@@ -1,24 +1,15 @@
 package com.shashank.splitterexpensemanager.authentication.registration.repository
 
+import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.localdb.model.Category
-import com.shashank.splitterexpensemanager.localdb.model.Person
-import com.shashank.splitterexpensemanager.localdb.room.dao.CategoryDao
-import com.shashank.splitterexpensemanager.localdb.room.dao.PersonDao
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
+import com.shashank.splitterexpensemanager.localdb.model.Person as PersonEntity
 
-class RegistrationRepository @Inject constructor(
-    var personDao: PersonDao,
-    var categoryDao: CategoryDao
-) {
-    suspend fun insertPerson(person: Person) = withContext(Dispatchers.IO) {
-        personDao.insertPerson(person)
-    }
+interface RegistrationRepository {
+    suspend fun insertPerson(person: PersonEntity)
 
-    suspend fun insertAllCategory(vararg category: Category) = withContext(Dispatchers.IO) {
-        categoryDao.insertAllCategory(*category)
-    }
+    suspend fun insertAllCategory(vararg category: Category)
+    fun loadPerson(email: String): Flow<Person>
 }
 
 

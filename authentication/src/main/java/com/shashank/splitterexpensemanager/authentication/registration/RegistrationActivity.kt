@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.shashank.splitterexpensemanager.authentication.R
+import com.shashank.splitterexpensemanager.core.PERSON_ID
+import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
@@ -32,9 +34,13 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var sUserName: String
     private lateinit var sEmailAddress: String
     private lateinit var sPassword: String
+    private var id: Long = 0
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
+
+    @Inject
+    lateinit var sharedPref: SharedPref
     private lateinit var auth: FirebaseAuth
     private val viewModel: RegistrationViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,13 +77,15 @@ class RegistrationActivity : AppCompatActivity() {
                     NetworkCallState.Success -> {
                         loader.gone()
 
+
                         viewModel.insertPerson(Person(null, sUserName, sEmailAddress, null))
+
                         viewModel.insertAllCategory(
                             Category(null, "Game", R.drawable.game_icon_png),
                             Category(null, "Movie", R.drawable.movie_icon_png),
                             Category(null, "Music", R.drawable.music_icon_png),
                             Category(null, "Sports", R.drawable.sport_icon_png),
-                            Category(null, "Dinig Out", R.drawable.dining_icon_png),
+                            Category(null, "Dining Out", R.drawable.dining_icon_png),
                             Category(null, "Groceries", R.drawable.groceries_icon_png),
                             Category(null, "Liquor", R.drawable.liquor_icon_png),
                             Category(null, "Electronics", R.drawable.electronics_icon_png),
@@ -92,16 +100,40 @@ class RegistrationActivity : AppCompatActivity() {
                             Category(null, "Education", R.drawable.education_icon_png),
                             Category(null, "Gift", R.drawable.gift_icon_png),
                             Category(null, "Insurance", R.drawable.insurence_icon_ing),
-                            Category(null, "Medical expenses", R.drawable.medical_expences_icon_png),
+                            Category(
+                                null,
+                                "Medical expenses",
+                                R.drawable.medical_expences_icon_png
+                            ),
                             Category(null, "Taxes", R.drawable.taxes_icon_png)
                         )
-                        actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
+                        viewModel.personLiveData(sEmailAddress)
                     }
                 }
             }
         }
+
+        lifecycleScope.launch {
+            viewModel.person.collect {
+                if (it?.id != null) {
+                    id = it?.id ?: -1
+                    sharedPref.setValue(PERSON_ID, id)
+                    actionProcessor.process(
+                        ActionRequestSchema(
+                            ActionType.DASH_BOARD.name,
+                        )
+                    )
+                }
+            }
+        }
+
+
         logInUpBtn.setOnClickListener {
-            actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name))
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.LOGIN.name
+                )
+            )
         }
     }
 }

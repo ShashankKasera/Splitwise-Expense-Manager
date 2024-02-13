@@ -29,6 +29,7 @@ class AddGroupActivity : AppCompatActivity() {
 
     private lateinit var sGroupName: String
     private lateinit var sGroupType: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_group)
@@ -41,12 +42,13 @@ class AddGroupActivity : AppCompatActivity() {
             finish()
         }
     }
+
     private fun createGroup() {
         sGroupName = groupName.text.toString().trim()
 
         lifecycleScope.launch {
             viewModel.insertGroup(
-                Group(null, sGroupName, sGroupType, "Group_image"),
+                Group(null, sGroupName, sGroupType, ""),
             )
         }
     }

@@ -1,6 +1,7 @@
 package com.shashank.splitterexpensemanager.authentication.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -14,6 +15,8 @@ import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.shashank.splitterexpensemanager.authentication.R
+import com.shashank.splitterexpensemanager.core.PERSON_ID
+import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.localdb.model.Category
 import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,9 +33,13 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var sEmailAddress: String
     private lateinit var sPassword: String
     private val viewModel: LoginViewModel by viewModels()
+    private var id: Long = 0
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
+
+    @Inject
+    lateinit var sharedPref: SharedPref
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -64,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
                     NetworkCallState.Success -> {
                         loader.gone()
 
+
                         viewModel.insertPerson(Person(null, null, sEmailAddress, null))
 
                         viewModel.insertAllCategory(
@@ -93,9 +101,25 @@ class LoginActivity : AppCompatActivity() {
                             ),
                             Category(null, "Taxes", R.drawable.taxes_icon_png)
                         )
-                        actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
+                        viewModel.personLiveData(sEmailAddress)
                     }
                 }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.person.collect {
+                if (it?.id != null) {
+                    id = it?.id ?: -1
+                    sharedPref.setValue(PERSON_ID, id)
+                    actionProcessor.process(
+                        ActionRequestSchema(
+                            ActionType.DASH_BOARD.name,
+                        )
+                    )
+                }
+
+                Log.i("hbkmvfjftljk", "onCreate: $id ")
             }
         }
         singUpBtn.setOnClickListener {

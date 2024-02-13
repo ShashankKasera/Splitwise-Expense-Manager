@@ -1,28 +1,79 @@
 package com.shashank.splitterexpensemanager.feature.groupmember
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
+import androidx.cardview.widget.CardView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
-import com.shashank.splitterexpensemanager.core.ID
+import com.shashank.splitterexpensemanager.core.GROUP_MEMBER
+import com.shashank.splitterexpensemanager.core.GROUP_ID
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
+import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
+import com.shashank.splitterexpensemanager.authentication.personmapper.PersonListMapper
+import com.shashank.splitterexpensemanager.authentication.model.Person
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class GroupMemberActivity : AppCompatActivity() {
+    @Inject
+    lateinit var mapper: PersonListMapper
+
+    @Inject
+    lateinit var actionProcessor: ActionProcessor
     private val viewModel: GroupMemberViewModel by viewModels()
+    private var groupId: Long = 0
     lateinit var recyclerView: RecyclerView
+    lateinit var tvAddFriends: CardView
+    private var groupMemberList = mutableListOf<Person>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_member)
         recyclerView = findViewById(R.id.rv_group_member)
-        val id = intent.extras?.getLong(ID)
+        tvAddFriends = findViewById(R.id.cv_add_group_member)
+        groupId = intent.extras?.getLong(GROUP_ID) ?: 0
+        groupId = intent.getLongExtra(GROUP_ID, 0)
 
-        viewModel.allGroupLiveData(id ?: 0).observe(this@GroupMemberActivity) {
-            var groupMemberAdapter = GroupMemberAdapter(it)
-            recyclerView.layoutManager = LinearLayoutManager(this)
-            recyclerView.adapter = groupMemberAdapter
+        recyclerViewSetup()
+        tvAddFriends.setOnClickListener {
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.ADD_FRIENDS.name,
+                    hashMapOf(
+                        GROUP_ID to (groupId)
+                    )
+                )
+            )
         }
+        viewModel.allGroupMember(groupId)
+        lifecycleScope.launch {
+            viewModel.allPerson.collect {
+                groupMemberList.addAll(it)
+                Log.i("uyg", "onCreate: groupMemberList $groupMemberList")
+            }
+        }
+    }
+
+    private fun recyclerViewSetup() {
+        var groupMemberAdapter = GroupMemberAdapter(
+            groupMemberList,
+            object : GroupMemberAdapter.OnItemClickListener {
+                override fun onItemClick(data: Person) {
+                    val returnIntent = Intent()
+                    returnIntent.putExtra(GROUP_MEMBER, data)
+                    setResult(RESULT_OK, returnIntent)
+                    finish()
+                }
+            }
+        )
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = groupMemberAdapter
     }
 }
