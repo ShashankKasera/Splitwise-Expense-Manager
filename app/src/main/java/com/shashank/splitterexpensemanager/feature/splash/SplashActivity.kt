@@ -24,6 +24,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
+
         Handler().postDelayed({
             val currentUser = auth.currentUser
             if (currentUser != null) {

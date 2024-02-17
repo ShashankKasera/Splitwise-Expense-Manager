@@ -9,5 +9,6 @@ interface LoginRepository {
     suspend fun insertPerson(person: PersonEntity)
 
     suspend fun insertAllCategory(vararg category: Category)
-    fun loadPerson(email: String): Flow<Person>
+
+    fun loadPersonByEmail(email: String): Flow<Person>
 }

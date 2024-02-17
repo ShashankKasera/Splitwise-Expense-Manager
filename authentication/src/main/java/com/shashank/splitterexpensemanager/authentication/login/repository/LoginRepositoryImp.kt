@@ -24,7 +24,7 @@ class LoginRepositoryImp @Inject constructor(
             categoryDao.insertAllCategory(*category)
         }
 
-    override fun loadPerson(email: String) = personDao.loadPersonByEmail(email).map {
+    override fun loadPersonByEmail(email: String) = personDao.loadPersonByEmail(email).map {
         personMapper.map(it)
     }
 }

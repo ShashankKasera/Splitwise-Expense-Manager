@@ -20,13 +20,9 @@ class RegistrationRepositoryImp @Inject constructor(
         personDao.insertPerson(person)
     }
 
+    override fun loadPersonByEmail(email: String) = personDao.loadPersonByEmail(email).map {
     override suspend fun insertAllCategory(vararg category: Category) =
         withContext(Dispatchers.IO) {
             categoryDao.insertAllCategory(*category)
         }
-
-    override fun loadPerson(email: String) = personDao.loadPersonByEmail(email).map {
-        Log.i("ggyj", "loadPerson: $it")
-        personMapper.map(it)
-    }
 }

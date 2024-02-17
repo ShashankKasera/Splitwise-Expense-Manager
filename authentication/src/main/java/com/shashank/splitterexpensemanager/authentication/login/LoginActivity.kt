@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -38,12 +39,11 @@ class LoginActivity : AppCompatActivity() {
     @Inject
     lateinit var actionProcessor: ActionProcessor
 
-    @Inject
-    lateinit var sharedPref: SharedPref
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
+
         emailAddress = findViewById(R.id.et_Email)
         password = findViewById(R.id.et_Password)
         loginBtn = findViewById(R.id.tv_login)
@@ -52,8 +52,13 @@ class LoginActivity : AppCompatActivity() {
         loginBtn.setOnClickListener {
             sEmailAddress = emailAddress.text.toString().trim()
             sPassword = password.text.toString().trim()
-            viewModel.login(sEmailAddress, sPassword)
+            if (sEmailAddress.isEmpty() && sPassword.isEmpty()) {
+                Toast.makeText(this, "Fill All Fields", Toast.LENGTH_LONG)
+            } else {
+                viewModel.login(sEmailAddress, sPassword)
+            }
         }
+
         lifecycleScope.launch {
             viewModel.networkState.collect {
                 when (it) {
@@ -104,26 +109,11 @@ class LoginActivity : AppCompatActivity() {
                         viewModel.personLiveData(sEmailAddress)
                     }
                 }
-            }
-        }
 
-        lifecycleScope.launch {
-            viewModel.person.collect {
-                if (it?.id != null) {
-                    id = it?.id ?: -1
-                    sharedPref.setValue(PERSON_ID, id)
-                    actionProcessor.process(
-                        ActionRequestSchema(
-                            ActionType.DASH_BOARD.name,
-                        )
-                    )
+                singUpBtn.setOnClickListener {
+                    actionProcessor.process(ActionRequestSchema(ActionType.REGISTRATION.name))
                 }
-
-                Log.i("hbkmvfjftljk", "onCreate: $id ")
             }
-        }
-        singUpBtn.setOnClickListener {
-            actionProcessor.process(ActionRequestSchema(ActionType.REGISTRATION.name))
         }
     }
 }

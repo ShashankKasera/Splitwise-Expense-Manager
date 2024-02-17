@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.shashank.splitterexpensemanager.authentication.R
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
@@ -23,6 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var userName: EditText
@@ -35,6 +38,7 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var sEmailAddress: String
     private lateinit var sPassword: String
     private var id: Long = 0
+    private lateinit var databaseReference: DatabaseReference
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
@@ -46,6 +50,7 @@ class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
+        databaseReference = FirebaseDatabase.getInstance().reference
         supportActionBar?.hide()
         userName = findViewById(R.id.et_User)
         emailAddress = findViewById(R.id.et_Email)
@@ -58,8 +63,13 @@ class RegistrationActivity : AppCompatActivity() {
             sUserName = userName.text.toString().trim()
             sEmailAddress = emailAddress.text.toString().trim()
             sPassword = password.text.toString().trim()
-            viewModel.registration(sEmailAddress, sPassword)
+            if (sUserName.isEmpty() && sEmailAddress.isEmpty() && sPassword.isEmpty()) {
+                Toast.makeText(this, "Fill All Fields", Toast.LENGTH_LONG)
+            } else {
+                viewModel.registration(sUserName, sEmailAddress, sPassword)
+            }
         }
+
         lifecycleScope.launch {
             viewModel.networkState.collect {
                 when (it) {
@@ -112,28 +122,8 @@ class RegistrationActivity : AppCompatActivity() {
                 }
             }
         }
-
-        lifecycleScope.launch {
-            viewModel.person.collect {
-                if (it?.id != null) {
-                    id = it?.id ?: -1
-                    sharedPref.setValue(PERSON_ID, id)
-                    actionProcessor.process(
-                        ActionRequestSchema(
-                            ActionType.DASH_BOARD.name,
-                        )
-                    )
-                }
-            }
-        }
-
-
         logInUpBtn.setOnClickListener {
-            actionProcessor.process(
-                ActionRequestSchema(
-                    ActionType.LOGIN.name
-                )
-            )
+            actionProcessor.process(ActionRequestSchema(ActionType.LOGIN.name))
         }
     }
 }
