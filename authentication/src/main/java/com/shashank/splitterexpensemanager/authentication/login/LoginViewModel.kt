@@ -13,6 +13,7 @@ import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.PERSON
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
+import com.shashank.splitterexpensemanager.localdb.model.Category
 import com.shashank.splitterexpensemanager.localdb.model.Person as PersonEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -93,7 +94,7 @@ class LoginViewModel @Inject constructor(var loginRepository: LoginRepository) :
 
     fun personLiveData(email: String) {
         viewModelScope.launch {
-            loginRepository.loadPerson(email).collect {
+            loginRepository.loadPersonByEmail(email).collect {
                 _person.emit(it)
             }
         }

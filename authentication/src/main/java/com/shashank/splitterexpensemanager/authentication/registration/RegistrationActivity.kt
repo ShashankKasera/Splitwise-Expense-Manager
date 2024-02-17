@@ -8,10 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.shashank.splitterexpensemanager.authentication.R
-import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
@@ -20,7 +17,6 @@ import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.shashank.splitterexpensemanager.localdb.model.Category
-import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -37,20 +33,16 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var sUserName: String
     private lateinit var sEmailAddress: String
     private lateinit var sPassword: String
-    private var id: Long = 0
-    private lateinit var databaseReference: DatabaseReference
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
 
     @Inject
     lateinit var sharedPref: SharedPref
-    private lateinit var auth: FirebaseAuth
     private val viewModel: RegistrationViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
-        databaseReference = FirebaseDatabase.getInstance().reference
         supportActionBar?.hide()
         userName = findViewById(R.id.et_User)
         emailAddress = findViewById(R.id.et_Email)
@@ -58,7 +50,6 @@ class RegistrationActivity : AppCompatActivity() {
         singUpBtn = findViewById(R.id.tv_Registration)
         logInUpBtn = findViewById(R.id.tv_Login)
         loader = findViewById(R.id.loader_Registration)
-        auth = FirebaseAuth.getInstance()
         singUpBtn.setOnClickListener {
             sUserName = userName.text.toString().trim()
             sEmailAddress = emailAddress.text.toString().trim()
@@ -88,7 +79,6 @@ class RegistrationActivity : AppCompatActivity() {
                         loader.gone()
 
 
-                        viewModel.insertPerson(Person(null, sUserName, sEmailAddress, null))
 
                         viewModel.insertAllCategory(
                             Category(null, "Game", R.drawable.game_icon_png),
@@ -110,14 +100,10 @@ class RegistrationActivity : AppCompatActivity() {
                             Category(null, "Education", R.drawable.education_icon_png),
                             Category(null, "Gift", R.drawable.gift_icon_png),
                             Category(null, "Insurance", R.drawable.insurence_icon_ing),
-                            Category(
-                                null,
-                                "Medical expenses",
-                                R.drawable.medical_expences_icon_png
-                            ),
+                            Category(null, "Medical expenses", R.drawable.medical_expences_icon_png),
                             Category(null, "Taxes", R.drawable.taxes_icon_png)
                         )
-                        viewModel.personLiveData(sEmailAddress)
+                        actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
                     }
                 }
             }

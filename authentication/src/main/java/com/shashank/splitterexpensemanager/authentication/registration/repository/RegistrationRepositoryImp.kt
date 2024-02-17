@@ -1,6 +1,5 @@
 package com.shashank.splitterexpensemanager.authentication.registration.repository
 
-import android.util.Log
 import com.shashank.splitterexpensemanager.authentication.personmapper.PersonMapper
 import com.shashank.splitterexpensemanager.localdb.model.Category
 import com.shashank.splitterexpensemanager.localdb.model.Person
@@ -11,6 +10,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+
 class RegistrationRepositoryImp @Inject constructor(
     private val personDao: PersonDao,
     private val categoryDao: CategoryDao,
@@ -20,9 +20,12 @@ class RegistrationRepositoryImp @Inject constructor(
         personDao.insertPerson(person)
     }
 
-    override fun loadPersonByEmail(email: String) = personDao.loadPersonByEmail(email).map {
     override suspend fun insertAllCategory(vararg category: Category) =
         withContext(Dispatchers.IO) {
             categoryDao.insertAllCategory(*category)
         }
+
+    override fun loadPersonByEmail(email: String) = personDao.loadPersonByEmail(email).map {
+        personMapper.map(it)
+    }
 }

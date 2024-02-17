@@ -1,5 +1,6 @@
 package com.shashank.splitterexpensemanager.authentication.registration
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
@@ -7,8 +8,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.shashank.splitterexpensemanager.authentication.model.Person
-import com.shashank.splitterexpensemanager.localdb.model.Person as PersonEntity
 import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.localdb.model.Person as PersonEntity
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +19,6 @@ import com.shashank.splitterexpensemanager.authentication.registration.repositor
 import com.shashank.splitterexpensemanager.core.PERSON
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
-import com.shashank.splitterexpensemanager.authentication.registration.repository.RegistrationRepository
 import com.shashank.splitterexpensemanager.localdb.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 
@@ -47,11 +45,6 @@ class RegistrationViewModel @Inject constructor(var registrationRepository: Regi
                 registrationRepository.insertPerson(PersonEntity(null, name, email, ""))
                 loadPersonByEmail(email)
                 _networkState.emit(NetworkCallState.Success)
-                _registrationUiState.emit(
-                    registrationUiState.value.copy(
-                        user = result.user
-                    )
-                )
             } catch (e: Exception) {
                 _networkState.emit(NetworkCallState.Error(e.message.toString()))
             }
@@ -78,5 +71,9 @@ class RegistrationViewModel @Inject constructor(var registrationRepository: Regi
                 }
             }
         }
+    }
+
+    suspend fun insertAllCategory(vararg category: Category) = viewModelScope.launch {
+        registrationRepository.insertAllCategory(*category)
     }
 }

@@ -1,7 +1,6 @@
 package com.shashank.splitterexpensemanager.authentication.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -16,10 +15,7 @@ import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.shashank.splitterexpensemanager.authentication.R
-import com.shashank.splitterexpensemanager.core.PERSON_ID
-import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.localdb.model.Category
-import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -76,9 +72,6 @@ class LoginActivity : AppCompatActivity() {
                     NetworkCallState.Success -> {
                         loader.gone()
 
-
-                        viewModel.insertPerson(Person(null, null, sEmailAddress, null))
-
                         viewModel.insertAllCategory(
                             Category(null, "Game", R.drawable.game_icon_png),
                             Category(null, "Movie", R.drawable.movie_icon_png),
@@ -99,21 +92,16 @@ class LoginActivity : AppCompatActivity() {
                             Category(null, "Education", R.drawable.education_icon_png),
                             Category(null, "Gift", R.drawable.gift_icon_png),
                             Category(null, "Insurance", R.drawable.insurence_icon_ing),
-                            Category(
-                                null,
-                                "Medical expenses",
-                                R.drawable.medical_expences_icon_png
-                            ),
+                            Category(null, "Medical expenses", R.drawable.medical_expences_icon_png),
                             Category(null, "Taxes", R.drawable.taxes_icon_png)
                         )
-                        viewModel.personLiveData(sEmailAddress)
+                        actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
                     }
                 }
-
-                singUpBtn.setOnClickListener {
-                    actionProcessor.process(ActionRequestSchema(ActionType.REGISTRATION.name))
-                }
             }
+        }
+        singUpBtn.setOnClickListener {
+            actionProcessor.process(ActionRequestSchema(ActionType.REGISTRATION.name))
         }
     }
 }
