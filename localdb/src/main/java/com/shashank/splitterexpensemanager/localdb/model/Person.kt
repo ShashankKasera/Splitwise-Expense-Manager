@@ -9,5 +9,5 @@ data class Person(
     var id: Long?,
     var name: String?,
     var emailId: String?,
-    var number: Int?
+    var number: String?
 )
