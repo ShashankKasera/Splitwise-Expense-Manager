@@ -8,8 +8,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.shashank.splitterexpensemanager.authentication.R
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
@@ -33,7 +31,6 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var sUserName: String
     private lateinit var sEmailAddress: String
     private lateinit var sPassword: String
-    private lateinit var databaseReference: DatabaseReference
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
@@ -42,7 +39,6 @@ class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
-        databaseReference = FirebaseDatabase.getInstance().reference
         supportActionBar?.hide()
         userName = findViewById(R.id.et_User)
         emailAddress = findViewById(R.id.et_Email)
