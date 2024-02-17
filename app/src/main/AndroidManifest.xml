@@ -25,6 +25,12 @@
             android:name=".feature.createfriens.CreateFriendsActivity"
             android:exported="false" />
         <activity
+            android:name=".feature.addfriends.AddFriendsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.groupmember.GroupMemberActivity"
+            android:exported="false" />
+        <activity
             android:name=".feature.total.TotalActivity"
             android:exported="false">
             <meta-data
