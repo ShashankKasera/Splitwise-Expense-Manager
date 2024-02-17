@@ -29,7 +29,7 @@
             android:exported="false">
         </activity>
         <activity
-            android:name=".feature.addgroup.ui.AddGroupActivity"
+            android:name=".feature.addgroup.AddGroupActivity"
             android:exported="false" />
         <activity
             android:name=".feature.groupmember.GroupMemberActivity"
