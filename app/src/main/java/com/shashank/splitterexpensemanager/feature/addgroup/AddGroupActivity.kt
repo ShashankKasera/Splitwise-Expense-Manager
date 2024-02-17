@@ -9,31 +9,26 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
-import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
-import com.shashank.splitterexpensemanager.feature.group.GroupViewModel
 import com.shashank.splitterexpensemanager.localdb.model.Group
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddGroupActivity : AppCompatActivity() {
-    @Inject
-    lateinit var actionProcessor: ActionProcessor
+
     lateinit var recyclerView: RecyclerView
     private var groupTypeList = ArrayList<GroupType>()
-    private val viewModel: GroupViewModel by viewModels()
+    private val viewModel: AddGroupViewModel by viewModels()
     private lateinit var groupName: EditText
     private lateinit var tvDone: TextView
-
     private lateinit var sGroupName: String
     private lateinit var sGroupType: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_group)
 
-        groupName = findViewById(R.id.et_group_name)
-        tvDone = findViewById(R.id.tv_done)
+        init()
         recyclerViewSetup()
         tvDone.setOnClickListener {
             createGroup()
@@ -41,12 +36,18 @@ class AddGroupActivity : AppCompatActivity() {
         }
     }
 
+    private fun init() {
+        groupName = findViewById(R.id.et_group_name)
+        tvDone = findViewById(R.id.tv_done)
+        recyclerView = findViewById(R.id.rv_group_type)
+    }
+
     private fun createGroup() {
         sGroupName = groupName.text.toString().trim()
 
         lifecycleScope.launch {
             viewModel.insertGroup(
-                Group(null, sGroupName, sGroupType, "Group_image"),
+                Group(null, sGroupName, sGroupType, ""),
             )
         }
     }
@@ -57,7 +58,7 @@ class AddGroupActivity : AppCompatActivity() {
         groupTypeList.add(GroupType("Home", R.drawable.home_rent_icon_png))
         groupTypeList.add(GroupType("Trip", R.drawable.trip_png))
 
-        recyclerView = findViewById(R.id.rv_group_type)
+
         val groupTypeAdapter =
             GroupTypeAdapter(
                 groupTypeList,

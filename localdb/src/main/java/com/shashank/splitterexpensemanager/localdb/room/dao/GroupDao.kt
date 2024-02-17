@@ -1,17 +1,17 @@
 package com.shashank.splitterexpensemanager.localdb.room.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.shashank.splitterexpensemanager.localdb.model.Group
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface GroupDao {
     @Insert
-    suspend fun insertGroup(group: Group)
+    suspend fun insertGroup(group: Group): Long
 
     @Update
     suspend fun upDateGroup(group: Group)
@@ -23,5 +23,5 @@ interface GroupDao {
     fun insertAllGroup(vararg group: Group)
 
     @Query("Select * from `Group`")
-    fun loadAllGroup(): LiveData<List<Group>>
+    fun loadAllGroup(): Flow<List<Group>>
 }

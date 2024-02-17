@@ -15,9 +15,7 @@ import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequ
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
-import com.shashank.splitterexpensemanager.authentication.R
 import com.shashank.splitterexpensemanager.localdb.model.Category
-import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -99,11 +97,10 @@ class LoginActivity : AppCompatActivity() {
                         actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
                     }
                 }
-
-                singUpBtn.setOnClickListener {
-                    actionProcessor.process(ActionRequestSchema(ActionType.REGISTRATION.name))
-                }
             }
+        }
+        singUpBtn.setOnClickListener {
+            actionProcessor.process(ActionRequestSchema(ActionType.REGISTRATION.name))
         }
     }
 }
