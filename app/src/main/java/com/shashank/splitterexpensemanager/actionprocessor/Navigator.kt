@@ -7,7 +7,7 @@ import com.shashank.splitterexpensemanager.authentication.registration.Registrat
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionParams
 import com.shashank.splitterexpensemanager.core.extension.toBundle
 import com.shashank.splitterexpensemanager.feature.DashboardActivity
-import com.shashank.splitterexpensemanager.feature.addgroup.ui.AddGroupActivity
+import com.shashank.splitterexpensemanager.feature.addgroup.AddGroupActivity
 import com.shashank.splitterexpensemanager.feature.addgroupmember.AddGroupMemberActivity
 import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
 import dagger.hilt.android.qualifiers.ActivityContext

@@ -1,4 +1,4 @@
-package com.shashank.splitterexpensemanager.feature.model
+package com.shashank.splitterexpensemanager.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

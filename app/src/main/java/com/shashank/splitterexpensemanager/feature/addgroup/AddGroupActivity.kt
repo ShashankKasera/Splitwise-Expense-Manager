@@ -9,13 +9,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
-import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
-import com.shashank.splitterexpensemanager.feature.addgroup.GroupTypeAdapter
 import com.shashank.splitterexpensemanager.localdb.model.Group
 import com.shashank.splitterexpensemanager.localdb.model.GroupType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddGroupActivity : AppCompatActivity() {
