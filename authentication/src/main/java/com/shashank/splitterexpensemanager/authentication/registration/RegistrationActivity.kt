@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.google.firebase.auth.FirebaseAuth
 import com.shashank.splitterexpensemanager.authentication.R
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
@@ -16,7 +16,6 @@ import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.shashank.splitterexpensemanager.localdb.model.Category
-import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -35,7 +34,7 @@ class RegistrationActivity : AppCompatActivity() {
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
-    private lateinit var auth: FirebaseAuth
+
     private val viewModel: RegistrationViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,12 +46,15 @@ class RegistrationActivity : AppCompatActivity() {
         singUpBtn = findViewById(R.id.tv_Registration)
         logInUpBtn = findViewById(R.id.tv_Login)
         loader = findViewById(R.id.loader_Registration)
-        auth = FirebaseAuth.getInstance()
         singUpBtn.setOnClickListener {
             sUserName = userName.text.toString().trim()
             sEmailAddress = emailAddress.text.toString().trim()
             sPassword = password.text.toString().trim()
-            viewModel.registration(sEmailAddress, sPassword)
+            if (sUserName.isEmpty() && sEmailAddress.isEmpty() && sPassword.isEmpty()) {
+                Toast.makeText(this, "Fill All Fields", Toast.LENGTH_LONG)
+            } else {
+                viewModel.registration(sUserName, sEmailAddress, sPassword)
+            }
         }
         lifecycleScope.launch {
             viewModel.networkState.collect {
@@ -71,7 +73,6 @@ class RegistrationActivity : AppCompatActivity() {
                     NetworkCallState.Success -> {
                         loader.gone()
 
-                        viewModel.insertPerson(Person(null, sUserName, sEmailAddress, null))
                         viewModel.insertAllCategory(
                             Category(null, "Game", R.drawable.game_icon_png),
                             Category(null, "Movie", R.drawable.movie_icon_png),
