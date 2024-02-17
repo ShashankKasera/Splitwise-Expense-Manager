@@ -17,6 +17,7 @@
         <activity
             android:name=".feature.total.TotalActivity"
             android:exported="false" >
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -57,7 +58,6 @@
         <activity
             android:name=".feature.category.CategoryActivity"
             android:exported="false" >
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
