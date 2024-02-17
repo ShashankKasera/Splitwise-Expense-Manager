@@ -1,5 +1,6 @@
 package com.shashank.splitterexpensemanager.authentication.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
@@ -13,6 +14,7 @@ import com.shashank.splitterexpensemanager.core.PERSON
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.localdb.model.Person as PersonEntity
+import com.shashank.splitterexpensemanager.localdb.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

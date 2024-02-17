@@ -18,7 +18,6 @@ import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.shashank.splitterexpensemanager.localdb.model.Category
-import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -79,7 +78,6 @@ class RegistrationActivity : AppCompatActivity() {
                     NetworkCallState.Success -> {
                         loader.gone()
 
-                        viewModel.insertPerson(Person(null, sUserName, sEmailAddress, "image"))
                         viewModel.insertAllCategory(
                             Category(null, "Game", R.drawable.game_icon_png),
                             Category(null, "Movie", R.drawable.movie_icon_png),
@@ -100,11 +98,7 @@ class RegistrationActivity : AppCompatActivity() {
                             Category(null, "Education", R.drawable.education_icon_png),
                             Category(null, "Gift", R.drawable.gift_icon_png),
                             Category(null, "Insurance", R.drawable.insurance_icon_ing),
-                            Category(
-                                null,
-                                "Medical expenses",
-                                R.drawable.medical_expenses_icon_png
-                            ),
+                            Category(null, "Medical expenses", R.drawable.medical_expenses_icon_png),
                             Category(null, "Taxes", R.drawable.taxes_icon_png)
                         )
                         actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
