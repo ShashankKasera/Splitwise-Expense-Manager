@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.addgroup.ui.AddGroupActivity"
+    tools:context=".feature.addgroup.AddGroupActivity"
     android:background="@drawable/main_gradient">
 
     <LinearLayout
