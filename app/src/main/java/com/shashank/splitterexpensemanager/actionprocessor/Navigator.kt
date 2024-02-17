@@ -13,6 +13,7 @@ import com.shashank.splitterexpensemanager.feature.addfriends.AddFriendsActivity
 import com.shashank.splitterexpensemanager.feature.addgroup.ui.AddGroupActivity
 import com.shashank.splitterexpensemanager.feature.category.CategoryActivity
 import com.shashank.splitterexpensemanager.feature.createfriens.CreateFriendsActivity
+import com.shashank.splitterexpensemanager.feature.addgroup.AddGroupActivity
 import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject

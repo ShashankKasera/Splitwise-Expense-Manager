@@ -1,12 +1,12 @@
 package com.shashank.splitterexpensemanager.localdb.room.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.shashank.splitterexpensemanager.localdb.model.Category
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CategoryDao {
@@ -23,5 +23,5 @@ interface CategoryDao {
     fun insertAllCategory(vararg category: Category)
 
     @Query("Select * from Category")
-    fun loadAllCategory(): LiveData<List<Category>>
+    fun loadAllCategory(): Flow<List<Category>>
 }

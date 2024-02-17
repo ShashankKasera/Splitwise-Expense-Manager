@@ -8,12 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
-import com.shashank.splitterexpensemanager.localdb.model.GroupMember
-import com.shashank.splitterexpensemanager.localdb.model.Person
+import com.shashank.splitterexpensemanager.model.GroupMember
+import com.shashank.splitterexpensemanager.authentication.model.Person
 
 class AddFriendsAdapter(
-    var people: List<Person>,
-    var groupMember: List<GroupMember>,
+    private val groupId: Long,
+    private val person: List<Person>,
+    private val groupMember: List<GroupMember>,
     private val onItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<AddFriendsAdapter.ViewHolder>() {
     interface OnItemClickListener {
@@ -27,21 +28,20 @@ class AddFriendsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvName.text = people[position].name
-        holder.tvNumber.text = people[position].number.toString()
+        holder.tvName.text = person[position].name
+        holder.tvNumber.text = person[position].number.toString()
         for (i in 0..groupMember.size - 1) {
-            if (people[position].id == groupMember[i].personId) {
+            if ((person[position].id == groupMember[i].personId) && groupMember[i].groupId == groupId) {
                 holder.checkBox.isChecked = true
             }
         }
-
         holder.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
-            onItemClickListener.onItemClick(position, people[position], isChecked)
+            onItemClickListener.onItemClick(position, person[position], isChecked)
         }
     }
 
     override fun getItemCount(): Int {
-        return people.size
+        return person.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -15,10 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SplitwiseExpenseManager"
-        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".feature.groupmember.GroupMemberActivity"
+            android:name=".feature.addgroup.AddGroupActivity"
+            android:exported="false" >
+
+        </activity>
+        <activity
+            android:name=".feature.createfriens.CreateFriendsActivity"
             android:exported="false" />
         <activity
             android:name=".feature.addfriends.AddFriendsActivity"
@@ -28,7 +32,7 @@
             android:name=".feature.addgroup.ui.AddGroupActivity"
             android:exported="false" />
         <activity
-            android:name=".feature.createfriens.CreateFriendsActivity"
+            android:name=".feature.groupmember.GroupMemberActivity"
             android:exported="false" />
         <activity
             android:name=".feature.total.TotalActivity"
