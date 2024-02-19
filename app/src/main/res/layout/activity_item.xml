@@ -109,10 +109,10 @@
 
             <TextView
                 android:id="@+id/tv_description"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:text="gwik ghi3wh iuhgi bhui uhje ghwkj gnkwj uighnek h3gwkj hgekj uhekn huekjn"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

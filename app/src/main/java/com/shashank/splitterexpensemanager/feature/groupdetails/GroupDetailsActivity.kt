@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.GROUP_ID
@@ -15,6 +16,9 @@ import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
+import com.shashank.splitterexpensemanager.core.extension.gone
+import com.shashank.splitterexpensemanager.core.extension.visible
+import com.shashank.splitterexpensemanager.model.ExpenseWithCategoryAndPerson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,6 +42,8 @@ class GroupDetailsActivity : AppCompatActivity() {
         var groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
         var personId: Long = sharedPref.getValue(PERSON_ID, 0L) as Long
         init()
+
+
         navigationForAddFriends(groupId)
         navigationForGroupMember(groupId)
         navigationForAddExpenses(groupId)
@@ -93,10 +99,29 @@ class GroupDetailsActivity : AppCompatActivity() {
     private fun getData(groupId: Long, personId: Long) {
         Log.i("rnmlkns", "getData: $personId  $groupId")
         lifecycleScope.launch {
+            viewModel.loadAllExpensesLiveData(groupId)
+            viewModel.expenses.collect { expenses ->
+                if (!expenses.isEmpty()) {
+                    llAddGroupMember.gone()
+                    recyclerView.visible()
+                    recyclerViewSetUp(personId, expenses)
+                }
+            }
+        }
+        lifecycleScope.launch {
             viewModel.getGroup(groupId)
             viewModel.group.collect {
                 if (it != null) tvGroupName.text = it.groupName
             }
         }
+    }
+
+    private fun recyclerViewSetUp(
+        personId: Long,
+        expensesList: List<ExpenseWithCategoryAndPerson?>
+    ) {
+        var expensesAdapter = ExpensesAdapter(personId, expensesList)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = expensesAdapter
     }
 }

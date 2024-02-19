@@ -115,7 +115,7 @@ class AddExpensesActivity : AppCompatActivity() {
         }
 
         cvSave.setOnClickListener {
-            addExpenses(personId, groupId)
+            addOweOrOwed(personId, groupId)
             finish()
         }
     }
@@ -210,7 +210,7 @@ class AddExpensesActivity : AppCompatActivity() {
         }
     }
 
-    private fun addExpenses(personId: Long, groupId: Long) {
+    private fun addExpenses(personId: Long, groupId: Long, splitAmount: Double) {
         val amount = tvAmount.text.toString().trim().toDouble()
         val date = tvDate.text.toString().trim()
         val time = tvTime.text.toString().trim()
@@ -219,9 +219,24 @@ class AddExpensesActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             viewModel.insertExpenses(
-                Expenses(null, personId, groupId, categoryId, amount, name, date, time, description)
+                Expenses(
+                    null,
+                    personId,
+                    groupId,
+                    categoryId,
+                    amount,
+                    splitAmount,
+                    name,
+                    date,
+                    time,
+                    description
+                )
             )
         }
+    }
+
+    private fun addOweOrOwed(personId: Long, groupId: Long) {
+        val amount = tvAmount.text.toString().trim().toDouble()
         viewModel.allGroupMember(groupId)
 
         lifecycleScope.launch {
@@ -230,6 +245,7 @@ class AddExpensesActivity : AppCompatActivity() {
                     if (viewModel.allPerson.size > 0) {
                         val numberOfMember = viewModel.allPerson.size
                         val splitAmount = (amount / numberOfMember)
+                        addExpenses(personId, groupId, splitAmount)
                         viewModel.allPerson.forEach { member ->
                             val owedId = member.id ?: 0
                             lifecycleScope.launch {
