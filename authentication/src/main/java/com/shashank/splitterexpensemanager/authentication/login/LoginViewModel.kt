@@ -1,11 +1,11 @@
 package com.shashank.splitterexpensemanager.authentication.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.shashank.splitterexpensemanager.authentication.login.repository.LoginRepository
 import com.shashank.splitterexpensemanager.authentication.model.Person
