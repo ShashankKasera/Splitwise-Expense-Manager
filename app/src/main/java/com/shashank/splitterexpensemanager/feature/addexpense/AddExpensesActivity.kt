@@ -5,6 +5,7 @@ import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -115,7 +116,7 @@ class AddExpensesActivity : AppCompatActivity() {
         }
 
         cvSave.setOnClickListener {
-            addOweOrOwed(personId, groupId)
+            addExpenses(personId, groupId)
             finish()
         }
     }
@@ -153,6 +154,9 @@ class AddExpensesActivity : AppCompatActivity() {
             viewModel.person.collect {
                 if (it != null) tvWhoPay.text = it.name
             }
+        }
+        lifecycleScope.launch {
+            viewModel.allGroupMember(groupId)
         }
     }
 
@@ -210,7 +214,7 @@ class AddExpensesActivity : AppCompatActivity() {
         }
     }
 
-    private fun addExpenses(personId: Long, groupId: Long, splitAmount: Double) {
+    private fun addExpenses(personId: Long, groupId: Long) {
         val amount = tvAmount.text.toString().trim().toDouble()
         val date = tvDate.text.toString().trim()
         val time = tvTime.text.toString().trim()
@@ -218,51 +222,45 @@ class AddExpensesActivity : AppCompatActivity() {
         val name = tvWhoPay.text.toString().trim()
 
         lifecycleScope.launch {
-            viewModel.insertExpenses(
-                Expenses(
-                    null,
-                    personId,
-                    groupId,
-                    categoryId,
-                    amount,
-                    splitAmount,
-                    name,
-                    date,
-                    time,
-                    description
-                )
-            )
-        }
-    }
 
-    private fun addOweOrOwed(personId: Long, groupId: Long) {
-        val amount = tvAmount.text.toString().trim().toDouble()
-        viewModel.allGroupMember(groupId)
-
-        lifecycleScope.launch {
             viewModel.personFeched.collect {
                 if (it) {
                     if (viewModel.allPerson.size > 0) {
                         val numberOfMember = viewModel.allPerson.size
                         val splitAmount = (amount / numberOfMember)
-                        addExpenses(personId, groupId, splitAmount)
+                        viewModel.insertExpenses(
+                            Expenses(
+                                null,
+                                personId,
+                                groupId,
+                                categoryId,
+                                amount,
+                                splitAmount,
+                                name,
+                                date,
+                                time,
+                                description
+                            )
+                        )
                         viewModel.allPerson.forEach { member ->
                             val owedId = member.id ?: 0
-                            lifecycleScope.launch {
-                                viewModel.insertOweOrOwed(
-                                    OweOrOwed(
-                                        null,
-                                        personId,
-                                        owedId,
-                                        groupId,
-                                        splitAmount
-                                    )
+                            Log.i("erjkgbk", "addExpenses: $owedId")
+                            viewModel.insertOweOrOwed(
+                                OweOrOwed(
+                                    null,
+                                    personId,
+                                    owedId,
+                                    groupId,
+                                    splitAmount
                                 )
-                            }
+                            )
                         }
                     }
                 }
             }
+
         }
     }
+
+
 }

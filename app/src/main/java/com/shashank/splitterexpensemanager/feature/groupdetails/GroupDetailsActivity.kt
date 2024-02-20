@@ -18,8 +18,11 @@ import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
+import com.shashank.splitterexpensemanager.feature.addgroup.ui.model.GroupType
 import com.shashank.splitterexpensemanager.model.ExpenseWithCategoryAndPerson
+import com.shashank.splitterexpensemanager.model.OweOrOwedWithPerson
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,30 +34,51 @@ class GroupDetailsActivity : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
     lateinit var tvGroupName: TextView
     lateinit var tvAddExpenses: TextView
+    lateinit var tvOverallOweOrOwed: TextView
     lateinit var llAddGroupMember: LinearLayout
 
     @Inject
     lateinit var sharedPref: SharedPref
+    private var amount=0.0
+    private var owePersonList = ArrayList<OweOrOwedWithPerson>()
     private val viewModel: GroupDetailViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_details)
         var groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
         var personId: Long = sharedPref.getValue(PERSON_ID, 0L) as Long
-        init()
 
-
+        init(groupId, personId)
         navigationForAddFriends(groupId)
         navigationForGroupMember(groupId)
         navigationForAddExpenses(groupId)
         getData(groupId, personId)
     }
 
-    private fun init() {
+    private fun init(groupId: Long, personId: Long) {
         recyclerView = findViewById(R.id.rv_group_activity)
         tvGroupName = findViewById(R.id.tv_group_Name_in_detail)
         tvAddExpenses = findViewById(R.id.tv_add_expenses)
+        tvOverallOweOrOwed = findViewById(R.id.tv_overall_owe)
         llAddGroupMember = findViewById(R.id.ll_group_member)
+        viewModel.loadAllExpensesLiveData(personId,groupId)
+        viewModel.loadAllOweByGroupId(groupId,personId)
+        viewModel.loadAllOwedByGroupId(groupId,personId)
+        lifecycleScope.launch {
+            viewModel.amount.collect{
+                amount=it?:0.0
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.owe.collect{
+//                Log.i("egb", "owe: ${it.size}")
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.owed.collect{
+                Log.i("egb", "owed: ${it.size}")
+            }
+        }
     }
 
     private fun navigationForAddFriends(groupId: Long) {
@@ -97,9 +121,21 @@ class GroupDetailsActivity : AppCompatActivity() {
     }
 
     private fun getData(groupId: Long, personId: Long) {
-        Log.i("rnmlkns", "getData: $personId  $groupId")
         lifecycleScope.launch {
-            viewModel.loadAllExpensesLiveData(groupId)
+            viewModel.oweOrOwed.collect {
+                if(amount>0){
+                    tvOverallOweOrOwed.setTextColor(
+                        tvOverallOweOrOwed.context.getResources().getColor(R.color.green)
+                    )
+                }else{
+                    tvOverallOweOrOwed.setTextColor(
+                        tvOverallOweOrOwed.context.getResources().getColor(R.color.primary_dark)
+                    )
+                }
+                tvOverallOweOrOwed.text=it.toString()
+            }
+        }
+        lifecycleScope.launch {
             viewModel.expenses.collect { expenses ->
                 if (!expenses.isEmpty()) {
                     llAddGroupMember.gone()
@@ -107,6 +143,7 @@ class GroupDetailsActivity : AppCompatActivity() {
                     recyclerViewSetUp(personId, expenses)
                 }
             }
+
         }
         lifecycleScope.launch {
             viewModel.getGroup(groupId)
