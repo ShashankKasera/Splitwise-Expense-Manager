@@ -12,9 +12,9 @@ import javax.inject.Inject
 class AddGroupViewModel @Inject constructor(
     private val addGroupRepository: AddGroupRepository,
 ) : ViewModel() {
-    fun insertGroup(group: Group) {
+    fun insertGroup(groupName: String, groupType: String) {
         viewModelScope.launch {
-            addGroupRepository.insertGroup(group)
+            addGroupRepository.insertGroup(Group(null, groupName, groupType, ""))
         }
     }
 }
