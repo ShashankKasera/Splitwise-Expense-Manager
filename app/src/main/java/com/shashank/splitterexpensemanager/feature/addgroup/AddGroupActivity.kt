@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.feature.addgroup.model.GroupType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

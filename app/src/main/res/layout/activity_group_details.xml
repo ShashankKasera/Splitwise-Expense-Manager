@@ -54,7 +54,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No Expenses here yet"
+                    android:text="@string/no_expenses_here_yet"
                     android:layout_marginLeft="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -288,7 +288,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Add Group Members"
+            android:text="@string/add_group_members"
             android:gravity="center"
             android:textColor="@color/primary_mid"
             android:layout_marginLeft="8dp"/>

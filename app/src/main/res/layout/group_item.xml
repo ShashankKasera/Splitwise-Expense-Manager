@@ -90,8 +90,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/amount"
-                    android:textColor="@color/primary_dark"
                     android:visibility="gone"
+                    android:textColor="@color/primary_dark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -107,6 +107,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/you_owe_group_member"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/tv_owe_amount_second"
                     app:layout_constraintStart_toStartOf="parent"
@@ -117,8 +118,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/amount"
-                    android:textColor="@color/primary_dark"
                     android:visibility="gone"
+                    android:textColor="@color/primary_dark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -128,6 +129,7 @@
                 android:id="@+id/tv_plus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:text="@string/plus_other_balances"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

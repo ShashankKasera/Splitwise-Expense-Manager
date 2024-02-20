@@ -42,4 +42,6 @@
     <string name="you_owe">You owe</string>
     <string name="no_expenses">No Expenses</string>
     <string name="group_type">Group Type</string>
+    <string name="no_expenses_here_yet">No Expenses here yet</string>
+    <string name="add_group_members">Add Group Members</string>
 </resources>
