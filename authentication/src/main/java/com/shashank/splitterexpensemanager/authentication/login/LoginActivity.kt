@@ -33,12 +33,10 @@ class LoginActivity : AppCompatActivity() {
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
-
         emailAddress = findViewById(R.id.et_Email)
         password = findViewById(R.id.et_Password)
         loginBtn = findViewById(R.id.tv_login)
@@ -48,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
             sEmailAddress = emailAddress.text.toString().trim()
             sPassword = password.text.toString().trim()
             if (sEmailAddress.isEmpty() && sPassword.isEmpty()) {
-                Toast.makeText(this, "Fill All Fields", Toast.LENGTH_LONG)
+                Toast.makeText(this, "${getString(R.string.fill_all_fields)}", Toast.LENGTH_LONG)
             } else {
                 viewModel.login(sEmailAddress, sPassword)
             }

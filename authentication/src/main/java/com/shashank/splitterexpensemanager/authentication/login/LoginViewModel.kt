@@ -1,6 +1,5 @@
 package com.shashank.splitterexpensemanager.authentication.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
@@ -22,18 +21,17 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 @HiltViewModel
-class LoginViewModel @Inject constructor(var loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val loginRepository: LoginRepository,
+    private val sharedPref: SharedPref
+) : ViewModel() {
 
-    @Inject
-    lateinit var sharedPref: SharedPref
-    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private lateinit var databaseReference: DatabaseReference
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val _networkState = MutableStateFlow<NetworkCallState>(NetworkCallState.Init)
     var networkState = _networkState.asStateFlow()
     private val _loginUiState = MutableStateFlow<LoginUiState>(LoginUiState())
     val loginUiState = _loginUiState.asStateFlow()
     fun login(email: String, password: String) {
-        databaseReference = FirebaseDatabase.getInstance().reference
         viewModelScope.launch {
             try {
                 _networkState.emit(NetworkCallState.Loading)

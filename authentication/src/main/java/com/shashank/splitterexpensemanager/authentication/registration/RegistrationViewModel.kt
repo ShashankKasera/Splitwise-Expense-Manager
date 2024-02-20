@@ -1,6 +1,5 @@
 package com.shashank.splitterexpensemanager.authentication.registration
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
@@ -23,17 +22,17 @@ import com.shashank.splitterexpensemanager.localdb.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 
 @HiltViewModel
-class RegistrationViewModel @Inject constructor(var registrationRepository: RegistrationRepository) :
-    ViewModel() {
-    @Inject
-    lateinit var sharedPref: SharedPref
+class RegistrationViewModel @Inject constructor(
+    private val registrationRepository: RegistrationRepository,
+    private val sharedPref: SharedPref
+) : ViewModel() {
+
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private lateinit var databaseReference: DatabaseReference
+    private val databaseReference = FirebaseDatabase.getInstance().reference
     private val _networkState = MutableStateFlow<NetworkCallState>(NetworkCallState.Init)
     var networkState = _networkState.asStateFlow()
 
     fun registration(name: String, email: String, password: String) {
-        databaseReference = FirebaseDatabase.getInstance().reference
         viewModelScope.launch {
             try {
                 _networkState.emit(NetworkCallState.Loading)
