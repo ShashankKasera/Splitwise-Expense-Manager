@@ -53,10 +53,10 @@ class AddGroupActivity : AppCompatActivity() {
     }
 
     private fun recyclerViewSetup() {
-        groupTypeList.add(GroupType("Other", R.drawable.other_png))
-        groupTypeList.add(GroupType("Couple", R.drawable.couple_png))
-        groupTypeList.add(GroupType("Home", R.drawable.home_rent_icon_png))
-        groupTypeList.add(GroupType("Trip", R.drawable.trip_png))
+        groupTypeList.add(GroupType(getString(R.string.other), R.drawable.other_png))
+        groupTypeList.add(GroupType(getString(R.string.couple), R.drawable.couple_png))
+        groupTypeList.add(GroupType(getString(R.string.home), R.drawable.home_rent_icon_png))
+        groupTypeList.add(GroupType(getString(R.string.trip), R.drawable.trip_png))
 
 
         val groupTypeAdapter =
