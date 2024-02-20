@@ -6,4 +6,8 @@
     <string name="home">Home</string>
     <string name="couple">Couple</string>
     <string name="other">Other</string>
+    <string name="create_a_group">Create a group</string>
+    <string name="done">Done</string>
+    <string name="group_name">Group Name</string>
+    <string name="type">Type</string>
 </resources>
