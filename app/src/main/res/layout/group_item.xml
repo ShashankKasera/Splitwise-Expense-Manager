@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cl_group"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -37,7 +38,6 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/cv_group_icon_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cv_group_icon_1"
             app:layout_constraintTop_toTopOf="@+id/cv_group_icon_1">
@@ -57,29 +57,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/no_expenses"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_ove_or_oved"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/you_owe_or_owed_amount_overall"
-                android:textSize="16sp"
                 android:layout_marginTop="4dp"
-                android:textColor="@color/primary_dark"/>
+                android:textColor="@color/primary_dark"
+                android:textSize="16sp"
+                android:visibility="gone" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp">
 
                 <TextView
-
                     android:id="@+id/tv_you_owe_fist"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/you_owe_group_member"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/tv_owe_amount_fist"
                     app:layout_constraintStart_toStartOf="parent"
@@ -90,6 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/amount"
+                    android:visibility="gone"
                     android:textColor="@color/primary_dark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -97,15 +98,16 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp">
 
                 <TextView
                     android:id="@+id/tv_you_owe_second"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/you_owe_group_member"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/tv_owe_amount_second"
                     app:layout_constraintStart_toStartOf="parent"
@@ -116,6 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/amount"
+                    android:visibility="gone"
                     android:textColor="@color/primary_dark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -124,9 +127,9 @@
 
             <TextView
                 android:id="@+id/tv_plus"
-                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:text="@string/plus_other_balances"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

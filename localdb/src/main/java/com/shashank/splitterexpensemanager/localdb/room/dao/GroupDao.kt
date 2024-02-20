@@ -24,4 +24,7 @@ interface GroupDao {
 
     @Query("Select * from `Group`")
     fun loadAllGroup(): Flow<List<Group>>
+
+    @Query("Select * from `Group` where id = :groupId")
+    fun loadGroup(groupId: Long): Flow<Group>
 }

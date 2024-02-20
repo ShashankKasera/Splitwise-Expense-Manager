@@ -9,7 +9,8 @@ enum class ActionType {
     LOGIN,
     REGISTRATION,
     ADD_GROUP_MEMBER,
-    ADD_GROUP
+    ADD_GROUP,
+    GROUP_DETAILS
 }
 
 interface Action {

@@ -26,6 +26,6 @@ class SplitAmountAdapter : RecyclerView.Adapter<SplitAmountAdapter.ViewHolder>()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvName: TextView = itemView.findViewById(R.id.tv_splitter_name)
-        val tvAmount: TextView = itemView.findViewById(R.id.tv_splitter_amount)
+        val tvAmount: TextView = itemView.findViewById(R.id.tv_splitter_owe)
     }
 }
