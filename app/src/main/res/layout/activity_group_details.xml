@@ -32,7 +32,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="Rameshwar trip"
+                    android:text="@string/group_name"
                     android:textColor="@color/white"
                     android:textSize="24dp"
                     android:textStyle="bold"
@@ -87,7 +87,7 @@
                     android:id="@+id/tv_overall_owe"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="You Owe Rs 5000 Overall"
+                    android:text="@string/you_owe_or_owed_amount_overall"
                     android:textColor="@color/primary_dark"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/gl_right_owe"
@@ -99,7 +99,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="You owe Mayank Gupta"
+                    android:text="@string/you_owe_group_member"
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toStartOf="@+id/ll_member_owe_amount"
                     app:layout_constraintStart_toStartOf="@+id/gl_left_cwe"
@@ -111,7 +111,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="You owe Piyus Gupta"
+                    android:text="@string/you_owe_group_member"
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toStartOf="@+id/ll_member_owe_amount"
                     app:layout_constraintStart_toStartOf="@+id/gl_left_cwe"
@@ -130,7 +130,7 @@
                         android:id="@+id/tv_first_owe_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rs 5000"
+                        android:text="@string/owe_or_owed_amount"
                         android:textColor="@color/black" />
 
                     <TextView
@@ -138,7 +138,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Rs 500"
+                        android:text="owe_or_owed_amount"
                         android:textColor="@color/black" />
                 </LinearLayout>
 
@@ -147,7 +147,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Plus 2 other balances"
+                    android:text="@string/plus_other_balances"
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toStartOf="@+id/gl_right_owe"
                     app:layout_constraintStart_toStartOf="@+id/gl_left_cwe"
@@ -184,7 +184,7 @@
                             android:layout_marginRight="8dp"
                             android:gravity="center"
                             android:padding="4dp"
-                            android:text="Settle Up"
+                            android:text="@string/settle_up"
                             android:textColor="@color/white"
                             android:textSize="16dp" />
                     </LinearLayout>
@@ -217,7 +217,7 @@
                             android:layout_marginRight="8dp"
                             android:gravity="center"
                             android:padding="4dp"
-                            android:text="Tottls"
+                            android:text="@string/tottls"
                             android:textColor="@color/white"
                             android:textSize="16dp" />
                     </LinearLayout>
@@ -248,7 +248,7 @@
                             android:layout_marginRight="8dp"
                             android:gravity="center"
                             android:padding="4dp"
-                            android:text="Balances"
+                            android:text="@string/balances"
                             android:textColor="@color/white"
                             android:textSize="16dp" />
                     </LinearLayout>
