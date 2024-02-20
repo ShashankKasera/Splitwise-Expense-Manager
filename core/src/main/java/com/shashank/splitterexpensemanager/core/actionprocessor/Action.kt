@@ -7,7 +7,9 @@ import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionPara
 enum class ActionType {
     DASH_BOARD,
     LOGIN,
-    REGISTRATION
+    REGISTRATION,
+    ADD_GROUP_MEMBER,
+    ADD_GROUP
 }
 
 interface Action {

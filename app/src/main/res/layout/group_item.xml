@@ -46,7 +46,7 @@
                 android:id="@+id/tv_group_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Maharastra Trip"
+                android:text="@string/group_name"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="No Expenses"
+                android:text="@string/no_expenses"
                 android:textSize="16sp"
                 />
 
@@ -64,7 +64,7 @@
                 android:id="@+id/tv_ove_or_oved"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="You owe Rs. 5000"
+                android:text="@string/you_owe_or_owed_amount_overall"
                 android:textSize="16sp"
                 android:layout_marginTop="4dp"
                 android:textColor="@color/primary_dark"/>
@@ -79,7 +79,7 @@
                     android:id="@+id/tv_you_owe_fist"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="You owe Mayank Gupta"
+                    android:text="@string/you_owe_group_member"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/tv_owe_amount_fist"
                     app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +89,7 @@
                     android:id="@+id/tv_owe_amount_fist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rs. 50000"
+                    android:text="@string/amount"
                     android:textColor="@color/primary_dark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +105,7 @@
                     android:id="@+id/tv_you_owe_second"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="You owe Piyush Gupta"
+                    android:text="@string/you_owe_group_member"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/tv_owe_amount_second"
                     app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +115,7 @@
                     android:id="@+id/tv_owe_amount_second"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rs. 50000"
+                    android:text="@string/amount"
                     android:textColor="@color/primary_dark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +127,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Plus 2 other balance"/>
+                android:text="@string/plus_other_balances"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

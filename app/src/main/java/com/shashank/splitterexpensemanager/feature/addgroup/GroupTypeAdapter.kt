@@ -10,8 +10,15 @@ import com.shashank.splitterexpensemanager.R
 import de.hdodenhof.circleimageview.CircleImageView
 
 class GroupTypeAdapter(
-    var groupTypeList: List<GroupType>
+    private var groupTypeList: ArrayList<GroupType>,
+    private val onItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<GroupTypeAdapter.ViewHolder>() {
+
+    private var selecdPosision = -1
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int, data: GroupType)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
@@ -22,6 +29,23 @@ class GroupTypeAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvName.text = groupTypeList[position].name
         holder.civImage.setImageResource(groupTypeList[position].image)
+
+        if (position == selecdPosision) {
+            holder.llGroupType.setBackgroundColor(
+                holder.llGroupType.context.getResources().getColor(R.color.primary_mid)
+            )
+            holder.tvName.setTextColor(holder.tvName.context.getResources().getColor(R.color.white))
+        } else {
+            holder.llGroupType.setBackgroundColor(
+                holder.llGroupType.context.getResources().getColor(R.color.white)
+            )
+            holder.tvName.setTextColor(holder.tvName.context.getResources().getColor(R.color.black))
+        }
+        holder.tvName.setOnClickListener {
+            selecdPosision = position
+            notifyDataSetChanged()
+            onItemClickListener.onItemClick(position, groupTypeList[position])
+        }
     }
 
     override fun getItemCount(): Int {

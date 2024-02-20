@@ -8,5 +8,6 @@ data class Group(
     @PrimaryKey(autoGenerate = true)
     var id: Long?,
     var groupName: String,
+    var groupType: String,
     var groupImage: String,
 )

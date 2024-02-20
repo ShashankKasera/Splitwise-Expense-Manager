@@ -44,7 +44,8 @@
             android:text="@string/done"
             android:layout_gravity="right|center"
             android:textColor="@color/white"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:layout_marginLeft="16dp"/>
     </LinearLayout>
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civ_group_image"

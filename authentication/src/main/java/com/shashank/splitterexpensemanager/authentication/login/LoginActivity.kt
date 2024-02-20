@@ -73,11 +73,10 @@ class LoginActivity : AppCompatActivity() {
                         actionProcessor.process(ActionRequestSchema(ActionType.DASH_BOARD.name))
                     }
                 }
-
-                singUpBtn.setOnClickListener {
-                    actionProcessor.process(ActionRequestSchema(ActionType.REGISTRATION.name))
-                }
             }
+        }
+        singUpBtn.setOnClickListener {
+            actionProcessor.process(ActionRequestSchema(ActionType.REGISTRATION.name))
         }
     }
 
