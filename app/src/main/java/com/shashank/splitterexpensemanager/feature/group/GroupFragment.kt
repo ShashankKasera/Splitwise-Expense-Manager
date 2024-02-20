@@ -8,11 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
-
+import dagger.hilt.android.AndroidEntryPoint
+@AndroidEntryPoint
 class GroupFragment : Fragment() {
-
-
     lateinit var recyclerView: RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater,

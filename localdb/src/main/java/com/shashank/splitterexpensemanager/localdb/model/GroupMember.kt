@@ -21,7 +21,7 @@ import androidx.room.PrimaryKey
 )
 data class GroupMember(
     @PrimaryKey(autoGenerate = true)
-    var id: Long,
+    var id: Long?,
     var personId: Long,
     var groupId: Long,
 )

@@ -9,7 +9,9 @@ import com.shashank.splitterexpensemanager.feature.activity.ActivityFragment
 import com.shashank.splitterexpensemanager.feature.friends.FriendsFragment
 import com.shashank.splitterexpensemanager.feature.group.GroupFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DashboardActivity : AppCompatActivity() {
 
     lateinit var bottomNav: BottomNavigationView

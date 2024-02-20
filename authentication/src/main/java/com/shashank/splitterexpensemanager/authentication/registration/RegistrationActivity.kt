@@ -61,6 +61,7 @@ class RegistrationActivity : AppCompatActivity() {
                 viewModel.registration(sUserName, sEmailAddress, sPassword)
             }
         }
+
         lifecycleScope.launch {
             viewModel.networkState.collect {
                 when (it) {
