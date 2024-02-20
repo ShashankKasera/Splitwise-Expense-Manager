@@ -18,6 +18,7 @@ import com.shashank.splitterexpensemanager.authentication.registration.repositor
 import com.shashank.splitterexpensemanager.core.PERSON
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
+import com.shashank.splitterexpensemanager.localdb.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 
 @HiltViewModel
@@ -69,5 +70,9 @@ class RegistrationViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    suspend fun insertAllCategory(vararg category: Category) = viewModelScope.launch {
+        registrationRepository.insertAllCategory(*category)
     }
 }

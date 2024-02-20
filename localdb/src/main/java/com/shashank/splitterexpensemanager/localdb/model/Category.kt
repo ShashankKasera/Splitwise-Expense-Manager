@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class Category(
     @PrimaryKey(autoGenerate = true)
-    var id: Long,
+    var id: Long?,
     var categoryName: String,
-    var categoryImage: String
+    var categoryImage: Int
 )

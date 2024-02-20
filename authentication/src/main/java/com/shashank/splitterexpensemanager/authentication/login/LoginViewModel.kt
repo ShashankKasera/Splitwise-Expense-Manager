@@ -13,13 +13,13 @@ import com.shashank.splitterexpensemanager.core.PERSON
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.localdb.model.Person as PersonEntity
+import com.shashank.splitterexpensemanager.localdb.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
-
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository,
@@ -29,10 +29,8 @@ class LoginViewModel @Inject constructor(
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val _networkState = MutableStateFlow<NetworkCallState>(NetworkCallState.Init)
     var networkState = _networkState.asStateFlow()
-
     private val _loginUiState = MutableStateFlow<LoginUiState>(LoginUiState())
     val loginUiState = _loginUiState.asStateFlow()
-
     fun login(email: String, password: String) {
         viewModelScope.launch {
             try {
@@ -79,5 +77,8 @@ class LoginViewModel @Inject constructor(
                 Log.i("LoginViewModel", "getUser: ${e.message}")
             }
         }
+    }
+    suspend fun insertAllCategory(vararg category: Category) = viewModelScope.launch {
+        loginRepository.insertAllCategory(*category)
     }
 }
