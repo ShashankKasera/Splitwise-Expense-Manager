@@ -1,1 +1,23 @@
-<resources></resources>
+<resources>
+    <string name="Game">Game</string>
+    <string name="Movie">Movie</string>
+    <string name="Music">Music</string>
+    <string name="Sports">Sports</string>
+    <string name="Dining_Out">Dining Out</string>
+    <string name="Groceries">Groceries</string>
+    <string name="Liquor">Liquor</string>
+    <string name="Electronics">Electronics</string>
+    <string name="furniture">furniture</string>
+    <string name="Household_supplies">Household supplies</string>
+    <string name="Maintenance">Maintenance</string>
+    <string name="Mortgage">Mortgage</string>
+    <string name="Pets">Pets</string>
+    <string name="Rent">Rent</string>
+    <string name="Childcare">Childcare</string>
+    <string name="Clothing">Clothing</string>
+    <string name="Education">Education</string>
+    <string name="Gift">Gift</string>
+    <string name="Insurance">Insurance</string>
+    <string name="Medical_Expenses">Medical Expenses</string>
+    <string name="Taxes">Taxes</string>
+</resources>
