@@ -14,6 +14,7 @@ import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
+import com.shashank.splitterexpensemanager.model.Group
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,7 +26,6 @@ class GroupFragment : Fragment() {
     lateinit var actionProcessor: ActionProcessor
     lateinit var recyclerView: RecyclerView
     lateinit var addGroup: TextView
-
     private val viewModel: GroupViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,9 +33,7 @@ class GroupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_group, container, false)
-        recyclerView = v.findViewById(R.id.rv_group)
-        addGroup = v.findViewById(R.id.tv_add_group)
-
+        init(v)
         addGroup.setOnClickListener {
             actionProcessor.process(
                 ActionRequestSchema(
@@ -46,25 +44,33 @@ class GroupFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.getAllGroup()
             viewModel.allGroup.collect {
-                val groupAdapter = GroupAdapter(
-                    it,
-                    object : GroupAdapter.OnItemClickListener {
-                        override fun onItemClick(groupId: Long) {
-                            actionProcessor.process(
-                                ActionRequestSchema(
-                                    ActionType.GROUP_DETAILS.name,
-                                    hashMapOf(
-                                        GROUP_ID to groupId,
-                                    )
-                                )
-                            )
-                        }
-                    }
-                )
-                recyclerView.layoutManager = LinearLayoutManager(context)
-                recyclerView.adapter = groupAdapter
+                setUpRecyclerView(it)
             }
         }
         return v
+    }
+
+    private fun init(v: View) {
+        recyclerView = v.findViewById(R.id.rv_group)
+        addGroup = v.findViewById(R.id.tv_add_group)
+    }
+    private fun setUpRecyclerView(groups: List<Group>) {
+        val groupAdapter = GroupAdapter(
+            groups,
+            object : GroupAdapter.OnItemClickListener {
+                override fun onItemClick(groupId: Long) {
+                    actionProcessor.process(
+                        ActionRequestSchema(
+                            ActionType.GROUP_DETAILS.name,
+                            hashMapOf(
+                                GROUP_ID to groupId,
+                            )
+                        )
+                    )
+                }
+            }
+        )
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = groupAdapter
     }
 }

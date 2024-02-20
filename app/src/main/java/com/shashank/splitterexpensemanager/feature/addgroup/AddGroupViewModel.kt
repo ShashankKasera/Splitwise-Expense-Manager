@@ -16,8 +16,9 @@ class AddGroupViewModel @Inject constructor(
     private val addGroupRepository: AddGroupRepository,
     private val sharedPref: SharedPref
 ) : ViewModel() {
-    fun insertGroup(group: Group) {
+    fun insertGroup(groupName: String, groupType: String) {
         viewModelScope.launch {
+            addGroupRepository.insertGroup(Group(null, groupName, groupType, ""))
             val id = addGroupRepository.insertGroup(group)
             val personId: Long = sharedPref.getValue(PERSON_ID, 0L) as Long
             addGroupRepository.insertGroupMember(GroupMember(null, personId, id))
