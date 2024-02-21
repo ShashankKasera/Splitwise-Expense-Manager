@@ -8,6 +8,7 @@ import com.shashank.splitterexpensemanager.localdb.room.dao.CategoryDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.ExpensesDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.GroupDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.GroupMemberDao
+import com.shashank.splitterexpensemanager.localdb.room.dao.OweOrOwedDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.PersonDao
 import dagger.Module
 import dagger.Provides
@@ -48,5 +49,9 @@ class AppModule {
     @Singleton
     @Provides
     fun getExpensesDao(db: SplitterDatabase): ExpensesDao = db.getExpensesDao()
+
+    @Singleton
+    @Provides
+    fun getOweOrOwedDao(db: SplitterDatabase): OweOrOwedDao = db.getOweOrOwedDao()
 }
 

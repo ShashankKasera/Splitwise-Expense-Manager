@@ -1,5 +1,7 @@
 package com.shashank.splitterexpensemanager.di
 
+import com.shashank.splitterexpensemanager.feature.addexpense.repository.AddExpensesRepository
+import com.shashank.splitterexpensemanager.feature.addexpense.repository.AddExpensesRepositoryImp
 import com.shashank.splitterexpensemanager.feature.addfriends.repository.AddFriendsRepository
 import com.shashank.splitterexpensemanager.feature.addfriends.repository.AddFriendsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.addgroup.repository.AddGroupRepository
@@ -26,19 +28,11 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun getAddGroupRepository(repo: AddGroupRepositoryImp): AddGroupRepository = repo
+    fun getAddExpensesRepository(repo: AddExpensesRepositoryImp): AddExpensesRepository = repo
 
     @Singleton
     @Provides
-    fun getGroupRepository(repo: GroupRepositoryImp): GroupRepository = repo
-
-    @Singleton
-    @Provides
-    fun getGroupDetailsRepository(repo: GroupDetailsRepositoryImp): GroupDetailsRepository = repo
-
-    @Singleton
-    @Provides
-    fun getAddFriendsRepository(repo: AddFriendsRepositoryImp): AddFriendsRepository = repo
+    fun getCategoryRepository(repo: CategoryRepositoryImp): CategoryRepository = repo
 
     @Singleton
     @Provides
@@ -46,9 +40,21 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun getAddFriendsRepository(repo: AddFriendsRepositoryImp): AddFriendsRepository = repo
+
+    @Singleton
+    @Provides
+    fun getGroupRepository(repo: GroupRepositoryImp): GroupRepository = repo
+
+    @Singleton
+    @Provides
     fun getCreateFriendsRepository(repo: CreateFriendsRepositoryImp): CreateFriendsRepository = repo
 
     @Singleton
     @Provides
-    fun getCategoryRepository(repo: CategoryRepositoryImp): CategoryRepository = repo
+    fun getGroupDetailsRepository(repo: GroupDetailsRepositoryImp): GroupDetailsRepository = repo
+
+    @Singleton
+    @Provides
+    fun getAddGroupRepository(repo: AddGroupRepositoryImp): AddGroupRepository = repo
 }

@@ -1,4 +1,5 @@
 package com.shashank.splitterexpensemanager.core
+
 import android.content.Context
 import android.content.SharedPreferences
 import android.text.TextUtils

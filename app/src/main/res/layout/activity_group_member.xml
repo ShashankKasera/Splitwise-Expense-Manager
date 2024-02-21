@@ -17,7 +17,7 @@
         tools:listitem="@layout/group_member_item" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_group_member"
+        android:id="@+id/cv_add_group_member"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="20dp"
