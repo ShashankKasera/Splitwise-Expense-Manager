@@ -7,8 +7,10 @@ import com.shashank.splitterexpensemanager.authentication.registration.Registrat
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionParams
 import com.shashank.splitterexpensemanager.core.extension.toBundle
 import com.shashank.splitterexpensemanager.feature.DashboardActivity
+import com.shashank.splitterexpensemanager.feature.groupmember.GroupMemberActivity
+import com.shashank.splitterexpensemanager.feature.addfriends.AddFriendsActivity
+import com.shashank.splitterexpensemanager.feature.createfriens.CreateFriendsActivity
 import com.shashank.splitterexpensemanager.feature.addgroup.AddGroupActivity
-import com.shashank.splitterexpensemanager.feature.addgroupmember.AddGroupMemberActivity
 import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
@@ -23,9 +25,11 @@ class DefaultNavigator @Inject constructor(@ActivityContext private val context:
             Route.DASH_BOARD -> Intent(context, DashboardActivity::class.java)
             Route.LOGIN -> Intent(context, LoginActivity::class.java)
             Route.REGISTRATION -> Intent(context, RegistrationActivity::class.java)
-            Route.ADD_GROUP_MEMBER -> Intent(context, AddGroupMemberActivity::class.java)
             Route.ADD_GROUP -> Intent(context, AddGroupActivity::class.java)
             Route.GROUP_DETAILS -> Intent(context, GroupDetailsActivity::class.java)
+            Route.CREATE_FRIENDS -> Intent(context, CreateFriendsActivity::class.java)
+            Route.ADD_FRIENDS -> Intent(context, AddFriendsActivity::class.java)
+            Route.GROUP_MEMBER -> Intent(context, GroupMemberActivity::class.java)
         }.apply {
             actionParams?.data?.toBundle()?.let {
                 putExtras(it)
@@ -40,7 +44,9 @@ enum class Route {
     DASH_BOARD,
     LOGIN,
     REGISTRATION,
-    ADD_GROUP_MEMBER,
     ADD_GROUP,
-    GROUP_DETAILS
+    GROUP_DETAILS,
+    CREATE_FRIENDS,
+    ADD_FRIENDS,
+    GROUP_MEMBER
 }

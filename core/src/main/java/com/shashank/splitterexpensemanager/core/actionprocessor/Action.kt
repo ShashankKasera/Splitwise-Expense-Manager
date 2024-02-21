@@ -8,9 +8,11 @@ enum class ActionType {
     DASH_BOARD,
     LOGIN,
     REGISTRATION,
-    ADD_GROUP_MEMBER,
     ADD_GROUP,
-    GROUP_DETAILS
+    GROUP_DETAILS,
+    CREATE_FRIENDS,
+    ADD_FRIENDS,
+    GROUP_MEMBER,
 }
 
 interface Action {

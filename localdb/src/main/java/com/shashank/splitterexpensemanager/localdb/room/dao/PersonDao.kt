@@ -27,4 +27,7 @@ interface PersonDao {
 
     @Query("Select * from Person where Person.emailId = :email")
     fun loadPersonByEmail(email: String): Flow<Person>
+
+    @Query("SELECT * FROM Person WHERE Person.id != :personId")
+    fun getAllPersonsExcept(personId: Long): Flow<List<Person>>
 }

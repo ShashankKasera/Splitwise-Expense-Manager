@@ -11,6 +11,7 @@ import com.shashank.splitterexpensemanager.R
 
 class FriendsFragment : Fragment() {
     lateinit var recyclerView: RecyclerView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -19,9 +20,13 @@ class FriendsFragment : Fragment() {
         val v: View = inflater.inflate(R.layout.fragment_friends, container, false)
 
         recyclerView = v.findViewById<View>(R.id.rv_friend) as RecyclerView
+        recyclerViewSetUp()
+        return v
+    }
+
+    fun recyclerViewSetUp() {
         val friendAdapter = FriendAdapter()
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = friendAdapter
-        return v
     }
 }

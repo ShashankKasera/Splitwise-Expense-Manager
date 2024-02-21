@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_add_group_member"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/civ_group_member"
+                android:id="@+id/civ_user"
                 android:layout_width="68dp"
                 android:layout_height="68dp"
                 android:padding="8dp"
@@ -37,14 +37,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@+id/civ_group_member"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/civ_group_member"
-                app:layout_constraintTop_toTopOf="@+id/civ_group_member">
+                app:layout_constraintBottom_toBottomOf="@+id/civ_user"
+                app:layout_constraintEnd_toStartOf="@+id/cb_add_friends"
+                app:layout_constraintStart_toEndOf="@+id/civ_user"
+                app:layout_constraintTop_toTopOf="@+id/civ_user">
 
                 <TextView
-                    android:id="@+id/tv_group_member_name"
+                    android:id="@+id/tv_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Mayank Gupta"
@@ -52,7 +51,7 @@
                     android:textSize="16dp" />
 
                 <TextView
-                    android:id="@+id/tv_group_member_number"
+                    android:id="@+id/tv_user_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -60,6 +59,15 @@
                     android:textColor="@color/grey"
                     android:textSize="16dp" />
             </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/cb_add_friends"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:buttonTint="@color/primary_mid"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

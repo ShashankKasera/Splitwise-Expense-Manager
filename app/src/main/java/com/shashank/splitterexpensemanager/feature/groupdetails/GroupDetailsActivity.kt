@@ -2,13 +2,16 @@ package com.shashank.splitterexpensemanager.feature.groupdetails
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.GROUP_ID
-import com.shashank.splitterexpensemanager.core.SharedPref
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
+import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,23 +19,52 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class GroupDetailsActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var actionProcessor: ActionProcessor
     lateinit var recyclerView: RecyclerView
     lateinit var tvGroupName: TextView
-
-    @Inject
-    lateinit var sharedPref: SharedPref
+    lateinit var llAddGroupMember: LinearLayout
     private val viewModel: GroupDetailViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_details)
         var groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
         init()
+        navigationForAddFriends(groupId)
+        navigationForGroupMember(groupId)
         getData(groupId)
     }
 
     private fun init() {
         recyclerView = findViewById(R.id.rv_group_activity)
         tvGroupName = findViewById(R.id.tv_group_Name_in_detail)
+        llAddGroupMember = findViewById(R.id.ll_group_member)
+    }
+
+    private fun navigationForAddFriends(groupId: Long) {
+        llAddGroupMember.setOnClickListener {
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.ADD_FRIENDS.name,
+                    hashMapOf(
+                        GROUP_ID to (groupId)
+                    )
+                )
+            )
+        }
+    }
+
+    private fun navigationForGroupMember(groupId: Long) {
+        tvGroupName.setOnClickListener {
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.GROUP_MEMBER.name,
+                    hashMapOf(
+                        GROUP_ID to (groupId)
+                    )
+                )
+            )
+        }
     }
 
     private fun getData(groupId: Long) {
