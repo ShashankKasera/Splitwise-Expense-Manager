@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.GROUP_ID
+import com.shashank.splitterexpensemanager.core.PERSON_ID
+import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
@@ -24,6 +26,9 @@ import javax.inject.Inject
 class GroupDetailsActivity : AppCompatActivity() {
 
     @Inject
+    lateinit var sharedPref: SharedPref
+
+    @Inject
     lateinit var actionProcessor: ActionProcessor
     lateinit var recyclerView: RecyclerView
     lateinit var tvGroupName: TextView
@@ -34,12 +39,11 @@ class GroupDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_details)
         var groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
+        val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
         init()
-
-
         navigationForAddFriends(groupId)
         navigationForGroupMember(groupId)
-        getData(groupId)
+        getData(groupId, personId)
         navigationForAddExpenses(groupId)
     }
 
@@ -89,7 +93,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun getData(groupId: Long) {
+    private fun getData(groupId: Long, personId: Long) {
         lifecycleScope.launch {
             viewModel.loadAllExpensesLiveData(groupId)
             viewModel.expenses.collect { expenses ->
@@ -112,7 +116,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         personId: Long,
         expensesList: List<ExpenseWithCategoryAndPerson?>
     ) {
-        var expensesAdapter = ExpensesAdapter(personId, expensesList)
+        var expensesAdapter = ExpensesAdapter(this, personId, expensesList)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = expensesAdapter
     }
