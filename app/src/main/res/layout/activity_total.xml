@@ -37,7 +37,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"
-                android:text="Rameshwar Trip"/>
+                android:text="@string/group_name"/>
         </LinearLayout>
 
 
@@ -84,7 +84,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:hint="This Month"
+                android:hint="@string/filter"
                 android:lines="1"
                 android:textSize="16sp"
                 android:textColor="@color/black"
@@ -150,7 +150,7 @@
                 android:lines="1"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Total Group Spending"
+                android:text="@string/total_group_spending"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/civ_total_group_spending"
                 app:layout_constraintTop_toTopOf="@id/civ_total_group_spending" />
@@ -159,7 +159,7 @@
                 android:id="@+id/tv_total_group_spending_amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Rs. 10000"
+                android:text="@string/amount"
                 android:lines="1"
                 android:textColor="@color/black"
                 android:textSize="18dp"
@@ -217,7 +217,7 @@
                 android:lines="1"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Total You Paid For"
+                android:text="@string/total_you_paid_for"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/civ_total_you_paid"
                 app:layout_constraintTop_toTopOf="@id/civ_total_you_paid" />
@@ -226,7 +226,7 @@
                 android:id="@+id/tv_total_you_paid_amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Rs. 10000"
+                android:text="@string/amount"
                 android:lines="1"
                 android:textColor="@color/black"
                 android:textSize="18dp"
@@ -285,7 +285,7 @@
                 android:lines="1"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Your Total Share"
+                android:text="@string/your_total_share"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/civ_total_your_share"
                 app:layout_constraintTop_toTopOf="@id/civ_total_your_share" />
@@ -294,7 +294,7 @@
                 android:id="@+id/tv_total_your_share_amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Rs. 10000"
+                android:text="@string/amount"
                 android:lines="1"
                 android:textColor="@color/black"
                 android:textSize="18dp"
@@ -303,9 +303,6 @@
                 app:layout_constraintBottom_toBottomOf="@+id/civ_total_your_share"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/civ_total_your_share" />
-
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

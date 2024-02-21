@@ -30,11 +30,13 @@ class AddFriendsViewModel @Inject constructor(
         }
     }
 
-    suspend fun insertGroupMember(groupMember: GroupMemberEntity) = viewModelScope.launch {
-        addFriendsRepository.insertGroupMember(groupMember)
+    fun insertGroupMember(personId: Long, groupId: Long) {
+        viewModelScope.launch {
+            addFriendsRepository.insertGroupMember(GroupMemberEntity(null, personId, groupId))
+        }
     }
 
-    suspend fun deleteGroupMember(personId: Long) = viewModelScope.launch {
+    fun deleteGroupMember(personId: Long) = viewModelScope.launch {
         addFriendsRepository.deleteGroupMember(personId)
     }
 
