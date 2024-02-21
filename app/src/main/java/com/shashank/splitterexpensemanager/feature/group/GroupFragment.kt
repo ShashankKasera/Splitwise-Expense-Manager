@@ -1,4 +1,5 @@
 package com.shashank.splitterexpensemanager.feature.group
+
 import com.shashank.splitterexpensemanager.R
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,6 +27,8 @@ class GroupFragment : Fragment() {
     lateinit var actionProcessor: ActionProcessor
     lateinit var recyclerView: RecyclerView
     lateinit var addGroup: TextView
+    lateinit var groupAdapter: GroupAdapter
+    private var groupList = mutableListOf<Group>()
     private val viewModel: GroupViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +37,8 @@ class GroupFragment : Fragment() {
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_group, container, false)
         init(v)
+        setUpRecyclerView()
+        getAllGroups()
         addGroup.setOnClickListener {
             actionProcessor.process(
                 ActionRequestSchema(
@@ -41,12 +46,7 @@ class GroupFragment : Fragment() {
                 )
             )
         }
-        lifecycleScope.launch {
-            viewModel.getAllGroup()
-            viewModel.allGroup.collect {
-                setUpRecyclerView(it)
-            }
-        }
+
         return v
     }
 
@@ -54,9 +54,10 @@ class GroupFragment : Fragment() {
         recyclerView = v.findViewById(R.id.rv_group)
         addGroup = v.findViewById(R.id.tv_add_group)
     }
-    private fun setUpRecyclerView(groups: List<Group>) {
-        val groupAdapter = GroupAdapter(
-            groups,
+
+    private fun setUpRecyclerView() {
+        groupAdapter = GroupAdapter(
+            groupList,
             object : GroupAdapter.OnItemClickListener {
                 override fun onItemClick(groupId: Long) {
                     actionProcessor.process(
@@ -72,5 +73,18 @@ class GroupFragment : Fragment() {
         )
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = groupAdapter
+    }
+
+    private fun getAllGroups() {
+        lifecycleScope.launch {
+            viewModel.getAllGroup()
+            viewModel.allGroup.collect {
+                if (it.isNotEmpty()) {
+                    groupList.clear()
+                    groupList.addAll(it)
+                    groupAdapter.notifyDataSetChanged()
+                }
+            }
+        }
     }
 }
