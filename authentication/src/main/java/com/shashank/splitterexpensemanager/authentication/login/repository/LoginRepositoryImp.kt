@@ -25,11 +25,6 @@ class LoginRepositoryImp @Inject constructor(
             categoryDao.insertAllCategory(*category)
         }
 
-    override suspend fun insertAllCategory(vararg category: Category) =
-        withContext(Dispatchers.IO) {
-            categoryDao.insertAllCategory(*category)
-        }
-
     override fun loadPersonByEmail(email: String) = personDao.loadPersonByEmail(email).map {
         personMapper.map(it)
     }

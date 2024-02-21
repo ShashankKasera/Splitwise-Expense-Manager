@@ -30,6 +30,7 @@ data class Expenses(
     var groupId: Long,
     var categoryId: Long,
     var amount: Double,
+    var splitAmount: Double,
     var name: String,
     var date: String,
     var time: String,

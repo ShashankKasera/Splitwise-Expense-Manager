@@ -14,7 +14,6 @@ import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
-import com.shashank.splitterexpensemanager.authentication.personmapper.PersonListMapper
 import com.shashank.splitterexpensemanager.authentication.model.Person
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -22,9 +21,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class GroupMemberActivity : AppCompatActivity() {
-    @Inject
-    lateinit var mapper: PersonListMapper
-
     @Inject
     lateinit var actionProcessor: ActionProcessor
     private val viewModel: GroupMemberViewModel by viewModels()
@@ -56,7 +52,7 @@ class GroupMemberActivity : AppCompatActivity() {
 
     private fun init() {
         recyclerView = findViewById(R.id.rv_group_member)
-        tvAddFriends = findViewById(R.id.cv_group_member)
+        tvAddFriends = findViewById(R.id.cv_add_group_member)
     }
 
     private fun recyclerViewSetup() {

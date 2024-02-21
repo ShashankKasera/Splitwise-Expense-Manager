@@ -1,4 +1,4 @@
-package com.shashank.splitterexpensemanager.feature.addgroup.ui
+package com.shashank.splitterexpensemanager.feature.addgroup
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
