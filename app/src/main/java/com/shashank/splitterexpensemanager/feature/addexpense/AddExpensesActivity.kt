@@ -28,8 +28,6 @@ import com.shashank.splitterexpensemanager.model.Category
 import com.shashank.splitterexpensemanager.feature.category.CategoryActivity
 import com.shashank.splitterexpensemanager.feature.groupmember.GroupMemberActivity
 import com.shashank.splitterexpensemanager.authentication.model.Person
-import com.shashank.splitterexpensemanager.localdb.model.Expenses
-import com.shashank.splitterexpensemanager.localdb.model.OweOrOwed
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
@@ -115,7 +113,7 @@ class AddExpensesActivity : AppCompatActivity() {
         }
 
         cvSave.setOnClickListener {
-            addOweOrOwed(personId, groupId)
+            addExpenses(personId, groupId)
             finish()
         }
     }
@@ -210,7 +208,7 @@ class AddExpensesActivity : AppCompatActivity() {
         }
     }
 
-    private fun addExpenses(personId: Long, groupId: Long, splitAmount: Double) {
+    private fun addExpenses(personId: Long, groupId: Long) {
         val amount = tvAmount.text.toString().trim().toDouble()
         val date = tvDate.text.toString().trim()
         val time = tvTime.text.toString().trim()
@@ -218,48 +216,23 @@ class AddExpensesActivity : AppCompatActivity() {
         val name = tvWhoPay.text.toString().trim()
 
         lifecycleScope.launch {
-            viewModel.insertExpenses(
-                Expenses(
-                    null,
-                    personId,
-                    groupId,
-                    categoryId,
-                    amount,
-                    splitAmount,
-                    name,
-                    date,
-                    time,
-                    description
-                )
-            )
-        }
-    }
-
-    private fun addOweOrOwed(personId: Long, groupId: Long) {
-        val amount = tvAmount.text.toString().trim().toDouble()
-        viewModel.allGroupMember(groupId)
-
-        lifecycleScope.launch {
+            viewModel.allGroupMember(groupId)
             viewModel.personFeched.collect {
                 if (it) {
                     if (viewModel.allPerson.size > 0) {
                         val numberOfMember = viewModel.allPerson.size
                         val splitAmount = (amount / numberOfMember)
-                        addExpenses(personId, groupId, splitAmount)
-                        viewModel.allPerson.forEach { member ->
-                            val owedId = member.id ?: 0
-                            lifecycleScope.launch {
-                                viewModel.insertOweOrOwed(
-                                    OweOrOwed(
-                                        null,
-                                        personId,
-                                        owedId,
-                                        groupId,
-                                        splitAmount
-                                    )
-                                )
-                            }
-                        }
+                        viewModel.insertExpenses(
+                            personId,
+                            groupId,
+                            categoryId,
+                            amount,
+                            splitAmount,
+                            name,
+                            date,
+                            time,
+                            description
+                        )
                     }
                 }
             }

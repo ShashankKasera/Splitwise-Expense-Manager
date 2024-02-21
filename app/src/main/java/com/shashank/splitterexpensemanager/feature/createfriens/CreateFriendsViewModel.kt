@@ -7,12 +7,15 @@ import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class CreateFriendsViewModel @Inject constructor(
     var createFriendsRepository: CreateFriendsRepository,
 ) : ViewModel() {
 
-    suspend fun insertPerson(person: Person) = viewModelScope.launch {
-        createFriendsRepository.insertPerson(person)
+    fun insertPerson(name: String, number: String) {
+        viewModelScope.launch {
+            createFriendsRepository.insertPerson(Person(null, name, "", number))
+        }
     }
 }

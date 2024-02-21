@@ -7,8 +7,6 @@ import com.shashank.splitterexpensemanager.localdb.model.Person as PersonEntity
 
 interface RegistrationRepository {
     suspend fun insertPerson(person: PersonEntity)
-
-    suspend fun insertAllCategory(vararg category: Category)
-
     fun loadPersonByEmail(email: String): Flow<Person>
+    suspend fun insertAllCategory(vararg category: Category)
 }

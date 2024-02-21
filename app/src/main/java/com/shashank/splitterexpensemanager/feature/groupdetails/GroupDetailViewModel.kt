@@ -18,8 +18,6 @@ class GroupDetailViewModel @Inject constructor(var groupDetailsRepository: Group
     private val _group = MutableStateFlow<Group?>(null)
     val group = _group.asStateFlow()
 
-    private val _expenses = MutableStateFlow<List<ExpenseWithCategoryAndPerson?>>(listOf())
-    val expenses = _expenses.asStateFlow()
     fun getGroup(groupId: Long) {
         viewModelScope.launch {
             groupDetailsRepository.loadGroup(groupId).collect {

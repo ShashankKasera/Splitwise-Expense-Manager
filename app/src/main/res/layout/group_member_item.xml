@@ -28,7 +28,7 @@
                 android:layout_width="68dp"
                 android:layout_height="68dp"
                 android:padding="8dp"
-                android:src="@drawable/mayank"
+                android:src="@drawable/user"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

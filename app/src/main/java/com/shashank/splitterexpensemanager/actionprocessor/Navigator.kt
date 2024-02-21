@@ -10,7 +10,7 @@ import com.shashank.splitterexpensemanager.feature.DashboardActivity
 import com.shashank.splitterexpensemanager.feature.addexpense.AddExpensesActivity
 import com.shashank.splitterexpensemanager.feature.groupmember.GroupMemberActivity
 import com.shashank.splitterexpensemanager.feature.addfriends.AddFriendsActivity
-import com.shashank.splitterexpensemanager.feature.addgroup.ui.AddGroupActivity
+import com.shashank.splitterexpensemanager.feature.addgroup.AddGroupActivity
 import com.shashank.splitterexpensemanager.feature.category.CategoryActivity
 import com.shashank.splitterexpensemanager.feature.createfriens.CreateFriendsActivity
 import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
