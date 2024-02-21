@@ -13,10 +13,9 @@ import com.shashank.splitterexpensemanager.model.Group
 class GroupAdapter(
     private val groups: List<Group>,
     private val onItemClickListener: OnItemClickListener
-) :
-    RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
     interface OnItemClickListener {
-        fun onItemClick(id: Long)
+        fun onItemClick(groupId: Long)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -1,7 +1,5 @@
 package com.shashank.splitterexpensemanager.di
 
-import com.shashank.splitterexpensemanager.feature.addexpense.repository.AddExpensesRepository
-import com.shashank.splitterexpensemanager.feature.addexpense.repository.AddExpensesRepositoryImp
 import com.shashank.splitterexpensemanager.feature.addfriends.repository.AddFriendsRepository
 import com.shashank.splitterexpensemanager.feature.addfriends.repository.AddFriendsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.addgroup.repository.AddGroupRepository

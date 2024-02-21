@@ -1,8 +1,8 @@
 package com.shashank.splitterexpensemanager.feature.addfriends.repository
 
 import com.shashank.splitterexpensemanager.localdb.model.GroupMember as GroupMemberEntity
-import com.shashank.splitterexpensemanager.model.GroupMember
 import com.shashank.splitterexpensemanager.authentication.model.Person
+import com.shashank.splitterexpensemanager.model.GroupMember
 import kotlinx.coroutines.flow.Flow
 
 interface AddFriendsRepository {

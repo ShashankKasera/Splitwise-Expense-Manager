@@ -11,7 +11,6 @@ class GroupMapper @Inject constructor() :
         id = input.id,
         groupName = input.groupName,
         groupType = input.groupType,
-        groupImage = input.groupImage,
-
+        groupImage = input.groupImage
     )
 }

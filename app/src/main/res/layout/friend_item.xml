@@ -28,7 +28,7 @@
                 android:layout_width="68dp"
                 android:layout_height="68dp"
                 android:padding="8dp"
-                android:src="@drawable/mayank"
+                android:src="@drawable/user"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,7 +36,7 @@
                 android:id="@+id/tv_friend_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Mayank Gupta"
+                android:text="@string/name"
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/civ_friend"
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="You owe"
+                    android:text="@string/you_owe"
                     android:textColor="@color/primary_dark" />
 
                 <TextView
@@ -67,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="Rs. 1137"
+                    android:text="@string/amount"
                     android:textColor="@color/primary_dark"
                     android:textSize="16dp" />
             </LinearLayout>

@@ -15,9 +15,15 @@ class LoginRepositoryImp @Inject constructor(
     private val categoryDao: CategoryDao,
     private val personMapper: PersonMapper
 ) : LoginRepository {
-    override suspend fun insertPerson(person: Person) = withContext(Dispatchers.IO) {
-        personDao.insertPerson(person)
-    }
+    override suspend fun insertPerson(person: Person) =
+        withContext(Dispatchers.IO) {
+            personDao.insertPerson(person)
+        }
+
+    override suspend fun insertAllCategory(vararg category: Category) =
+        withContext(Dispatchers.IO) {
+            categoryDao.insertAllCategory(*category)
+        }
 
     override suspend fun insertAllCategory(vararg category: Category) =
         withContext(Dispatchers.IO) {

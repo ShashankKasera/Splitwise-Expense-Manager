@@ -1,6 +1,5 @@
 package com.shashank.splitterexpensemanager.mapper.groupmapper
 
-
 import com.shashank.splitterexpensemanager.core.mapper.ListMapper
 import com.shashank.splitterexpensemanager.localdb.model.Group as GroupEntity
 import com.shashank.splitterexpensemanager.model.Group

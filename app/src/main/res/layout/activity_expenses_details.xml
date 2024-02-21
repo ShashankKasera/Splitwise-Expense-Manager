@@ -70,78 +70,41 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="Paid "
+        android:text="@string/paid_amount"
         android:textColor="@color/black"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/circleImageView10" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Rs. 6000 "
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageView10" />
     <TextView
         android:id="@+id/tv_by"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="By "
+        android:text="@string/paid_by"
         android:textColor="@color/black"
         android:textSize="16dp"
         android:layout_marginLeft="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mayank Gupta"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        app:layout_constraintStart_toEndOf="@id/tv_by"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time "
+        android:text="@string/time"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_by" />
-    <TextView
-        android:id="@+id/tv_time_format"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="12:33"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/tv_time"
-        app:layout_constraintTop_toBottomOf="@id/tv_by" />
-
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date "
+        android:text="@string/date"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_time" />
-    <TextView
-        android:id="@+id/tv_date_format"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Agu 09 2023"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/tv_date"
-        app:layout_constraintTop_toBottomOf="@id/tv_time_format" />
 
     <TextView
         android:id="@+id/tv_description"
@@ -150,7 +113,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="The surprising thing is that many people loved his songs but didn't know who he was. No one can match his melodious and soulful voice"
+        android:text="@string/description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_date" />
@@ -159,9 +122,7 @@
         android:id="@+id/rv_group_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_description"
