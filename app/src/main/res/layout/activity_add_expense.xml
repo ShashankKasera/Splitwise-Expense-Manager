@@ -43,7 +43,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginTop="16dp"
-                        android:src="@drawable/rameshwarm" />
+                        android:src="@drawable/utrakhnd" />
 
                     <TextView
                         android:layout_width="wrap_content"

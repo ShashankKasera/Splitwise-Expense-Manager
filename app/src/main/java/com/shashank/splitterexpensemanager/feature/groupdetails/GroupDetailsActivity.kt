@@ -35,7 +35,6 @@ class GroupDetailsActivity : AppCompatActivity() {
         navigationForGroupMember(groupId)
         getData(groupId)
         navigationForAddExpenses(groupId)
-
     }
 
     private fun init() {
