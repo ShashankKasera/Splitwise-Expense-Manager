@@ -43,7 +43,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginTop="16dp"
-                        android:src="@drawable/dining_icon" />
+                        android:src="@drawable/utrakhnd" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -131,7 +131,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cv_enter_amount">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_cv_category"
+                    android:id="@+id/cl_category_expenses"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="@+id/cv_cv_category"
@@ -153,6 +153,7 @@
                         tools:ignore="MissingConstraints" />
 
                     <TextView
+                        android:id="@+id/tv_expenses_category"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"

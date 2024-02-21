@@ -10,4 +10,5 @@
 #65: Create new group UI
 #67: Group Create
 #69: Showing groups in ui
-#71: Add Group Members
+#71: Add Group Members 
+#73: Showing Category in UI

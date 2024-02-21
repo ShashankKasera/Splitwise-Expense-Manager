@@ -28,7 +28,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/dining_icon"
+                android:src="@drawable/utrakhnd"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -70,10 +70,9 @@
                 android:id="@+id/civ_filter_image"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/filter_icon"
                 android:padding="8dp"
-                android:layout_marginLeft="8sp"
-                app:civ_circle_background_color="#a9c7d1"
+                android:src="@drawable/filter_icon_png"
+                app:civ_circle_background_color="@color/primary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -136,7 +135,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/total_icon"
-                app:civ_border_color="#FF000000"
+                app:civ_circle_background_color="@color/primary"
                 android:padding="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -200,7 +199,7 @@
                 android:id="@+id/civ_total_you_paid"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/you_paid_icon"
+                android:src="@drawable/you_paid_icon_png"
                 android:padding="8dp"
                 app:civ_circle_background_color="@color/primary"
                 app:layout_constraintBottom_toBottomOf="parent"

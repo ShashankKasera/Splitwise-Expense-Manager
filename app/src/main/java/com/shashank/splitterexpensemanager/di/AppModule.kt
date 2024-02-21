@@ -4,6 +4,8 @@ import com.shashank.splitterexpensemanager.feature.addfriends.repository.AddFrie
 import com.shashank.splitterexpensemanager.feature.addfriends.repository.AddFriendsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.addgroup.repository.AddGroupRepository
 import com.shashank.splitterexpensemanager.feature.addgroup.repository.AddGroupRepositoryImp
+import com.shashank.splitterexpensemanager.feature.category.repository.CategoryRepository
+import com.shashank.splitterexpensemanager.feature.category.repository.CategoryRepositoryImp
 import com.shashank.splitterexpensemanager.feature.createfriens.repository.CreateFriendsRepository
 import com.shashank.splitterexpensemanager.feature.createfriens.repository.CreateFriendsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.group.repository.GroupRepository
@@ -45,4 +47,8 @@ class AppModule {
     @Singleton
     @Provides
     fun getCreateFriendsRepository(repo: CreateFriendsRepositoryImp): CreateFriendsRepository = repo
+
+    @Singleton
+    @Provides
+    fun getCategoryRepository(repo: CategoryRepositoryImp): CategoryRepository = repo
 }

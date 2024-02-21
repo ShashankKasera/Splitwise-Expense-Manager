@@ -7,10 +7,12 @@ import com.shashank.splitterexpensemanager.authentication.registration.Registrat
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionParams
 import com.shashank.splitterexpensemanager.core.extension.toBundle
 import com.shashank.splitterexpensemanager.feature.DashboardActivity
+import com.shashank.splitterexpensemanager.feature.addexpense.AddExpensesActivity
 import com.shashank.splitterexpensemanager.feature.groupmember.GroupMemberActivity
 import com.shashank.splitterexpensemanager.feature.addfriends.AddFriendsActivity
-import com.shashank.splitterexpensemanager.feature.createfriens.CreateFriendsActivity
 import com.shashank.splitterexpensemanager.feature.addgroup.AddGroupActivity
+import com.shashank.splitterexpensemanager.feature.category.CategoryActivity
+import com.shashank.splitterexpensemanager.feature.createfriens.CreateFriendsActivity
 import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
@@ -30,6 +32,8 @@ class DefaultNavigator @Inject constructor(@ActivityContext private val context:
             Route.CREATE_FRIENDS -> Intent(context, CreateFriendsActivity::class.java)
             Route.ADD_FRIENDS -> Intent(context, AddFriendsActivity::class.java)
             Route.GROUP_MEMBER -> Intent(context, GroupMemberActivity::class.java)
+            Route.ADD_EXPENSES -> Intent(context, AddExpensesActivity::class.java)
+            Route.CATEGORY -> Intent(context, CategoryActivity::class.java)
         }.apply {
             actionParams?.data?.toBundle()?.let {
                 putExtras(it)
@@ -48,5 +52,7 @@ enum class Route {
     GROUP_DETAILS,
     CREATE_FRIENDS,
     ADD_FRIENDS,
-    GROUP_MEMBER
+    GROUP_MEMBER,
+    ADD_EXPENSES,
+    CATEGORY
 }

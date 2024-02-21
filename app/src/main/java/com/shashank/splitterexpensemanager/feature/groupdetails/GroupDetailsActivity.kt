@@ -23,6 +23,7 @@ class GroupDetailsActivity : AppCompatActivity() {
     lateinit var actionProcessor: ActionProcessor
     lateinit var recyclerView: RecyclerView
     lateinit var tvGroupName: TextView
+    lateinit var tvAddExpenses: TextView
     lateinit var llAddGroupMember: LinearLayout
     private val viewModel: GroupDetailViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,11 +34,13 @@ class GroupDetailsActivity : AppCompatActivity() {
         navigationForAddFriends(groupId)
         navigationForGroupMember(groupId)
         getData(groupId)
+        navigationForAddExpenses(groupId)
     }
 
     private fun init() {
         recyclerView = findViewById(R.id.rv_group_activity)
         tvGroupName = findViewById(R.id.tv_group_Name_in_detail)
+        tvAddExpenses = findViewById(R.id.tv_add_expenses)
         llAddGroupMember = findViewById(R.id.ll_group_member)
     }
 
@@ -61,6 +64,19 @@ class GroupDetailsActivity : AppCompatActivity() {
                     ActionType.GROUP_MEMBER.name,
                     hashMapOf(
                         GROUP_ID to (groupId)
+                    )
+                )
+            )
+        }
+    }
+
+    private fun navigationForAddExpenses(groupId: Long) {
+        tvAddExpenses.setOnClickListener {
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.ADD_EXPENSES.name,
+                    hashMapOf(
+                        GROUP_ID to (groupId),
                     )
                 )
             )
