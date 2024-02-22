@@ -32,12 +32,6 @@ class GroupDetailViewModel @Inject constructor(var groupDetailsRepository: Group
     private val _expenses = MutableStateFlow<List<ExpenseWithCategoryAndPerson?>>(listOf())
     val expenses = _expenses.asStateFlow()
 
-    private val _owe = MutableStateFlow<List<OweOrOwedWithPerson?>>(listOf())
-    val owe = _owe.asStateFlow()
-
-    private val _owed = MutableStateFlow<List<OweOrOwedWithPerson?>>(listOf())
-    val owed = _owed.asStateFlow()
-
     fun getGroup(groupId: Long) {
         viewModelScope.launch {
             groupDetailsRepository.loadGroup(groupId).collect {

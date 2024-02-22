@@ -49,7 +49,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="Mayank Gupta"
+                android:text="@string/name"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/tv_you_borrowed"
                 app:layout_constraintStart_toEndOf="@+id/civ_category"
@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="Paind :- 50000"
+                android:text="@string/paid_amount"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/civ_category"
                 app:layout_constraintTop_toBottomOf="@id/tv_persian_name" />
@@ -70,7 +70,7 @@
                 android:id="@+id/tv_you_borrowed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="You Borrowed"
+                android:text="@string/you_borrowed_or_lent"
                 android:textColor="@color/primary_dark"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Rs 5000"
+                android:text="@string/amount"
                 android:textColor="@color/primary_dark"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Oct 10 2023"
+                android:text="@string/date"
                 app:layout_constraintStart_toEndOf="@+id/civ_category"
                 app:layout_constraintTop_toBottomOf="@+id/tv_paid_amount" />
 
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="12:12 AM"
+                android:text="@string/time"
                 app:layout_constraintStart_toEndOf="@+id/tv_date_activity"
                 app:layout_constraintTop_toBottomOf="@+id/tv_paid_amount" />
 
@@ -113,7 +113,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="gwik ghi3wh iuhgi bhui uhje ghwkj gnkwj uighnek h3gwkj hgekj uhekn huekjn"
+                android:layout_marginBottom="8dp"
+                android:text="@string/description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

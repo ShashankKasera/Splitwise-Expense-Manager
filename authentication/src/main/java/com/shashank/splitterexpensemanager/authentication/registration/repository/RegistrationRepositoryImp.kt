@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-
 class RegistrationRepositoryImp @Inject constructor(
     private val personDao: PersonDao,
     private val categoryDao: CategoryDao,
@@ -24,7 +23,6 @@ class RegistrationRepositoryImp @Inject constructor(
         withContext(Dispatchers.IO) {
             categoryDao.insertAllCategory(*category)
         }
-
     override fun loadPersonByEmail(email: String) = personDao.loadPersonByEmail(email).map {
         personMapper.map(it)
     }

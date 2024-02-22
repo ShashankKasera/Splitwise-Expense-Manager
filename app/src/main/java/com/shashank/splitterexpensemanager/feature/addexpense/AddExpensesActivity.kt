@@ -5,7 +5,6 @@ import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -222,45 +221,26 @@ class AddExpensesActivity : AppCompatActivity() {
         val name = tvWhoPay.text.toString().trim()
 
         lifecycleScope.launch {
-
+            viewModel.allGroupMember(groupId)
             viewModel.personFeched.collect {
                 if (it) {
                     if (viewModel.allPerson.size > 0) {
                         val numberOfMember = viewModel.allPerson.size
                         val splitAmount = (amount / numberOfMember)
                         viewModel.insertExpenses(
-                            Expenses(
-                                null,
-                                personId,
-                                groupId,
-                                categoryId,
-                                amount,
-                                splitAmount,
-                                name,
-                                date,
-                                time,
-                                description
-                            )
+                            personId,
+                            groupId,
+                            categoryId,
+                            amount,
+                            splitAmount,
+                            name,
+                            date,
+                            time,
+                            description
                         )
-                        viewModel.allPerson.forEach { member ->
-                            val owedId = member.id ?: 0
-                            Log.i("erjkgbk", "addExpenses: $owedId")
-                            viewModel.insertOweOrOwed(
-                                OweOrOwed(
-                                    null,
-                                    personId,
-                                    owedId,
-                                    groupId,
-                                    splitAmount
-                                )
-                            )
-                        }
                     }
                 }
             }
-
         }
     }
-
-
 }

@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.feature.addexpense.repository.AddExpensesRepository
-import com.shashank.splitterexpensemanager.localdb.model.Expenses
 import com.shashank.splitterexpensemanager.localdb.model.OweOrOwed
 import com.shashank.splitterexpensemanager.authentication.model.Person
+import com.shashank.splitterexpensemanager.localdb.model.Expenses
 import com.shashank.splitterexpensemanager.model.Group
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -54,11 +54,42 @@ class AddExpensesViewModel @Inject constructor(
         }
     }
 
-    suspend fun insertExpenses(expenses: Expenses) = viewModelScope.launch {
-        addExpensesRepository.insertExpenses(expenses)
-    }
-
-    suspend fun insertOweOrOwed(oweOrOwed: OweOrOwed) = viewModelScope.launch {
-        addExpensesRepository.insertOweOrOwed(oweOrOwed)
+    suspend fun insertExpenses(
+        personId: Long,
+        groupId: Long,
+        categoryId: Long,
+        amount: Double,
+        splitAmount: Double,
+        name: String,
+        date: String,
+        time: String,
+        description: String,
+    ) = viewModelScope.launch {
+        addExpensesRepository.insertExpenses(
+            Expenses(
+                null,
+                personId,
+                groupId,
+                categoryId,
+                amount,
+                splitAmount,
+                name,
+                date,
+                time,
+                description
+            )
+        )
+        allPerson.forEach { member ->
+            val owedId = member.id ?: 0
+            addExpensesRepository.insertOweOrOwed(
+                OweOrOwed(
+                    null,
+                    personId,
+                    owedId,
+                    groupId,
+                    splitAmount
+                )
+            )
+        }
     }
 }

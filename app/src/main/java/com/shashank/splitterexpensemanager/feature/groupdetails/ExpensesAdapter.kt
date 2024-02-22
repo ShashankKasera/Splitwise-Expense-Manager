@@ -1,5 +1,6 @@
 package com.shashank.splitterexpensemanager.feature.groupdetails
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.shashank.splitterexpensemanager.model.ExpenseWithCategoryAndPerson
 import de.hdodenhof.circleimageview.CircleImageView
 
 class ExpensesAdapter(
+    private val context: Context,
     private val personId: Long,
     private val expensesList: List<ExpenseWithCategoryAndPerson?>
 ) : RecyclerView.Adapter<ExpensesAdapter.ViewHolder>() {
@@ -36,7 +38,7 @@ class ExpensesAdapter(
             holder.civCategory.setImageResource(expensesList[position]?.category!!.categoryImage)
         }
         if (personId == expensesList[position]?.person?.id) {
-            holder.tvBorrowed.text = "You Lent"
+            holder.tvBorrowed.text = context.getString(R.string.you_lent)
             holder.tvBorrowed.setTextColor(
                 holder.tvBorrowed.context.getResources().getColor(R.color.green)
             )
@@ -49,6 +51,7 @@ class ExpensesAdapter(
 
             holder.tvBorrowedAmount.text = lentAmount.formatNumber(2)
         } else {
+            holder.tvBorrowed.text = context.getString(R.string.you_borrowed)
             holder.tvBorrowed.setTextColor(
                 holder.tvBorrowed.context.getResources().getColor(R.color.primary_dark)
             )

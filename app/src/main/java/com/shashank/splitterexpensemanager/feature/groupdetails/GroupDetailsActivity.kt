@@ -2,7 +2,6 @@ package com.shashank.splitterexpensemanager.feature.groupdetails
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -18,16 +17,16 @@ import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
-import com.shashank.splitterexpensemanager.feature.addgroup.ui.model.GroupType
 import com.shashank.splitterexpensemanager.model.ExpenseWithCategoryAndPerson
-import com.shashank.splitterexpensemanager.model.OweOrOwedWithPerson
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class GroupDetailsActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var sharedPref: SharedPref
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
@@ -36,21 +35,16 @@ class GroupDetailsActivity : AppCompatActivity() {
     lateinit var tvAddExpenses: TextView
     lateinit var tvOverallOweOrOwed: TextView
     lateinit var llAddGroupMember: LinearLayout
-
-    @Inject
-    lateinit var sharedPref: SharedPref
-    private var amount=0.0
-    private var owePersonList = ArrayList<OweOrOwedWithPerson>()
     private val viewModel: GroupDetailViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_details)
         var groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
-        var personId: Long = sharedPref.getValue(PERSON_ID, 0L) as Long
-
-        init(groupId, personId)
+        val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
+        init()
         navigationForAddFriends(groupId)
         navigationForGroupMember(groupId)
+        getData(groupId, personId)
         navigationForAddExpenses(groupId)
         getData(groupId, personId)
     }
@@ -121,6 +115,7 @@ class GroupDetailsActivity : AppCompatActivity() {
     }
 
     private fun getData(groupId: Long, personId: Long) {
+        Log.i("rnmlkns", "getData: $personId  $groupId")
         lifecycleScope.launch {
             viewModel.oweOrOwed.collect {
                 if(amount>0){
@@ -143,7 +138,6 @@ class GroupDetailsActivity : AppCompatActivity() {
                     recyclerViewSetUp(personId, expenses)
                 }
             }
-
         }
         lifecycleScope.launch {
             viewModel.getGroup(groupId)
@@ -157,7 +151,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         personId: Long,
         expensesList: List<ExpenseWithCategoryAndPerson?>
     ) {
-        var expensesAdapter = ExpensesAdapter(personId, expensesList)
+        var expensesAdapter = ExpensesAdapter(this, personId, expensesList)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = expensesAdapter
     }

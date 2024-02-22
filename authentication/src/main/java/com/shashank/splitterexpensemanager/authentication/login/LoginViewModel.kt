@@ -6,41 +6,32 @@ import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.shashank.splitterexpensemanager.authentication.login.repository.LoginRepository
 import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.PERSON
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
-import com.shashank.splitterexpensemanager.localdb.model.Category
 import com.shashank.splitterexpensemanager.localdb.model.Person as PersonEntity
+import com.shashank.splitterexpensemanager.localdb.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
-
 @HiltViewModel
-class LoginViewModel @Inject constructor(var loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val loginRepository: LoginRepository,
+    private val sharedPref: SharedPref
+) : ViewModel() {
 
-    @Inject
-    lateinit var sharedPref: SharedPref
-    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-
-    private lateinit var databaseReference: DatabaseReference
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val _networkState = MutableStateFlow<NetworkCallState>(NetworkCallState.Init)
     var networkState = _networkState.asStateFlow()
-
     private val _loginUiState = MutableStateFlow<LoginUiState>(LoginUiState())
     val loginUiState = _loginUiState.asStateFlow()
-
-
-    private val _person = MutableStateFlow<Person?>(null)
-    val person = _person.asStateFlow()
     fun login(email: String, password: String) {
-        databaseReference = FirebaseDatabase.getInstance().reference
         viewModelScope.launch {
             try {
                 _networkState.emit(NetworkCallState.Loading)
@@ -87,16 +78,7 @@ class LoginViewModel @Inject constructor(var loginRepository: LoginRepository) :
             }
         }
     }
-
     suspend fun insertAllCategory(vararg category: Category) = viewModelScope.launch {
         loginRepository.insertAllCategory(*category)
-    }
-
-    fun personLiveData(email: String) {
-        viewModelScope.launch {
-            loginRepository.loadPersonByEmail(email).collect {
-                _person.emit(it)
-            }
-        }
     }
 }

@@ -1,4 +1,5 @@
 package com.shashank.splitterexpensemanager.mapper.groupmembermapper
+
 import com.shashank.splitterexpensemanager.core.mapper.Mapper
 import com.shashank.splitterexpensemanager.localdb.model.GroupMember as GroupMemberEntity
 import com.shashank.splitterexpensemanager.model.GroupMember
