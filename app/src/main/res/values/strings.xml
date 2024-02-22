@@ -44,4 +44,6 @@
     <string name="group_type">Group Type</string>
     <string name="no_expenses_here_yet">No Expenses here yet</string>
     <string name="add_group_members">Add Group Members</string>
+    <string name="you_lent">You Lent</string>
+    <string name="you_borrowed">You Borrowed</string>
 </resources>

@@ -4,7 +4,9 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
+import com.shashank.splitterexpensemanager.localdb.model.ExpenseWithCategoryAndPerson
 import com.shashank.splitterexpensemanager.localdb.model.Expenses
 import kotlinx.coroutines.flow.Flow
 
@@ -24,4 +26,14 @@ interface ExpensesDao {
 
     @Query("Select * from Expenses")
     fun loadAllExpenses(): Flow<List<Expenses>>
+
+    @Transaction
+    @Query(
+        "SELECT * " +
+            "FROM Expenses " +
+            "INNER JOIN Category ON Category.id == Expenses.categoryId " +
+            "INNER JOIN Person ON Person.id == Expenses.personId " +
+            "WHERE Expenses.groupId == :groupId"
+    )
+    fun loadAllExpensesByGroupId(groupId: Long): Flow<List<ExpenseWithCategoryAndPerson>>
 }
