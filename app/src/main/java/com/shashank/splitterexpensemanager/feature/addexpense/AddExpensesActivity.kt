@@ -3,7 +3,6 @@ package com.shashank.splitterexpensemanager.feature.addexpense
 import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.DatePicker
 import android.widget.EditText
@@ -12,24 +11,23 @@ import android.widget.TextView
 import android.widget.TimePicker
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.CATEGORY
-import com.shashank.splitterexpensemanager.core.GROUP_MEMBER
 import com.shashank.splitterexpensemanager.core.GROUP_ID
+import com.shashank.splitterexpensemanager.core.GROUP_MEMBER
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
-import com.shashank.splitterexpensemanager.model.Category
 import com.shashank.splitterexpensemanager.feature.category.CategoryActivity
 import com.shashank.splitterexpensemanager.feature.groupmember.GroupMemberActivity
-import com.shashank.splitterexpensemanager.authentication.model.Person
-import com.shashank.splitterexpensemanager.localdb.model.Expenses
-import com.shashank.splitterexpensemanager.localdb.model.OweOrOwed
+import com.shashank.splitterexpensemanager.model.Category
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
@@ -116,7 +114,6 @@ class AddExpensesActivity : AppCompatActivity() {
 
         cvSave.setOnClickListener {
             addExpenses(personId, groupId)
-            finish()
         }
     }
 
@@ -137,7 +134,6 @@ class AddExpensesActivity : AppCompatActivity() {
         tvDescription = findViewById(R.id.et_description_expenses)
         tvWhoPay = findViewById(R.id.tv_who_pay_expenses)
         cvSave = findViewById(R.id.cv_save_expenses)
-
         tvDate.text = getCurrentDate()
         tvTime.text = getCurrentTime()
         var groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
@@ -239,6 +235,13 @@ class AddExpensesActivity : AppCompatActivity() {
                             description
                         )
                     }
+                }
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.expenses.collect {
+                if (it) {
+                    finish()
                 }
             }
         }

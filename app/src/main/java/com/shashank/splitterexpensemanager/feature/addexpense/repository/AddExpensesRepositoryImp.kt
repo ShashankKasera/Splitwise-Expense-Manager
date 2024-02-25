@@ -1,6 +1,7 @@
 package com.shashank.splitterexpensemanager.feature.addexpense.repository
 
-import android.util.Log
+import com.shashank.splitterexpensemanager.authentication.personmapper.PersonListMapper
+import com.shashank.splitterexpensemanager.authentication.personmapper.PersonMapper
 import com.shashank.splitterexpensemanager.localdb.model.Expenses
 import com.shashank.splitterexpensemanager.localdb.model.OweOrOwed
 import com.shashank.splitterexpensemanager.localdb.room.dao.ExpensesDao
@@ -9,8 +10,6 @@ import com.shashank.splitterexpensemanager.localdb.room.dao.GroupMemberDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.OweOrOwedDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.PersonDao
 import com.shashank.splitterexpensemanager.mapper.groupmapper.GroupMapper
-import com.shashank.splitterexpensemanager.authentication.personmapper.PersonListMapper
-import com.shashank.splitterexpensemanager.authentication.personmapper.PersonMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
@@ -26,7 +25,7 @@ class AddExpensesRepositoryImp @Inject constructor(
     private val personMapper: PersonMapper,
     private val groupMapper: GroupMapper
 ) : AddExpensesRepository {
-    override fun loadGroup(groupId: Long) = groupDao.loadGroup(groupId).map {
+    override fun loadGroup(groupId: Long) = groupDao.loadGroupFlow(groupId).map {
         groupMapper.map(it)
     }
 
@@ -35,9 +34,10 @@ class AddExpensesRepositoryImp @Inject constructor(
     }
 
     override fun loadAllGroupMemberWithGroupId(groupId: Long) =
-        groupMemberDao.loadAllGroupMemberWithGroupId(groupId).map {
+        groupMemberDao.loadAllGroupMemberWithGroupIdFlow(groupId).map {
             personListMapper.map(it)
         }
+
     override suspend fun insertExpenses(expenses: Expenses) = withContext(Dispatchers.IO) {
         expensesDao.insertExpenses(expenses)
     }
