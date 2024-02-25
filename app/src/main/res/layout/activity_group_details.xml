@@ -52,7 +52,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:visibility="gone"
+                    android:id="@+id/tv_no_expenses_here_yet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/no_expenses_here_yet"
@@ -65,7 +65,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_amount"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-60dp">
@@ -95,64 +95,25 @@
                     app:layout_constraintStart_toStartOf="@+id/gl_left_cwe"
                     app:layout_constraintTop_toTopOf="@+id/cl_amount" />
 
-                <TextView
-                    android:id="@+id/tv_first_owe"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/you_owe_group_member"
-                    android:textColor="@color/black"
-                    app:layout_constraintEnd_toStartOf="@+id/ll_member_owe_amount"
-                    app:layout_constraintStart_toStartOf="@+id/gl_left_cwe"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_overall_owe" />
-
-
-                <TextView
-                    android:id="@+id/tv_second_owe"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_owe_owed"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/you_owe_group_member"
-                    android:textColor="@color/black"
-                    app:layout_constraintEnd_toStartOf="@+id/ll_member_owe_amount"
+                    app:layout_constraintEnd_toEndOf="@+id/gl_right_owe"
                     app:layout_constraintStart_toStartOf="@+id/gl_left_cwe"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_first_owe" />
-
-                <LinearLayout
-                    android:id="@+id/ll_member_owe_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="@id/gl_right_owe"
-                    app:layout_constraintTop_toTopOf="@+id/tv_first_owe">
-
-
-                    <TextView
-                        android:id="@+id/tv_first_owe_amount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/owe_or_owed_amount"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:id="@+id/tv_second_owe_amount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="owe_or_owed_amount"
-                        android:textColor="@color/black" />
-                </LinearLayout>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_overall_owe" />
 
                 <TextView
                     android:id="@+id/tv_other_member"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:textSize="14dp"
                     android:text="@string/plus_other_balances"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_grey"
                     app:layout_constraintEnd_toStartOf="@+id/gl_right_owe"
                     app:layout_constraintStart_toStartOf="@+id/gl_left_cwe"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_second_owe" />
+                    app:layout_constraintTop_toBottomOf="@+id/rv_owe_owed" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_bottom_cwe"
@@ -260,8 +221,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_group_activity"
-        android:visibility="gone"
+        android:id="@+id/rv_group_expense"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -270,6 +230,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/activity_item" />
 
+    <TextView
+        android:id="@+id/tv_you_re_the_only_one_here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/you_re_the_only_one_here"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/ll_group_member"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
     <LinearLayout
         android:id="@+id/ll_group_member"
         android:layout_width="wrap_content"

@@ -35,5 +35,15 @@ interface ExpensesDao {
             "INNER JOIN Person ON Person.id == Expenses.personId " +
             "WHERE Expenses.groupId == :groupId"
     )
-    fun loadAllExpensesByGroupId(groupId: Long): Flow<List<ExpenseWithCategoryAndPerson>>
+    fun loadAllExpensesByGroupIdFlow(groupId: Long): Flow<List<ExpenseWithCategoryAndPerson>>
+
+    @Transaction
+    @Query(
+        "SELECT * " +
+            "FROM Expenses " +
+            "INNER JOIN Category ON Category.id == Expenses.categoryId " +
+            "INNER JOIN Person ON Person.id == Expenses.personId " +
+            "WHERE Expenses.groupId == :groupId"
+    )
+    fun loadAllExpensesByGroupId(groupId: Long): List<ExpenseWithCategoryAndPerson>
 }
