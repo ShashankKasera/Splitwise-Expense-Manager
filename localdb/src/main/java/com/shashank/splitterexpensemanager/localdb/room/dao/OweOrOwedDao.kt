@@ -26,19 +26,9 @@ interface OweOrOwedDao {
     @Query("Select * from OweOrOwed")
     fun loadAllOweOrOwed(): Flow<List<OweOrOwed>>
 
-    @Query(
-        "SELECT * " +
-             "FROM OweOrOwed " +
-             "INNER JOIN person ON Person.id == OweOrOwed.personOweId " +
-             "WHERE OweOrOwed.groupId == :groupId AND OweOrOwed.personOweId==:personId"
-    )
-    fun loadAllOweByGroupId(groupId:Long,personId:Long): Flow<List<OweOrOwedWithPerson>>
+    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.groupId == :groupId AND OweOrOwed.personOweId==:personId")
+    fun loadAllOweByGroupId(groupId: Long, personId: Long): List<OweOrOwedWithPerson>
 
-    @Query(
-        "SELECT * " +
-                "FROM OweOrOwed " +
-                "INNER JOIN person ON Person.id == OweOrOwed.personOwedId " +
-                "WHERE OweOrOwed.groupId == :groupId AND OweOrOwed.personOweId!=:personId"
-    )
-    fun loadAllOwedByGroupId(groupId:Long,personId:Long): Flow<List<OweOrOwedWithPerson>>
+    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.groupId == :groupId AND OweOrOwed.personOweId!=:personId")
+    fun loadAllOwedByGroupId(groupId: Long, personId: Long): List<OweOrOwedWithPerson>
 }

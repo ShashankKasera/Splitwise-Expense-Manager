@@ -1,7 +1,7 @@
 package com.shashank.splitterexpensemanager.feature.expensesdetails
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
@@ -12,7 +12,7 @@ class ExpensesDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_expenses_details)
 
-        recyclerView = findViewById(R.id.rv_group_activity)
+        recyclerView = findViewById(R.id.rv_group_expense)
         val splitAmountAdapter = SplitAmountAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = splitAmountAdapter

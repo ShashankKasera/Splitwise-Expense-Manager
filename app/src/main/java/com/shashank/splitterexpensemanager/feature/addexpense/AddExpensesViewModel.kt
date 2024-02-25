@@ -1,12 +1,11 @@
 package com.shashank.splitterexpensemanager.feature.addexpense
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shashank.splitterexpensemanager.feature.addexpense.repository.AddExpensesRepository
-import com.shashank.splitterexpensemanager.localdb.model.OweOrOwed
 import com.shashank.splitterexpensemanager.authentication.model.Person
+import com.shashank.splitterexpensemanager.feature.addexpense.repository.AddExpensesRepository
 import com.shashank.splitterexpensemanager.localdb.model.Expenses
+import com.shashank.splitterexpensemanager.localdb.model.OweOrOwed
 import com.shashank.splitterexpensemanager.model.Group
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,6 +28,9 @@ class AddExpensesViewModel @Inject constructor(
 
     private val _group = MutableStateFlow<Group?>(null)
     val group = _group.asStateFlow()
+
+    private val _expenses = MutableStateFlow<Boolean>(false)
+    val expenses = _expenses.asStateFlow()
     fun getGroup(groupId: Long) {
         viewModelScope.launch {
             addExpensesRepository.loadGroup(groupId).collect {
@@ -48,6 +50,7 @@ class AddExpensesViewModel @Inject constructor(
     fun allGroupMember(groupId: Long) {
         viewModelScope.launch {
             addExpensesRepository.loadAllGroupMemberWithGroupId(groupId).collect {
+                allPerson.clear()
                 allPerson.addAll(it)
                 _personFeched.emit(true)
             }
@@ -91,5 +94,6 @@ class AddExpensesViewModel @Inject constructor(
                 )
             )
         }
+        _expenses.emit(true)
     }
 }
