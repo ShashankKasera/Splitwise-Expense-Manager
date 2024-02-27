@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.shashank.splitterexpensemanager.localdb.model.OweOrOwed
+import com.shashank.splitterexpensemanager.localdb.model.OweOrOwedWithPerson
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -24,4 +25,10 @@ interface OweOrOwedDao {
 
     @Query("Select * from OweOrOwed")
     fun loadAllOweOrOwed(): Flow<List<OweOrOwed>>
+
+    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.groupId == :groupId AND OweOrOwed.personOweId==:personId")
+    fun loadAllOweByGroupId(groupId: Long, personId: Long): List<OweOrOwedWithPerson>
+
+    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.groupId == :groupId AND OweOrOwed.personOweId!=:personId")
+    fun loadAllOwedByGroupId(groupId: Long, personId: Long): List<OweOrOwedWithPerson>
 }
