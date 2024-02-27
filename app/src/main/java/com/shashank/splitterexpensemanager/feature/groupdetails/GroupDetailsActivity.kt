@@ -1,5 +1,6 @@
 package com.shashank.splitterexpensemanager.feature.groupdetails
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -62,6 +63,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         navigationForGroupMember(groupId)
         getData()
         navigationForAddExpenses(groupId)
+        getData(groupId, personId)
     }
 
     private fun init() {
@@ -87,7 +89,6 @@ class GroupDetailsActivity : AppCompatActivity() {
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
         viewModel.groupDetails(groupId, personId)
     }
-
 
     private fun navigationForAddFriends(groupId: Long) {
         llAddGroupMember.setOnClickListener {
