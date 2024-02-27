@@ -1,7 +1,6 @@
 package com.shashank.splitterexpensemanager.feature.groupdetails
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -79,7 +78,6 @@ class GroupDetailsActivity : AppCompatActivity() {
 
         val groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
-        Log.i("ggu", "onResume: ")
         viewModel.groupDetails(groupId, personId)
     }
 
@@ -87,7 +85,6 @@ class GroupDetailsActivity : AppCompatActivity() {
         super.onRestart()
         val groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
-        Log.i("ggu", "onResume: ")
         viewModel.groupDetails(groupId, personId)
     }
 
@@ -220,7 +217,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         rvOweOwed.layoutManager = LinearLayoutManager(this)
         rvOweOwed.adapter = oweOwedAdapter
 
-        expensesAdapter = ExpensesAdapter(this, personId, expensesList)
+        expensesAdapter = ExpensesAdapter(actionProcessor, personId, expensesList)
         val layoutManager = LinearLayoutManager(this)
         layoutManager.setReverseLayout(true)
         layoutManager.setStackFromEnd(true)

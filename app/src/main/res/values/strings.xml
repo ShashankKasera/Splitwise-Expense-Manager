@@ -54,5 +54,11 @@
     <string name="plus_other_balance">Plus %d Other Balance</string>
     <string name="owes_you">%1$s owes You</string>
     <string name="rs">Rs. %1$s</string>
-    <string name="you_owes">You owes %1$s</string>
+    <string name="you_owes">You owes</string>
+    <string name="paid_amount_expensese_details">Paid Amount %1$s</string>
+    <string name="paid_by_expensese_details">Paid by %1$s</string>
+    <string name="date_expensese_details">Date %1$s</string>
+    <string name="time_expensese_details">Time %1$s</string>
+    <string name="description_expensese_details">Description %1$s</string>
+    <string name="owes">%1$s owes</string>
 </resources>
