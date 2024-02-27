@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
@@ -63,7 +62,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         navigationForGroupMember(groupId)
         getData()
         navigationForAddExpenses(groupId)
-        getData(groupId, personId)
+        getData()
     }
 
     private fun init() {

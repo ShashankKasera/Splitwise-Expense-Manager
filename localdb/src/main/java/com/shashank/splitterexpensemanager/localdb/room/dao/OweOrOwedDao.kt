@@ -29,15 +29,9 @@ interface OweOrOwedDao {
     @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.groupId == :groupId AND OweOrOwed.personOweId==:personId")
     fun loadAllOweByGroupId(groupId: Long, personId: Long): List<OweOrOwedWithPerson>
 
-    @Query(
-        "SELECT * " +
-            "FROM OweOrOwed " +
-            "WHERE OweOrOwed.groupId == :groupId AND OweOrOwed.personOweId!=:personId"
-    )
+    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.groupId == :groupId AND OweOrOwed.personOweId!=:personId")
     fun loadAllOwedByGroupId(groupId: Long, personId: Long): List<OweOrOwedWithPerson>
 
-    @Query(
-        "SELECT * FROM OweOrOwed WHERE OweOrOwed.expensesId == :expensesId"
-    )
+    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.expensesId == :expensesId")
     fun loadAllOweOwedByExpensesId(expensesId: Long): Flow<List<OweOrOwedWithPerson>>
 }
