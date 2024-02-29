@@ -12,10 +12,10 @@ class ExpenseWithCategoryAndPersonMapper @Inject constructor(
     val personMapper: PersonMapper,
     val categoryMapper: CategoryMapper,
     val expensesMapper: ExpensesMapper
-) : Mapper<ExpenseWithCategoryAndPersonEntity, ExpenseWithCategoryAndPerson> {
-    override fun map(input: ExpenseWithCategoryAndPersonEntity) = ExpenseWithCategoryAndPerson(
-        expense = expensesMapper.map(input.expense),
-        category = categoryMapper.map(input.category),
-        person = personMapper.map(input.person)
+) : Mapper<ExpenseWithCategoryAndPersonEntity?, ExpenseWithCategoryAndPerson> {
+    override fun map(input: ExpenseWithCategoryAndPersonEntity?) = ExpenseWithCategoryAndPerson(
+        expense = expensesMapper.map(input?.expense),
+        category = categoryMapper.map(input?.category),
+        person = personMapper.map(input?.person)
     )
 }

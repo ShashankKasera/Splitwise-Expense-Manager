@@ -3,17 +3,17 @@ package com.shashank.splitterexpensemanager.localdb.model
 import androidx.room.Embedded
 import androidx.room.Relation
 
-data class ExpenseWithCategoryAndPerson(
-    @Embedded
-    val expense: Expenses?,
+data class OweOrOwedWithPerson(
+    @Embedded val oweOrOwed: OweOrOwed?,
     @Relation(
-        parentColumn = "categoryId",
+        parentColumn = "personOweId",
         entityColumn = "id"
     )
-    val category: Category?,
+    val personOwe: Person?,
+
     @Relation(
-        parentColumn = "personId",
+        parentColumn = "personOwedId",
         entityColumn = "id"
     )
-    val person: Person?
+    val personOwed: Person?,
 )
