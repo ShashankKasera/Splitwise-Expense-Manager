@@ -20,6 +20,10 @@ class ExpensesDetailsViewModel @Inject constructor(
 
     private val _oweOwed = MutableStateFlow<List<OweOrOwedWithPerson>>(listOf())
     val oweOwed = _oweOwed.asStateFlow()
+
+    fun deleteExpenses(expensesId: Long) = viewModelScope.launch {
+        expensesDetailsRepository.deleteExpenses(expensesId)
+    }
     fun loadExpensesDetails(expensesId: Long) {
         viewModelScope.launch {
             expensesDetailsRepository.loadExpensesByExpensesId(expensesId).collect {

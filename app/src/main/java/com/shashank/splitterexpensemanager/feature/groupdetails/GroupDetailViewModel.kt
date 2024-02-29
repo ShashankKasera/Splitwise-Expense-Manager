@@ -50,7 +50,7 @@ class GroupDetailViewModel @Inject constructor(var groupDetailsRepository: Group
                 val data = GroupDetails(
                     group = groupDeferred.await(),
                     groupMember = groupMemberDeferred.await(),
-                    expenses = expensesDeferred.await(),
+                    expenses = ((expensesDeferred.await()) ?: emptyList()),
                     hashMap = hashMap
                 )
 

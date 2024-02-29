@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/iv_delete"
+            android:id="@+id/iv_delete_expenses"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="end"
@@ -47,7 +47,7 @@
             android:src="@drawable/edit_icon"
             android:layout_marginRight="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/iv_delete"
+            app:layout_constraintEnd_toStartOf="@id/iv_delete_expenses"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

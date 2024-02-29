@@ -1,6 +1,7 @@
 package com.shashank.splitterexpensemanager.feature.expensesdetails
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,7 @@ class ExpensesDetailsActivity : AppCompatActivity() {
     lateinit var tvPaidBy: TextView
     lateinit var tvTime: TextView
     lateinit var tvDate: TextView
+    lateinit var ivDelete: ImageView
     lateinit var tvdescription: TextView
     private var oweOwedList = mutableListOf<OweOrOwedWithPerson>()
     lateinit var splitAmountAdapter: SplitAmountAdapter
@@ -39,6 +41,7 @@ class ExpensesDetailsActivity : AppCompatActivity() {
 
         init()
         setUpRecyclerView(personId)
+
         viewModel.loadExpensesDetails(expensesId)
         lifecycleScope.launch {
             viewModel.expenses.collect {
@@ -66,6 +69,11 @@ class ExpensesDetailsActivity : AppCompatActivity() {
                 }
             }
         }
+
+        ivDelete.setOnClickListener {
+            viewModel.deleteExpenses(expensesId)
+            finish()
+        }
     }
 
     private fun init() {
@@ -75,6 +83,7 @@ class ExpensesDetailsActivity : AppCompatActivity() {
         tvDate = findViewById(R.id.tv_date)
         tvTime = findViewById(R.id.tv_time)
         tvdescription = findViewById(R.id.tv_description)
+        ivDelete = findViewById(R.id.iv_delete_expenses)
     }
 
     private fun setUpRecyclerView(personId: Long) {
