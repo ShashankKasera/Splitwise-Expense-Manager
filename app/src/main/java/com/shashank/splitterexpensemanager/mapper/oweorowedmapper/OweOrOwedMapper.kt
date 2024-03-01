@@ -9,6 +9,7 @@ class OweOrOwedMapper @Inject constructor() :
     Mapper<OweOrOwedEntity?, OweOrOwed> {
     override fun map(input: OweOrOwedEntity?) = OweOrOwed(
         id = input?.id,
+        expensesId = input?.expensesId ?: -1,
         personOweId = input?.personOweId ?: -1,
         personOwedId = input?.personOwedId ?: -1,
         groupId = input?.groupId ?: -1,

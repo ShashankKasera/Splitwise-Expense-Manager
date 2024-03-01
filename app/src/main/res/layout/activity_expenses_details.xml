@@ -40,7 +40,7 @@
 
 
         <ImageView
-            android:id="@+id/iv_edit"
+            android:id="@+id/iv_edit_expenses"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="end"
