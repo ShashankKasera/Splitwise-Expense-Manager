@@ -11,4 +11,5 @@
     <string name="dont_t_have_an_account">Dont\'t have an account?</string>
     <string name="sing_up_now">Sing Up Now</string>
     <string name="forget_password">Forget Password?</string>
+    <string name="fill_all_fields">Fill All Fields</string>
 </resources>

@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.example.splitwiseexpensemanager.fragments.AccountFragment"
+        android:name="com.shashank.splitterexpensemanager.feature.account.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/activityFragment"
-        android:name="com.example.splitwiseexpensemanager.fragments.ActivityFragment"
+        android:name="com.shashank.splitterexpensemanager.feature.activity.ActivityFragment"
         android:label="fragment_activity"
         tools:layout="@layout/fragment_activity" />
     <fragment
         android:id="@+id/groupFragment"
-        android:name="com.example.splitwiseexpensemanager.fragments.GroupFragment"
+        android:name="com.shashank.splitterexpensemanager.feature.group.GroupFragment"
         android:label="fragment_group"
         tools:layout="@layout/fragment_group" />
     <fragment
         android:id="@+id/friendsFragment"
-        android:name="com.example.splitwiseexpensemanager.fragments.FriendsFragment"
+        android:name="com.shashank.splitterexpensemanager.feature.friends.FriendsFragment"
         android:label="fragment_friends"
         tools:layout="@layout/fragment_friends" />
 </navigation>

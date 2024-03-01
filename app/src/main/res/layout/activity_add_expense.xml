@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.AddExpenseActivity">
+    tools:context=".feature.addexpense.AddExpensesActivity">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,13 +44,14 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginTop="16dp"
-                        android:src="@drawable/dining_icon" />
+                        android:src="@drawable/utrakhnd" />
 
                     <TextView
+                        android:id="@+id/tv_group_name_expenses"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Rameshwar Trip"
+                        android:text="@string/group_name"
                         android:textColor="@color/white"
                         android:textSize="24dp"
                         android:textStyle="bold" />
@@ -74,7 +76,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cv_curve_group">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_enter_amount"
+                    android:id="@+id/cl_amount_expenses"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
@@ -97,12 +99,13 @@
                         tools:ignore="MissingConstraints" />
 
                     <EditText
+                        android:id="@+id/et_amount_expenses"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="16sp"
                         android:background="@null"
-                        android:hint="Enter Amount"
+                        android:hint="@string/enter_amount"
                         android:inputType="number"
                         android:lines="1"
                         android:textColor="@color/black"
@@ -131,7 +134,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cv_enter_amount">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_cv_category"
+                    android:id="@+id/cl_category_expenses"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="@+id/cv_cv_category"
@@ -140,7 +143,7 @@
 
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/civ_category"
+                        android:id="@+id/civ_category_image_expenses"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:padding="8dp"
@@ -153,18 +156,19 @@
                         tools:ignore="MissingConstraints" />
 
                     <TextView
+                        android:id="@+id/tv_category_name_expenses"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="16sp"
                         android:background="@null"
-                        android:hint="Category"
+                        android:hint="@string/category"
                         android:lines="1"
                         android:textColor="@color/black"
                         android:textSize="18dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/civ_category"
+                        app:layout_constraintStart_toEndOf="@+id/civ_category_image_expenses"
                         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -187,7 +191,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cv_category">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_cv_date"
+                    android:id="@+id/cl_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="@+id/cv_cv_date"
@@ -209,12 +213,13 @@
                         tools:ignore="MissingConstraints" />
 
                     <TextView
+                        android:id="@+id/tv_date_expenses"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="16sp"
                         android:background="@null"
-                        android:hint="12,12,2023"
+                        android:hint="@string/date"
                         android:lines="1"
                         android:textColor="@color/black"
                         android:textSize="18dp"
@@ -225,6 +230,7 @@
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -243,7 +249,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cv_date">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_cv_time"
+                    android:id="@+id/cl_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="@+id/cv_cv_time"
@@ -265,12 +271,13 @@
                         tools:ignore="MissingConstraints" />
 
                     <TextView
+                        android:id="@+id/tv_time_expenses"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="16sp"
                         android:background="@null"
-                        android:hint="12:12 AM"
+                        android:hint="@string/time"
                         android:lines="1"
                         android:textColor="@color/black"
                         android:textSize="18dp"
@@ -321,12 +328,13 @@
                         tools:ignore="MissingConstraints" />
 
                     <EditText
+                        android:id="@+id/et_description_expenses"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="16sp"
                         android:background="@null"
-                        android:hint="Description (optional)"
+                        android:hint="@string/description_optional"
                         android:inputType="text"
                         android:lines="1"
                         android:textColor="@color/black"
@@ -354,14 +362,14 @@
                     android:id="@+id/tv_split_paid_by"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Paid by"
-                    app:layout_constraintBottom_toBottomOf="@+id/cv_who_pay"
-                    app:layout_constraintEnd_toStartOf="@+id/cv_who_pay"
+                    android:text="@string/paid_by"
+                    app:layout_constraintBottom_toBottomOf="@+id/cv_who_pay_expenses"
+                    app:layout_constraintEnd_toStartOf="@+id/cv_who_pay_expenses"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/cv_who_pay" />
+                    app:layout_constraintTop_toTopOf="@+id/cv_who_pay_expenses" />
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_who_pay"
+                    android:id="@+id/cv_who_pay_expenses"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
@@ -379,12 +387,12 @@
                         android:background="@drawable/main_gradient">
 
                         <TextView
-                            android:id="@+id/tv_how_pay"
+                            android:id="@+id/tv_who_pay_expenses"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:padding="8dp"
-                            android:text="Shashank"
+                            android:text="@string/who_pay"
                             android:textColor="@color/white" />
                     </LinearLayout>
 
@@ -395,11 +403,11 @@
                     android:id="@+id/tv_split"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="split"
+                    android:text="@string/split"
                     app:layout_constraintBottom_toBottomOf="@+id/cv_how_split"
                     app:layout_constraintEnd_toStartOf="@+id/cv_how_split"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/cv_who_pay"
+                    app:layout_constraintStart_toEndOf="@+id/cv_who_pay_expenses"
                     app:layout_constraintTop_toTopOf="@+id/cv_how_split" />
 
                 <androidx.cardview.widget.CardView
@@ -426,7 +434,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:padding="8dp"
-                            android:text="Equaly"
+                            android:text="@string/equaly"
                             android:textColor="@color/white" />
                     </LinearLayout>
 
@@ -435,7 +443,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cv_login"
+                android:id="@+id/cv_save_expenses"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -457,17 +465,63 @@
                     android:background="@drawable/main_gradient">
 
                     <TextView
-                        android:id="@+id/tv_save"
+                        android:id="@+id/tv_save_expenses"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="SAVE"
+                        android:text="@string/save"
                         android:textColor="@color/white"
                         android:textSize="20dp" />
                 </LinearLayout>
 
 
             </androidx.cardview.widget.CardView>
+
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_dp_expenses"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:background="@color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <DatePicker
+            android:id="@+id/dp_expenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:datePickerMode="calendar"
+            android:layout_margin="50dp"
+            android:background="@color/white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_TimePicker_expenses"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:background="@color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TimePicker
+            android:id="@+id/timePicker_expenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white"
+            android:layout_margin="50dp"
+            android:timePickerMode="clock"/>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
