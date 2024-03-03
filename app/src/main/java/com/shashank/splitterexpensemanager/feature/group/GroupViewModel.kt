@@ -13,8 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class GroupViewModel @Inject constructor(
     private val groupRepository: GroupRepository
-) :
-    ViewModel() {
+) : ViewModel() {
     private val _allGroup = MutableStateFlow<List<Group>>(listOf())
     val allGroup = _allGroup.asStateFlow()
 

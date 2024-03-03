@@ -14,3 +14,8 @@
 #73: Showing Category in UI
 #75: Add Expenses
 #77: Showing Expenses in UI
+#79: Showing Groups Details in UI
+#81: Showing Expenses Details in UI
+#83: Delete Expenses
+#85: Update Expenses
+#87: Group Settings
