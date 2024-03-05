@@ -229,7 +229,7 @@ class GroupDetailsActivity : AppCompatActivity() {
     private fun recyclerViewSetUp(
         personId: Long,
     ) {
-        oweOwedAdapter = OweOwedAdapter(this, oweOwedList)
+        oweOwedAdapter = OweOwedAdapter(oweOwedList)
         rvOweOwed.layoutManager = LinearLayoutManager(this)
         rvOweOwed.adapter = oweOwedAdapter
         expensesAdapter = ExpensesAdapter(actionProcessor, personId, expensesList)
