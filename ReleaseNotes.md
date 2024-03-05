@@ -19,3 +19,4 @@
 #83: Delete Expenses
 #85: Update Expenses
 #87: Group Settings
+#89: Showing All GroupDetails
