@@ -12,6 +12,8 @@ import com.shashank.splitterexpensemanager.feature.createfriens.repository.Creat
 import com.shashank.splitterexpensemanager.feature.createfriens.repository.CreateFriendsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.expensesdetails.repository.ExpensesDetailsRepository
 import com.shashank.splitterexpensemanager.feature.expensesdetails.repository.ExpensesDetailsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.friends.repository.FriendsRepository
+import com.shashank.splitterexpensemanager.feature.friends.repository.FriendsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.group.repository.GroupRepository
 import com.shashank.splitterexpensemanager.feature.group.repository.GroupRepositoryImp
 import com.shashank.splitterexpensemanager.feature.groupdetails.repository.GroupDetailsRepository
@@ -69,4 +71,8 @@ class AppModule {
     @Singleton
     @Provides
     fun getGroupSettingsRepository(repo: GroupSettingsRepositoryImp): GroupSettingsRepository = repo
+
+    @Singleton
+    @Provides
+    fun getFriendsRepository(repo: FriendsRepositoryImp): FriendsRepository = repo
 }
