@@ -12,8 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
+import com.shashank.splitterexpensemanager.core.FRIEND_ID
+import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
+import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
@@ -28,7 +33,8 @@ class FriendsFragment : Fragment() {
 
     @Inject
     lateinit var sharedPref: SharedPref
-
+    @Inject
+    lateinit var actionProcessor: ActionProcessor
     private val viewModel: FriendsViewModel by viewModels()
     private var allFriendsList = mutableListOf<Pair<Person, Double>>()
     lateinit var friendAdapter: FriendAdapter
@@ -62,7 +68,16 @@ class FriendsFragment : Fragment() {
     }
 
     fun setUprecyclerView() {
-        friendAdapter = FriendAdapter(allFriendsList)
+        friendAdapter = FriendAdapter(allFriendsList,object :FriendAdapter.OnItemClickListener{
+            override fun onItemClick(pair: Pair<Person, Double>) {
+                val id:Long=pair.first.id?:-1
+                actionProcessor.process(ActionRequestSchema(
+                    ActionType.Friends_DETAILS.name,
+                    hashMapOf(
+                        FRIEND_ID to id,
+                    )))
+            }
+        })
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = friendAdapter
     }

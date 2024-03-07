@@ -6,7 +6,7 @@ import com.shashank.splitterexpensemanager.localdb.room.dao.GroupDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.GroupMemberDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.OweOrOwedDao
 import com.shashank.splitterexpensemanager.mapper.groupmapper.GroupMapper
-import com.shashank.splitterexpensemanager.mapper.oweorowedwitpersonmapper.OweOrOwedWithPersonListMapper
+import com.shashank.splitterexpensemanager.mapper.oweorowedwithpersonmapper.OweOrOwedWithPersonListMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

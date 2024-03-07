@@ -14,6 +14,7 @@ import com.shashank.splitterexpensemanager.feature.addgroup.AddGroupActivity
 import com.shashank.splitterexpensemanager.feature.category.CategoryActivity
 import com.shashank.splitterexpensemanager.feature.createfriens.CreateFriendsActivity
 import com.shashank.splitterexpensemanager.feature.expensesdetails.ExpensesDetailsActivity
+import com.shashank.splitterexpensemanager.feature.friendsdetails.FriendsDetailsActivity
 import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
 import com.shashank.splitterexpensemanager.feature.groupsettings.GroupSettingsActivity
 import dagger.hilt.android.qualifiers.ActivityContext
@@ -38,6 +39,7 @@ class DefaultNavigator @Inject constructor(@ActivityContext private val context:
             Route.CATEGORY -> Intent(context, CategoryActivity::class.java)
             Route.EXPENSES_DETAILS -> Intent(context, ExpensesDetailsActivity::class.java)
             Route.GROUP_SETTING -> Intent(context, GroupSettingsActivity::class.java)
+            Route.Friends_DETAILS -> Intent(context, FriendsDetailsActivity::class.java)
         }.apply {
             actionParams?.data?.toBundle()?.let {
                 putExtras(it)
@@ -60,5 +62,6 @@ enum class Route {
     ADD_EXPENSES,
     CATEGORY,
     EXPENSES_DETAILS,
-    GROUP_SETTING
+    GROUP_SETTING,
+    Friends_DETAILS
 }

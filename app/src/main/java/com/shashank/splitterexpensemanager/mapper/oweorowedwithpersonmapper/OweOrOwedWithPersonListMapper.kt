@@ -1,4 +1,4 @@
-package com.shashank.splitterexpensemanager.mapper.oweorowedwitpersonmapper
+package com.shashank.splitterexpensemanager.mapper.oweorowedwithpersonmapper
 
 import com.shashank.splitterexpensemanager.core.mapper.ListMapper
 import com.shashank.splitterexpensemanager.localdb.model.OweOrOwedWithPerson as OweOrOwedWithPersonEntity
