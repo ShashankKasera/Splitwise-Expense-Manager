@@ -39,7 +39,7 @@ class DefaultNavigator @Inject constructor(@ActivityContext private val context:
             Route.CATEGORY -> Intent(context, CategoryActivity::class.java)
             Route.EXPENSES_DETAILS -> Intent(context, ExpensesDetailsActivity::class.java)
             Route.GROUP_SETTING -> Intent(context, GroupSettingsActivity::class.java)
-            Route.Friends_DETAILS -> Intent(context, FriendsDetailsActivity::class.java)
+            Route.FRIENDS_DETAILS -> Intent(context, FriendsDetailsActivity::class.java)
         }.apply {
             actionParams?.data?.toBundle()?.let {
                 putExtras(it)
@@ -63,5 +63,5 @@ enum class Route {
     CATEGORY,
     EXPENSES_DETAILS,
     GROUP_SETTING,
-    Friends_DETAILS
+    FRIENDS_DETAILS
 }

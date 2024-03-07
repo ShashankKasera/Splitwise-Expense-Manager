@@ -32,29 +32,21 @@
                     android:id="@+id/tv_friends_Name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginBottom="24dp"
                     android:text="@string/group_name"
                     android:textColor="@color/white"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/civ_friends_image"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_setting_friendsDetails"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <ImageView
-                    android:id="@+id/iv_setting_friendsDetails"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="16dp"
-                    android:src="@drawable/edit_icon"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civ_friends_image"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="50dp"
                     android:layout_marginTop="60dp"
                     android:src="@drawable/utrakhnd"
                     app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +98,7 @@
                     android:id="@+id/tv_other_member_friend_details"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:text="@string/plus_other_balances"
                     android:textColor="@color/dark_grey"
                     app:layout_constraintEnd_toStartOf="@+id/gl_right_owe_friend_details"
@@ -146,7 +138,7 @@
                             android:padding="4dp"
                             android:text="@string/settle_up"
                             android:textColor="@color/white"
-                            android:textSize="16dp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -179,7 +171,7 @@
                             android:padding="4dp"
                             android:text="@string/tottls"
                             android:textColor="@color/white"
-                            android:textSize="16dp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -210,7 +202,7 @@
                             android:padding="4dp"
                             android:text="@string/balances"
                             android:textColor="@color/white"
-                            android:textSize="16dp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -219,13 +211,13 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_friends_expense"
+        android:id="@+id/rv_group_owe_owed_friend_details"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_top_friend_details"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/friends_details_item" />
+        tools:listitem="@layout/group_owe_owed_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

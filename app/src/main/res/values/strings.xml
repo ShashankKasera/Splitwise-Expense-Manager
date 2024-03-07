@@ -73,4 +73,6 @@
     <string name="owes_group_member">Owes</string>
     <string name="you_settled_up">You Settled Up</string>
     <string name="settled_up">Settled Up</string>
+    <string name="owes_you_in_group">%1$s owes You in  \"%2$s\"</string>
+    <string name="you_owes_in_group">You owes %1$s in  \"%2$s\"</string>
 </resources>

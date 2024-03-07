@@ -33,11 +33,10 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/civ_friends_image"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/game_icon_png"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/trip_png"
                 app:civ_circle_background_color="@color/primary"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -45,18 +44,26 @@
                 tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/tv_group_name"
+                android:id="@+id/tv_friend_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:text="@string/name"
                 android:textColor="@color/black"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/tv_you_borrowed_friends"
                 app:layout_constraintStart_toEndOf="@+id/civ_friends_image"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/civ_friends_image" />
 
-
-
+            <TextView
+                android:id="@+id/tv_group_type_friend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/group_type"
+                app:layout_constraintBottom_toBottomOf="@+id/civ_friends_image"
+                app:layout_constraintStart_toEndOf="@+id/civ_friends_image"
+                app:layout_constraintTop_toBottomOf="@+id/tv_friend_name" />
 
             <TextView
                 android:id="@+id/tv_you_borrowed_friends"
@@ -79,26 +86,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_you_borrowed_friends" />
 
-            <TextView
-                android:id="@+id/tv_date_friends"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/date"
-                app:layout_constraintStart_toEndOf="@+id/civ_friends_image"
-                app:layout_constraintTop_toBottomOf="@+id/tv_group_name" />
 
             <TextView
-                android:id="@+id/tv_time_friends"
+                android:id="@+id/tv_settled_up_friends"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/time"
-                app:layout_constraintStart_toEndOf="@+id/tv_date_friends"
-                app:layout_constraintTop_toBottomOf="@+id/tv_group_name" />
-
+                android:text="@string/settled_up"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/civ_friends_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/civ_friends_image" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

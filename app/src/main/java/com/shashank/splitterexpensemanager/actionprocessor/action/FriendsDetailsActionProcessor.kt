@@ -10,6 +10,6 @@ class FriendsDetailsActionProcessor @Inject constructor(
     private val navigator: Navigator
 ) : Action {
     override fun execute(params: ActionParams, callBack: ((Boolean) -> Unit)?) {
-        navigator.navigate(Route.Friends_DETAILS, params)
+        navigator.navigate(Route.FRIENDS_DETAILS, params)
     }
 }

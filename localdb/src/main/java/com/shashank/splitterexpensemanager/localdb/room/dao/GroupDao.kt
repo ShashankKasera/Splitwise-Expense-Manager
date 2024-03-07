@@ -30,4 +30,12 @@ interface GroupDao {
 
     @Query("Select * from `Group` where id = :groupId")
     fun loadGroupFlow(groupId: Long): Flow<Group>
+
+    @Query(
+        "SELECT * " +
+            "FROM `GroupMember` " +
+            "INNER JOIN `Group` ON `Group`.id == GroupMember.groupId " +
+            "WHERE GroupMember.personId == :friendId"
+    )
+    fun loadGroupByFriendId(friendId: Long): List<Group>
 }

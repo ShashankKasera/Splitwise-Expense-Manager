@@ -12,6 +12,10 @@ import com.shashank.splitterexpensemanager.feature.createfriens.repository.Creat
 import com.shashank.splitterexpensemanager.feature.createfriens.repository.CreateFriendsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.expensesdetails.repository.ExpensesDetailsRepository
 import com.shashank.splitterexpensemanager.feature.expensesdetails.repository.ExpensesDetailsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.friends.repository.FriendsRepository
+import com.shashank.splitterexpensemanager.feature.friends.repository.FriendsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.friendsdetails.repository.FriendsDetailsRepository
+import com.shashank.splitterexpensemanager.feature.friendsdetails.repository.FriendsDetailsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.group.repository.GroupRepository
 import com.shashank.splitterexpensemanager.feature.group.repository.GroupRepositoryImp
 import com.shashank.splitterexpensemanager.feature.groupdetails.repository.GroupDetailsRepository

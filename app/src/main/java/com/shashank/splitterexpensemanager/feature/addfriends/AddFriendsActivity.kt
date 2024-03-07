@@ -2,7 +2,6 @@ package com.shashank.splitterexpensemanager.feature.addfriends
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -70,7 +69,6 @@ class AddFriendsActivity : AppCompatActivity() {
                     data: Person,
                     isChecked: Boolean
                 ) {
-                    Log.i("btyf", "onItemClick: $isChecked")
                     if (isChecked) {
                         viewModel.insertGroupMember(data.id ?: 0, groupId)
                     } else {
@@ -90,7 +88,6 @@ class AddFriendsActivity : AppCompatActivity() {
                 if (it.isNotEmpty()) {
                     personList.clear()
                     personList.addAll(it)
-                    Log.i("gguy", "getAllPersonExcept: $it")
                     addFriendsAdapter.notifyDataSetChanged()
                 }
             }
@@ -105,7 +102,6 @@ class AddFriendsActivity : AppCompatActivity() {
                 if (groupMember.isNotEmpty()) {
                     groupMemberList.clear()
                     groupMemberList.addAll(groupMember)
-                    Log.i("gguy", "getAllGroupMember: $groupMember")
                     addFriendsAdapter.notifyDataSetChanged()
                 }
             }

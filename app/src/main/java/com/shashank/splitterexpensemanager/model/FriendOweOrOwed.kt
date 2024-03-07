@@ -5,9 +5,9 @@ import com.shashank.splitterexpensemanager.authentication.model.Person
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class OweOrOwedWithPersonAndGroup(
-    val oweOrOwed: OweOrOwed,
-    val personOwe: Person,
-    val personOwed: Person,
-    val group: Group
+data class FriendOweOrOwed(
+    val owe: Person = Person(),
+    val owed: Person = Person(),
+    val group: Group = Group(),
+    val groupOweOwed: Double = 0.0,
 ) : Parcelable

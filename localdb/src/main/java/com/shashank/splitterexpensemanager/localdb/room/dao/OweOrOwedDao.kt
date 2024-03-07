@@ -7,7 +7,6 @@ import androidx.room.Query
 import androidx.room.Update
 import com.shashank.splitterexpensemanager.localdb.model.OweOrOwed
 import com.shashank.splitterexpensemanager.localdb.model.OweOrOwedWithPerson
-import com.shashank.splitterexpensemanager.localdb.model.OweOrOwedWithPersonAndGroup
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -51,9 +50,21 @@ interface OweOrOwedDao {
     @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.personOweId!=:personId")
     fun loadAllOwed(personId: Long): List<OweOrOwedWithPerson>
 
-    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.personOweId==:personOweId AND OweOrOwed.personOwedId==:personOwedId ")
-    fun loadAllOweByOweIdAndOwedId(personOweId: Long,personOwedId: Long): List<OweOrOwedWithPersonAndGroup>
+    @Query(
+        "SELECT SUM(amount) " +
+            "FROM OweOrOwed " +
+            "WHERE personOweId = :personId " +
+            "AND personOwedId = :friendId " +
+            "AND groupId=:groupId"
+    )
+    fun loadAllOweByOweIdAndOwedId(personId: Long, friendId: Long, groupId: Long): Double
 
-    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.personOweId!=:personOweId AND OweOrOwed.personOwedId==:personOwedId ")
-    fun loadAllOwedByOweIdAndOwedId(personOweId: Long,personOwedId: Long): List<OweOrOwedWithPersonAndGroup>
+    @Query(
+        "SELECT SUM(amount) " +
+            "FROM OweOrOwed " +
+            "WHERE OweOrOwed.personOweId==:friendId " +
+            "AND OweOrOwed.personOwedId==:personId " +
+            "AND groupId=:groupId"
+    )
+    fun loadAllOwedByOweIdAndOwedId(friendId: Long, personId: Long, groupId: Long): Double
 }

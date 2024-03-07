@@ -32,7 +32,10 @@ interface PersonDao {
     fun loadPersonByEmail(email: String): Flow<Person>
 
     @Query("Select * from Person where Person.id = :personId")
-    fun loadPersonById(personId: Long): Flow<Person>
+    fun loadPersonByIdFlow(personId: Long): Flow<Person>
+
+    @Query("Select * from Person where Person.id = :personId")
+    fun loadPersonById(personId: Long): Person
 
     @Query("SELECT * FROM Person WHERE Person.id != :personId")
     fun getAllPersonsExcept(personId: Long): Flow<List<Person>>

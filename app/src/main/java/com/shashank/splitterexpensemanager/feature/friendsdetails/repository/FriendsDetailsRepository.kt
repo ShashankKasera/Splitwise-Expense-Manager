@@ -1,9 +1,13 @@
 package com.shashank.splitterexpensemanager.feature.friendsdetails.repository
-import com.shashank.splitterexpensemanager.model.OweOrOwedWithPersonAndGroup
+
+import com.shashank.splitterexpensemanager.authentication.model.Person
+import com.shashank.splitterexpensemanager.model.Group
 
 interface FriendsDetailsRepository {
 
-    fun loadAllOweByOweIdAndOwedId(personOweId: Long,personOwedId: Long): List<OweOrOwedWithPersonAndGroup>
+    fun loadAllGroupByFriendId(friendId: Long): List<Group>
+    fun loadFriendByFriendId(friendId: Long): Person
+    fun loadAllOweByOweIdAndOwedId(personId: Long, friendId: Long, groupId: Long): Double
 
-    fun loadAllOwedByOweIdAndOwedId(personOweId: Long,personOwedId: Long): List<OweOrOwedWithPersonAndGroup>
+    fun loadAllOwedByOweIdAndOwedId(friendId: Long, personId: Long, groupId: Long): Double
 }

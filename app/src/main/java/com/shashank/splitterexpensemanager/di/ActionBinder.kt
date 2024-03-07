@@ -93,6 +93,6 @@ internal abstract class ActionsMultiBinderModule {
 
     @Binds
     @IntoMap
-    @ActionTypeKey(ActionType.Friends_DETAILS)
+    @ActionTypeKey(ActionType.FRIENDS_DETAILS)
     internal abstract fun bindFriendsDetailsAction(action: FriendsDetailsActionProcessor): Action
 }

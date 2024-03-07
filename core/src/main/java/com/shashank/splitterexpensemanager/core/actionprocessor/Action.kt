@@ -17,7 +17,7 @@ enum class ActionType {
     CATEGORY,
     EXPENSES_DETAILS,
     GROUP_SETTING,
-    Friends_DETAILS
+    FRIENDS_DETAILS
 }
 
 interface Action {
