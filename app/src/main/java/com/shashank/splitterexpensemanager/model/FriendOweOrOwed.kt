@@ -6,8 +6,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class FriendOweOrOwed(
-    val owe: Person = Person(),
-    val owed: Person = Person(),
+
+    val friend: Person = Person(),
     val group: Group = Group(),
     val groupOweOwed: Double = 0.0,
 ) : Parcelable

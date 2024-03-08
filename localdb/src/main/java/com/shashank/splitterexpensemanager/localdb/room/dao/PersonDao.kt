@@ -38,5 +38,8 @@ interface PersonDao {
     fun loadPersonById(personId: Long): Person
 
     @Query("SELECT * FROM Person WHERE Person.id != :personId")
-    fun getAllPersonsExcept(personId: Long): Flow<List<Person>>
+    fun getAllPersonsExceptFlow(personId: Long): Flow<List<Person>>
+
+    @Query("SELECT * FROM Person WHERE Person.id != :personId")
+    fun getAllPersonsExcept(personId: Long): List<Person>
 }

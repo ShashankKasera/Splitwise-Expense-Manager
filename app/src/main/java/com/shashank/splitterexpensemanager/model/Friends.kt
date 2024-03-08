@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Friends(
-    val person: Person = Person(),
-    val friendsHashMap: HashMap<Person, Double> = hashMapOf(),
+    val friend: Person = Person(),
+    val friendsOweOwedList: List<FriendOweOrOwed> = listOf(),
     val overallOweOrOwed: Double = 0.0,
 ) : Parcelable

@@ -11,7 +11,8 @@
         android:id="@+id/tv_owe_owed_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14dp"
+        android:textSize="14sp"
+        android:text="tjgjnd"
         android:textColor="@color/dark_grey"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +21,8 @@
         android:id="@+id/tv_owe_owed_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14dp"
+        android:textSize="14sp"
+        android:text="thb"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

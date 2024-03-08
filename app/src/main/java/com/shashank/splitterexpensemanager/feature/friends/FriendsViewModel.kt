@@ -2,8 +2,8 @@ package com.shashank.splitterexpensemanager.feature.friends
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.feature.friends.repository.FriendsRepository
+import com.shashank.splitterexpensemanager.model.FriendOweOrOwed
 import com.shashank.splitterexpensemanager.model.Friends
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -18,49 +18,63 @@ class FriendsViewModel @Inject constructor(
     var friendsRepository: FriendsRepository
 ) : ViewModel() {
 
-    private val _allFriends = MutableStateFlow<Friends>(Friends())
+    private val _allFriends = MutableStateFlow(Pair<List<Friends>, Double>(listOf(), 0.0))
     val allFriends = _allFriends.asStateFlow()
 
     fun loadAllFriends(personId: Long) {
+        var youOverallOweOrOwed = 0.0
+
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val personDeferred = async { friendsRepository.loadPerson() }
-                val oweDeferred = async { friendsRepository.loadAllOwe(personId) }
-                val owedDeferred = async { friendsRepository.loadAllOwed(personId) }
+                val allPersonDeferred = async { friendsRepository.getAllPersonsExcept(personId) }
+                val friendList = mutableListOf<Friends>()
+                allPersonDeferred.await().forEach { friend ->
+                    val groupDeferred =
+                        async { friendsRepository.loadAllGroupByFriendId(friend.id ?: -1) }
+                    var amount = 0.0
+                    val friendOweOwedList = mutableListOf<FriendOweOrOwed>()
 
-                val allFriendsWithOweOwedHashmap: HashMap<Person, Double> =
-                    HashMap(personDeferred.await().associate { it to 0.0 })
+                    groupDeferred.await().forEach { group ->
 
-                val owe = oweDeferred.await()
-                val owed = owedDeferred.await()
-                var person = Person()
-                var amount = 0.0
-                owe.forEach {
-                    if (it.personOwe.id != it.personOwed.id) {
-                        amount += it.oweOrOwed.amount
-                        allFriendsWithOweOwedHashmap[it.personOwed] =
-                            ((allFriendsWithOweOwedHashmap[it.personOwed]) ?: 0.0).plus(it.oweOrOwed.amount)
-                    } else {
-                        person = it.personOwe
+                        val oweDeferred = async {
+                            friendsRepository.loadAllOweByOweIdAndOwedId(
+                                personId,
+                                friend.id ?: -1,
+                                group.id ?: -1
+                            )
+                        }
+                        val owedDeferred = async {
+                            friendsRepository.loadAllOwedByOweIdAndOwedId(
+                                friend.id ?: -1,
+                                personId,
+                                group.id ?: -1
+                            )
+                        }
+                        val owe = oweDeferred.await()
+                        val owed = owedDeferred.await()
+
+                        if ((owe - owed) != 0.0) {
+                            friendOweOwedList.add(
+                                FriendOweOrOwed(
+                                    friend,
+                                    group,
+                                    (owe - owed)
+                                )
+                            )
+                        }
+                        amount += (owe - owed)
                     }
+                    youOverallOweOrOwed += amount
+                    friendList.add(
+                        Friends(
+                            friend = friend,
+                            friendsOweOwedList = friendOweOwedList,
+                            overallOweOrOwed = amount
+                        )
+                    )
                 }
 
-                owed.forEach {
-                    if (it.personOwed.id == personId) {
-                        amount -= it.oweOrOwed.amount
-                        person = it.personOwed
-                        allFriendsWithOweOwedHashmap[it.personOwe] =
-                            ((allFriendsWithOweOwedHashmap[it.personOwe]) ?: 0.0).minus(it.oweOrOwed.amount)
-                    }
-                }
-
-                allFriendsWithOweOwedHashmap.remove(person)
-                val data = Friends(
-                    person = person,
-                    friendsHashMap = allFriendsWithOweOwedHashmap,
-                    overallOweOrOwed = amount
-                )
-                _allFriends.emit(data)
+                _allFriends.emit(Pair(friendList, youOverallOweOrOwed))
             } catch (e: Exception) {
                 e.printStackTrace()
             }
