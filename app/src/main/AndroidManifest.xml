@@ -17,17 +17,17 @@
         android:theme="@style/Theme.SplitwiseExpenseManager"
         tools:targetApi="31">
         <activity
+            android:name=".feature.groupsettings.GroupSettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".feature.addgroup.AddGroupActivity"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".feature.createfriens.CreateFriendsActivity"
             android:exported="false" />
         <activity
             android:name=".feature.addfriends.AddFriendsActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".feature.addgroup.AddGroupActivity"
             android:exported="false" />
@@ -44,8 +44,6 @@
         <activity
             android:name=".feature.expensesdetails.ExpensesDetailsActivity"
             android:exported="true">
-
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -65,11 +63,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".feature.DashboardActivity"
             android:exported="false">
@@ -87,10 +85,10 @@
         <activity
             android:name=".feature.addexpense.AddExpensesActivity"
             android:exported="false">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
     </application>
+
 </manifest>
