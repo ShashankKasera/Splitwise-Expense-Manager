@@ -10,12 +10,20 @@ import com.shashank.splitterexpensemanager.feature.category.repository.CategoryR
 import com.shashank.splitterexpensemanager.feature.category.repository.CategoryRepositoryImp
 import com.shashank.splitterexpensemanager.feature.createfriens.repository.CreateFriendsRepository
 import com.shashank.splitterexpensemanager.feature.createfriens.repository.CreateFriendsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.expensesdetails.repository.ExpensesDetailsRepository
+import com.shashank.splitterexpensemanager.feature.expensesdetails.repository.ExpensesDetailsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.friends.repository.FriendsRepository
+import com.shashank.splitterexpensemanager.feature.friends.repository.FriendsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.friendsdetails.repository.FriendsDetailsRepository
+import com.shashank.splitterexpensemanager.feature.friendsdetails.repository.FriendsDetailsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.group.repository.GroupRepository
 import com.shashank.splitterexpensemanager.feature.group.repository.GroupRepositoryImp
 import com.shashank.splitterexpensemanager.feature.groupdetails.repository.GroupDetailsRepository
 import com.shashank.splitterexpensemanager.feature.groupdetails.repository.GroupDetailsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.groupmember.repository.GroupMemberRepository
 import com.shashank.splitterexpensemanager.feature.groupmember.repository.GroupMemberRepositoryImp
+import com.shashank.splitterexpensemanager.feature.groupsettings.repository.GroupSettingsRepository
+import com.shashank.splitterexpensemanager.feature.groupsettings.repository.GroupSettingsRepositoryImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,4 +65,20 @@ class AppModule {
     @Singleton
     @Provides
     fun getAddGroupRepository(repo: AddGroupRepositoryImp): AddGroupRepository = repo
+
+    @Singleton
+    @Provides
+    fun getExpensesDetailsRepository(repo: ExpensesDetailsRepositoryImp): ExpensesDetailsRepository = repo
+
+    @Singleton
+    @Provides
+    fun getGroupSettingsRepository(repo: GroupSettingsRepositoryImp): GroupSettingsRepository = repo
+
+    @Singleton
+    @Provides
+    fun getFriendsRepository(repo: FriendsRepositoryImp): FriendsRepository = repo
+
+    @Singleton
+    @Provides
+    fun getFriendsDetailsRepository(repo: FriendsDetailsRepositoryImp): FriendsDetailsRepository = repo
 }

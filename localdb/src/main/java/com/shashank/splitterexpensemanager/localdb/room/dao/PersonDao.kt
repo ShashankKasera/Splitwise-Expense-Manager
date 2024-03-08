@@ -23,14 +23,23 @@ interface PersonDao {
     fun insertAllPerson(vararg person: Person)
 
     @Query("Select * from Person")
-    fun loadAllPerson(): Flow<List<Person>>
+    fun loadAllPersonFlow(): Flow<List<Person>>
+
+    @Query("Select * from Person")
+    fun loadAllPerson(): List<Person>
 
     @Query("Select * from Person where Person.emailId = :email")
     fun loadPersonByEmail(email: String): Flow<Person>
 
     @Query("Select * from Person where Person.id = :personId")
-    fun loadPersonById(personId: Long): Flow<Person>
+    fun loadPersonByIdFlow(personId: Long): Flow<Person>
+
+    @Query("Select * from Person where Person.id = :personId")
+    fun loadPersonById(personId: Long): Person
 
     @Query("SELECT * FROM Person WHERE Person.id != :personId")
-    fun getAllPersonsExcept(personId: Long): Flow<List<Person>>
+    fun getAllPersonsExceptFlow(personId: Long): Flow<List<Person>>
+
+    @Query("SELECT * FROM Person WHERE Person.id != :personId")
+    fun getAllPersonsExcept(personId: Long): List<Person>
 }
