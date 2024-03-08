@@ -48,6 +48,13 @@ class FriendsDetailsActivity : AppCompatActivity() {
         init(friendId, personId)
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        var friendId: Long = intent.extras?.getLong(FRIEND_ID) ?: -1
+        val personId: Long = sharedPref.getValue(PERSON_ID, 0L) as Long
+
+        viewModel.loadAllFriends(personId, friendId)
+    }
     private fun init(friendId: Long, personId: Long) {
         rvGroupOweOwed = findViewById(R.id.rv_group_owe_owed_friend_details)
         tvFriendName = findViewById(R.id.tv_friends_Name)
@@ -73,19 +80,31 @@ class FriendsDetailsActivity : AppCompatActivity() {
 
     private fun getData() {
         lifecycleScope.launch {
-            viewModel.allFriends.collect {
-                tvFriendName.text = it.friend.name
-                if (it.friendsHashMap.isNotEmpty()) {
-                    groupOweOwedList.clear()
-                    groupOweOwedList.addAll(it.friendsHashMap.toList())
+            viewModel.allFriends.collect { friendDetails ->
+                tvFriendName.text = friendDetails.friend.name
+
+                if (friendDetails.friendsHashMap.isNotEmpty()) {
+                    groupOweOwedList.apply {
+                        clear()
+                        addAll(friendDetails.friendsHashMap.toList())
+                    }
                     groupOweOwedAdapter.notifyDataSetChanged()
                 }
-                if (it.friendOweOwedList.isNotEmpty()) {
-                    friendOweOwedList.clear()
-                    friendOweOwedList.addAll(it.friendOweOwedList)
+
+                if (friendDetails.friendOweOwedList.isNotEmpty()) {
+                    friendOweOwedList.apply {
+                        clear()
+                        addAll(friendDetails.friendOweOwedList)
+                    }
                     friendOweOwedAdapter.notifyDataSetChanged()
-                    overall(friendOweOwedList.size, it.overallOweOrOwed)
                 }
+
+                overall(
+                    friendDetails.friendsHashMap.size,
+                    friendDetails.friendOweOwedList.size,
+                    friendDetails.overallOweOrOwed
+                )
+
                 if (friendOweOwedList.size > 3) {
                     tvPlus.visible()
                     tvPlus.text =
@@ -97,30 +116,48 @@ class FriendsDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun overall(size: Int, overallOweOrOwed: Double) {
-        if (size == 0) {
-            tvOverallOweOrOwed.visible()
-            tvOverallOweOrOwed.text = getString(R.string.you_are_all_settled_up_in_this_group)
-            tvOverallOweOrOwed.setTextColor(tvOverallOweOrOwed.context.resources.getColor(R.color.black))
-        } else if (size > 1) {
-            tvOverallOweOrOwed.visible()
-            val overall = overallOweOrOwed
-
-            val colorResId =
-                if (overall == 0.0) R.color.black else if (overall < 0) R.color.primary_dark else R.color.green
-            val absOverall = Math.abs(overall)
-
-            tvOverallOweOrOwed.text = if (overall == 0.0) {
-                getString(R.string.you_are_settled_up_overall)
-            } else if (overall < 0) {
-                getString(R.string.you_owe_rs_overall, absOverall.formatNumber(2))
-            } else {
-                getString(R.string.you_are_owed_rs_overall, absOverall.formatNumber(2))
+    private fun overall(friendsHashMapSize: Int, friendOweOwedList: Int, overallOweOrOwed: Double) {
+        when {
+            friendsHashMapSize == 0 -> {
+                tvOverallOweOrOwed.visible()
+                tvOverallOweOrOwed.text = getString(R.string.no_expenses_friend)
             }
 
-            tvOverallOweOrOwed.setTextColor(tvOverallOweOrOwed.context.resources.getColor(colorResId))
-        } else {
-            tvOverallOweOrOwed.gone()
+            friendOweOwedList == 0 -> {
+                tvOverallOweOrOwed.visible()
+                tvOverallOweOrOwed.text = getString(R.string.you_are_all_settled_up)
+                tvOverallOweOrOwed.setTextColor(tvOverallOweOrOwed.context.resources.getColor(R.color.black))
+            }
+
+            friendOweOwedList > 1 -> {
+                tvOverallOweOrOwed.visible()
+                val overall = overallOweOrOwed
+
+                val colorResId = when {
+                    overall == 0.0 -> R.color.black
+                    overall < 0 -> R.color.primary_dark
+                    else -> R.color.green
+                }
+
+                val absOverall = Math.abs(overall)
+                val oweOrOwedText = when {
+                    overall == 0.0 -> getString(R.string.you_are_settled_up_overall)
+                    overall < 0 -> getString(
+                        R.string.you_owe_rs_overall,
+                        absOverall.formatNumber(2)
+                    )
+                    else -> getString(R.string.you_are_owed_rs_overall, absOverall.formatNumber(2))
+                }
+
+                tvOverallOweOrOwed.text = oweOrOwedText
+                tvOverallOweOrOwed.setTextColor(
+                    tvOverallOweOrOwed.context.resources.getColor(
+                        colorResId
+                    )
+                )
+            }
+
+            else -> tvOverallOweOrOwed.gone()
         }
     }
 }

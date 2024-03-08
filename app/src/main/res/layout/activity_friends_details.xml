@@ -79,7 +79,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/you_owe_or_owed_amount_overall"
-                    android:textColor="@color/primary_dark"
+                    android:textColor="@color/dark_grey"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/gl_right_owe_friend_details"
                     app:layout_constraintStart_toStartOf="@+id/gl_left_cwe_friend_details"

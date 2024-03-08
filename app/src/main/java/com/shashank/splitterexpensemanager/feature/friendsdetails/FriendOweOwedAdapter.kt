@@ -28,7 +28,7 @@ class FriendOweOwedAdapter(
                 amount > 0 -> {
                     tvName.text = context.getString(
                         R.string.owes_you_in_group,
-                        friendOweOrOwed.owe.name,
+                        friendOweOrOwed.friend.name,
                         friendOweOrOwed.group.groupName
                     )
                     tvAmount.text = context.getString(R.string.rs, amount.formatNumber(2))
@@ -38,7 +38,7 @@ class FriendOweOwedAdapter(
                 amount < 0 -> {
                     tvName.text = context.getString(
                         R.string.you_owes_in_group,
-                        friendOweOrOwed.owed.name,
+                        friendOweOrOwed.friend.name,
                         friendOweOrOwed.group.groupName
                     )
                     tvAmount.text = context.getString(R.string.rs, (-amount).formatNumber(2))
@@ -47,7 +47,6 @@ class FriendOweOwedAdapter(
             }
         }
     }
-
 
     override fun getItemCount(): Int {
         return if (groupOweOwedList.size <= 3) groupOweOwedList.size else 2

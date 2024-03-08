@@ -24,8 +24,6 @@ class FriendsDetailsViewModel @Inject constructor(
     fun loadAllFriends(personId: Long, friendId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val personDeferred =
-                    async { friendsDetailsRepository.loadFriendByFriendId(personId) }
                 val friendDeferred =
                     async { friendsDetailsRepository.loadFriendByFriendId(friendId) }
                 val groupDeferred =
@@ -58,7 +56,6 @@ class FriendsDetailsViewModel @Inject constructor(
                         if ((owe - owed) < 0.0) {
                             friendOweOwedList.add(
                                 FriendOweOrOwed(
-                                    personDeferred.await(),
                                     friendDeferred.await(),
                                     it,
                                     (owe - owed)
@@ -68,7 +65,6 @@ class FriendsDetailsViewModel @Inject constructor(
                             friendOweOwedList.add(
                                 FriendOweOrOwed(
                                     friendDeferred.await(),
-                                    personDeferred.await(),
                                     it,
                                     (owe - owed)
                                 )

@@ -6,31 +6,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.model.FriendOweOrOwed
 import com.shashank.splitterexpensemanager.model.Friends
-import com.shashank.splitterexpensemanager.authentication.model.Person
-import com.shashank.splitterexpensemanager.core.extension.formatNumber
-import com.shashank.splitterexpensemanager.core.extension.gone
-import com.shashank.splitterexpensemanager.core.extension.visible
 
 class FriendAdapter(
     private val context: FriendsFragment,
     private val allFriendsList: MutableList<Friends>,
     private val onItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<FriendAdapter.ViewHolder>() {
-   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
     lateinit var friendOweOwedAdapter: FriendOweOwedAdapter
     private var oweOwedList = mutableListOf<FriendOweOrOwed>()
     interface OnItemClickListener {
-        fun onItemClick(pair: Pair<Person, Double>)
+        fun onItemClick(friend: Person)
     }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.friend_item, parent, false)
         return ViewHolder(view)
     }
@@ -65,6 +63,9 @@ class FriendAdapter(
             }
         }
 
+        holder.cvFriend.setOnClickListener {
+            onItemClickListener.onItemClick(allFriendsList[position].friend)
+        }
     }
 
     private fun setupSettledUpView(holder: ViewHolder, context: Context) {
@@ -72,50 +73,6 @@ class FriendAdapter(
         holder.tvFriendOweOrOwed.gone()
         holder.tvFriendOweOrOwedAmount.gone()
         holder.tvSettledUp.text = context.getString(R.string.no_expenses_friend)
-        holder.tvSettledUp.setTextColor(context.getColor(R.color.dark_grey))
-    }
-
-    private fun setupOwesView(
-        holder: ViewHolder,
-        context: Context,
-        textResId: Int,
-        textColorResId: Int,
-        amount: Double
-    ) {
-        holder.tvSettledUp.gone()
-        holder.tvFriendOweOrOwed.text = context.getString(textResId)
-        holder.tvFriendOweOrOwed.setTextColor(context.getColor(textColorResId))
-        holder.tvFriendOweOrOwedAmount.text = context.getString(R.string.rs, amount.formatNumber(2))
-        holder.tvFriendOweOrOwedAmount.setTextColor(context.getColor(textColorResId))
-        val (person, amount) = allFriendsList[position]
-        val context = holder.itemView.context
-
-        holder.tvFriendName.text = person.name
-
-        when {
-            amount == 0.0 -> {
-                setupSettledUpView(holder, context)
-            }
-
-            amount > 0 -> {
-                setupOwesView(holder, context, R.string.owes_you_friends, R.color.green, amount)
-            }
-
-            amount < 0 -> {
-                setupOwesView(holder, context, R.string.you_owes, R.color.primary_dark, -amount)
-            }
-        }
-
-        holder.cvFriend.setOnClickListener {
-            onItemClickListener.onItemClick(allFriendsList[position])
-        }
-    }
-
-    private fun setupSettledUpView(holder: ViewHolder, context: Context) {
-        holder.tvSettledUp.visible()
-        holder.tvFriendOweOrOwed.gone()
-        holder.tvFriendOweOrOwedAmount.gone()
-        holder.tvSettledUp.text = context.getString(R.string.settled_up)
         holder.tvSettledUp.setTextColor(context.getColor(R.color.dark_grey))
     }
 
