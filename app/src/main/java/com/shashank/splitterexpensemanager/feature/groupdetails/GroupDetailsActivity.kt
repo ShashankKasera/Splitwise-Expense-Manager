@@ -40,6 +40,7 @@ class GroupDetailsActivity : AppCompatActivity() {
     lateinit var rvOweOwed: RecyclerView
     lateinit var tvGroupName: TextView
     lateinit var cvAddExpenses: CardView
+    lateinit var cvBalances: CardView
     lateinit var tvOverallOweOrOwed: TextView
     lateinit var tvNoExpenses: TextView
     lateinit var tvYouAreTheOnlyOneHere: TextView
@@ -60,6 +61,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
         init()
         recyclerViewSetUp(personId)
+        navigationForBalances(groupId)
         navigationForGroupSettings(groupId)
         navigationForAddFriends(groupId)
         navigationForGroupMember(groupId)
@@ -73,6 +75,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         tvNoExpenses = findViewById(R.id.tv_no_expenses_here_yet)
         tvGroupName = findViewById(R.id.tv_group_Name_in_detail)
         cvAddExpenses = findViewById(R.id.cv_add_expenses)
+        cvBalances = findViewById(R.id.cv_balance)
         tvOverallOweOrOwed = findViewById(R.id.tv_overall_owe)
         llAddGroupMember = findViewById(R.id.ll_group_member)
         tvOweOrOwedOther = findViewById(R.id.tv_other_member)
@@ -92,6 +95,18 @@ class GroupDetailsActivity : AppCompatActivity() {
         viewModel.groupDetails(groupId, personId)
     }
 
+    private fun navigationForBalances(groupId: Long) {
+        cvBalances.setOnClickListener {
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.BALANCES.name,
+                    hashMapOf(
+                        GROUP_ID to (groupId)
+                    )
+                )
+            )
+        }
+    }
     private fun navigationForGroupSettings(groupId: Long) {
         ivSetting.setOnClickListener {
             actionProcessor.process(

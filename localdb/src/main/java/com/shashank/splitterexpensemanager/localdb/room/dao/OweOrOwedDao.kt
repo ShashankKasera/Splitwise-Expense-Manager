@@ -61,4 +61,14 @@ interface OweOrOwedDao {
             "AND groupId=:groupId"
     )
     fun loadAllOwedByOweIdAndOwedId(friendId: Long, personId: Long, groupId: Long): Double
+
+    @Query(
+        "SELECT * " +
+            "FROM OweOrOwed " +
+            "WHERE groupId = :groupId " +
+            "AND (personOweId = :personId " +
+            "OR personOwedId = :personId) " +
+            "AND (personOweId != personOwedId)"
+    )
+    fun loadAllOweOwedByGroupIdAndPersonId(groupId: Long, personId: Long): List<OweOrOwedWithPerson>
 }

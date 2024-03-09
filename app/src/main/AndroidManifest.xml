@@ -17,6 +17,9 @@
         android:theme="@style/Theme.SplitwiseExpenseManager"
         tools:targetApi="31">
         <activity
+            android:name=".feature.balances.BalancesActivity"
+            android:exported="false" />
+        <activity
             android:name=".feature.friendsdetails.FriendsDetailsActivity"
             android:exported="false" />
         <activity
