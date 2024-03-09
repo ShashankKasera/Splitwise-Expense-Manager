@@ -22,3 +22,4 @@
 #89: Showing All GroupDetails
 #91: All Friends Owe Owed
 #92: Friends Details
+#95: All Activity

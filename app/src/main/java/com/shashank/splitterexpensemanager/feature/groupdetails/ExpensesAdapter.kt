@@ -25,7 +25,7 @@ class ExpensesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.activity_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.expenses_item, parent, false)
         return ViewHolder(view)
     }
 
