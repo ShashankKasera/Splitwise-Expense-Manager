@@ -26,13 +26,13 @@ import androidx.room.PrimaryKey
 )
 data class Expenses(
     @PrimaryKey(autoGenerate = true) var id: Long?,
-    var personId: Long,
-    var groupId: Long,
-    var categoryId: Long,
-    var amount: Double,
-    var splitAmount: Double,
-    var name: String,
-    var date: String,
-    var time: String,
-    var description: String,
+    var personId: Long?,
+    var groupId: Long?,
+    var categoryId: Long?,
+    var amount: Double?,
+    var splitAmount: Double?,
+    var name: String?,
+    var date: String?,
+    var time: String?,
+    var description: String?,
 )

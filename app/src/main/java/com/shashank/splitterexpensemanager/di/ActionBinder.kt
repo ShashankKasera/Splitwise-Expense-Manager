@@ -10,8 +10,11 @@ import com.shashank.splitterexpensemanager.core.actionprocessor.Action
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.actionprocessor.action.RegistrationActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.DashboardActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.ExpensesDetailsActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.FriendsDetailsActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupDetailsActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupMemberActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.GroupSettingsActionProcessor
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -77,4 +80,19 @@ internal abstract class ActionsMultiBinderModule {
     @IntoMap
     @ActionTypeKey(ActionType.CATEGORY)
     internal abstract fun bindCategoryAction(action: CategoryActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.EXPENSES_DETAILS)
+    internal abstract fun bindExpensesDetailsAction(action: ExpensesDetailsActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.GROUP_SETTING)
+    internal abstract fun bindGroupSettingsAction(action: GroupSettingsActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.FRIENDS_DETAILS)
+    internal abstract fun bindFriendsDetailsAction(action: FriendsDetailsActionProcessor): Action
 }

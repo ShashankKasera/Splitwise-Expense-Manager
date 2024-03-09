@@ -16,7 +16,7 @@ class AddFriendsRepositoryImp @Inject constructor(
     private val personListMapper: PersonListMapper,
     private val groupMemberListMapper: GroupMemberListMapper,
 ) : AddFriendsRepository {
-    override fun loadPersonExcept(personId: Long) = personDao.getAllPersonsExcept(personId).map {
+    override fun loadPersonExcept(personId: Long) = personDao.getAllPersonsExceptFlow(personId).map {
         personListMapper.map(it)
     }
 
