@@ -12,10 +12,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.core.GROUP_ID
+import com.shashank.splitterexpensemanager.core.PERSON_ID
+import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
-import com.shashank.splitterexpensemanager.model.Group
+import com.shashank.splitterexpensemanager.model.GroupAndOweOrOwed
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,11 +26,14 @@ import javax.inject.Inject
 class GroupFragment : Fragment() {
 
     @Inject
+    lateinit var sharedPref: SharedPref
+
+    @Inject
     lateinit var actionProcessor: ActionProcessor
     lateinit var recyclerView: RecyclerView
     lateinit var addGroup: TextView
     lateinit var groupAdapter: GroupAdapter
-    private var groupList = mutableListOf<Group>()
+    private var groupList = mutableListOf<GroupAndOweOrOwed>()
     private val viewModel: GroupViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,8 +41,10 @@ class GroupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_group, container, false)
+        val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
         init(v)
         setUpRecyclerView()
+        viewModel.getAllGroup(personId)
         getAllGroups()
         addGroup.setOnClickListener {
             actionProcessor.process(
@@ -46,10 +53,14 @@ class GroupFragment : Fragment() {
                 )
             )
         }
-
         return v
     }
 
+    override fun onResume() {
+        super.onResume()
+        val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
+        viewModel.getAllGroup(personId)
+    }
     private fun init(v: View) {
         recyclerView = v.findViewById(R.id.rv_group)
         addGroup = v.findViewById(R.id.tv_add_group)
@@ -57,6 +68,7 @@ class GroupFragment : Fragment() {
 
     private fun setUpRecyclerView() {
         groupAdapter = GroupAdapter(
+            this,
             groupList,
             object : GroupAdapter.OnItemClickListener {
                 override fun onItemClick(groupId: Long) {
@@ -71,13 +83,16 @@ class GroupFragment : Fragment() {
                 }
             }
         )
-        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        val layoutManager = LinearLayoutManager(context)
+        layoutManager.reverseLayout = true
+        layoutManager.stackFromEnd = true
+        recyclerView.layoutManager = layoutManager
         recyclerView.adapter = groupAdapter
     }
 
     private fun getAllGroups() {
         lifecycleScope.launch {
-            viewModel.getAllGroup()
             viewModel.allGroup.collect {
                 if (it.isNotEmpty()) {
                     groupList.clear()
