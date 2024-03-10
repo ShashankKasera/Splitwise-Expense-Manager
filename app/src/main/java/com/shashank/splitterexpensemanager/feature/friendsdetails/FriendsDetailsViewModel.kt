@@ -37,28 +37,28 @@ class FriendsDetailsViewModel @Inject constructor(
                 groupDeferred.await().forEach {
                     val oweDeferred = async {
                         friendsDetailsRepository.loadAllOweByOweIdAndOwedId(
-                            personId,
                             friendId,
+                            personId,
                             it.id ?: -1
                         )
                     }
                     val owedDeferred = async {
                         friendsDetailsRepository.loadAllOwedByOweIdAndOwedId(
-                            friendId,
                             personId,
+                            friendId,
                             it.id ?: -1
                         )
                     }
                     val owe = oweDeferred.await()
                     val owed = owedDeferred.await()
-                    groupOweOwedHashmap[it] = owe - owed
-                    if ((owe - owed) != 0.0) {
-                        if ((owe - owed) < 0.0) {
+                    groupOweOwedHashmap[it] = owed - owe
+                    if ((owed - owe) != 0.0) {
+                        if ((owed - owe) < 0.0) {
                             friendOweOwedList.add(
                                 FriendOweOrOwed(
                                     friendDeferred.await(),
                                     it,
-                                    (owe - owed)
+                                    (owed - owe)
                                 )
                             )
                         } else {
@@ -66,12 +66,12 @@ class FriendsDetailsViewModel @Inject constructor(
                                 FriendOweOrOwed(
                                     friendDeferred.await(),
                                     it,
-                                    (owe - owed)
+                                    (owed - owe)
                                 )
                             )
                         }
                     }
-                    amount += (owe - owed)
+                    amount += (owed - owe)
                 }
 
                 val data = FriendsDetails(

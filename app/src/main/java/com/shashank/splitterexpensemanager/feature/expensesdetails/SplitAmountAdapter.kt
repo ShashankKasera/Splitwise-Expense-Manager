@@ -22,10 +22,10 @@ class SplitAmountAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvName.text = if (personId == oweOwedList[position].personOwed.id) {
+        holder.tvName.text = if (personId == oweOwedList[position].personOwe.id) {
             context.getString(R.string.you_owes)
         } else {
-            context.getString(R.string.owes, oweOwedList[position].personOwed.name)
+            context.getString(R.string.owes, oweOwedList[position].personOwe.name)
         }
         holder.tvAmount.text =
             context.getString(R.string.rs, (oweOwedList[position].oweOrOwed.amount).formatNumber(2))

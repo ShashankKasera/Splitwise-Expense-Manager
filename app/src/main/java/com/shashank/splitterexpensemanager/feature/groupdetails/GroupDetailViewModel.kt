@@ -27,26 +27,29 @@ class GroupDetailViewModel @Inject constructor(var groupDetailsRepository: Group
                 val groupMemberDeferred =
                     async { groupDetailsRepository.loadAllGroupMemberWithGroupId(groupId) }
                 val expensesDeferred = async { groupDetailsRepository.loadGroupExpenses(groupId) }
-                val oweDeferred =
-                    async { groupDetailsRepository.loadAllOweByGroupId(groupId, personId) }
                 val owedDeferred =
                     async { groupDetailsRepository.loadAllOwedByGroupId(groupId, personId) }
 
-                val owe = oweDeferred.await()
+                val oweDeferred =
+                    async { groupDetailsRepository.loadAllOweByGroupId(groupId, personId) }
+
                 val owed = owedDeferred.await()
-                owe.forEach {
+                val owe = oweDeferred.await()
+
+                owed.forEach {
                     if (it.personOwe.id != it.personOwed.id) {
+                        hashMap[it.personOwe] =
+                            ((hashMap[it.personOwe]) ?: 0.0).plus(it.oweOrOwed.amount)
+                    }
+                }
+                owe.forEach {
+                    if (it.personOwe.id == personId) {
                         hashMap[it.personOwed] =
-                            ((hashMap[it.personOwed]) ?: 0.0).plus(it.oweOrOwed.amount)
+                            ((hashMap[it.personOwed]) ?: 0.0).minus(it.oweOrOwed.amount)
                     }
                 }
 
-                owed.forEach {
-                    if (it.personOwed.id == personId) {
-                        hashMap[it.personOwe] =
-                            ((hashMap[it.personOwe]) ?: 0.0).minus(it.oweOrOwed.amount)
-                    }
-                }
+
                 val data = GroupDetails(
                     group = groupDeferred.await(),
                     groupMember = groupMemberDeferred.await(),

@@ -11,6 +11,7 @@ import com.shashank.splitterexpensemanager.feature.addexpense.AddExpensesActivit
 import com.shashank.splitterexpensemanager.feature.groupmember.GroupMemberActivity
 import com.shashank.splitterexpensemanager.feature.addfriends.AddFriendsActivity
 import com.shashank.splitterexpensemanager.feature.addgroup.AddGroupActivity
+import com.shashank.splitterexpensemanager.feature.addpayment.AddPaymentActivity
 import com.shashank.splitterexpensemanager.feature.balances.BalancesActivity
 import com.shashank.splitterexpensemanager.feature.category.CategoryActivity
 import com.shashank.splitterexpensemanager.feature.createfriens.CreateFriendsActivity
@@ -18,6 +19,7 @@ import com.shashank.splitterexpensemanager.feature.expensesdetails.ExpensesDetai
 import com.shashank.splitterexpensemanager.feature.friendsdetails.FriendsDetailsActivity
 import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
 import com.shashank.splitterexpensemanager.feature.groupsettings.GroupSettingsActivity
+import com.shashank.splitterexpensemanager.feature.settleup.SettleUpActivity
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
@@ -42,6 +44,8 @@ class DefaultNavigator @Inject constructor(@ActivityContext private val context:
             Route.GROUP_SETTING -> Intent(context, GroupSettingsActivity::class.java)
             Route.FRIENDS_DETAILS -> Intent(context, FriendsDetailsActivity::class.java)
             Route.BALANCES -> Intent(context, BalancesActivity::class.java)
+            Route.SETTLE_UP -> Intent(context, SettleUpActivity::class.java)
+            Route.ADD_PAYMENT -> Intent(context, AddPaymentActivity::class.java)
         }.apply {
             actionParams?.data?.toBundle()?.let {
                 putExtras(it)
@@ -67,4 +71,6 @@ enum class Route {
     GROUP_SETTING,
     FRIENDS_DETAILS,
     BALANCES,
+    SETTLE_UP,
+    ADD_PAYMENT,
 }

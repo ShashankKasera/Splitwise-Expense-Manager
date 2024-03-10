@@ -28,27 +28,29 @@ class GroupViewModel @Inject constructor(
                 it.forEach {
                     try {
                         val hashMap = HashMap<Person, Double>()
-                        val oweDeferred =
-                            async { groupRepository.loadAllOweByGroupId(it.id ?: -1, personId) }
                         val owedDeferred =
                             async { groupRepository.loadAllOwedByGroupId(it.id ?: -1, personId) }
 
-                        val owe = oweDeferred.await()
+                        val oweDeferred =
+                            async { groupRepository.loadAllOweByGroupId(it.id ?: -1, personId) }
+
                         val owed = owedDeferred.await()
+                        val owe = oweDeferred.await()
+
+
                         var oweOwed = 0.0
-                        owe.forEach {
+                        owed.forEach {
                             if (it.personOwe.id != it.personOwed.id) {
                                 oweOwed += it.oweOrOwed.amount
-                                hashMap[it.personOwed] =
-                                    ((hashMap[it.personOwed]) ?: 0.0).plus(it.oweOrOwed.amount)
+                                hashMap[it.personOwe] =
+                                    ((hashMap[it.personOwe]) ?: 0.0).plus(it.oweOrOwed.amount)
                             }
                         }
-
-                        owed.forEach {
-                            if (it.personOwed.id == personId) {
+                        owe.forEach {
+                            if (it.personOwe.id == personId) {
                                 oweOwed -= it.oweOrOwed.amount
-                                hashMap[it.personOwe] =
-                                    ((hashMap[it.personOwe]) ?: 0.0).minus(it.oweOrOwed.amount)
+                                hashMap[it.personOwed] =
+                                    ((hashMap[it.personOwed]) ?: 0.0).minus(it.oweOrOwed.amount)
                             }
                         }
 

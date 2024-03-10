@@ -7,24 +7,14 @@ import androidx.room.PrimaryKey
 @Entity(
     foreignKeys = [
         ForeignKey(
-            entity = Expenses::class,
+            entity = Person::class,
             parentColumns = ["id"],
-            childColumns = ["expensesId"],
-            onDelete = ForeignKey.CASCADE
-        ), ForeignKey(
-            entity = Repay::class,
-            parentColumns = ["id"],
-            childColumns = ["repayId"],
+            childColumns = ["payerId"],
             onDelete = ForeignKey.CASCADE
         ), ForeignKey(
             entity = Person::class,
             parentColumns = ["id"],
-            childColumns = ["personOwedId"],
-            onDelete = ForeignKey.CASCADE
-        ), ForeignKey(
-            entity = Person::class,
-            parentColumns = ["id"],
-            childColumns = ["personOweId"],
+            childColumns = ["receiverId"],
             onDelete = ForeignKey.CASCADE
         ), ForeignKey(
             entity = Group::class,
@@ -34,13 +24,14 @@ import androidx.room.PrimaryKey
         )
     ]
 )
-data class OweOrOwed(
+data class Repay(
     @PrimaryKey(autoGenerate = true)
     val id: Long?,
-    val expensesId: Long?,
-    val repayId: Long?,
-    val personOwedId: Long?,
-    val personOweId: Long?,
+    val payerId: Long?,
+    val receiverId: Long?,
     val groupId: Long?,
     val amount: Double?,
+    val date: String?,
+    val time: String?,
+    val description: String?,
 )

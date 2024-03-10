@@ -26,10 +26,10 @@ interface OweOrOwedDao {
     @Query("Select * from OweOrOwed")
     fun loadAllOweOrOwed(): Flow<List<OweOrOwed>>
 
-    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.groupId == :groupId AND OweOrOwed.personOweId==:personId")
+    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.groupId == :groupId AND OweOrOwed.personOwedId!=:personId")
     fun loadAllOweByGroupId(groupId: Long, personId: Long): List<OweOrOwedWithPerson>
 
-    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.groupId == :groupId AND OweOrOwed.personOweId!=:personId")
+    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.groupId == :groupId AND OweOrOwed.personOwedId==:personId")
     fun loadAllOwedByGroupId(groupId: Long, personId: Long): List<OweOrOwedWithPerson>
 
     @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.expensesId == :expensesId")
@@ -47,8 +47,8 @@ interface OweOrOwedDao {
     @Query(
         "SELECT SUM(amount) " +
             "FROM OweOrOwed " +
-            "WHERE personOweId = :personId " +
-            "AND personOwedId = :friendId " +
+            "WHERE personOwedId = :personId " +
+            "AND personOweId = :friendId " +
             "AND groupId=:groupId"
     )
     fun loadAllOweByOweIdAndOwedId(personId: Long, friendId: Long, groupId: Long): Double
@@ -56,8 +56,8 @@ interface OweOrOwedDao {
     @Query(
         "SELECT SUM(amount) " +
             "FROM OweOrOwed " +
-            "WHERE OweOrOwed.personOweId==:friendId " +
-            "AND OweOrOwed.personOwedId==:personId " +
+            "WHERE OweOrOwed.personOwedId==:friendId " +
+            "AND OweOrOwed.personOweId==:personId " +
             "AND groupId=:groupId"
     )
     fun loadAllOwedByOweIdAndOwedId(friendId: Long, personId: Long, groupId: Long): Double
@@ -66,9 +66,9 @@ interface OweOrOwedDao {
         "SELECT * " +
             "FROM OweOrOwed " +
             "WHERE groupId = :groupId " +
-            "AND (personOweId = :personId " +
-            "OR personOwedId = :personId) " +
-            "AND (personOweId != personOwedId)"
+            "AND (personOwedId = :personId " +
+            "OR personOweId = :personId) " +
+            "AND (personOwedId != personOweId)"
     )
     fun loadAllOweOwedByGroupIdAndPersonId(groupId: Long, personId: Long): List<OweOrOwedWithPerson>
 }

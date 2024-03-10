@@ -71,6 +71,8 @@
     <string name="group_member">Group Member</string>
     <string name="add_people_to_group">Add People to Group</string>
     <string name="get_back">Get Back</string>
+    <string name="you_are_owed">you are owed</string>
+    <string name="you_owed">you owe</string>
     <string name="owes_group_member">Owes</string>
     <string name="you_settled_up">You Settled Up</string>
     <string name="settled_up">Settled Up</string>
@@ -82,4 +84,6 @@
     <string name="settle_up_balances">SETTLE UP</string>
     <string name="owe">owe</string>
     <string name="in_total">in total</string>
+    <string name="select_a_balance_to_settle">Select a balance to settle</string>
+    <string name="to">to</string>
 </resources>

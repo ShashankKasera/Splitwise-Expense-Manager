@@ -24,3 +24,4 @@
 #92: Friends Details
 #95: All Activity
 #97: Balances
+#99: Settle Up

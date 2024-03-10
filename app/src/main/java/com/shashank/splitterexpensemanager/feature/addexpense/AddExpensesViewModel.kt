@@ -104,13 +104,14 @@ class AddExpensesViewModel @Inject constructor(
             )
         )
         allGroupMemberList.forEach { member ->
-            val owedId = member.id ?: 0
+            val oweId = member.id ?: 0
             addExpensesRepository.insertOweOrOwed(
                 OweOrOwedEntity(
                     null,
                     expensesId,
+                    null,
                     personId,
-                    owedId,
+                    oweId,
                     groupId,
                     splitAmount
                 )
@@ -157,8 +158,9 @@ class AddExpensesViewModel @Inject constructor(
                         OweOrOwedEntity(
                             id = it.id,
                             expensesId = it.expensesId,
-                            personOweId = personId,
-                            personOwedId = it.personOwedId,
+                            repayId = null,
+                            personOwedId = personId,
+                            personOweId = it.personOweId,
                             groupId = it.groupId,
                             amount = splitAmount
                         )

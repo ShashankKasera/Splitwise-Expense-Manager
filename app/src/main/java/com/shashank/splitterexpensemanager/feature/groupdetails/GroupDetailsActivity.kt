@@ -41,6 +41,7 @@ class GroupDetailsActivity : AppCompatActivity() {
     lateinit var tvGroupName: TextView
     lateinit var cvAddExpenses: CardView
     lateinit var cvBalances: CardView
+    lateinit var cvSettleUp: CardView
     lateinit var tvOverallOweOrOwed: TextView
     lateinit var tvNoExpenses: TextView
     lateinit var tvYouAreTheOnlyOneHere: TextView
@@ -62,11 +63,25 @@ class GroupDetailsActivity : AppCompatActivity() {
         init()
         recyclerViewSetUp(personId)
         navigationForBalances(groupId)
+        navigationForSettleUp(groupId)
         navigationForGroupSettings(groupId)
         navigationForAddFriends(groupId)
         navigationForGroupMember(groupId)
         getData()
         navigationForAddExpenses(groupId)
+    }
+
+    private fun navigationForSettleUp(groupId: Long) {
+        cvSettleUp.setOnClickListener {
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.SETTLE_UP.name,
+                    hashMapOf(
+                        GROUP_ID to (groupId)
+                    )
+                )
+            )
+        }
     }
 
     private fun init() {
@@ -76,6 +91,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         tvGroupName = findViewById(R.id.tv_group_Name_in_detail)
         cvAddExpenses = findViewById(R.id.cv_add_expenses)
         cvBalances = findViewById(R.id.cv_balance)
+        cvSettleUp = findViewById(R.id.cv_settle_up)
         tvOverallOweOrOwed = findViewById(R.id.tv_overall_owe)
         llAddGroupMember = findViewById(R.id.ll_group_member)
         tvOweOrOwedOther = findViewById(R.id.tv_other_member)
@@ -107,6 +123,7 @@ class GroupDetailsActivity : AppCompatActivity() {
             )
         }
     }
+
     private fun navigationForGroupSettings(groupId: Long) {
         ivSetting.setOnClickListener {
             actionProcessor.process(
@@ -169,38 +186,48 @@ class GroupDetailsActivity : AppCompatActivity() {
                     tvYouAreTheOnlyOneHere.visible()
                     cvAddExpenses.gone()
                 }
-                if (!it.expenses.isEmpty()) {
-                    llAddGroupMember.gone()
-                    tvYouAreTheOnlyOneHere.gone()
-                    rvExpenses.visible()
-                    clOweOwed.visible()
-                    tvNoExpenses.gone()
-                    expensesList.clear()
-                    expensesList.addAll(it.expenses)
-                    expensesAdapter.notifyDataSetChanged()
-                    rvExpenses.layoutManager?.scrollToPosition(expensesList.size - 1)
-                } else {
-                    rvExpenses.gone()
-                    clOweOwed.gone()
-                    llAddGroupMember.visible()
-                    tvNoExpenses.visible()
-                }
-                if (it.group != null) tvGroupName.text = it.group.groupName
-
                 if (it.hashMap.isNotEmpty()) {
+                    tvNoExpenses.gone()
+                    clOweOwed.visible()
                     oweOwedList.clear()
                     oweOwedList.addAll(it.hashMap.toList())
                     oweOwedList.removeIf { it.second == 0.0 }
                     oweOwedAdapter.notifyDataSetChanged()
-                    overall(it, oweOwedList.size)
-                    if (oweOwedList.size > 2) {
-                        tvOweOrOwedOther.visible()
-                        tvOweOrOwedOther.text =
-                            getString(R.string.plus_other_balance, (oweOwedList.size - 2))
-                    } else {
-                        tvOweOrOwedOther.gone()
-                    }
                 }
+
+                if (it.expenses.isNotEmpty() || oweOwedList.isNotEmpty()) {
+                    if (!it.expenses.isEmpty()) {
+                        llAddGroupMember.gone()
+                        tvYouAreTheOnlyOneHere.gone()
+                        rvExpenses.visible()
+                        expensesList.clear()
+                        expensesList.addAll(it.expenses)
+                        expensesAdapter.notifyDataSetChanged()
+                        rvExpenses.layoutManager?.scrollToPosition(expensesList.size - 1)
+                    } else {
+                        rvExpenses.gone()
+                        llAddGroupMember.visible()
+                    }
+
+                    if (oweOwedList.isNotEmpty()) {
+                        rvOweOwed.visible()
+                        overall(it, oweOwedList.size)
+                        if (oweOwedList.size > 2) {
+                            tvOweOrOwedOther.visible()
+                            tvOweOrOwedOther.text =
+                                getString(R.string.plus_other_balance, (oweOwedList.size - 2))
+                        } else {
+                            tvOweOrOwedOther.gone()
+                        }
+                    } else {
+                        rvOweOwed.gone()
+                    }
+                } else {
+                    tvNoExpenses.visible()
+                    clOweOwed.gone()
+                }
+
+                if (it.group != null) tvGroupName.text = it.group.groupName
             }
         }
     }

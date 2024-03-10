@@ -8,6 +8,8 @@ import com.shashank.splitterexpensemanager.feature.addfriends.repository.AddFrie
 import com.shashank.splitterexpensemanager.feature.addfriends.repository.AddFriendsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.addgroup.repository.AddGroupRepository
 import com.shashank.splitterexpensemanager.feature.addgroup.repository.AddGroupRepositoryImp
+import com.shashank.splitterexpensemanager.feature.addpayment.repository.AddPaymentRepository
+import com.shashank.splitterexpensemanager.feature.addpayment.repository.AddPaymentRepositoryImp
 import com.shashank.splitterexpensemanager.feature.balances.repository.BalancesRepository
 import com.shashank.splitterexpensemanager.feature.balances.repository.BalancesRepositoryImp
 import com.shashank.splitterexpensemanager.feature.category.repository.CategoryRepository
@@ -28,6 +30,8 @@ import com.shashank.splitterexpensemanager.feature.groupmember.repository.GroupM
 import com.shashank.splitterexpensemanager.feature.groupmember.repository.GroupMemberRepositoryImp
 import com.shashank.splitterexpensemanager.feature.groupsettings.repository.GroupSettingsRepository
 import com.shashank.splitterexpensemanager.feature.groupsettings.repository.GroupSettingsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.settleup.repository.SettleUpRepository
+import com.shashank.splitterexpensemanager.feature.settleup.repository.SettleUpRepositoryImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -93,4 +97,12 @@ class AppModule {
     @Singleton
     @Provides
     fun getBalancesRepository(repo: BalancesRepositoryImp): BalancesRepository = repo
+
+    @Singleton
+    @Provides
+    fun getSettleUpRepository(repo: SettleUpRepositoryImp): SettleUpRepository = repo
+
+    @Singleton
+    @Provides
+    fun getAddPaymentRepository(repo: AddPaymentRepositoryImp): AddPaymentRepository = repo
 }

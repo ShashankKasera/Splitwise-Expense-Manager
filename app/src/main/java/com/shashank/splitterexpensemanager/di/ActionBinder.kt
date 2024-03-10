@@ -3,6 +3,7 @@ package com.shashank.splitterexpensemanager.di
 import com.shashank.splitterexpensemanager.actionprocessor.action.AddExpensesActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.AddFriendsActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.AddGroupActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.AddPaymentActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.BalancesActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.CategoryActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.CreateFriendsActionProcessor
@@ -16,6 +17,7 @@ import com.shashank.splitterexpensemanager.actionprocessor.action.FriendsDetails
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupDetailsActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupMemberActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupSettingsActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.SettleUpActionProcessor
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -101,4 +103,14 @@ internal abstract class ActionsMultiBinderModule {
     @IntoMap
     @ActionTypeKey(ActionType.BALANCES)
     internal abstract fun bindBalancesAction(action: BalancesActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.SETTLE_UP)
+    internal abstract fun bindSettleUpAction(action: SettleUpActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.ADD_PAYMENT)
+    internal abstract fun bindAddPaymentAction(action: AddPaymentActionProcessor): Action
 }
