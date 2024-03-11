@@ -13,6 +13,6 @@
         tools:itemCount="10"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        tools:listitem="@layout/activity_item" />
+        tools:listitem="@layout/expenses_item" />
 
 </FrameLayout>
