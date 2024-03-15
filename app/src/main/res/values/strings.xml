@@ -23,6 +23,7 @@
     <string name="name">Name</string>
     <string name="number">Number</string>
     <string name="paid_amount">Paid amount</string>
+    <string name="paid">paid</string>
     <string name="description">description</string>
     <string name="you_owe_or_owed_amount_overall">you_owe_or_owed_amount_overall</string>
     <string name="owe_or_owed_amount">owe or owed amount</string>
@@ -86,4 +87,7 @@
     <string name="in_total">in total</string>
     <string name="select_a_balance_to_settle">Select a balance to settle</string>
     <string name="to">to</string>
+    <string name="add_expenses">Add Expenses</string>
+    <string name="expenses">Expenses</string>
+    <string name="repay">Repay</string>
 </resources>

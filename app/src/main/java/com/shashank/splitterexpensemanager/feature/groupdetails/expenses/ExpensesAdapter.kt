@@ -1,4 +1,4 @@
-package com.shashank.splitterexpensemanager.feature.groupdetails
+package com.shashank.splitterexpensemanager.feature.groupdetails.expenses
 
 import android.view.LayoutInflater
 import android.view.View

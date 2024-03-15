@@ -1,6 +1,7 @@
 package com.shashank.splitterexpensemanager.feature.groupdetails
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -11,6 +12,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.GROUP_ID
@@ -22,7 +25,6 @@ import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequ
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
-import com.shashank.splitterexpensemanager.model.ExpenseWithCategoryAndPerson
 import com.shashank.splitterexpensemanager.model.GroupDetails
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -36,7 +38,6 @@ class GroupDetailsActivity : AppCompatActivity() {
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
-    lateinit var rvExpenses: RecyclerView
     lateinit var rvOweOwed: RecyclerView
     lateinit var tvGroupName: TextView
     lateinit var cvAddExpenses: CardView
@@ -46,12 +47,12 @@ class GroupDetailsActivity : AppCompatActivity() {
     lateinit var tvNoExpenses: TextView
     lateinit var tvYouAreTheOnlyOneHere: TextView
     lateinit var clOweOwed: ConstraintLayout
-    lateinit var expensesAdapter: ExpensesAdapter
     lateinit var oweOwedAdapter: OweOwedAdapter
     lateinit var tvOweOrOwedOther: TextView
     lateinit var ivSetting: ImageView
     lateinit var llAddGroupMember: LinearLayout
-    private var expensesList = mutableListOf<ExpenseWithCategoryAndPerson>()
+    lateinit var viewPager: ViewPager
+    lateinit var tabLayout: TabLayout
     private var oweOwedList = mutableListOf<Pair<Person, Double>>()
     private val viewModel: GroupDetailViewModel by viewModels()
 
@@ -60,8 +61,12 @@ class GroupDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_group_details)
         var groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
+        viewModel.groupId = groupId
+        viewModel.personId = personId
         init()
-        recyclerViewSetUp(personId)
+
+
+        recyclerViewSetUp()
         navigationForBalances(groupId)
         navigationForSettleUp(groupId)
         navigationForGroupSettings(groupId)
@@ -85,7 +90,6 @@ class GroupDetailsActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        rvExpenses = findViewById(R.id.rv_group_expense)
         rvOweOwed = findViewById(R.id.rv_owe_owed)
         tvNoExpenses = findViewById(R.id.tv_no_expenses_here_yet)
         tvGroupName = findViewById(R.id.tv_group_Name_in_detail)
@@ -98,6 +102,8 @@ class GroupDetailsActivity : AppCompatActivity() {
         clOweOwed = findViewById(R.id.cl_amount)
         tvYouAreTheOnlyOneHere = findViewById(R.id.tv_you_re_the_only_one_here)
         ivSetting = findViewById(R.id.iv_setting_groupDetails)
+        viewPager = findViewById(R.id.viewPager)
+        tabLayout = findViewById(R.id.tablayout)
 
         val groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
@@ -178,47 +184,40 @@ class GroupDetailsActivity : AppCompatActivity() {
 
     private fun getData() {
         lifecycleScope.launch {
-            viewModel.groupDetails.collect {
-                if (it.groupMember.size > 1) {
+            viewModel.groupDetails.collect { groupDetails ->
+                val groupMemberCount = groupDetails.groupMember.size
+                val expensesNotEmpty = groupDetails.expenses.isNotEmpty()
+                val repayNotEmpty = groupDetails.repay.isNotEmpty()
+                val oweOwedNotEmpty = groupDetails.hashMap.isNotEmpty()
+
+                if (groupMemberCount > 1) {
                     tvYouAreTheOnlyOneHere.gone()
                     cvAddExpenses.visible()
                 } else {
                     tvYouAreTheOnlyOneHere.visible()
                     cvAddExpenses.gone()
                 }
-                if (it.hashMap.isNotEmpty()) {
+
+                llAddGroupMember.visibility =
+                    if (expensesNotEmpty || repayNotEmpty) View.GONE else View.VISIBLE
+
+                if (oweOwedNotEmpty) {
                     tvNoExpenses.gone()
                     clOweOwed.visible()
                     oweOwedList.clear()
-                    oweOwedList.addAll(it.hashMap.toList())
-                    oweOwedList.removeIf { it.second == 0.0 }
+                    oweOwedList.addAll(groupDetails.hashMap.toList().filter { it.second != 0.0 })
                     oweOwedAdapter.notifyDataSetChanged()
                 }
 
-                if (it.expenses.isNotEmpty() || oweOwedList.isNotEmpty()) {
-                    if (!it.expenses.isEmpty()) {
-                        llAddGroupMember.gone()
-                        tvYouAreTheOnlyOneHere.gone()
-                        rvExpenses.visible()
-                        expensesList.clear()
-                        expensesList.addAll(it.expenses)
-                        expensesAdapter.notifyDataSetChanged()
-                        rvExpenses.layoutManager?.scrollToPosition(expensesList.size - 1)
-                    } else {
-                        rvExpenses.gone()
-                        llAddGroupMember.visible()
-                    }
+                if (expensesNotEmpty || oweOwedList.isNotEmpty()) {
+                    overall(groupDetails, oweOwedList.size)
 
                     if (oweOwedList.isNotEmpty()) {
                         rvOweOwed.visible()
-                        overall(it, oweOwedList.size)
-                        if (oweOwedList.size > 2) {
-                            tvOweOrOwedOther.visible()
-                            tvOweOrOwedOther.text =
-                                getString(R.string.plus_other_balance, (oweOwedList.size - 2))
-                        } else {
-                            tvOweOrOwedOther.gone()
-                        }
+                        tvOweOrOwedOther.visibility =
+                            if (oweOwedList.size > 2) View.VISIBLE else View.GONE
+                        tvOweOrOwedOther.text =
+                            getString(R.string.plus_other_balance, (oweOwedList.size - 2))
                     } else {
                         rvOweOwed.gone()
                     }
@@ -227,10 +226,11 @@ class GroupDetailsActivity : AppCompatActivity() {
                     clOweOwed.gone()
                 }
 
-                if (it.group != null) tvGroupName.text = it.group.groupName
+                groupDetails.group?.let { tvGroupName.text = it.groupName }
             }
         }
     }
+
 
     private fun overall(it: GroupDetails, size: Int) {
         if (size == 0) {
@@ -268,17 +268,13 @@ class GroupDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun recyclerViewSetUp(
-        personId: Long,
-    ) {
+    private fun recyclerViewSetUp() {
         oweOwedAdapter = OweOwedAdapter(oweOwedList)
         rvOweOwed.layoutManager = LinearLayoutManager(this)
         rvOweOwed.adapter = oweOwedAdapter
-        expensesAdapter = ExpensesAdapter(actionProcessor, personId, expensesList)
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.setReverseLayout(true)
-        layoutManager.setStackFromEnd(true)
-        rvExpenses.layoutManager = layoutManager
-        rvExpenses.adapter = expensesAdapter
+
+        val adapter = ViewPagerAdapter(this, supportFragmentManager)
+        viewPager.adapter = adapter
+        tabLayout.setupWithViewPager(viewPager)
     }
 }

@@ -19,6 +19,9 @@ class GroupDetailViewModel @Inject constructor(var groupDetailsRepository: Group
 
     private val _groupDetails = MutableStateFlow<GroupDetails>(GroupDetails())
     val groupDetails = _groupDetails.asStateFlow()
+
+    var groupId: Long = -1
+    var personId: Long = -1
     fun groupDetails(groupId: Long, personId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -27,6 +30,7 @@ class GroupDetailViewModel @Inject constructor(var groupDetailsRepository: Group
                 val groupMemberDeferred =
                     async { groupDetailsRepository.loadAllGroupMemberWithGroupId(groupId) }
                 val expensesDeferred = async { groupDetailsRepository.loadGroupExpenses(groupId) }
+                val repayDeferred = async { groupDetailsRepository.loadGroupRepay(groupId) }
                 val owedDeferred =
                     async { groupDetailsRepository.loadAllOwedByGroupId(groupId, personId) }
 
@@ -54,6 +58,7 @@ class GroupDetailViewModel @Inject constructor(var groupDetailsRepository: Group
                     group = groupDeferred.await(),
                     groupMember = groupMemberDeferred.await(),
                     expenses = ((expensesDeferred.await()) ?: emptyList()),
+                    repay = ((repayDeferred.await()) ?: emptyList()),
                     hashMap = hashMap
                 )
 
