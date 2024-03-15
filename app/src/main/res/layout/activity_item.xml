@@ -43,27 +43,36 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
                 tools:ignore="MissingConstraints" />
-
             <TextView
-                android:id="@+id/tv_persian_name"
+                android:id="@+id/tv_group_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="@string/name"
+                android:layout_marginStart="8dp"
+                android:text="@string/group_name"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/tv_you_borrowed"
                 app:layout_constraintStart_toEndOf="@+id/civ_category"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tv_persian_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/name"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/civ_category"
+                app:layout_constraintTop_toBottomOf="@+id/tv_group_name" />
+
+            <TextView
                 android:id="@+id/tv_paid_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
                 android:text="@string/paid_amount"
                 android:textColor="@color/black"
+                android:layout_marginStart="8dp"
                 app:layout_constraintStart_toEndOf="@+id/civ_category"
-                app:layout_constraintTop_toBottomOf="@id/tv_persian_name" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_persian_name" />
 
 
             <TextView
