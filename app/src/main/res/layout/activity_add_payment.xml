@@ -202,7 +202,7 @@
                         tools:ignore="MissingConstraints" />
 
                     <TextView
-                        android:id="@+id/tv_date_repay"
+                        android:id="@+id/tv_date_repay_activity"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
@@ -260,7 +260,7 @@
                         tools:ignore="MissingConstraints" />
 
                     <TextView
-                        android:id="@+id/tv_time_repay"
+                        android:id="@+id/tv_time_repay_activity"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
