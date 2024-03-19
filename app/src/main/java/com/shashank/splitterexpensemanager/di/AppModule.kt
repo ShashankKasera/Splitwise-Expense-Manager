@@ -32,6 +32,8 @@ import com.shashank.splitterexpensemanager.feature.groupsettings.repository.Grou
 import com.shashank.splitterexpensemanager.feature.groupsettings.repository.GroupSettingsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.settleup.repository.SettleUpRepository
 import com.shashank.splitterexpensemanager.feature.settleup.repository.SettleUpRepositoryImp
+import com.shashank.splitterexpensemanager.feature.total.repository.TotalRepository
+import com.shashank.splitterexpensemanager.feature.total.repository.TotalRepositoryImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -105,4 +107,8 @@ class AppModule {
     @Singleton
     @Provides
     fun getAddPaymentRepository(repo: AddPaymentRepositoryImp): AddPaymentRepository = repo
+
+    @Singleton
+    @Provides
+    fun getTotalRepository(repo: TotalRepositoryImp): TotalRepository = repo
 }

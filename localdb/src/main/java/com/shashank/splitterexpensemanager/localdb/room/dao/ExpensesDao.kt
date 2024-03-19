@@ -42,4 +42,13 @@ interface ExpensesDao {
 
     @Query("DELETE FROM `Expenses` WHERE `Expenses`.id = :expensesId;")
     fun deleteExpenses(expensesId: Long)
+
+    @Query("SELECT SUM(amount) FROM Expenses WHERE groupId=:groupId")
+    fun getTotalGroupSpending(groupId: Long): Flow<Double>
+
+    @Query("SELECT SUM(amount) FROM Expenses WHERE groupId=:groupId AND personId=:personId")
+    fun getTotalYouPaidFor(personId: Long, groupId: Long): Flow<Double>
+
+    @Query("SELECT SUM(splitAmount) FROM Expenses WHERE groupId=:groupId")
+    fun getYourTotalShare(groupId: Long): Flow<Double>
 }

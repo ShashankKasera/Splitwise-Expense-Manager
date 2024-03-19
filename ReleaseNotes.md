@@ -27,3 +27,4 @@
 #99: Settle Up
 #101:Showing Repay  
 #103:Showing Repay in Activity
+#105:Total of Group
