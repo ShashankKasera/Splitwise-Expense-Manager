@@ -3,6 +3,8 @@ package com.shashank.splitterexpensemanager.di
 import com.shashank.splitterexpensemanager.actionprocessor.action.AddExpensesActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.AddFriendsActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.AddGroupActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.AddPaymentActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.BalancesActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.CategoryActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.CreateFriendsActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.LoginActionProcessor
@@ -10,8 +12,15 @@ import com.shashank.splitterexpensemanager.core.actionprocessor.Action
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.actionprocessor.action.RegistrationActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.DashboardActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.ExpensesDetailsActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.FriendsDetailsActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupDetailsActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupMemberActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.GroupSettingsActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.RepayDetailsActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.SelectRepayActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.SettleUpActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.TotalActionProcessor
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -77,4 +86,49 @@ internal abstract class ActionsMultiBinderModule {
     @IntoMap
     @ActionTypeKey(ActionType.CATEGORY)
     internal abstract fun bindCategoryAction(action: CategoryActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.EXPENSES_DETAILS)
+    internal abstract fun bindExpensesDetailsAction(action: ExpensesDetailsActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.GROUP_SETTING)
+    internal abstract fun bindGroupSettingsAction(action: GroupSettingsActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.FRIENDS_DETAILS)
+    internal abstract fun bindFriendsDetailsAction(action: FriendsDetailsActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.BALANCES)
+    internal abstract fun bindBalancesAction(action: BalancesActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.SETTLE_UP)
+    internal abstract fun bindSettleUpAction(action: SettleUpActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.ADD_PAYMENT)
+    internal abstract fun bindAddPaymentAction(action: AddPaymentActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.TOTAL)
+    internal abstract fun bindTotalAction(action: TotalActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.SELECT_REPAY)
+    internal abstract fun bindSelectRepayAction(action: SelectRepayActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.REPAY_DETAILS)
+    internal abstract fun bindRepayDetailsAction(action: RepayDetailsActionProcessor): Action
 }

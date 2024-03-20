@@ -30,13 +30,15 @@ class AddFriendsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvName.text = person[position].name
         holder.tvNumber.text = person[position].number.toString()
-        for (i in 0..groupMember.size - 1) {
-            if ((person[position].id == groupMember[i].personId) && groupMember[i].groupId == groupId) {
+        holder.checkBox.isChecked = false
+        for (i in 0 until groupMember.size) {
+            if (person[position].id == groupMember[i].personId && groupMember[i].groupId == groupId) {
                 holder.checkBox.isChecked = true
+                break
             }
         }
-        holder.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
-            onItemClickListener.onItemClick(position, person[position], isChecked)
+        holder.checkBox.setOnClickListener {
+            onItemClickListener.onItemClick(position, person[position], holder.checkBox.isChecked)
         }
     }
 

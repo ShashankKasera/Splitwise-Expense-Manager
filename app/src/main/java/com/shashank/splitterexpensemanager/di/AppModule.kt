@@ -1,21 +1,41 @@
 package com.shashank.splitterexpensemanager.di
 
+import com.shashank.splitterexpensemanager.feature.activity.repository.ActivityRepository
+import com.shashank.splitterexpensemanager.feature.activity.repository.ActivityRepositoryImp
 import com.shashank.splitterexpensemanager.feature.addexpense.repository.AddExpensesRepository
 import com.shashank.splitterexpensemanager.feature.addexpense.repository.AddExpensesRepositoryImp
 import com.shashank.splitterexpensemanager.feature.addfriends.repository.AddFriendsRepository
 import com.shashank.splitterexpensemanager.feature.addfriends.repository.AddFriendsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.addgroup.repository.AddGroupRepository
 import com.shashank.splitterexpensemanager.feature.addgroup.repository.AddGroupRepositoryImp
+import com.shashank.splitterexpensemanager.feature.addpayment.repository.AddPaymentRepository
+import com.shashank.splitterexpensemanager.feature.addpayment.repository.AddPaymentRepositoryImp
+import com.shashank.splitterexpensemanager.feature.balances.repository.BalancesRepository
+import com.shashank.splitterexpensemanager.feature.balances.repository.BalancesRepositoryImp
 import com.shashank.splitterexpensemanager.feature.category.repository.CategoryRepository
 import com.shashank.splitterexpensemanager.feature.category.repository.CategoryRepositoryImp
 import com.shashank.splitterexpensemanager.feature.createfriens.repository.CreateFriendsRepository
 import com.shashank.splitterexpensemanager.feature.createfriens.repository.CreateFriendsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.expensesdetails.repository.ExpensesDetailsRepository
+import com.shashank.splitterexpensemanager.feature.expensesdetails.repository.ExpensesDetailsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.friends.repository.FriendsRepository
+import com.shashank.splitterexpensemanager.feature.friends.repository.FriendsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.friendsdetails.repository.FriendsDetailsRepository
+import com.shashank.splitterexpensemanager.feature.friendsdetails.repository.FriendsDetailsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.group.repository.GroupRepository
 import com.shashank.splitterexpensemanager.feature.group.repository.GroupRepositoryImp
 import com.shashank.splitterexpensemanager.feature.groupdetails.repository.GroupDetailsRepository
 import com.shashank.splitterexpensemanager.feature.groupdetails.repository.GroupDetailsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.groupmember.repository.GroupMemberRepository
 import com.shashank.splitterexpensemanager.feature.groupmember.repository.GroupMemberRepositoryImp
+import com.shashank.splitterexpensemanager.feature.groupsettings.repository.GroupSettingsRepository
+import com.shashank.splitterexpensemanager.feature.groupsettings.repository.GroupSettingsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.repaydetails.repository.RepayDetailsRepository
+import com.shashank.splitterexpensemanager.feature.repaydetails.repository.RepayDetailsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.settleup.repository.SettleUpRepository
+import com.shashank.splitterexpensemanager.feature.settleup.repository.SettleUpRepositoryImp
+import com.shashank.splitterexpensemanager.feature.total.repository.TotalRepository
+import com.shashank.splitterexpensemanager.feature.total.repository.TotalRepositoryImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,4 +77,44 @@ class AppModule {
     @Singleton
     @Provides
     fun getAddGroupRepository(repo: AddGroupRepositoryImp): AddGroupRepository = repo
+
+    @Singleton
+    @Provides
+    fun getExpensesDetailsRepository(repo: ExpensesDetailsRepositoryImp): ExpensesDetailsRepository = repo
+
+    @Singleton
+    @Provides
+    fun getGroupSettingsRepository(repo: GroupSettingsRepositoryImp): GroupSettingsRepository = repo
+
+    @Singleton
+    @Provides
+    fun getFriendsRepository(repo: FriendsRepositoryImp): FriendsRepository = repo
+
+    @Singleton
+    @Provides
+    fun getFriendsDetailsRepository(repo: FriendsDetailsRepositoryImp): FriendsDetailsRepository = repo
+
+    @Singleton
+    @Provides
+    fun getActivityRepository(repo: ActivityRepositoryImp): ActivityRepository = repo
+
+    @Singleton
+    @Provides
+    fun getBalancesRepository(repo: BalancesRepositoryImp): BalancesRepository = repo
+
+    @Singleton
+    @Provides
+    fun getSettleUpRepository(repo: SettleUpRepositoryImp): SettleUpRepository = repo
+
+    @Singleton
+    @Provides
+    fun getAddPaymentRepository(repo: AddPaymentRepositoryImp): AddPaymentRepository = repo
+
+    @Singleton
+    @Provides
+    fun getTotalRepository(repo: TotalRepositoryImp): TotalRepository = repo
+
+    @Singleton
+    @Provides
+    fun getRepayDetailsRepository(repo: RepayDetailsRepositoryImp): RepayDetailsRepository = repo
 }
