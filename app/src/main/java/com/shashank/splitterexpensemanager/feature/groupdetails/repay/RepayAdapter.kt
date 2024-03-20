@@ -1,5 +1,6 @@
 package com.shashank.splitterexpensemanager.feature.groupdetails.repay
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,11 +8,17 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.core.GROUP_ID
+import com.shashank.splitterexpensemanager.core.REPAY_ID
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
+import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.model.RepayWithPerson
 
 class RepayAdapter(
+    private val actionProcessor: ActionProcessor,
     private val repayList: List<RepayWithPerson?>
 ) : RecyclerView.Adapter<RepayAdapter.ViewHolder>() {
 
@@ -37,6 +44,19 @@ class RepayAdapter(
             if (!repayItem?.repay?.description.isNullOrEmpty()) {
                 tvDescription.visible()
                 tvDescription.text = repayItem?.repay?.description
+            }
+
+            cvRepay.setOnClickListener {
+                Log.i("qfbhj", "onBindViewHolder: ${repayItem?.repay?.id ?: -1}")
+                actionProcessor.process(
+                    ActionRequestSchema(
+                        ActionType.REPAY_DETAILS.name,
+                        hashMapOf(
+                            REPAY_ID to (repayItem?.repay?.id ?: -1),
+                            GROUP_ID to (repayItem?.repay?.groupId ?: -1)
+                        )
+                    )
+                )
             }
         }
     }

@@ -71,4 +71,7 @@ interface OweOrOwedDao {
             "AND (personOwedId != personOweId)"
     )
     fun loadAllOweOwedByGroupIdAndPersonId(groupId: Long, personId: Long): List<OweOrOwedWithPerson>
+
+    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.repayId == :repayId")
+    fun loadOweOwedByRepayId(repayId: Long): Flow<OweOrOwed>
 }

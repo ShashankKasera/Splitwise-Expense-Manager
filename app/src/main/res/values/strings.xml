@@ -64,7 +64,7 @@
     <string name="paid_by_expensese_details">Paid by %1$s</string>
     <string name="date_expensese_details">Date %1$s</string>
     <string name="time_expensese_details">Time %1$s</string>
-    <string name="description_expensese_details">Description %1$s</string>
+    <string name="description_expensese_details">Description -: %1$s</string>
     <string name="owes">%1$s owes</string>
     <string name="owes_balances">owes</string>
     <string name="you_owes_group_details">You owes %1$s</string>
@@ -93,4 +93,9 @@
     <string name="add_repay">Add Repay</string>
     <string name="select_payer">Select Payer</string>
     <string name="select_recipient">Select Recipient</string>
+    <string name="this_payment_was_added_using_the">This payment was added using the  \"record a</string>
+    <string name="payment_feature_no_money_has_been_moved">payment\" feature. No money has been moved</string>
+    <string name="you_paid">You paid %1$s</string>
+    <string name="payer_receiver">%1$s paid %2$s</string>
+    <string name="date_time">%1$s %2$s</string>
 </resources>

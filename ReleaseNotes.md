@@ -29,3 +29,4 @@
 #103:Showing Repay in Activity
 #105:Total of Group
 #107:Add Repay by Person
+#109:Repay Details

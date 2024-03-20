@@ -1,7 +1,6 @@
 package com.shashank.splitterexpensemanager.feature.groupdetails
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -129,7 +128,6 @@ class GroupDetailsActivity : AppCompatActivity() {
         super.onRestart()
         val groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
-        Log.i("ejhb", "onRestart: $groupId")
         viewModel.groupDetails(groupId, personId)
     }
 
@@ -186,7 +184,6 @@ class GroupDetailsActivity : AppCompatActivity() {
     }
 
 
-
     private fun getData() {
         lifecycleScope.launch {
             viewModel.groupDetails.collect { groupDetails ->
@@ -223,6 +220,7 @@ class GroupDetailsActivity : AppCompatActivity() {
                             getString(R.string.plus_other_balance, (oweOwedList.size - 2))
                     } else {
                         rvOweOwed.gone()
+                        tvOweOrOwedOther.gone()
                     }
                 } else {
                     tvNoExpenses.visible()

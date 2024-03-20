@@ -23,6 +23,7 @@ enum class ActionType {
     ADD_PAYMENT,
     TOTAL,
     SELECT_REPAY,
+    REPAY_DETAILS,
 }
 
 interface Action {
