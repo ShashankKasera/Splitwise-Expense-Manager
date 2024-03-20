@@ -1,7 +1,6 @@
 package com.shashank.splitterexpensemanager.feature.settleup
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -45,7 +44,6 @@ class SettleUpActivity : AppCompatActivity() {
                 oweOwedList.clear()
                 oweOwedList.addAll(it)
                 oweOwedList.removeIf { it.second == 0.0 }
-                Log.i("grwkjnjk", "onCreate: $oweOwedList")
                 settleUpAdapter.notifyDataSetChanged()
             }
         }

@@ -4,13 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
+import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
+import com.shashank.splitterexpensemanager.core.extension.gone
+import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailViewModel
 import com.shashank.splitterexpensemanager.model.RepayWithPerson
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +31,7 @@ class RepayFragment : Fragment() {
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
-
+    lateinit var cvAddRepay: CardView
     private var repayList = mutableListOf<RepayWithPerson>()
 
     private val viewModel: GroupDetailViewModel by activityViewModels()
@@ -42,11 +48,13 @@ class RepayFragment : Fragment() {
         init(v, groupId, personId)
         setupRecyclerView()
         getData()
+        navigationForAddExpenses(groupId)
         return v
     }
 
     private fun init(v: View, groupId: Long, personId: Long) {
         rvRepay = v.findViewById(R.id.rv_group_repay)
+        cvAddRepay = v.findViewById(R.id.cv_add_repay)
         viewModel.groupDetails(groupId, personId)
     }
 
@@ -61,12 +69,31 @@ class RepayFragment : Fragment() {
 
     private fun getData() {
         lifecycleScope.launch {
-            viewModel.groupDetails.collect {
+            viewModel.groupDetails.collect { groupDetails ->
+                val groupMemberCount = groupDetails.groupMember.size
+                if (groupMemberCount > 1) {
+                    cvAddRepay.visible()
+                } else {
+                    cvAddRepay.gone()
+                }
                 repayList.clear()
-                repayList.addAll(it.repay)
+                repayList.addAll(groupDetails.repay)
                 repayAdapter.notifyDataSetChanged()
                 rvRepay.layoutManager?.scrollToPosition(repayList.size - 1)
             }
+        }
+    }
+
+    private fun navigationForAddExpenses(groupId: Long) {
+        cvAddRepay.setOnClickListener {
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.SELECT_REPAY.name,
+                    hashMapOf(
+                        GROUP_ID to (groupId),
+                    )
+                )
+            )
         }
     }
 }

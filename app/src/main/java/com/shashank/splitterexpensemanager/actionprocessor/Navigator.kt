@@ -19,6 +19,7 @@ import com.shashank.splitterexpensemanager.feature.expensesdetails.ExpensesDetai
 import com.shashank.splitterexpensemanager.feature.friendsdetails.FriendsDetailsActivity
 import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
 import com.shashank.splitterexpensemanager.feature.groupsettings.GroupSettingsActivity
+import com.shashank.splitterexpensemanager.feature.selectrepay.SelectRepayActivity
 import com.shashank.splitterexpensemanager.feature.settleup.SettleUpActivity
 import com.shashank.splitterexpensemanager.feature.total.TotalActivity
 import dagger.hilt.android.qualifiers.ActivityContext
@@ -48,6 +49,7 @@ class DefaultNavigator @Inject constructor(@ActivityContext private val context:
             Route.SETTLE_UP -> Intent(context, SettleUpActivity::class.java)
             Route.ADD_PAYMENT -> Intent(context, AddPaymentActivity::class.java)
             Route.TOTAL -> Intent(context, TotalActivity::class.java)
+            Route.SELECT_REPAY -> Intent(context, SelectRepayActivity::class.java)
         }.apply {
             actionParams?.data?.toBundle()?.let {
                 putExtras(it)
@@ -76,4 +78,5 @@ enum class Route {
     SETTLE_UP,
     ADD_PAYMENT,
     TOTAL,
+    SELECT_REPAY,
 }

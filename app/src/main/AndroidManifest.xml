@@ -17,6 +17,9 @@
         android:theme="@style/Theme.SplitwiseExpenseManager"
         tools:targetApi="31">
         <activity
+            android:name=".feature.selectrepay.SelectRepayActivity"
+            android:exported="false" />
+        <activity
             android:name=".feature.addpayment.AddPaymentActivity"
             android:exported="false" />
         <activity

@@ -1,5 +1,6 @@
 package com.shashank.splitterexpensemanager.feature.addpayment
 
+import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
@@ -18,11 +19,13 @@ import com.shashank.splitterexpensemanager.core.AMOUNT
 import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.PAYER_ID
 import com.shashank.splitterexpensemanager.core.RECEIVER_ID
+import com.shashank.splitterexpensemanager.core.SELECT_REPAY
 import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
+import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -60,9 +63,12 @@ class AddPaymentActivity : AppCompatActivity() {
         val payerId: Long = intent.extras?.getLong(PAYER_ID) ?: 0
         val amount: Double = intent.extras?.getDouble(AMOUNT) ?: 0.0
         val receiverId: Long = intent.extras?.getLong(RECEIVER_ID) ?: 0
+        val selectRepay: Boolean = intent.extras?.getBoolean(SELECT_REPAY) ?: false
         init()
 
-        etAmount.setText(amount.formatNumber(2))
+        if (amount != 0.0) {
+            etAmount.setText(amount.formatNumber(2))
+        }
         tvDate.text = getCurrentDate()
         tvTime.text = getCurrentTime()
 
@@ -74,7 +80,7 @@ class AddPaymentActivity : AppCompatActivity() {
             getTimePicker()
         }
         cvSave.setOnClickListener {
-            getInitialData(payerId, receiverId, groupId)
+            getInitialData(payerId, receiverId, groupId, selectRepay)
         }
         getPayer(payerId)
         getReceiver(receiverId)
@@ -176,7 +182,12 @@ class AddPaymentActivity : AppCompatActivity() {
         }
     }
 
-    private fun getInitialData(payerId: Long, receiverId: Long, groupId: Long) {
+    private fun getInitialData(
+        payerId: Long,
+        receiverId: Long,
+        groupId: Long,
+        selectRepay: Boolean
+    ) {
         val amount = etAmount.text.toString().trim().toDouble()
         val date = tvDate.text.toString().trim()
         val time = tvTime.text.toString().trim()
@@ -188,7 +199,16 @@ class AddPaymentActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             viewModel.repayInsertSuccessfully.collect {
-                if (it) finish()
+                if (it) {
+                    if (selectRepay) {
+                        val intent =
+                            Intent(this@AddPaymentActivity, GroupDetailsActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        intent.putExtra(GROUP_ID, groupId)
+                        startActivity(intent)
+                    }
+                    finish()
+                }
             }
         }
     }
