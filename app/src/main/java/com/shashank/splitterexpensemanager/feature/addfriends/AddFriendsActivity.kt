@@ -37,7 +37,7 @@ class AddFriendsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_friends)
-        var groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
+        var groupId: Long = intent.extras?.getLong(GROUP_ID) ?: -1
         var personId: Long = sharedPref.getValue(PERSON_ID, 0L) as Long
         init()
         setUpRecyclerView(groupId, personList, groupMemberList)

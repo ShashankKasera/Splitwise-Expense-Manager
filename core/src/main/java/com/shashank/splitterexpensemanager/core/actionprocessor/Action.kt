@@ -14,7 +14,15 @@ enum class ActionType {
     ADD_FRIENDS,
     GROUP_MEMBER,
     ADD_EXPENSES,
-    CATEGORY
+    CATEGORY,
+    EXPENSES_DETAILS,
+    GROUP_SETTING,
+    FRIENDS_DETAILS,
+    BALANCES,
+    SETTLE_UP,
+    ADD_PAYMENT,
+    TOTAL,
+    SELECT_REPAY,
 }
 
 interface Action {
