@@ -98,4 +98,5 @@
     <string name="you_paid">You paid %1$s</string>
     <string name="payer_receiver">%1$s paid %2$s</string>
     <string name="date_time">%1$s %2$s</string>
+    <string name="shared_group">Shared group</string>
 </resources>

@@ -25,6 +25,7 @@ enum class ActionType {
     SELECT_REPAY,
     REPAY_DETAILS,
     GROUP_SETTLED_UP,
+    FRIEND_SETTING,
 }
 
 interface Action {

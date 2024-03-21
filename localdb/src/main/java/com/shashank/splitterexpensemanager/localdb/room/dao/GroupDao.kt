@@ -38,4 +38,12 @@ interface GroupDao {
             "WHERE GroupMember.personId == :friendId"
     )
     fun loadGroupByFriendId(friendId: Long): List<Group>
+
+    @Query(
+        "SELECT * " +
+            "FROM `GroupMember` " +
+            "INNER JOIN `Group` ON `Group`.id == GroupMember.groupId " +
+            "WHERE GroupMember.personId == :friendId"
+    )
+    fun loadGroupByFriendIdFlow(friendId: Long): Flow<List<Group>>
 }

@@ -25,9 +25,10 @@
 #95: All Activity
 #97: Balances
 #99: Settle Up
-#101:Showing Repay  
-#103:Showing Repay in Activity
-#105:Total of Group
-#107:Add Repay by Person
-#109:Repay Details
-#109:Group Settled Up
+#101: Showing Repay  
+#103: Showing Repay in Activity
+#105: Total of Group
+#107: Add Repay by Person
+#109: Repay Details
+#111: Group Settled Up
+#113: Friend Setting
