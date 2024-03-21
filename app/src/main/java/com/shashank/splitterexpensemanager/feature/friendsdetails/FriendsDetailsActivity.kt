@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,8 @@ import com.shashank.splitterexpensemanager.core.FRIEND_ID
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
+import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
@@ -31,6 +34,7 @@ class FriendsDetailsActivity : AppCompatActivity() {
     lateinit var rvGroupOweOwed: RecyclerView
     lateinit var tvFriendName: TextView
     lateinit var tvOverallOweOrOwed: TextView
+    lateinit var cvSettledUp: CardView
     lateinit var tvPlus: TextView
     lateinit var rvFriendOweOwed: RecyclerView
     lateinit var groupOweOwedAdapter: GroupOweOwedAdapter
@@ -46,6 +50,18 @@ class FriendsDetailsActivity : AppCompatActivity() {
         val personId: Long = sharedPref.getValue(PERSON_ID, 0L) as Long
 
         init(friendId, personId)
+
+        cvSettledUp.setOnClickListener {
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.GROUP_SETTLED_UP.name,
+                    hashMapOf(
+                        PERSON_ID to (personId),
+                        FRIEND_ID to (friendId)
+                    )
+                )
+            )
+        }
     }
 
     override fun onRestart() {
@@ -55,12 +71,14 @@ class FriendsDetailsActivity : AppCompatActivity() {
 
         viewModel.loadAllFriends(personId, friendId)
     }
+
     private fun init(friendId: Long, personId: Long) {
         rvGroupOweOwed = findViewById(R.id.rv_group_owe_owed_friend_details)
         tvFriendName = findViewById(R.id.tv_friends_Name)
         tvOverallOweOrOwed = findViewById(R.id.tv_overall_owe_friend_details)
         rvFriendOweOwed = findViewById(R.id.rv_owe_owed_friend_details)
         tvPlus = findViewById(R.id.tv_other_member_friend_details)
+        cvSettledUp = findViewById(R.id.cv_settle_up_friend_details)
         recyclerViewSetUp()
 
         viewModel.loadAllFriends(personId, friendId)
@@ -83,21 +101,17 @@ class FriendsDetailsActivity : AppCompatActivity() {
             viewModel.allFriends.collect { friendDetails ->
                 tvFriendName.text = friendDetails.friend.name
 
-                if (friendDetails.friendsHashMap.isNotEmpty()) {
-                    groupOweOwedList.apply {
-                        clear()
-                        addAll(friendDetails.friendsHashMap.toList())
-                    }
-                    groupOweOwedAdapter.notifyDataSetChanged()
+                groupOweOwedList.apply {
+                    clear()
+                    addAll(friendDetails.friendsHashMap.toList())
                 }
+                groupOweOwedAdapter.notifyDataSetChanged()
 
-                if (friendDetails.friendOweOwedList.isNotEmpty()) {
-                    friendOweOwedList.apply {
-                        clear()
-                        addAll(friendDetails.friendOweOwedList)
-                    }
-                    friendOweOwedAdapter.notifyDataSetChanged()
+                friendOweOwedList.apply {
+                    clear()
+                    addAll(friendDetails.friendOweOwedList)
                 }
+                friendOweOwedAdapter.notifyDataSetChanged()
 
                 overall(
                     friendDetails.friendsHashMap.size,
@@ -146,6 +160,7 @@ class FriendsDetailsActivity : AppCompatActivity() {
                         R.string.you_owe_rs_overall,
                         absOverall.formatNumber(2)
                     )
+
                     else -> getString(R.string.you_are_owed_rs_overall, absOverall.formatNumber(2))
                 }
 

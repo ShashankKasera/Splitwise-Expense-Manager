@@ -24,6 +24,7 @@ enum class ActionType {
     TOTAL,
     SELECT_REPAY,
     REPAY_DETAILS,
+    GROUP_SETTLED_UP,
 }
 
 interface Action {

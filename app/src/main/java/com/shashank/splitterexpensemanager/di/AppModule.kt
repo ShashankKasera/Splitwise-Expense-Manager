@@ -30,6 +30,8 @@ import com.shashank.splitterexpensemanager.feature.groupmember.repository.GroupM
 import com.shashank.splitterexpensemanager.feature.groupmember.repository.GroupMemberRepositoryImp
 import com.shashank.splitterexpensemanager.feature.groupsettings.repository.GroupSettingsRepository
 import com.shashank.splitterexpensemanager.feature.groupsettings.repository.GroupSettingsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.groupsettledup.repository.GroupSettledUpRepository
+import com.shashank.splitterexpensemanager.feature.groupsettledup.repository.GroupSettledUpRepositoryImp
 import com.shashank.splitterexpensemanager.feature.repaydetails.repository.RepayDetailsRepository
 import com.shashank.splitterexpensemanager.feature.repaydetails.repository.RepayDetailsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.settleup.repository.SettleUpRepository
@@ -117,4 +119,8 @@ class AppModule {
     @Singleton
     @Provides
     fun getRepayDetailsRepository(repo: RepayDetailsRepositoryImp): RepayDetailsRepository = repo
+
+    @Singleton
+    @Provides
+    fun getGroupSettledUpRepository(repo: GroupSettledUpRepositoryImp): GroupSettledUpRepository = repo
 }
