@@ -128,6 +128,7 @@ class AddExpensesActivity : AppCompatActivity() {
         cvSave.setOnClickListener {
             val amount = etAmount.text.toString().trim().toDouble()
             val date = tvDate.text.toString().trim()
+//            val date = tvDate.text.toString().trim().stringToDate("dd/mm/yyyy")?:Date()
             val time = tvTime.text.toString().trim()
             val description = tvDescription.text.toString().trim()
             val name = tvWhoPay.text.toString().trim()
@@ -189,11 +190,9 @@ class AddExpensesActivity : AppCompatActivity() {
             today.get(Calendar.YEAR),
             today.get(Calendar.MONTH),
             today.get(Calendar.DAY_OF_MONTH)
-
         ) { view, year, month, day ->
-            val month = month + 1
-            val msg = "$day/$month/$year"
-            tvDate.text = msg
+            val formattedDate = String.format("%02d/%02d/%d", day, month + 1, year)
+            tvDate.text = formattedDate
             llDatePicker.gone()
         }
     }
@@ -276,7 +275,8 @@ class AddExpensesActivity : AppCompatActivity() {
                 etAmount.setText(it?.expense?.amount.toString())
                 tvCategoryName.text = it?.category?.categoryName
                 ivCategoryImage.setImageResource(it?.category?.categoryImage ?: 0)
-                tvDate.text = it?.expense?.date
+                tvDate.text = (it?.expense?.date)
+//                tvDate.text = (it?.expense?.date)?.dateToString((it.expense.date),"dd/mm/yyyy")
                 tvTime.text = it?.expense?.time
                 tvDescription.setText(it?.expense?.description)
                 tvWhoPay.text = it?.person?.name

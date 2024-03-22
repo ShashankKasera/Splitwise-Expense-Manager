@@ -1,6 +1,5 @@
 package com.shashank.splitterexpensemanager.feature.groupdetails.repay
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +37,7 @@ class RepayAdapter(
             tvReceiverName.text = repayItem?.receiver?.name
             tvAmount.text = repayItem?.repay?.amount?.formatNumber(2)
             tvDate.text = repayItem?.repay?.date
+//            tvDate.text = repayItem?.repay?.date?.dateToString(repayItem.repay.date,"dd/mm/yyyy")
             tvTime.text = repayItem?.repay?.time
 
 
@@ -47,7 +47,6 @@ class RepayAdapter(
             }
 
             cvRepay.setOnClickListener {
-                Log.i("qfbhj", "onBindViewHolder: ${repayItem?.repay?.id ?: -1}")
                 actionProcessor.process(
                     ActionRequestSchema(
                         ActionType.REPAY_DETAILS.name,

@@ -1,6 +1,5 @@
 package com.shashank.splitterexpensemanager.feature.addpayment
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.authentication.model.Person
@@ -93,7 +92,7 @@ class AddPaymentViewModel @Inject constructor(
                 description,
             )
         )
-        Log.i("nhjk", "updateRepay: ${oweOrOwed.id}")
+
         addPaymentRepository.updateOweOrOwed(
             OweOrOwedEntity(
                 oweOrOwed.id,

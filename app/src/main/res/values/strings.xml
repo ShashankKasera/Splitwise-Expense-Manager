@@ -99,4 +99,7 @@
     <string name="payer_receiver">%1$s paid %2$s</string>
     <string name="date_time">%1$s %2$s</string>
     <string name="shared_group">Shared group</string>
+    <string name="this_month">THIS MONTH</string>
+    <string name="last_month">LAST MONTH</string>
+    <string name="all_time">ALL TIME</string>
 </resources>

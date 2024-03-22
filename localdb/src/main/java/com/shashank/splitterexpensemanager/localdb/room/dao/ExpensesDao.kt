@@ -46,9 +46,42 @@ interface ExpensesDao {
     @Query("SELECT SUM(amount) FROM Expenses WHERE groupId=:groupId")
     fun getTotalGroupSpending(groupId: Long): Flow<Double>
 
+    @Query(
+        "SELECT SUM(amount) " +
+            "FROM Expenses " +
+            "WHERE groupId = :groupId " +
+            "AND SUBSTR(date, 4, 2) = :month " +
+            "AND SUBSTR(date, 7, 4) = :year"
+    )
+    fun getTotalGroupSpendingFroThisMonth(groupId: Long, month: String, year: String): Flow<Double>
+
     @Query("SELECT SUM(amount) FROM Expenses WHERE groupId=:groupId AND personId=:personId")
     fun getTotalYouPaidFor(personId: Long, groupId: Long): Flow<Double>
 
+    @Query(
+        "SELECT SUM(amount) " +
+            "FROM Expenses " +
+            "WHERE groupId=:groupId " +
+            "AND personId=:personId " +
+            "AND SUBSTR(date, 4, 2) = :month " +
+            "AND SUBSTR(date, 7, 4) = :year"
+    )
+    fun getTotalYouPaidForFroThisMonth(
+        personId: Long,
+        groupId: Long,
+        month: String,
+        year: String
+    ): Flow<Double>
+
     @Query("SELECT SUM(splitAmount) FROM Expenses WHERE groupId=:groupId")
     fun getYourTotalShare(groupId: Long): Flow<Double>
+
+    @Query(
+        "SELECT SUM(splitAmount) " +
+            "FROM Expenses " +
+            "WHERE groupId=:groupId " +
+            "AND SUBSTR(date, 4, 2) = :month " +
+            "AND SUBSTR(date, 7, 4) = :year"
+    )
+    fun getYourTotalShareByMonthAndYear(groupId: Long, month: String, year: String): Flow<Double>
 }
