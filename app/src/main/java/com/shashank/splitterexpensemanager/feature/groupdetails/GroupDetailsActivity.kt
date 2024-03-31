@@ -1,6 +1,7 @@
 package com.shashank.splitterexpensemanager.feature.groupdetails
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -59,14 +60,12 @@ class GroupDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_details)
-        var groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
-        groupId = intent.getLongExtra(GROUP_ID, -1)
+        var groupId: Long = intent.extras?.getLong(GROUP_ID) ?: -1
+        groupId = if (groupId != -1L) intent.getLongExtra(GROUP_ID, -1) else -1
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
         viewModel.groupId = groupId
         viewModel.personId = personId
         init()
-
-
         recyclerViewSetUp()
         navigationForTotal(groupId)
         navigationForBalances(groupId)
@@ -129,6 +128,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         val groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
         viewModel.groupDetails(groupId, personId)
+        getData()
     }
 
     private fun navigationForBalances(groupId: Long) {
@@ -202,11 +202,15 @@ class GroupDetailsActivity : AppCompatActivity() {
                     if (expensesNotEmpty || repayNotEmpty) View.GONE else View.VISIBLE
 
                 if (oweOwedNotEmpty) {
+                    Log.i("jhjh", "groupDetails a: ${groupDetails.hashMap}")
+
                     tvNoExpenses.gone()
                     clOweOwed.visible()
                     oweOwedList.clear()
                     oweOwedList.addAll(groupDetails.hashMap.toList().filter { it.second != 0.0 })
                     oweOwedAdapter.notifyDataSetChanged()
+                } else {
+                    oweOwedList.clear()
                 }
 
                 if (expensesNotEmpty || oweOwedList.isNotEmpty()) {

@@ -46,7 +46,7 @@ class FriendsFragment : Fragment() {
     lateinit var tvOverall: TextView
     lateinit var tvClearFilter: TextView
     lateinit var ivFilter: ImageView
-    lateinit var lladdFriends: LinearLayout
+    lateinit var llAddFriends: LinearLayout
     lateinit var friendAdapter: FriendAdapter
     private val viewModel: FriendsViewModel by viewModels()
     private var allFriendsList = mutableListOf<Friends>()
@@ -83,7 +83,7 @@ class FriendsFragment : Fragment() {
             }
         }
 
-        lladdFriends.setOnClickListener {
+        llAddFriends.setOnClickListener {
             actionProcessor.process(ActionRequestSchema(ActionType.CREATE_FRIENDS.name))
         }
         return v
@@ -106,7 +106,7 @@ class FriendsFragment : Fragment() {
         recyclerView = v.findViewById<View>(R.id.rv_friend) as RecyclerView
         tvOverall = v.findViewById(R.id.tv_overall_you_owe_friends)
         ivFilter = v.findViewById(R.id.iv_filter_friend)
-        lladdFriends = v.findViewById(R.id.ll_add_friends)
+        llAddFriends = v.findViewById(R.id.ll_add_friends)
         tvFilter = v.findViewById(R.id.tv_filter_friends)
         ivManChillingOut = v.findViewById(R.id.iv_man_chilling_out_friend)
         tvNoOneToSeeHare = v.findViewById(R.id.tv_no_one_to_see_hare_friends)

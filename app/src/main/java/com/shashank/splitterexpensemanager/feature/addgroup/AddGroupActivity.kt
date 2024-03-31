@@ -1,5 +1,6 @@
 package com.shashank.splitterexpensemanager.feature.addgroup
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
@@ -13,6 +14,7 @@ import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.UPDATE_GROUP
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.feature.addgroup.model.GroupType
+import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
 import com.shashank.splitterexpensemanager.localdb.model.Group
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -53,7 +55,17 @@ class AddGroupActivity : AppCompatActivity() {
             } else {
                 createGroup()
             }
-            finish()
+            lifecycleScope.launch {
+                viewModel.groupAdded.collect {
+                    if (it) {
+                        val intent = Intent(this@AddGroupActivity, GroupDetailsActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                        intent.putExtra(GROUP_ID, viewModel.groupId)
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+            }
         }
     }
 

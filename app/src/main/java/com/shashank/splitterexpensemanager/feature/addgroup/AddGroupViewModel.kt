@@ -22,11 +22,16 @@ class AddGroupViewModel @Inject constructor(
 
     private val _group = MutableStateFlow<Group>(Group())
     val group = _group.asStateFlow()
+    private val _groupAdded = MutableStateFlow<Boolean>(false)
+    val groupAdded = _groupAdded.asStateFlow()
+    var groupId: Long = -1
     fun insertGroup(groupName: String, groupType: String) {
         viewModelScope.launch {
             val id = addGroupRepository.insertGroup(GroupEntity(null, groupName, groupType, ""))
             val personId: Long = sharedPref.getValue(PERSON_ID, 0L) as Long
+            groupId = id
             addGroupRepository.insertGroupMember(GroupMember(null, personId, id))
+            _groupAdded.emit(true)
         }
     }
 

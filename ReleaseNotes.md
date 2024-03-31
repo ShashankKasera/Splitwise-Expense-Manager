@@ -34,3 +34,4 @@
 #113: Friend Setting
 #115: Totals Filter
 #117: Friends Filter
+#119: Groups Filter

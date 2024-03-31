@@ -74,7 +74,7 @@
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_overall_you_owe_friends">
+        app:layout_constraintTop_toBottomOf="@+id/tv_filter_friends">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_friend"
