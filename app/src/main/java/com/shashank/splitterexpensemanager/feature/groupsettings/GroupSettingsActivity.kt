@@ -36,6 +36,8 @@ class GroupSettingsActivity : AppCompatActivity() {
     lateinit var ivEditGroup: ImageView
     lateinit var cvDeleteGroup: CardView
     lateinit var cvAddFriends: CardView
+    lateinit var toolbar: TextView
+    lateinit var ivBack: ImageView
     lateinit var groupMemberAdapter: GroupMemberAdapter
     private var groupMemberList = mutableListOf<Pair<Person, Double>>()
 
@@ -78,6 +80,13 @@ class GroupSettingsActivity : AppCompatActivity() {
         ivEditGroup = findViewById(R.id.iv_edit_group_setting)
         cvDeleteGroup = findViewById(R.id.cv_delete_group_group_settings)
         cvAddFriends = findViewById(R.id.cv_add_group_Member_group_settings)
+        toolbar = findViewById(R.id.tv_tb_group_settings)
+        ivBack = findViewById(R.id.iv_tb_group_settings)
+
+        toolbar.text = getString(R.string.group_setting)
+        ivBack.setOnClickListener {
+            finish()
+        }
         viewModel.groupSetting(groupId)
     }
 

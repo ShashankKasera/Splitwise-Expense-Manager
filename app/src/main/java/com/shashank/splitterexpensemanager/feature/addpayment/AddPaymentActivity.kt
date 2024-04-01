@@ -6,6 +6,7 @@ import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.DatePicker
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.TimePicker
@@ -41,6 +42,8 @@ class AddPaymentActivity : AppCompatActivity() {
 
     @Inject
     lateinit var sharedPref: SharedPref
+    lateinit var toolbar: TextView
+    lateinit var ivBack: ImageView
     lateinit var llDatePicker: LinearLayout
     lateinit var tvPayerName: TextView
     lateinit var tvReceiverName: TextView
@@ -87,7 +90,6 @@ class AddPaymentActivity : AppCompatActivity() {
         cvSave.setOnClickListener {
             val amount = etAmount.text.toString().trim().toDouble()
             val date = tvDate.text.toString().trim()
-//            val date = tvDate.text.toString().trim().stringToDate("dd/mm/yyyy")?:Date()
             val time = tvTime.text.toString().trim()
             val description = tvDescription.text.toString().trim()
 
@@ -144,6 +146,14 @@ class AddPaymentActivity : AppCompatActivity() {
         tvWhoPayName = findViewById(R.id.tv_who_pay_repay)
         tvWhoSplitName = findViewById(R.id.tv_who_split)
         cvSave = findViewById(R.id.cv_save_repay)
+
+        toolbar = findViewById(R.id.tv_tb_add_payment)
+        ivBack = findViewById(R.id.iv_tb_add_payment)
+
+        toolbar.text = getString(R.string.add_payment)
+        ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun getPayer(payerId: Long) {
@@ -302,7 +312,6 @@ class AddPaymentActivity : AppCompatActivity() {
             viewModel.repayDetails.collect {
                 etAmount.setText(it?.repay?.amount.toString())
                 tvDate.text = it?.repay?.date
-//                tvDate.text = it?.repay?.date?.dateToString((it.repay.date),"dd/mm/yyyy")
                 tvTime.text = it?.repay?.time
                 tvDescription.setText(it?.repay?.description)
                 tvPayerName.text = it?.payer?.name

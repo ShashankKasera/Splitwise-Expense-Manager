@@ -27,6 +27,18 @@
                 android:layout_height="230dp"
                 android:background="@drawable/wave_shap">
 
+                <ImageView
+                    android:id="@+id/iv_back_group_details"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/back_icon"
+                    android:tint="@color/white"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_group_Name_in_detail"
+                    app:layout_constraintTop_toTopOf="@+id/tv_group_Name_in_detail"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
                 <TextView
                     android:id="@+id/tv_group_Name_in_detail"
                     android:layout_width="0dp"
@@ -35,11 +47,11 @@
                     android:layout_marginBottom="24dp"
                     android:text="@string/group_name"
                     android:textColor="@color/white"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/civ_group"
                     app:layout_constraintEnd_toStartOf="@+id/iv_setting_groupDetails"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toEndOf="@+id/iv_back_group_details" />
 
                 <ImageView
                     android:id="@+id/iv_setting_groupDetails"
@@ -191,7 +203,7 @@
                             android:layout_marginRight="8dp"
                             android:gravity="center"
                             android:padding="4dp"
-                            android:text="@string/tottls"
+                            android:text="@string/total"
                             android:textColor="@color/white"
                             android:textSize="16dp" />
                     </LinearLayout>

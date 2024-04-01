@@ -6,29 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".feature.groupsettledup.GroupSettledUpActivity">
 
-    <ImageView
-        android:id="@+id/tv_cancel_group_settle_up"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/cancel"
-        android:tint="@color/dark_grey"
+    <LinearLayout
+        android:id="@+id/tb_group_settle_up"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:background="@color/primary_mid"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_select_a_balance_to_settle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/select_a_balance_to_settle"
-        android:textSize="20sp"
-        android:textColor="@color/dark_grey"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_cancel_group_settle_up"
-        app:layout_constraintStart_toEndOf="@+id/tv_cancel_group_settle_up"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/iv_cancel_group_settle_up"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="24dp"
+            android:src="@drawable/cancel"
+            android:tint="@color/white"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/tv_select_a_balance_to_settle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/select_a_balance_to_settle"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_group_settle_up"
@@ -36,7 +44,7 @@
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_select_a_balance_to_settle"
+        app:layout_constraintTop_toBottomOf="@+id/tb_group_settle_up"
         tools:itemCount="10"
         android:layout_marginTop="16dp"
         tools:listitem="@layout/group_settled_up_item" />

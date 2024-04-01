@@ -1,6 +1,7 @@
 package com.shashank.splitterexpensemanager.feature.total
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,8 @@ class TotalActivity : AppCompatActivity() {
     lateinit var tvYourTotalShare: TextView
     lateinit var tvFilter: TextView
     lateinit var filter: CardView
+    lateinit var toolbar: TextView
+    lateinit var ivBack: ImageView
     lateinit var filterAdapter: FilterAdapter
     lateinit var filterRecyclerView: RecyclerView
     private var filterList = ArrayList<String>()
@@ -102,6 +105,12 @@ class TotalActivity : AppCompatActivity() {
         tvYourTotalShare = findViewById(R.id.tv_total_your_share_amount)
         tvFilter = findViewById(R.id.tv_total_filter)
         filter = findViewById(R.id.cv_total_filter)
+        ivBack = findViewById(R.id.iv_tb_total)
+        toolbar = findViewById(R.id.tv_tb_total)
+        toolbar.text = getString(R.string.total)
+        ivBack.setOnClickListener {
+            finish()
+        }
         tvFilter.text = getString(R.string.all_time)
     }
 

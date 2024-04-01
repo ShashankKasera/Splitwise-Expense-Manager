@@ -1,20 +1,21 @@
 package com.shashank.splitterexpensemanager.feature.addfriends
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
-import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.model.GroupMember
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -28,6 +29,8 @@ class AddFriendsActivity : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
     lateinit var tvAddFriends: TextView
     lateinit var addFriendsAdapter: AddFriendsAdapter
+    lateinit var toolbar: TextView
+    lateinit var ivBack: ImageView
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
@@ -52,6 +55,13 @@ class AddFriendsActivity : AppCompatActivity() {
     private fun init() {
         recyclerView = findViewById(R.id.rv_add_friends)
         tvAddFriends = findViewById(R.id.tv_add_User)
+        toolbar = findViewById(R.id.tv_tb_add_friends)
+        ivBack = findViewById(R.id.iv_tb_add_friends)
+
+        toolbar.text = getString(R.string.add_friends)
+        ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setUpRecyclerView(

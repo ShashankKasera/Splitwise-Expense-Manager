@@ -35,6 +35,8 @@ class RepayDetailsActivity : AppCompatActivity() {
     lateinit var ivDelete: ImageView
     lateinit var ivUpdate: ImageView
     lateinit var tvdescription: TextView
+    lateinit var toolbar: TextView
+    lateinit var ivBack: ImageView
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
@@ -103,5 +105,12 @@ class RepayDetailsActivity : AppCompatActivity() {
         tvdescription = findViewById(R.id.tv_description)
         ivDelete = findViewById(R.id.iv_delete_repay_details)
         ivUpdate = findViewById(R.id.iv_edit_repay_details)
+        toolbar = findViewById(R.id.tv_tb_repay_details)
+        ivBack = findViewById(R.id.iv_back_repay_details)
+
+        toolbar.text = getString(R.string.repay_details)
+        ivBack.setOnClickListener {
+            finish()
+        }
     }
 }

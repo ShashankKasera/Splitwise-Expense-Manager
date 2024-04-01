@@ -1,6 +1,7 @@
 package com.shashank.splitterexpensemanager.feature.settleup
 
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -26,6 +27,7 @@ class SettleUpActivity : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
     private val viewModel: SettleUpViewModel by viewModels()
     lateinit var settleUpAdapter: SettleUpAdapter
+    lateinit var ivCancel: ImageView
     private var oweOwedList = mutableListOf<Pair<Person, Double>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +37,11 @@ class SettleUpActivity : AppCompatActivity() {
         var groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
         recyclerView = findViewById(R.id.rv_settle_up)
+        ivCancel = findViewById(R.id.tv_cancel_settle_up)
+
+        ivCancel.setOnClickListener {
+            finish()
+        }
         setupRecyclerView(groupId, personId)
 
 

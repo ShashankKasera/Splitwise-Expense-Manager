@@ -1,6 +1,7 @@
 package com.shashank.splitterexpensemanager.feature.friendsetting
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,8 @@ class FriendSettingActivity : AppCompatActivity() {
     private val viewModel: FriendSettingViewModel by viewModels()
     private var groupList = mutableListOf<Group>()
     lateinit var groupAdapter: GroupAdapter
+    lateinit var toolbar: TextView
+    lateinit var ivBack: ImageView
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
@@ -32,6 +35,13 @@ class FriendSettingActivity : AppCompatActivity() {
 
         tvFriendName = findViewById(R.id.tv_name_friend_setting)
         recyclerView = findViewById(R.id.rv_friend_settings)
+        toolbar = findViewById(R.id.tv_tb_friend_setting)
+        ivBack = findViewById(R.id.iv_tb_friend_setting)
+
+        toolbar.text = getString(R.string.friend_setting)
+        ivBack.setOnClickListener {
+            finish()
+        }
         setUpRecyclerView()
         viewModel.allGroup(friendId)
         lifecycleScope.launch {

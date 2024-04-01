@@ -6,6 +6,7 @@ import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.DatePicker
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.TimePicker
@@ -44,6 +45,8 @@ class AddExpensesActivity : AppCompatActivity() {
 
     @Inject
     lateinit var sharedPref: SharedPref
+    lateinit var toolbar: TextView
+    lateinit var ivBack: ImageView
     lateinit var clCategory: ConstraintLayout
     lateinit var llDatePicker: LinearLayout
     lateinit var tvGroupName: TextView
@@ -128,7 +131,6 @@ class AddExpensesActivity : AppCompatActivity() {
         cvSave.setOnClickListener {
             val amount = etAmount.text.toString().trim().toDouble()
             val date = tvDate.text.toString().trim()
-//            val date = tvDate.text.toString().trim().stringToDate("dd/mm/yyyy")?:Date()
             val time = tvTime.text.toString().trim()
             val description = tvDescription.text.toString().trim()
             val name = tvWhoPay.text.toString().trim()
@@ -158,7 +160,13 @@ class AddExpensesActivity : AppCompatActivity() {
         tvDescription = findViewById(R.id.et_description_expenses)
         tvWhoPay = findViewById(R.id.tv_who_pay_expenses)
         cvSave = findViewById(R.id.cv_save_expenses)
+        toolbar = findViewById(R.id.tv_tb_add_expenses)
+        ivBack = findViewById(R.id.iv_tb_add_expenses)
 
+        toolbar.text = getString(R.string.add_expenses)
+        ivBack.setOnClickListener {
+            finish()
+        }
         viewModel.getGroup(groupId)
         lifecycleScope.launch {
             viewModel.group.collect {
@@ -276,7 +284,6 @@ class AddExpensesActivity : AppCompatActivity() {
                 tvCategoryName.text = it?.category?.categoryName
                 ivCategoryImage.setImageResource(it?.category?.categoryImage ?: 0)
                 tvDate.text = (it?.expense?.date)
-//                tvDate.text = (it?.expense?.date)?.dateToString((it.expense.date),"dd/mm/yyyy")
                 tvTime.text = it?.expense?.time
                 tvDescription.setText(it?.expense?.description)
                 tvWhoPay.text = it?.person?.name
