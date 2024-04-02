@@ -9,7 +9,9 @@ import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.core.CommonImages
 import com.shashank.splitterexpensemanager.core.FRIEND_ID
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
@@ -22,6 +24,7 @@ import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.model.FriendOweOrOwed
 import com.shashank.splitterexpensemanager.model.Group
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,6 +42,7 @@ class FriendsDetailsActivity : AppCompatActivity() {
     lateinit var cvSettledUp: CardView
     lateinit var tvPlus: TextView
     lateinit var ivSetting: ImageView
+    lateinit var civFriend: CircleImageView
     lateinit var rvFriendOweOwed: RecyclerView
     lateinit var groupOweOwedAdapter: GroupOweOwedAdapter
     lateinit var friendOweOwedAdapter: FriendOweOwedAdapter
@@ -77,6 +81,7 @@ class FriendsDetailsActivity : AppCompatActivity() {
 
     private fun init(friendId: Long, personId: Long) {
         rvGroupOweOwed = findViewById(R.id.rv_group_owe_owed_friend_details)
+        civFriend = findViewById(R.id.civ_friends_image)
         toolbar = findViewById(R.id.tv_name_friend_details)
         ivBack = findViewById(R.id.iv_back_friend_details)
 
@@ -90,8 +95,10 @@ class FriendsDetailsActivity : AppCompatActivity() {
         tvPlus = findViewById(R.id.tv_other_member_friend_details)
         cvSettledUp = findViewById(R.id.cv_settle_up_friend_details)
         recyclerViewSetUp()
+        Glide.with(this).load(CommonImages.USER_ICON).into(civFriend)
 
         viewModel.loadAllFriends(personId, friendId)
+        Glide.with(this).load(CommonImages.SETTING_ICON).into(ivSetting)
 
         getData()
     }

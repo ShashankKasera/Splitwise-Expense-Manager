@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.shashank.splitterexpensemanager.authentication.R
+import com.shashank.splitterexpensemanager.core.CategoryImages
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
@@ -88,107 +89,107 @@ class LoginActivity : AppCompatActivity() {
                 Category(
                     null,
                     getString(RCore.string.Game),
-                    RCore.drawable.game_icon_png
+                    CategoryImages.GAME_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Movie),
-                    RCore.drawable.movie_icon_png
+                    CategoryImages.MOVIE_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Music),
-                    RCore.drawable.music_icon_png
+                    CategoryImages.MUSIC_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Sports),
-                    RCore.drawable.sport_icon_png
+                    CategoryImages.SPORT_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Dining_Out),
-                    RCore.drawable.dining_icon_png
+                    CategoryImages.DINING_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Groceries),
-                    RCore.drawable.groceries_icon_png
+                    CategoryImages.GROCERIES_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Liquor),
-                    RCore.drawable.liquor_icon_png
+                    CategoryImages.LIQUOR_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Electronics),
-                    RCore.drawable.electronics_icon_png
+                    CategoryImages.ELECTRONICS_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.furniture),
-                    RCore.drawable.furniture_icon_png
+                    CategoryImages.FURNITURE_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Household_supplies),
-                    RCore.drawable.household_supplies_png
+                    CategoryImages.HOUSEHOLD_SUPPLIES
                 ),
                 Category(
                     null,
                     getString(RCore.string.Maintenance),
-                    RCore.drawable.maintenance_icon_png
+                    CategoryImages.MAINTENANCE_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Mortgage),
-                    RCore.drawable.mortgage_icon_png
+                    CategoryImages.MORTGAGE_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Pets),
-                    RCore.drawable.pets_icon_png
+                    CategoryImages.PETS_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Rent),
-                    RCore.drawable.home_rent_icon_png
+                    CategoryImages.HOME_RENT
                 ),
                 Category(
                     null,
                     getString(RCore.string.Childcare),
-                    RCore.drawable.childcare_icon_png
+                    CategoryImages.CHILDCARE_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Clothing),
-                    RCore.drawable.clothing_icon_png
+                    CategoryImages.CLOTHING_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Education),
-                    RCore.drawable.education_icon_png
+                    CategoryImages.EDUCATION_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Gift),
-                    RCore.drawable.gift_icon_png
+                    CategoryImages.GIFT_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Insurance),
-                    RCore.drawable.insurence_icon_ing
+                    CategoryImages.INSURANCE_icon
                 ),
                 Category(
                     null,
                     getString(RCore.string.Medical_Expenses),
-                    RCore.drawable.medical_expences_icon_png
+                    CategoryImages.MEDICAL_EXPENSES_ICON
                 ),
                 Category(
                     null,
                     getString(RCore.string.Taxes),
-                    RCore.drawable.taxes_icon_png
+                    CategoryImages.TAXES_ICON
                 )
             )
         }

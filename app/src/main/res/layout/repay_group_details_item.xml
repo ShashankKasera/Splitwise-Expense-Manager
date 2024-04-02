@@ -33,9 +33,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/civ_repay"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/you_paid_icon_png"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 app:civ_circle_background_color="@color/primary"
 
                 app:layout_constraintBottom_toBottomOf="parent"

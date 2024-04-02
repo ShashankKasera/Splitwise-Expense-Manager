@@ -8,11 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.core.CommonImages
 import com.shashank.splitterexpensemanager.core.FRIEND_ID
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.model.Group
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,6 +26,7 @@ class FriendSettingActivity : AppCompatActivity() {
     private val viewModel: FriendSettingViewModel by viewModels()
     private var groupList = mutableListOf<Group>()
     lateinit var groupAdapter: GroupAdapter
+    lateinit var civFriendImage: CircleImageView
     lateinit var toolbar: TextView
     lateinit var ivBack: ImageView
 
@@ -37,11 +41,13 @@ class FriendSettingActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.rv_friend_settings)
         toolbar = findViewById(R.id.tv_tb_friend_setting)
         ivBack = findViewById(R.id.iv_tb_friend_setting)
-
+        civFriendImage = findViewById(R.id.civ_group_image_friend_settings)
         toolbar.text = getString(R.string.friend_setting)
         ivBack.setOnClickListener {
             finish()
         }
+        Glide.with(this).load(CommonImages.USER_ICON).into(civFriendImage)
+
         setUpRecyclerView()
         viewModel.allGroup(friendId)
         lifecycleScope.launch {

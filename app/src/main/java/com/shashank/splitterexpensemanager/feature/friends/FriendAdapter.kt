@@ -9,8 +9,10 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
+import com.shashank.splitterexpensemanager.core.CommonImages
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
@@ -43,6 +45,7 @@ class FriendAdapter(
         oweOwedList.clear()
         oweOwedList.addAll(friends.friendsOweOwedList)
         oweOwedList.removeIf { it.groupOweOwed == 0.0 }
+        Glide.with(context).load(CommonImages.USER_ICON).into(holder.civFriendImage)
         if (oweOwedList.size > 3) {
             holder.tvPlusOther.visible()
             holder.tvPlusOther.text =

@@ -6,12 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import com.shashank.splitterexpensemanager.model.Group
+import de.hdodenhof.circleimageview.CircleImageView
 
 class GroupAdapter(
     private val actionProcessor: ActionProcessor,
@@ -29,6 +31,8 @@ class GroupAdapter(
 
         with(holder) {
             tvName.text = group.groupName
+            Glide.with(itemView.context).load(group.groupImage).into(civGroupImage)
+
             cvGroup.setOnClickListener {
                 val groupId = group.id ?: -1
                 actionProcessor.process(
@@ -50,5 +54,6 @@ class GroupAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvName: TextView = itemView.findViewById(R.id.tv_group_friend_setting_name)
         val cvGroup: CardView = itemView.findViewById(R.id.cv_group_friend_setting)
+        val civGroupImage: CircleImageView = itemView.findViewById(R.id.civ_group_friend_setting)
     }
 }

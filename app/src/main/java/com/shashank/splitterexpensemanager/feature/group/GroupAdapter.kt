@@ -1,13 +1,16 @@
 package com.shashank.splitterexpensemanager.feature.group
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
@@ -36,17 +39,24 @@ class GroupAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val groupData = groups[position]
         with(holder) {
-            ivGroupName.text = groupData.group.groupName
+            tvGroupName.text = groupData.group.groupName
+            Log.i("erhuri", "onBindViewHolder: ")
 
-            val layoutParams = holder.ivGroup.layoutParams
-            layoutParams.height = if (groupData.overall == 0.0) 300 else 550
-            holder.ivGroup.layoutParams = layoutParams
+//            val layoutParamsIv = holder.ivGroup.layoutParams
+//            layoutParamsIv.height = if (groupData.overall == 0.0) 250 else 500
+//            holder.ivGroup.layoutParams = layoutParamsIv
 
+            val layoutParamsCv = holder.cvGroup.layoutParams
+            layoutParamsCv.height = if (groupData.overall == 0.0) 300 else 550
+            holder.cvGroup.layoutParams = layoutParamsCv
             if (groupData.hashMap.isEmpty()) {
                 handleEmptyHashmapView(holder)
             } else {
                 handleNonEmptyHashmapView(holder, groupData)
             }
+
+            Glide.with(context).load(groupData.group.groupImage).into(ivGroupImage)
+
             clGroup.setOnClickListener {
                 onItemClickListener.onItemClick(groupData.group.id ?: 0)
             }
@@ -104,9 +114,14 @@ class GroupAdapter(
     private fun handleSingleSizeOverall(holder: ViewHolder, overall: Double) {
         with(holder) {
             tvOveOrOved.visible()
-            val layoutParams = holder.ivGroup.layoutParams
-            layoutParams.height = 350
-            holder.ivGroup.layoutParams = layoutParams
+//            val layoutParamsIv = holder.ivGroup.layoutParams
+//            layoutParamsIv.height = 300
+//            holder.ivGroup.layoutParams = layoutParamsIv
+
+            Log.i("erhuri", "handleSingleSizeOverall: ")
+            val layoutParamsCv = holder.cvGroup.layoutParams
+            layoutParamsCv.height = 350
+            holder.cvGroup.layoutParams = layoutParamsCv
             val colorResId = if (overall < 0) R.color.primary_dark else R.color.green
             val absOverall = Math.abs(overall)
             tvOveOrOved.text = context.getString(
@@ -158,8 +173,9 @@ class GroupAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val clGroup: ConstraintLayout = itemView.findViewById(R.id.cl_group)
-        val ivGroup: ImageView = itemView.findViewById(R.id.iv_group_icon)
-        val ivGroupName: TextView = itemView.findViewById(R.id.tv_group_name)
+        val cvGroup: CardView = itemView.findViewById(R.id.cv_group_image)
+        val tvGroupName: TextView = itemView.findViewById(R.id.tv_group_name)
+        val ivGroupImage: ImageView = itemView.findViewById(R.id.iv_group_icon)
         val tvNoExpenses: TextView = itemView.findViewById(R.id.tv_no_expenses)
         val tvOveOrOved: TextView = itemView.findViewById(R.id.tv_ove_or_oved)
         val tvPlus: TextView = itemView.findViewById(R.id.tv_plus)

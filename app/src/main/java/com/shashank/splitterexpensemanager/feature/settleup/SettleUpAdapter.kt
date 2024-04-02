@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.AMOUNT
+import com.shashank.splitterexpensemanager.core.CommonImages
 import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.PAYER_ID
 import com.shashank.splitterexpensemanager.core.RECEIVER_ID
@@ -16,6 +18,7 @@ import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
+import de.hdodenhof.circleimageview.CircleImageView
 
 class SettleUpAdapter(
     private val groupId: Long,
@@ -54,6 +57,8 @@ class SettleUpAdapter(
                     tvGetBackOrOweAmount.setTextColor(context.getColor(R.color.primary_dark))
                 }
             }
+            Glide.with(context).load(CommonImages.USER_ICON).into(holder.civGroupMember)
+
             cvGroupMember.setOnClickListener {
                 when {
                     amount > 0 -> {
@@ -98,5 +103,6 @@ class SettleUpAdapter(
         val cvGroupMember: CardView = itemView.findViewById(R.id.cv_add_group_member)
         val tvGetBackOrOwe: TextView = itemView.findViewById(R.id.tv_get_back)
         val tvGetBackOrOweAmount: TextView = itemView.findViewById(R.id.tv_get_back_amount)
+        val civGroupMember: CircleImageView = itemView.findViewById(R.id.civ_group_member)
     }
 }

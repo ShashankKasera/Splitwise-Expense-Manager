@@ -6,15 +6,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.REPAY_ID
+import com.shashank.splitterexpensemanager.core.TotalImages
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.model.RepayWithPerson
+import de.hdodenhof.circleimageview.CircleImageView
 
 class RepayAdapter(
     private val actionProcessor: ActionProcessor,
@@ -36,6 +39,7 @@ class RepayAdapter(
             tvPayerName.text = repayItem?.payer?.name
             tvReceiverName.text = repayItem?.receiver?.name
             tvAmount.text = repayItem?.repay?.amount?.formatNumber(2)
+            Glide.with(context).load(TotalImages.TOTAL_YOU_PAID_FOR).into(civRepay)
             tvDate.text = repayItem?.repay?.date
             tvTime.text = repayItem?.repay?.time
 
@@ -66,6 +70,7 @@ class RepayAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvPayerName: TextView = itemView.findViewById(R.id.tv_payer_name)
         val tvReceiverName: TextView = itemView.findViewById(R.id.tv_receiver_name_repay)
+        val civRepay: CircleImageView = itemView.findViewById(R.id.civ_repay)
         val tvAmount: TextView = itemView.findViewById(R.id.tv_amount_repay)
         val tvDate: TextView = itemView.findViewById(R.id.tv_date_repay)
         val tvTime: TextView = itemView.findViewById(R.id.tv_time_repay)

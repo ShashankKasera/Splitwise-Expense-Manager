@@ -14,9 +14,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
+import com.shashank.splitterexpensemanager.core.CommonImages
 import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
@@ -28,6 +30,7 @@ import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.model.GroupDetails
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -55,6 +58,7 @@ class GroupDetailsActivity : AppCompatActivity() {
     lateinit var viewPager: ViewPager
     lateinit var tabLayout: TabLayout
     lateinit var ivBack: ImageView
+    lateinit var civGroup: CircleImageView
     private var oweOwedList = mutableListOf<Pair<Person, Double>>()
     private val viewModel: GroupDetailViewModel by viewModels()
 
@@ -116,6 +120,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         clOweOwed = findViewById(R.id.cl_amount)
         tvYouAreTheOnlyOneHere = findViewById(R.id.tv_you_re_the_only_one_here)
         ivSetting = findViewById(R.id.iv_setting_groupDetails)
+        civGroup = findViewById(R.id.civ_group)
         viewPager = findViewById(R.id.viewPager)
         tabLayout = findViewById(R.id.tablayout)
         ivBack = findViewById(R.id.iv_back_group_details)
@@ -126,6 +131,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         val groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
         viewModel.groupDetails(groupId, personId)
+        Glide.with(this).load(CommonImages.SETTING_ICON).into(ivSetting)
     }
 
     override fun onRestart() {
@@ -202,6 +208,7 @@ class GroupDetailsActivity : AppCompatActivity() {
                 } else {
                     tvYouAreTheOnlyOneHere.visible()
                 }
+                Glide.with(this@GroupDetailsActivity).load(groupDetails.group.groupImage).into(civGroup)
 
                 llAddGroupMember.visibility =
                     if (expensesNotEmpty || repayNotEmpty) View.GONE else View.VISIBLE

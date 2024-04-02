@@ -66,10 +66,9 @@
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/circleImageView10"
+        android:id="@+id/civ_repay"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/dining_icon_png"
         android:layout_marginTop="50dp"
         app:civ_circle_background_color="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +86,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageView10" />
+        app:layout_constraintTop_toBottomOf="@+id/civ_repay" />
 
     <TextView
         android:id="@+id/tv_amount_repay_details"

@@ -3,6 +3,7 @@ package com.shashank.splitterexpensemanager.feature.groupsettings
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,9 +11,12 @@ import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
+import com.shashank.splitterexpensemanager.core.CommonImages
 import com.shashank.splitterexpensemanager.core.GROUP_ID
+import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.UPDATE_GROUP
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
@@ -21,6 +25,7 @@ import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequ
 import com.shashank.splitterexpensemanager.feature.DashboardActivity
 import com.shashank.splitterexpensemanager.localdb.model.Group
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,12 +35,15 @@ class GroupSettingsActivity : AppCompatActivity() {
     @Inject
     lateinit var actionProcessor: ActionProcessor
 
+
     private val viewModel: GroupSettingsViewModel by viewModels()
     lateinit var recyclerView: RecyclerView
     lateinit var tvGroupName: TextView
     lateinit var ivEditGroup: ImageView
+    lateinit var ivDelete: CircleImageView
     lateinit var cvDeleteGroup: CardView
-    lateinit var cvAddFriends: CardView
+    lateinit var civGroup: CircleImageView
+    lateinit var llAddFriends: LinearLayout
     lateinit var toolbar: TextView
     lateinit var ivBack: ImageView
     lateinit var groupMemberAdapter: GroupMemberAdapter
@@ -47,8 +55,10 @@ class GroupSettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_settings)
         val groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
+        val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
+
         init(groupId)
-        recyclerViewSetup()
+        recyclerViewSetup(personId)
         getData()
 
         ivEditGroup.setOnClickListener {
@@ -62,7 +72,7 @@ class GroupSettingsActivity : AppCompatActivity() {
                 )
             )
         }
-        cvAddFriends.setOnClickListener {
+        llAddFriends.setOnClickListener {
             actionProcessor.process(
                 ActionRequestSchema(
                     ActionType.ADD_FRIENDS.name,
@@ -79,7 +89,9 @@ class GroupSettingsActivity : AppCompatActivity() {
         tvGroupName = findViewById(R.id.tv_group_name_group_setting)
         ivEditGroup = findViewById(R.id.iv_edit_group_setting)
         cvDeleteGroup = findViewById(R.id.cv_delete_group_group_settings)
-        cvAddFriends = findViewById(R.id.cv_add_group_Member_group_settings)
+        llAddFriends = findViewById(R.id.ll_add_friends_group_setting)
+        civGroup = findViewById(R.id.civ_group_image_group_settings)
+        ivDelete = findViewById(R.id.civ_delete_group_group_setting)
         toolbar = findViewById(R.id.tv_tb_group_settings)
         ivBack = findViewById(R.id.iv_tb_group_settings)
 
@@ -87,11 +99,12 @@ class GroupSettingsActivity : AppCompatActivity() {
         ivBack.setOnClickListener {
             finish()
         }
+        Glide.with(this).load(CommonImages.DELETE_ICON).into(ivDelete)
         viewModel.groupSetting(groupId)
     }
 
-    private fun recyclerViewSetup() {
-        groupMemberAdapter = GroupMemberAdapter(groupMemberList)
+    private fun recyclerViewSetup(personId: Long) {
+        groupMemberAdapter = GroupMemberAdapter(personId, actionProcessor, groupMemberList)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = groupMemberAdapter
     }
@@ -101,6 +114,7 @@ class GroupSettingsActivity : AppCompatActivity() {
             viewModel.groupSetting.collect {
                 val group = it.group
                 tvGroupName.text = it.group.groupName
+                Glide.with(this@GroupSettingsActivity).load(it.group.groupImage).into(civGroup)
 
                 cvDeleteGroup.setOnClickListener {
                     viewModel.deleteGroup(

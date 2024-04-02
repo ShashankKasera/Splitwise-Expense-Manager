@@ -53,12 +53,11 @@
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/circleImageView10"
+        android:id="@+id/civ_category_expenses_details"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginLeft="64dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/dining_icon_png"
         app:civ_circle_background_color="@color/primary"
         app:layout_constraintBottom_toBottomOf="@+id/ll_toolbar"
         app:layout_constraintStart_toStartOf="@+id/ll_toolbar"
@@ -74,7 +73,7 @@
         android:textColor="@color/black"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageView10" />
+        app:layout_constraintTop_toBottomOf="@+id/civ_category_expenses_details" />
 
     <TextView
         android:id="@+id/tv_paid_by"

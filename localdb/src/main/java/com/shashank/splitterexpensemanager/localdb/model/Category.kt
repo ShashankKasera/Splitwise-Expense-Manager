@@ -8,5 +8,5 @@ data class Category(
     @PrimaryKey(autoGenerate = true)
     var id: Long?,
     var categoryName: String,
-    var categoryImage: Int
+    var categoryImage: String
 )

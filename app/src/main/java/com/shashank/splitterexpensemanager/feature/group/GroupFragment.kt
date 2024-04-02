@@ -13,8 +13,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.core.CommonImages
 import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
@@ -57,6 +59,7 @@ class GroupFragment : Fragment() {
     lateinit var ivAddGroup: ImageView
     lateinit var tvOverall: TextView
     lateinit var tvClearFilter: TextView
+    lateinit var ivFirstTime: ImageView
     private val viewModel: GroupViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,6 +86,7 @@ class GroupFragment : Fragment() {
                     filter(personId)
                     clearFilter(personId)
                 }
+                llAddGroups.visible()
             }
         }
         llAddGroups.setOnClickListener {
@@ -121,6 +125,7 @@ class GroupFragment : Fragment() {
         llEmptyList = v.findViewById(R.id.ll_empty_list_group)
         tvClearFilter = v.findViewById(R.id.tv_clear_filter_groups)
         llFirstTime = v.findViewById(R.id.ll_first_time_group)
+        ivFirstTime = v.findViewById(R.id.iv_first_time_group)
         ivAddGroup = v.findViewById(R.id.iv_add_group)
         filterList.add(getString(R.string.all_groups))
         filterList.add(getString(R.string.outstanding_balance))
@@ -128,6 +133,9 @@ class GroupFragment : Fragment() {
         filterList.add(getString(R.string.group_that_owe_you))
 
         toolbar.setTitle(getString(R.string.dashboard))
+        Glide.with(this).load(CommonImages.FILTER_NORMAL_ICON).into(ivFilter)
+        Glide.with(this).load(CommonImages.GIRL_CHILLING_OUT_ICON).into(ivManChillingOut)
+        Glide.with(this).load(CommonImages.FRIENDS_MEET_EACH_OTHER_ICON).into(ivFirstTime)
     }
 
     private fun filter(personId: Long) {

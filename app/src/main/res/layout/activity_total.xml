@@ -61,11 +61,13 @@
                 android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civ_group_image_total"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/utrakhnd" />
+                    app:civ_circle_background_color="@color/primary_dark"/>
 
                 <TextView
+                    android:id="@+id/tv_group_name_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -101,7 +103,6 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="8dp"
-                    android:src="@drawable/filter_icon_png"
                     app:civ_circle_background_color="@color/primary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -158,7 +159,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:padding="8dp"
-                    android:src="@drawable/total_icon"
+                    android:rotation="90"
                     app:civ_circle_background_color="@color/primary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -218,7 +219,6 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:padding="8dp"
-                    android:src="@drawable/you_paid_icon_png"
                     app:civ_circle_background_color="@color/primary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -280,7 +280,6 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:padding="8dp"
-                    android:src="@drawable/your_share_icon"
                     app:civ_circle_background_color="@color/primary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

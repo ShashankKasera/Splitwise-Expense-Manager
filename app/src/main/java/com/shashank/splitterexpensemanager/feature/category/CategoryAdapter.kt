@@ -7,10 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.model.Category
 
 class CategoryAdapter(
+    private val context: CategoryActivity,
     private val categories: List<Category>,
     private val onItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
@@ -27,7 +29,7 @@ class CategoryAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvCategoryName.text = categories[position].categoryName
-        holder.civCategoryImage.setImageResource(categories[position].categoryImage)
+        Glide.with(context).load(categories[position].categoryImage).into(holder.civCategoryImage)
         holder.clCategory.setOnClickListener {
             onItemClickListener.onItemClick(position, categories[position])
         }
