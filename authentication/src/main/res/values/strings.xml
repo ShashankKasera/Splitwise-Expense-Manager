@@ -12,4 +12,7 @@
     <string name="sing_up_now">Sing Up Now</string>
     <string name="forget_password">Forget Password?</string>
     <string name="fill_all_fields">Fill All Fields</string>
+    <string name="please_enter_valid_email_id">please enter valid email id</string>
+    <string name="please_enter_valid_password">please enter valid password</string>
+    <string name="please_enter_valid_user_name">please enter valid user name</string>
 </resources>

@@ -134,4 +134,10 @@
     <string name="group_setting">Group Setting</string>
     <string name="repay_details">Repay Details</string>
     <string name="total">Total</string>
+    <string name="please_enter_group_name">please enter group name</string>
+    <string name="please_select_group_type">please select group type</string>
+    <string name="please_enter_valid_number">Please enter valid number</string>
+    <string name="please_enter_an_amount">please enter an amount</string>
+    <string name="you_must_enter_an_amount">you must enter an amount</string>
+    <string name="please_select_category">please select category</string>
 </resources>

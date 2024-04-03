@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.TimePicker
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -77,7 +78,7 @@ class AddPaymentActivity : AppCompatActivity() {
 
         val groupId: Long = intent.extras?.getLong(GROUP_ID) ?: -1
         val payerId: Long = intent.extras?.getLong(PAYER_ID) ?: -1
-        val amount: Double = intent.extras?.getDouble(AMOUNT) ?: 0.0
+        val amountUpdate: Double = intent.extras?.getDouble(AMOUNT) ?: 0.0
         val repayId: Long = intent.extras?.getLong(REPAY_ID) ?: -1
         val receiverId: Long = intent.extras?.getLong(RECEIVER_ID) ?: -1
         val selectRepay: Boolean = intent.extras?.getBoolean(SELECT_REPAY) ?: false
@@ -89,7 +90,7 @@ class AddPaymentActivity : AppCompatActivity() {
             viewModel.loadOweOrOwed(repayId)
             getInitialDataRepayForUpdate(repayId)
         } else {
-            getInitialDataRepayForInsert(amount, payerId, receiverId)
+            getInitialDataRepayForInsert(amountUpdate, payerId, receiverId)
         }
 
         clDate.setOnClickListener {
@@ -100,34 +101,44 @@ class AddPaymentActivity : AppCompatActivity() {
             getTimePicker()
         }
         cvSave.setOnClickListener {
-            val amount = etAmount.text.toString().trim().toDouble()
+            val amount =
+                when {
+                    etAmount.text.toString().trim().isEmpty() -> -1.0
+                    else -> etAmount.text.toString()
+                        .trim().toDouble()
+                }
             val date = tvDate.text.toString().trim()
             val time = tvTime.text.toString().trim()
             val description = tvDescription.text.toString().trim()
 
+
             if (updateFlag) {
-                updateRepay(
-                    repayId,
-                    payerId,
-                    receiverId,
-                    groupId,
-                    amount,
-                    date,
-                    time,
-                    description,
-                    selectRepay
-                )
+                if (validation(amount)) {
+                    updateRepay(
+                        repayId,
+                        payerId,
+                        receiverId,
+                        groupId,
+                        amount,
+                        date,
+                        time,
+                        description,
+                        selectRepay
+                    )
+                }
             } else {
-                getInitialData(
-                    payerId,
-                    receiverId,
-                    groupId,
-                    amount,
-                    date,
-                    time,
-                    description,
-                    selectRepay
-                )
+                if (validation(amount)) {
+                    getInitialData(
+                        payerId,
+                        receiverId,
+                        groupId,
+                        amount,
+                        date,
+                        time,
+                        description,
+                        selectRepay
+                    )
+                }
             }
         }
     }
@@ -343,6 +354,31 @@ class AddPaymentActivity : AppCompatActivity() {
                 tvReceiverName.text = it?.receiver?.name
                 tvWhoSplitName.text = it?.receiver?.name
             }
+        }
+    }
+
+    private fun validation(amount: Double) = when {
+        amount == -1.0 -> {
+            Toast.makeText(
+                this,
+                getString(R.string.please_enter_an_amount),
+                Toast.LENGTH_LONG
+            )
+                .show()
+            false
+        }
+
+        amount <= 0.0 -> {
+            Toast.makeText(
+                this,
+                getString(R.string.you_must_enter_an_amount),
+                Toast.LENGTH_LONG
+            ).show()
+            false
+        }
+
+        else -> {
+            true
         }
     }
 }

@@ -17,6 +17,8 @@ import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.GroupTypeImages
 import com.shashank.splitterexpensemanager.core.UPDATE_GROUP
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
+import com.shashank.splitterexpensemanager.core.extension.showToast
 import com.shashank.splitterexpensemanager.feature.addgroup.model.GroupType
 import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
 import com.shashank.splitterexpensemanager.localdb.model.Group
@@ -38,11 +40,11 @@ class AddGroupActivity : AppCompatActivity() {
     private val viewModel: AddGroupViewModel by viewModels()
     private lateinit var groupName: EditText
     private lateinit var tvDone: TextView
-    private lateinit var ivBack: ImageView
-    private lateinit var sGroupName: String
-    private lateinit var sGroupType: String
-    private lateinit var sGroupImage: String
+    private var sGroupName = String.EMPTY
+    private var sGroupType = String.EMPTY
+    private var sGroupImage = String.EMPTY
     private lateinit var groupTypeAdapter: GroupTypeAdapter
+    private lateinit var ivBack: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,9 +61,9 @@ class AddGroupActivity : AppCompatActivity() {
         tvDone.setOnClickListener {
             sGroupName = groupName.text.toString().trim()
             if (updateGroupFlag) {
-                updateGroup(groupId)
+                if (validation()) updateGroup(groupId)
             } else {
-                createGroup()
+                if (validation()) createGroup()
             }
             lifecycleScope.launch {
                 viewModel.groupAdded.collect {
@@ -118,57 +120,63 @@ class AddGroupActivity : AppCompatActivity() {
     private fun setUpRecyclerView() {
         groupTypeList.add(GroupType(getString(R.string.trip), GroupTypeImages.TRIP_CREATE_GROUP))
         groupTypeList.add(GroupType(getString(R.string.home), GroupTypeImages.HOME_CREATE_GROUP))
-        groupTypeList.add(
-            GroupType(
-                getString(R.string.couple),
-                GroupTypeImages.COUPLE_CREATE_GROUP
-            )
-        )
+        groupTypeList.add(GroupType(getString(R.string.couple), GroupTypeImages.COUPLE_CREATE_GROUP))
         groupTypeList.add(GroupType(getString(R.string.other), GroupTypeImages.OTHER_CREATE_GROUP))
 
-        groupTypeAdapter =
-            GroupTypeAdapter(
-                this,
-                selectPosition,
-                groupTypeList,
-                object : GroupTypeAdapter.OnItemClickListener {
-                    override fun onItemClick(position: Int, data: GroupType) {
-                        sGroupType = data.name
-                        if (!sGroupType.equals("")) {
-                            when (sGroupType) {
-                                getString(R.string.trip) -> {
-                                    Glide.with(this@AddGroupActivity)
-                                        .load(GroupTypeImages.TRIP_CREATE_GROUP).into(civGroupImage)
-                                    sGroupImage = GroupTypeImages.TRIP_CREATE_GROUP
-                                }
+        groupTypeAdapter = GroupTypeAdapter(
+            this,
+            selectPosition,
+            groupTypeList,
+            object : GroupTypeAdapter.OnItemClickListener {
+                override fun onItemClick(position: Int, data: GroupType) {
+                    sGroupType = data.name
+                    if (!sGroupType.equals("")) {
+                        when (sGroupType) {
+                            getString(R.string.trip) -> {
+                                Glide.with(this@AddGroupActivity)
+                                    .load(GroupTypeImages.TRIP_CREATE_GROUP).into(civGroupImage)
+                                sGroupImage = GroupTypeImages.TRIP_CREATE_GROUP
+                            }
 
-                                getString(R.string.couple) -> {
-                                    Glide.with(this@AddGroupActivity)
-                                        .load(GroupTypeImages.COUPLE_CREATE_GROUP)
-                                        .into(civGroupImage)
-                                    sGroupImage = GroupTypeImages.COUPLE_CREATE_GROUP
-                                }
+                            getString(R.string.couple) -> {
+                                Glide.with(this@AddGroupActivity)
+                                    .load(GroupTypeImages.COUPLE_CREATE_GROUP).into(civGroupImage)
+                                sGroupImage = GroupTypeImages.COUPLE_CREATE_GROUP
+                            }
 
-                                getString(R.string.home) -> {
-                                    Glide.with(this@AddGroupActivity)
-                                        .load(GroupTypeImages.HOME_CREATE_GROUP).into(civGroupImage)
-                                    sGroupImage = GroupTypeImages.HOME_CREATE_GROUP
-                                }
+                            getString(R.string.home) -> {
+                                Glide.with(this@AddGroupActivity)
+                                    .load(GroupTypeImages.HOME_CREATE_GROUP).into(civGroupImage)
+                                sGroupImage = GroupTypeImages.HOME_CREATE_GROUP
+                            }
 
-                                getString(R.string.other) -> {
-                                    Glide.with(this@AddGroupActivity)
-                                        .load(GroupTypeImages.OTHER_CREATE_GROUP)
-                                        .into(civGroupImage)
-                                    sGroupImage = GroupTypeImages.OTHER_CREATE_GROUP
-                                }
+                            getString(R.string.other) -> {
+                                Glide.with(this@AddGroupActivity)
+                                    .load(GroupTypeImages.OTHER_CREATE_GROUP).into(civGroupImage)
+                                sGroupImage = GroupTypeImages.OTHER_CREATE_GROUP
                             }
                         }
                     }
                 }
-            )
+            }
+        )
         recyclerView.adapter = groupTypeAdapter
         val layoutManager =
             LinearLayoutManager(this@AddGroupActivity, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.layoutManager = layoutManager
+    }
+
+    private fun validation() = when {
+        sGroupName.isEmpty() -> {
+            showToast(getString(R.string.please_enter_group_name))
+            false
+        }
+
+        sGroupType.isEmpty() -> {
+            showToast(getString(R.string.please_select_group_type))
+            false
+        }
+
+        else -> true
     }
 }

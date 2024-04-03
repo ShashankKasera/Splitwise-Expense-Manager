@@ -15,6 +15,8 @@ import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import com.shashank.splitterexpensemanager.core.extension.gone
+import com.shashank.splitterexpensemanager.core.extension.isValidGmail
+import com.shashank.splitterexpensemanager.core.extension.isValidUserName
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.shashank.splitterexpensemanager.localdb.model.Category
@@ -55,10 +57,7 @@ class RegistrationActivity : AppCompatActivity() {
             sUserName = userName.text.toString().trim()
             sEmailAddress = emailAddress.text.toString().trim()
             sPassword = password.text.toString().trim()
-            if (sUserName.isEmpty() && sEmailAddress.isEmpty() && sPassword.isEmpty()) {
-                Toast.makeText(this, getString(R.string.fill_all_fields), Toast.LENGTH_LONG)
-                    .show()
-            } else {
+            if (validation()) {
                 viewModel.registration(sUserName, sEmailAddress, sPassword)
             }
         }
@@ -67,6 +66,8 @@ class RegistrationActivity : AppCompatActivity() {
             viewModel.networkState.collect {
                 when (it) {
                     is NetworkCallState.Error -> {
+                        Toast.makeText(this@RegistrationActivity, it.errorMsg, Toast.LENGTH_LONG)
+                            .show()
                         loader.gone()
                     }
 
@@ -201,4 +202,43 @@ class RegistrationActivity : AppCompatActivity() {
             )
         }
     }
+
+    private fun validation() =
+        when {
+            sUserName.isEmpty() || sEmailAddress.isEmpty() || sPassword.isEmpty() -> {
+                Toast.makeText(this, getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()
+                false
+            }
+
+            !sUserName.isValidUserName(sUserName) -> {
+                Toast.makeText(
+                    this,
+                    getString(R.string.please_enter_valid_user_name),
+                    Toast.LENGTH_LONG
+                ).show()
+                false
+            }
+
+            !sEmailAddress.isValidGmail(sEmailAddress) -> {
+                Toast.makeText(
+                    this,
+                    getString(R.string.please_enter_valid_email_id),
+                    Toast.LENGTH_LONG
+                ).show()
+                false
+            }
+
+            sPassword.length < 5 -> {
+                Toast.makeText(
+                    this,
+                    getString(R.string.please_enter_valid_password),
+                    Toast.LENGTH_LONG
+                ).show()
+                false
+            }
+
+            else -> {
+                true
+            }
+        }
 }

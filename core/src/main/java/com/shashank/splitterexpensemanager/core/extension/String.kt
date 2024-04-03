@@ -21,4 +21,18 @@ fun String.capitalizeFirstLetter(input: String): String {
     }
 }
 
+fun String.isValidGmail(email: String): Boolean {
+    val gmailPattern = "[a-zA-Z0-9._%+-]+@gmail\\.com"
+    val regex = Regex(gmailPattern)
+    return regex.matches(email)
+}
+
+fun String.isValidUserName(username: String): Boolean {
+    // Define your username criteria here
+    val usernameRegex = "^[a-zA-Z]+\$".toRegex()
+
+    // Check if the username matches the regex pattern
+    return username.matches(usernameRegex)
+}
+
 

@@ -29,6 +29,7 @@ import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.UPDATE_EXPENSES
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.extension.gone
+import com.shashank.splitterexpensemanager.core.extension.showToast
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.feature.category.CategoryActivity
 import com.shashank.splitterexpensemanager.feature.groupmember.GroupMemberActivity
@@ -70,7 +71,7 @@ class AddExpensesActivity : AppCompatActivity() {
     lateinit var tvDescription: EditText
     lateinit var tvWhoPay: TextView
     lateinit var cvSave: CardView
-    private var categoryId: Long = 0
+    private var categoryId: Long = -1
     private var personId: Long = 0
     private val viewModel: AddExpensesViewModel by viewModels()
 
@@ -136,15 +137,44 @@ class AddExpensesActivity : AppCompatActivity() {
         }
 
         cvSave.setOnClickListener {
-            val amount = etAmount.text.toString().trim().toDouble()
+            val amount =
+                when {
+                    etAmount.text.toString().trim().isEmpty() -> -1.0
+                    else -> etAmount.text.toString()
+                        .trim().toDouble()
+                }
             val date = tvDate.text.toString().trim()
             val time = tvTime.text.toString().trim()
             val description = tvDescription.text.toString().trim()
             val name = tvWhoPay.text.toString().trim()
-            if (updateFlag) {
-                updateExpenses(expensesId, personId, groupId, amount, date, time, description, name)
-            } else {
-                addExpenses(personId, groupId, amount, date, time, description, name)
+            when {
+                updateFlag -> {
+                    when {
+                        validation(amount, categoryId) -> updateExpenses(
+                            expensesId,
+                            personId,
+                            groupId,
+                            amount,
+                            date,
+                            time,
+                            description,
+                            name
+                        )
+                    }
+                }
+                else -> {
+                    when {
+                        validation(amount, categoryId) -> addExpenses(
+                            personId,
+                            groupId,
+                            amount,
+                            date,
+                            time,
+                            description,
+                            name
+                        )
+                    }
+                }
             }
         }
     }
@@ -189,8 +219,7 @@ class AddExpensesActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.group.collect {
                 if (it != null) tvGroupName.text = it.groupName
-                Glide.with(this@AddExpensesActivity).load(it?.groupImage ?: "")
-                    .into(civGroup)
+                Glide.with(this@AddExpensesActivity).load(it?.groupImage ?: "").into(civGroup)
             }
         }
     }
@@ -349,4 +378,25 @@ class AddExpensesActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun validation(amount: Double, categoryId: Long) =
+
+        when {
+            amount == -1.0 -> {
+                showToast(getString(R.string.please_enter_an_amount))
+                false
+            }
+
+            amount <= 0.0 -> {
+                showToast(getString(R.string.you_must_enter_an_amount))
+                false
+            }
+
+            categoryId == -1L -> {
+                showToast(getString(R.string.please_select_category))
+                false
+            }
+
+            else -> true
+        }
 }
