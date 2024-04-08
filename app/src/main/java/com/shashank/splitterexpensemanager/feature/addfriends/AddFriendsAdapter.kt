@@ -9,9 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
-import com.shashank.splitterexpensemanager.model.GroupMember
 import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.CommonImages
+import com.shashank.splitterexpensemanager.core.FEMALE
+import com.shashank.splitterexpensemanager.core.MALE
+import com.shashank.splitterexpensemanager.model.GroupMember
 
 class AddFriendsAdapter(
     private val groupId: Long,
@@ -33,7 +35,11 @@ class AddFriendsAdapter(
         val context = holder.itemView.context
         holder.tvName.text = person[position].name
         holder.tvNumber.text = person[position].number.toString()
-        Glide.with(context).load(CommonImages.USER_ICON).into(holder.civImage)
+        if (person[position].gender == MALE) {
+            Glide.with(context).load(CommonImages.USER_ICON).into(holder.civImage)
+        } else if (person[position].gender == FEMALE) {
+            Glide.with(context).load(CommonImages.GIRL).into(holder.civImage)
+        }
 
         holder.checkBox.isChecked = false
         for (i in 0 until groupMember.size) {

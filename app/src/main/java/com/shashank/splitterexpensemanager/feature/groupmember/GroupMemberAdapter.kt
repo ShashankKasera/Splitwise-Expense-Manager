@@ -10,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.CommonImages
+import com.shashank.splitterexpensemanager.core.FEMALE
+import com.shashank.splitterexpensemanager.core.MALE
 import de.hdodenhof.circleimageview.CircleImageView
 
 class GroupMemberAdapter(
@@ -30,11 +32,14 @@ class GroupMemberAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val context = holder.itemView.context
         holder.tvName.text = person[position].name
-        holder.tvNumber.text = person[position].number
         holder.cvGroupMember.setOnClickListener {
             onItemClickListener.onItemClick(person[position])
         }
-        Glide.with(context).load(CommonImages.USER_ICON).into(holder.civGroupMember)
+        if (person[position].gender == MALE) {
+            Glide.with(context).load(CommonImages.USER_ICON).into(holder.civGroupMember)
+        } else if (person[position].gender == FEMALE) {
+            Glide.with(context).load(CommonImages.GIRL).into(holder.civGroupMember)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -43,7 +48,6 @@ class GroupMemberAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvName: TextView = itemView.findViewById(R.id.tv_group_member_name)
-        val tvNumber: TextView = itemView.findViewById(R.id.tv_group_member_number)
         val cvGroupMember: CardView = itemView.findViewById(R.id.cv_add_group_member)
         val civGroupMember: CircleImageView = itemView.findViewById(R.id.civ_group_member)
     }

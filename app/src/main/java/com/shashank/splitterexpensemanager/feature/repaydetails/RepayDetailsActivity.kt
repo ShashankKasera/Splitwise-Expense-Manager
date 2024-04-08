@@ -19,6 +19,7 @@ import com.shashank.splitterexpensemanager.core.UPDATE_REPAY
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
@@ -73,10 +74,10 @@ class RepayDetailsActivity : AppCompatActivity() {
                     }
                     tvDateTime.text = getString(R.string.date_time, it.repay.date, it.repay.time)
 
-                    if (it.repay.description != "") {
+                    if (it.repay.description != String.EMPTY) {
                         tvdescription.visible()
                         tvdescription.text =
-                            getString(R.string.description_expensese_details, it.repay.description)
+                            getString(R.string.description_expenses_details, it.repay.description)
                     } else {
                         tvdescription.gone()
                     }

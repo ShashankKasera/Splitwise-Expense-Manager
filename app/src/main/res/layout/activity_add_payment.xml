@@ -7,95 +7,89 @@
     tools:context=".feature.addpayment.AddPaymentActivity">
 
     <LinearLayout
-        android:id="@+id/tb_add_payment"
+        android:id="@+id/ll_top"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:orientation="horizontal"
-        android:background="@color/primary_mid"
-        android:elevation="4dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/iv_tb_add_payment"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/back_icon"
-            android:tint="@color/white"
-            android:layout_gravity="center"
-            android:layout_marginStart="24sp"/>
-        <TextView
-            android:id="@+id/tv_tb_add_payment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_gravity="center"
-            android:textSize="20sp"
-            android:textColor="@color/white" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tb_add_payment">
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_curve_group"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_top"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginTop="-90dp"
-            app:cardCornerRadius="100dp"
-            app:cardElevation="16dp"
+            android:layout_height="wrap_content"
+            app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="80dp"
-                android:background="@drawable/main_gradient"
-                android:gravity="center"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:id="@+id/cl_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    android:background="@drawable/wave_shap">
+
+                    <ImageView
+                        android:id="@+id/iv_tb_add_payment"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/back_icon"
+                        android:tint="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_tb_add_payment"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_tb_add_payment" />
+
+                    <TextView
+                        android:id="@+id/tv_tb_add_payment"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginBottom="24dp"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/iv_tb_add_payment" />
+
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/civ_payer"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:layout_marginStart="24dp"
+                        android:layout_marginStart="62dp"
+                        android:layout_marginTop="72dp"
+                        android:src="@drawable/user"
                         app:civ_circle_background_color="@color/primary_dark"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_tb_add_payment" />
 
                     <ImageView
                         android:id="@+id/iv_arrow"
-                        android:layout_width="60dp"
+                        android:layout_width="0dp"
                         android:layout_height="60dp"
+                        android:layout_marginTop="72dp"
+                        android:tint="@color/dark_grey"
                         app:layout_constraintEnd_toStartOf="@+id/civ_receiver"
                         app:layout_constraintStart_toEndOf="@+id/civ_payer"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_tb_add_payment" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/civ_receiver"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginTop="72dp"
+                        android:layout_marginEnd="62dp"
+                        android:src="@drawable/user"
                         app:civ_circle_background_color="@color/primary_dark"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.53" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_tb_add_payment" />
 
                     <TextView
                         android:id="@+id/tv_payer_name_repay"
@@ -103,9 +97,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="@string/group_name"
-                        android:textColor="@color/white"
+                        android:textColor="@color/dark_grey"
                         android:textSize="16sp"
                         android:textStyle="bold"
+                        android:lines="1"
                         app:layout_constraintEnd_toEndOf="@+id/civ_payer"
                         app:layout_constraintStart_toStartOf="@+id/civ_payer"
                         app:layout_constraintTop_toBottomOf="@+id/civ_payer" />
@@ -116,17 +111,29 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="@string/group_name"
-                        android:textColor="@color/white"
+                        android:textColor="@color/dark_grey"
                         android:textSize="16sp"
+                        android:lines="1"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/civ_receiver"
                         app:layout_constraintStart_toStartOf="@+id/civ_receiver"
                         app:layout_constraintTop_toBottomOf="@+id/civ_receiver" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 
-        </com.google.android.material.card.MaterialCardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_top">
+
 
         <androidx.cardview.widget.CardView
 
@@ -134,7 +141,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginRight="24dp"
             android:background="@color/white"
             app:cardCornerRadius="8dp"
@@ -155,8 +162,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civ_rs"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
                     android:padding="8dp"
                     app:civ_border_color="#FF000000"
                     app:civ_circle_background_color="@color/primary"
@@ -176,6 +183,7 @@
                     android:inputType="number"
                     android:lines="1"
                     android:textColor="@color/black"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/civ_rs"
@@ -210,8 +218,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civ_date"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
                     android:padding="8dp"
                     app:civ_border_color="#FF000000"
                     app:civ_circle_background_color="@color/primary"
@@ -230,7 +238,7 @@
                     android:hint="@string/date"
                     android:lines="1"
                     android:textColor="@color/black"
-                    android:textSize="18dp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/civ_date"
@@ -267,8 +275,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civ_time"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
                     android:padding="8dp"
                     android:rotation="90"
                     app:civ_circle_background_color="@color/primary"
@@ -287,7 +295,7 @@
                     android:hint="@string/time"
                     android:lines="1"
                     android:textColor="@color/black"
-                    android:textSize="18dp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/civ_time"
@@ -323,8 +331,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civ_description"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
                     android:padding="8dp"
                     app:civ_border_color="#FF000000"
                     app:civ_circle_background_color="@color/primary"
@@ -344,6 +352,7 @@
                     android:inputType="text"
                     android:lines="1"
                     android:textColor="@color/black"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/civ_description"
@@ -380,7 +389,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:background="@color/primary"
-                app:cardCornerRadius="50dp"
+                app:cardCornerRadius="52dp"
                 app:cardElevation="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tv_split"
@@ -397,8 +406,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:padding="8dp"
+                        android:padding="4dp"
                         android:text="@string/who_pay"
+                        android:lines="1"
                         android:textColor="@color/white" />
                 </LinearLayout>
 
@@ -422,7 +432,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:background="@color/primary"
-                app:cardCornerRadius="50dp"
+                app:cardCornerRadius="52dp"
                 app:cardElevation="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -439,8 +449,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:padding="8dp"
+                        android:padding="4dp"
                         android:text="@string/equaly"
+                        android:lines="1"
                         android:textColor="@color/white" />
                 </LinearLayout>
 
@@ -451,14 +462,14 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_save_repay"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="24dp"
             android:layout_marginBottom="16dp"
             android:background="@color/primary"
-            app:cardCornerRadius="50dp"
+            app:cardCornerRadius="52dp"
             app:cardElevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -477,7 +488,7 @@
                     android:gravity="center"
                     android:text="@string/save"
                     android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
 
@@ -489,9 +500,9 @@
         android:id="@+id/ll_dp_repay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/transparent"
         android:gravity="center"
         android:visibility="gone"
-        android:background="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -501,18 +512,18 @@
             android:id="@+id/dp_repay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:datePickerMode="calendar"
-            android:layout_margin="50dp"
-            android:background="@color/white"/>
+            android:layout_margin="52dp"
+            android:background="@color/white"
+            android:datePickerMode="calendar" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_TimePicker_repay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/transparent"
         android:gravity="center"
         android:visibility="gone"
-        android:background="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -522,9 +533,9 @@
             android:id="@+id/timePicker_repay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="52dp"
             android:background="@color/white"
-            android:layout_margin="50dp"
-            android:timePickerMode="clock"/>
+            android:timePickerMode="clock" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

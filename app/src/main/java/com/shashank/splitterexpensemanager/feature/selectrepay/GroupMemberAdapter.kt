@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.CommonImages
+import com.shashank.splitterexpensemanager.core.FEMALE
+import com.shashank.splitterexpensemanager.core.MALE
 import de.hdodenhof.circleimageview.CircleImageView
 
 class GroupMemberAdapter(
@@ -50,7 +52,11 @@ class GroupMemberAdapter(
         holder.checkBox.setOnClickListener {
             onItemClickListener.onItemClick(position, person[position], holder.checkBox.isChecked)
         }
-        Glide.with(context).load(CommonImages.USER_ICON).into(holder.civGroupMember)
+        if (person[position].gender == MALE) {
+            Glide.with(context).load(CommonImages.USER_ICON).into(holder.civGroupMember)
+        } else if (person[position].gender == FEMALE) {
+            Glide.with(context).load(CommonImages.GIRL).into(holder.civGroupMember)
+        }
     }
 
     override fun getItemCount(): Int {

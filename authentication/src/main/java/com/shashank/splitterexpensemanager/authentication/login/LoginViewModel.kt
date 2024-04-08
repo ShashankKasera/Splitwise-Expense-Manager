@@ -10,6 +10,7 @@ import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.PERSON
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.shashank.splitterexpensemanager.localdb.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -69,9 +70,18 @@ class LoginViewModel @Inject constructor(
             try {
                 val snapshot = databaseReference.get().await()
                 val person = snapshot.getValue(Person::class.java)
-                val userName = person?.name ?: ""
-                val userEmailAddress = person?.emailId ?: ""
-                loginRepository.insertPerson(PersonEntity(null, userName, userEmailAddress, ""))
+                val userName = person?.name ?: String.EMPTY
+                val userEmailAddress = person?.emailId ?: String.EMPTY
+                val userGender = person?.gender ?: String.EMPTY
+                loginRepository.insertPerson(
+                    PersonEntity(
+                        null,
+                        userName,
+                        userEmailAddress,
+                        String.EMPTY,
+                        userGender
+                    )
+                )
                 loadPersonByEmail(userEmailAddress)
             } catch (e: Exception) {
                 _networkState.emit(NetworkCallState.Error(e.message.toString()))

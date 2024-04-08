@@ -2,6 +2,7 @@ package com.shashank.splitterexpensemanager.feature.createfriens
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.feature.createfriens.repository.CreateFriendsRepository
 import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,9 +14,9 @@ class CreateFriendsViewModel @Inject constructor(
     var createFriendsRepository: CreateFriendsRepository,
 ) : ViewModel() {
 
-    fun insertPerson(name: String, number: String) {
+    fun insertPerson(name: String, number: String, gender: String) {
         viewModelScope.launch {
-            createFriendsRepository.insertPerson(Person(null, name, "", number))
+            createFriendsRepository.insertPerson(Person(null, name, String.EMPTY, number, gender))
         }
     }
 }

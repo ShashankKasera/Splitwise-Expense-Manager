@@ -61,11 +61,12 @@
     <string name="owes_you_friends">owes You</string>
     <string name="rs">Rs. %1$s</string>
     <string name="you_owes">You owes</string>
-    <string name="paid_amount_expensese_details">Paid Amount %1$s</string>
-    <string name="paid_by_expensese_details">Paid by %1$s</string>
-    <string name="date_expensese_details">Date %1$s</string>
-    <string name="time_expensese_details">Time %1$s</string>
-    <string name="description_expensese_details">Description -: %1$s</string>
+    <string name="paid_amount_expenses_details">Paid Amount %1$s</string>
+    <string name="paid_by_expenses_details">Paid by %1$s</string>
+    <string name="date_expenses_details">Date -: %1$s</string>
+    <string name="time_expenses_details">Time -: %1$s</string>
+    <string name="description_expenses_details">Description -: %1$s</string>
+    <string name="category_expenses_details">Category -: %1$s</string>
     <string name="owes">%1$s owes</string>
     <string name="owes_balances">owes</string>
     <string name="you_owes_group_details">You owes %1$s</string>
@@ -140,4 +141,12 @@
     <string name="please_enter_an_amount">please enter an amount</string>
     <string name="you_must_enter_an_amount">you must enter an amount</string>
     <string name="please_select_category">please select category</string>
+    <string name="nothing_to_see_here">Nothing to see here</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="enter_a_name">Enter a name</string>
+    <string name="enter_a_valid_mobile_number">Enter a valid mobile number</string>
+    <string name="select_gender">Select gender</string>
+    <string name="enter_a_number">Enter a number</string>
 </resources>

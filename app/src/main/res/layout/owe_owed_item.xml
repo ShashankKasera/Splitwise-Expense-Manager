@@ -9,11 +9,12 @@
 
     <TextView
         android:id="@+id/tv_owe_owed_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:text="tjgjnd"
+        android:layout_marginEnd="8sp"
         android:textColor="@color/dark_grey"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_owe_owed_amount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:text="thb"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_owe_owed_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/tv_owe_owed_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

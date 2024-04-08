@@ -18,7 +18,10 @@ import com.shashank.splitterexpensemanager.core.UPDATE_EXPENSES
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
+import com.shashank.splitterexpensemanager.core.extension.gone
+import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.model.OweOrOwedWithPerson
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
@@ -33,6 +36,7 @@ class ExpensesDetailsActivity : AppCompatActivity() {
     lateinit var tvPaidBy: TextView
     lateinit var tvTime: TextView
     lateinit var tvDate: TextView
+    lateinit var tvCategory: TextView
     lateinit var ivDelete: ImageView
     lateinit var ivUpdate: ImageView
     lateinit var tvdescription: TextView
@@ -62,16 +66,23 @@ class ExpensesDetailsActivity : AppCompatActivity() {
                 if (it != null) {
                     tvAmount.text =
                         getString(
-                            R.string.paid_amount_expensese_details,
+                            R.string.paid_amount_expenses_details,
                             (it.expense.amount).formatNumber(2)
                         )
                     Glide.with(this@ExpensesDetailsActivity).load(it.category.categoryImage)
                         .into(civCategory)
-                    tvPaidBy.text = getString(R.string.paid_by_expensese_details, it.expense.name)
-                    tvDate.text = getString(R.string.date_expensese_details, it.expense.date)
-                    tvTime.text = getString(R.string.time_expensese_details, it.expense.time)
-                    tvdescription.text =
-                        getString(R.string.description_expensese_details, it.expense.description)
+                    tvPaidBy.text = getString(R.string.paid_by_expenses_details, it.expense.name)
+                    tvDate.text = getString(R.string.date_expenses_details, it.expense.date)
+                    tvTime.text = getString(R.string.time_expenses_details, it.expense.time)
+                    tvCategory.text =
+                        getString(R.string.category_expenses_details, it.category.categoryName)
+                    if (!it.expense.description.equals(String.EMPTY)) {
+                        tvdescription.text =
+                            getString(R.string.description_expenses_details, it.expense.description)
+                        tvdescription.visible()
+                    } else {
+                        tvdescription.gone()
+                    }
                 }
             }
         }
@@ -108,6 +119,7 @@ class ExpensesDetailsActivity : AppCompatActivity() {
     private fun init() {
         recyclerView = findViewById(R.id.rv_group_expense)
         tvAmount = findViewById(R.id.tv_paid_amount_expenses_details)
+        tvCategory = findViewById(R.id.tv_category)
         civCategory = findViewById(R.id.civ_category_expenses_details)
         tvPaidBy = findViewById(R.id.tv_paid_by)
         tvDate = findViewById(R.id.tv_date)

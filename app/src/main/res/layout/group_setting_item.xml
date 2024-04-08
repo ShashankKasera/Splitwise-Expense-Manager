@@ -25,9 +25,10 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/civ_group_friend_setting"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
                 android:padding="8dp"
+                app:civ_circle_background_color="@color/primary_mid"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,8 +38,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/name"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:layout_marginEnd="16dp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 app:layout_constraintBottom_toBottomOf="@+id/civ_group_friend_setting"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/civ_group_friend_setting"

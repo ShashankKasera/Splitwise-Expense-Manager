@@ -28,11 +28,13 @@ fun String.isValidGmail(email: String): Boolean {
 }
 
 fun String.isValidUserName(username: String): Boolean {
-    // Define your username criteria here
-    val usernameRegex = "^[a-zA-Z]+\$".toRegex()
-
-    // Check if the username matches the regex pattern
+    val usernameRegex = "^[a-zA-Z\\s]+\$".toRegex()
     return username.matches(usernameRegex)
 }
 
+
+fun String.isValidMobileNumber(number: String): Boolean {
+    val pattern = Regex("^\\d{10}\$")
+    return pattern.matches(number)
+}
 

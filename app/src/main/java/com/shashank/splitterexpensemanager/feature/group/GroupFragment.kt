@@ -57,6 +57,7 @@ class GroupFragment : Fragment() {
     lateinit var llFirstTime: LinearLayout
     lateinit var llAddGroups: LinearLayout
     lateinit var ivAddGroup: ImageView
+    lateinit var ivAddGroupLL: ImageView
     lateinit var tvOverall: TextView
     lateinit var tvClearFilter: TextView
     lateinit var ivFirstTime: ImageView
@@ -77,6 +78,7 @@ class GroupFragment : Fragment() {
                     llFirstTime.visible()
                     ivFilter.gone()
                     tvOverall.gone()
+                    llAddGroups.visible()
                 } else if (it != -1) {
                     llFirstTime.gone()
                     ivFilter.visible()
@@ -85,8 +87,8 @@ class GroupFragment : Fragment() {
                     getAllGroups()
                     filter(personId)
                     clearFilter(personId)
+                    llAddGroups.gone()
                 }
-                llAddGroups.visible()
             }
         }
         llAddGroups.setOnClickListener {
@@ -127,6 +129,7 @@ class GroupFragment : Fragment() {
         llFirstTime = v.findViewById(R.id.ll_first_time_group)
         ivFirstTime = v.findViewById(R.id.iv_first_time_group)
         ivAddGroup = v.findViewById(R.id.iv_add_group)
+        ivAddGroupLL = v.findViewById(R.id.iv_add_group_ll)
         filterList.add(getString(R.string.all_groups))
         filterList.add(getString(R.string.outstanding_balance))
         filterList.add(getString(R.string.group_you_owe))
@@ -136,6 +139,8 @@ class GroupFragment : Fragment() {
         Glide.with(this).load(CommonImages.FILTER_NORMAL_ICON).into(ivFilter)
         Glide.with(this).load(CommonImages.GIRL_CHILLING_OUT_ICON).into(ivManChillingOut)
         Glide.with(this).load(CommonImages.FRIENDS_MEET_EACH_OTHER_ICON).into(ivFirstTime)
+        Glide.with(this).load(CommonImages.ADD_NEW_GROUP).into(ivAddGroup)
+        Glide.with(this).load(CommonImages.ADD_NEW_GROUP).into(ivAddGroupLL)
     }
 
     private fun filter(personId: Long) {

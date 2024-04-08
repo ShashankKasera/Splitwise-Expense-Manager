@@ -13,6 +13,7 @@ import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.model.ExpenseWithCategoryAndPerson
@@ -57,7 +58,7 @@ class ExpensesAdapter(
             }
 
             val categoryImage = expenseItem?.category?.categoryImage
-            if (categoryImage != null && !categoryImage.equals("")) {
+            if (categoryImage != null && !categoryImage.equals(String.EMPTY)) {
                 Glide.with(context).load(categoryImage).into(civCategory)
             }
 
