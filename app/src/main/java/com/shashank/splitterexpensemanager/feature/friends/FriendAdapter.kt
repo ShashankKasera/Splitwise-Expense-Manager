@@ -17,7 +17,7 @@ class FriendAdapter : RecyclerView.Adapter<FriendAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.i("jg", "onBindViewHolder: ")
+        Log.i("onBindViewHolder", "onBindViewHolder: ")
     }
 
     override fun getItemCount(): Int {
