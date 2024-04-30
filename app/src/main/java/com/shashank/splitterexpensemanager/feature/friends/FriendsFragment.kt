@@ -115,6 +115,7 @@ class FriendsFragment : Fragment() {
         super.onResume()
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
         viewModel.getAllPersonExcept(personId)
+        viewModel.loadAllFriends(personId)
     }
 
     private fun init(v: View) {
