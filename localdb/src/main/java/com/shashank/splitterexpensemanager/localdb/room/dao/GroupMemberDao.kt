@@ -28,7 +28,17 @@ interface GroupMemberDao {
             "INNER JOIN person ON Person.id == GroupMember.personId " +
             "WHERE GroupMember.groupId == :groupId"
     )
-    fun loadAllGroupMemberWithGroupId(groupId: Long): Flow<List<Person>>
+    fun loadAllGroupMemberWithGroupIdFlow(groupId: Long): Flow<List<Person>>
+
+
+    @Query(
+        "SELECT * " +
+            "FROM GroupMember " +
+            "INNER JOIN person ON Person.id == GroupMember.personId " +
+            "WHERE GroupMember.groupId == :groupId"
+    )
+    fun loadAllGroupMemberWithGroupId(groupId: Long): List<Person>
+
 
     @Query("DELETE FROM `GroupMember` WHERE `GroupMember`.personId = :personId;")
     fun deleteGroupMember(personId: Long)

@@ -17,7 +17,7 @@ class SplitAmountAdapter : RecyclerView.Adapter<SplitAmountAdapter.ViewHolder>()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.i("jek", "onBindViewHolder: ")
+        Log.i("onBindViewHolder", "onBindViewHolder: ")
     }
 
     override fun getItemCount(): Int {
