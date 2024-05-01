@@ -16,7 +16,7 @@ class ActivityAdapter : RecyclerView.Adapter<ActivityAdapter.ViewHolder>() {
         return ViewHolder(view)
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.i("hjkbe", "onBindViewHolder: ")
+        Log.i("onBindViewHolder", "onBindViewHolder: ")
     }
     override fun getItemCount(): Int {
         return 10
