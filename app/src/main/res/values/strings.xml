@@ -47,8 +47,10 @@
     <string name="you_lent">You Lent</string>
     <string name="you_borrowed">You Borrowed</string>
     <string name="you_re_the_only_one_here">You\'re the only one here!</string>
-    <string name="you_owe_rs_overall">You Owe Rs %1$s Overall</string>
+    <string name="you_owe_rs_overall">You Are Owe Rs %1$s Overall</string>
+    <string name="you_owe_rs">You Are Owe Rs %1$s</string>
     <string name="you_are_owed_rs_overall">You Are Owed Rs %1$s Overall</string>
+    <string name="you_are_owed_rs">You Are Owed Rs %1$s</string>
     <string name="you_are_settled_up_overall">You are settled up overall</string>
     <string name="you_are_all_settled_up_in_this_group">You are all settled up in this group</string>
     <string name="plus_other_balance">Plus %d Other Balance</string>
@@ -67,4 +69,5 @@
     <string name="add_people_to_group">Add People to Group</string>
     <string name="get_back">Get Back</string>
     <string name="owes_group_member">Owes</string>
+    <string name="you_settled_up">You Settled Up</string>
 </resources>
