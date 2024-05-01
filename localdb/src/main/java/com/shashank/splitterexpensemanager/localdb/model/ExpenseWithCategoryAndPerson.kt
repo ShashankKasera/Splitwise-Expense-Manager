@@ -4,7 +4,8 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 data class ExpenseWithCategoryAndPerson(
-    @Embedded val expense: Expenses,
+    @Embedded
+    val expense: Expenses,
     @Relation(
         parentColumn = "categoryId",
         entityColumn = "id"

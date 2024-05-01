@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ExpensesDao {
     @Insert
-    suspend fun insertExpenses(expenses: Expenses)
+    suspend fun insertExpenses(expenses: Expenses): Long
 
     @Update
     suspend fun upDateExpenses(expenses: Expenses)
@@ -32,6 +32,10 @@ interface ExpensesDao {
     fun loadAllExpensesByGroupIdFlow(groupId: Long): Flow<List<ExpenseWithCategoryAndPerson>>
 
     @Transaction
-    @Query("SELECT * FROM Expenses WHERE Expenses.groupId == :groupId")
+    @Query("SELECT * FROM Expenses WHERE Expenses.groupId = :groupId")
     fun loadAllExpensesByGroupId(groupId: Long): List<ExpenseWithCategoryAndPerson>
+
+    @Transaction
+    @Query("SELECT * FROM Expenses WHERE Expenses.id == :expensesId")
+    fun loadExpensesByExpensesId(expensesId: Long): Flow<ExpenseWithCategoryAndPerson>
 }

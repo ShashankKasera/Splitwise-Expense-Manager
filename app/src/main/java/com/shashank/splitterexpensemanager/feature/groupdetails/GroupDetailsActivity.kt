@@ -62,6 +62,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         navigationForGroupMember(groupId)
         getData()
         navigationForAddExpenses(groupId)
+        getData()
     }
 
     private fun init() {
@@ -217,7 +218,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         rvOweOwed.layoutManager = LinearLayoutManager(this)
         rvOweOwed.adapter = oweOwedAdapter
 
-        expensesAdapter = ExpensesAdapter(this, personId, expensesList)
+        expensesAdapter = ExpensesAdapter(actionProcessor, personId, expensesList)
         val layoutManager = LinearLayoutManager(this)
         layoutManager.setReverseLayout(true)
         layoutManager.setStackFromEnd(true)

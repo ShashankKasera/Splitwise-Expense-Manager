@@ -68,7 +68,7 @@ class AddExpensesViewModel @Inject constructor(
         time: String,
         description: String,
     ) = viewModelScope.launch {
-        addExpensesRepository.insertExpenses(
+        val expensesId = addExpensesRepository.insertExpenses(
             Expenses(
                 null,
                 personId,
@@ -87,6 +87,7 @@ class AddExpensesViewModel @Inject constructor(
             addExpensesRepository.insertOweOrOwed(
                 OweOrOwed(
                     null,
+                    expensesId,
                     personId,
                     owedId,
                     groupId,

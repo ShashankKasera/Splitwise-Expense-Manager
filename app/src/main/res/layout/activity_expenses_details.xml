@@ -65,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ll_toolbar" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_paid_amount_expenses_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -77,15 +77,16 @@
         app:layout_constraintTop_toBottomOf="@+id/circleImageView10" />
 
     <TextView
-        android:id="@+id/tv_by"
+        android:id="@+id/tv_paid_by"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/paid_by"
         android:textColor="@color/black"
         android:textSize="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_paid_amount_expenses_details" />
 
     <TextView
         android:id="@+id/tv_time"
@@ -95,7 +96,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_by" />
+        app:layout_constraintTop_toBottomOf="@id/tv_paid_by" />
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
@@ -111,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="@string/description"
         app:layout_constraintEnd_toEndOf="parent"

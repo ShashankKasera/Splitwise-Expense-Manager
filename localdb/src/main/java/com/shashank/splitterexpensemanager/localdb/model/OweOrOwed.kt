@@ -7,6 +7,11 @@ import androidx.room.PrimaryKey
 @Entity(
     foreignKeys = [
         ForeignKey(
+            entity = Expenses::class,
+            parentColumns = ["id"],
+            childColumns = ["expensesId"],
+            onDelete = ForeignKey.CASCADE
+        ), ForeignKey(
             entity = Person::class,
             parentColumns = ["id"],
             childColumns = ["personOweId"],
@@ -26,9 +31,10 @@ import androidx.room.PrimaryKey
 )
 data class OweOrOwed(
     @PrimaryKey(autoGenerate = true)
-    var id: Long?,
-    var personOweId: Long,
-    var personOwedId: Long,
-    var groupId: Long,
-    var amount: Double,
+    val id: Long?,
+    val expensesId: Long,
+    val personOweId: Long,
+    val personOwedId: Long,
+    val groupId: Long,
+    val amount: Double,
 )

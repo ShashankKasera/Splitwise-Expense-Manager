@@ -1,14 +1,19 @@
 package com.shashank.splitterexpensemanager.feature.expensesdetails
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.core.extension.formatNumber
+import com.shashank.splitterexpensemanager.model.OweOrOwedWithPerson
 
-class SplitAmountAdapter : RecyclerView.Adapter<SplitAmountAdapter.ViewHolder>() {
+class SplitAmountAdapter(
+    private val context: ExpensesDetailsActivity,
+    private val personId: Long,
+    private val oweOwedList: MutableList<OweOrOwedWithPerson>
+) : RecyclerView.Adapter<SplitAmountAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -17,11 +22,17 @@ class SplitAmountAdapter : RecyclerView.Adapter<SplitAmountAdapter.ViewHolder>()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.i("onBindViewHolder", "onBindViewHolder: ")
+        holder.tvName.text = if (personId == oweOwedList[position].personOwed.id) {
+            context.getString(R.string.you_owes)
+        } else {
+            context.getString(R.string.owes, oweOwedList[position].personOwed.name)
+        }
+        holder.tvAmount.text =
+            context.getString(R.string.rs, (oweOwedList[position].oweOrOwed.amount).formatNumber(2))
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return oweOwedList.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

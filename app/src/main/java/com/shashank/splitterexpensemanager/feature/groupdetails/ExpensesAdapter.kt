@@ -1,19 +1,23 @@
 package com.shashank.splitterexpensemanager.feature.groupdetails
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.core.EXPENSES_ID
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
+import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.model.ExpenseWithCategoryAndPerson
 import de.hdodenhof.circleimageview.CircleImageView
 
 class ExpensesAdapter(
-    private val context: Context,
+    private var actionProcessor: ActionProcessor,
     private val personId: Long,
     private val expensesList: List<ExpenseWithCategoryAndPerson?>
 ) : RecyclerView.Adapter<ExpensesAdapter.ViewHolder>() {
@@ -34,6 +38,16 @@ class ExpensesAdapter(
             tvDate.text = expenseItem?.expense?.date
             tvTime.text = expenseItem?.expense?.time
 
+            clExpenses.setOnClickListener {
+                actionProcessor.process(
+                    ActionRequestSchema(
+                        ActionType.EXPENSES_DETAILS.name,
+                        hashMapOf(
+                            EXPENSES_ID to (expenseItem?.expense?.id ?: -1)
+                        )
+                    )
+                )
+            }
             if (!expenseItem?.expense?.description.isNullOrEmpty()) {
                 tvDescription.visible()
                 tvDescription.text = expenseItem?.expense?.description
@@ -46,7 +60,8 @@ class ExpensesAdapter(
 
             val isPersonIdMatch = personId == expenseItem?.person?.id
             with(tvBorrowed) {
-                text = context.getString(if (isPersonIdMatch) R.string.you_lent else R.string.you_borrowed)
+                text =
+                    context.getString(if (isPersonIdMatch) R.string.you_lent else R.string.you_borrowed)
                 setTextColor(context.resources.getColor(if (isPersonIdMatch) R.color.green else R.color.primary_dark))
             }
 
@@ -55,7 +70,8 @@ class ExpensesAdapter(
 
                 val amount = expenseItem?.expense?.amount ?: 0.0
                 val splitAmount = expenseItem?.expense?.splitAmount ?: 0.0
-                text = if (isPersonIdMatch) (amount - splitAmount).formatNumber(2) else splitAmount.formatNumber(2)
+                text =
+                    if (isPersonIdMatch) (amount - splitAmount).formatNumber(2) else splitAmount.formatNumber(2)
             }
         }
     }
@@ -73,5 +89,6 @@ class ExpensesAdapter(
         val tvBorrowed: TextView = itemView.findViewById(R.id.tv_you_borrowed)
         val tvBorrowedAmount: TextView = itemView.findViewById(R.id.tv_you_borrowed_amount)
         val civCategory: CircleImageView = itemView.findViewById(R.id.civ_category)
+        val clExpenses: ConstraintLayout = itemView.findViewById(R.id.cl_expense)
     }
 }
