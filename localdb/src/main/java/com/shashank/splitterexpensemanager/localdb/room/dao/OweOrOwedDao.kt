@@ -40,4 +40,31 @@ interface OweOrOwedDao {
 
     @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.groupId == :groupId")
     fun loadAllOweOwedByGroupId(groupId: Long): List<OweOrOwedWithPerson>
+
+    @Query("Select * from OweOrOwed")
+    fun loadAllOweOrOwedWithPerson(): List<OweOrOwedWithPerson>
+
+    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.personOweId==:personId")
+    fun loadAllOwe(personId: Long): List<OweOrOwedWithPerson>
+
+    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.personOweId!=:personId")
+    fun loadAllOwed(personId: Long): List<OweOrOwedWithPerson>
+
+    @Query(
+        "SELECT SUM(amount) " +
+            "FROM OweOrOwed " +
+            "WHERE personOweId = :personId " +
+            "AND personOwedId = :friendId " +
+            "AND groupId=:groupId"
+    )
+    fun loadAllOweByOweIdAndOwedId(personId: Long, friendId: Long, groupId: Long): Double
+
+    @Query(
+        "SELECT SUM(amount) " +
+            "FROM OweOrOwed " +
+            "WHERE OweOrOwed.personOweId==:friendId " +
+            "AND OweOrOwed.personOwedId==:personId " +
+            "AND groupId=:groupId"
+    )
+    fun loadAllOwedByOweIdAndOwedId(friendId: Long, personId: Long, groupId: Long): Double
 }

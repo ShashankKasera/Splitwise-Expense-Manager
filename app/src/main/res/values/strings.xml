@@ -53,8 +53,10 @@
     <string name="you_are_owed_rs">You Are Owed Rs %1$s</string>
     <string name="you_are_settled_up_overall">You are settled up overall</string>
     <string name="you_are_all_settled_up_in_this_group">You are all settled up in this group</string>
+    <string name="you_are_all_settled_up">You are all settled up</string>
     <string name="plus_other_balance">Plus %d Other Balance</string>
     <string name="owes_you">%1$s owes You</string>
+    <string name="owes_you_friends">owes You</string>
     <string name="rs">Rs. %1$s</string>
     <string name="you_owes">You owes</string>
     <string name="paid_amount_expensese_details">Paid Amount %1$s</string>
@@ -70,4 +72,9 @@
     <string name="get_back">Get Back</string>
     <string name="owes_group_member">Owes</string>
     <string name="you_settled_up">You Settled Up</string>
+    <string name="settled_up">Settled Up</string>
+    <string name="no_expenses_friend">No Expenses</string>
+    <string name="owes_you_in_group">%1$s owes You in  \"%2$s\"</string>
+    <string name="you_owes_in_group">You owes %1$s in  \"%2$s\"</string>
+    <string name="add_friends">Add Friends</string>
 </resources>
