@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.EXPENSES_ID
+import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
@@ -43,7 +44,8 @@ class ExpensesAdapter(
                     ActionRequestSchema(
                         ActionType.EXPENSES_DETAILS.name,
                         hashMapOf(
-                            EXPENSES_ID to (expenseItem?.expense?.id ?: -1)
+                            EXPENSES_ID to (expenseItem?.expense?.id ?: -1),
+                            GROUP_ID to (expenseItem?.expense?.groupId ?: -1)
                         )
                     )
                 )
@@ -71,7 +73,11 @@ class ExpensesAdapter(
                 val amount = expenseItem?.expense?.amount ?: 0.0
                 val splitAmount = expenseItem?.expense?.splitAmount ?: 0.0
                 text =
-                    if (isPersonIdMatch) (amount - splitAmount).formatNumber(2) else splitAmount.formatNumber(2)
+                    if (isPersonIdMatch) {
+                        (amount - splitAmount).formatNumber(2)
+                    } else {
+                        splitAmount.formatNumber(2)
+                    }
             }
         }
     }

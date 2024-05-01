@@ -31,7 +31,7 @@ class OweOwedAdapter(
                     tvAmount.setTextColor(context.getColor(R.color.green))
                 }
                 amount < 0 -> {
-                    tvName.text = context.getString(R.string.you_owes, person.name)
+                    tvName.text = context.getString(R.string.you_owes_group_details, person.name)
                     tvAmount.text = context.getString(R.string.rs, (-amount).formatNumber(2))
                     tvAmount.setTextColor(context.getColor(R.color.primary_dark))
                 }

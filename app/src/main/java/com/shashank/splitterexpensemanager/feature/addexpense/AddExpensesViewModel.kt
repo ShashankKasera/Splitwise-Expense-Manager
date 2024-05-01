@@ -5,32 +5,44 @@ import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.feature.addexpense.repository.AddExpensesRepository
 import com.shashank.splitterexpensemanager.localdb.model.Expenses
-import com.shashank.splitterexpensemanager.localdb.model.OweOrOwed
+import com.shashank.splitterexpensemanager.model.ExpenseWithCategoryAndPerson
 import com.shashank.splitterexpensemanager.model.Group
+import com.shashank.splitterexpensemanager.model.OweOrOwed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.shashank.splitterexpensemanager.localdb.model.OweOrOwed as OweOrOwedEntity
 
 @HiltViewModel
 class AddExpensesViewModel @Inject constructor(
     private val addExpensesRepository: AddExpensesRepository
 ) : ViewModel() {
 
-    val allPerson = mutableListOf<Person>()
+    val allGroupMemberList = mutableListOf<Person>()
+    val allOweOrOwedList = mutableListOf<OweOrOwed>()
 
-    private val _personFeched = MutableStateFlow<Boolean>(false)
-    val personFeched = _personFeched.asStateFlow()
+    private val _groupMemberFetchedForInsertOweOwed = MutableStateFlow<Boolean>(false)
+    val groupMemberFetchedForInsertOweOwed = _groupMemberFetchedForInsertOweOwed.asStateFlow()
 
-    private val _person = MutableStateFlow<Person?>(null)
-    val person = _person.asStateFlow()
+    private val _oweOrOwedFetchedForUpdate = MutableStateFlow<Boolean>(false)
+    val oweOrOwedFetchedForUpdate = _oweOrOwedFetchedForUpdate.asStateFlow()
+
+    private val _whoPayPerson = MutableStateFlow<Person?>(null)
+    val whoPayPerson = _whoPayPerson.asStateFlow()
 
     private val _group = MutableStateFlow<Group?>(null)
     val group = _group.asStateFlow()
 
-    private val _expenses = MutableStateFlow<Boolean>(false)
-    val expenses = _expenses.asStateFlow()
+    private val _expensesInsertSuccessfully = MutableStateFlow<Boolean>(false)
+    val expensesInsertSuccessfully = _expensesInsertSuccessfully.asStateFlow()
+
+    private val _expensesUpdateSuccessfully = MutableStateFlow<Boolean>(false)
+    val expensesUpdateSuccessfully = _expensesUpdateSuccessfully.asStateFlow()
+
+    private val _expensesDetails = MutableStateFlow<ExpenseWithCategoryAndPerson?>(null)
+    val expensesDetails = _expensesDetails.asStateFlow()
     fun getGroup(groupId: Long) {
         viewModelScope.launch {
             addExpensesRepository.loadGroup(groupId).collect {
@@ -42,7 +54,7 @@ class AddExpensesViewModel @Inject constructor(
     fun getPerson(personId: Long) {
         viewModelScope.launch {
             addExpensesRepository.loadPerson(personId).collect {
-                _person.emit(it)
+                _whoPayPerson.emit(it)
             }
         }
     }
@@ -50,10 +62,18 @@ class AddExpensesViewModel @Inject constructor(
     fun allGroupMember(groupId: Long) {
         viewModelScope.launch {
             addExpensesRepository.loadAllGroupMemberWithGroupId(groupId).collect {
-                allPerson.clear()
-                allPerson.addAll(it)
-                _personFeched.emit(true)
+                allGroupMemberList.clear()
+                allGroupMemberList.addAll(it)
+                _groupMemberFetchedForInsertOweOwed.emit(true)
             }
+        }
+    }
+
+    fun allOweOrOwed(expensesId: Long) {
+        viewModelScope.launch {
+            allOweOrOwedList.clear()
+            allOweOrOwedList.addAll(addExpensesRepository.loadAllOweOrOwedByExpensesId(expensesId))
+            _oweOrOwedFetchedForUpdate.emit(true)
         }
     }
 
@@ -82,10 +102,10 @@ class AddExpensesViewModel @Inject constructor(
                 description
             )
         )
-        allPerson.forEach { member ->
+        allGroupMemberList.forEach { member ->
             val owedId = member.id ?: 0
             addExpensesRepository.insertOweOrOwed(
-                OweOrOwed(
+                OweOrOwedEntity(
                     null,
                     expensesId,
                     personId,
@@ -95,6 +115,61 @@ class AddExpensesViewModel @Inject constructor(
                 )
             )
         }
-        _expenses.emit(true)
+        _expensesInsertSuccessfully.emit(true)
+    }
+
+    suspend fun updateExpenses(
+        expensesId: Long,
+        personId: Long,
+        groupId: Long,
+        categoryId: Long,
+        amount: Double,
+        name: String,
+        date: String,
+        time: String,
+        description: String,
+    ) {
+        viewModelScope.launch {
+            if (allOweOrOwedList.size > 0) {
+                val numberOfMember = allOweOrOwedList.size
+                val splitAmount = (amount / numberOfMember)
+                addExpensesRepository.updateExpenses(
+                    Expenses(
+                        expensesId,
+                        personId,
+                        groupId,
+                        categoryId,
+                        amount,
+                        splitAmount,
+                        name,
+                        date,
+                        time,
+                        description
+                    )
+                )
+
+                allOweOrOwedList.forEach {
+                    addExpensesRepository.updateOweOrOwed(
+                        OweOrOwedEntity(
+                            id = it.id,
+                            expensesId = it.expensesId,
+                            personOweId = personId,
+                            personOwedId = it.personOwedId,
+                            groupId = it.groupId,
+                            amount = splitAmount
+                        )
+                    )
+                }
+                _expensesUpdateSuccessfully.emit(true)
+            }
+        }
+    }
+
+    fun loadExpensesDetails(expensesId: Long) {
+        viewModelScope.launch {
+            addExpensesRepository.loadExpensesByExpensesId(expensesId).collect {
+                _expensesDetails.emit(it)
+            }
+        }
     }
 }

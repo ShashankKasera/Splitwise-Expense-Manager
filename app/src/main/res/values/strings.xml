@@ -61,4 +61,5 @@
     <string name="time_expensese_details">Time %1$s</string>
     <string name="description_expensese_details">Description %1$s</string>
     <string name="owes">%1$s owes</string>
+    <string name="you_owes_group_details">You owes %1$s</string>
 </resources>

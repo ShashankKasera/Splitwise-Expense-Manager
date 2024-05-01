@@ -10,8 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.EXPENSES_ID
+import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
+import com.shashank.splitterexpensemanager.core.UPDATE_EXPENSES
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
+import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.model.OweOrOwedWithPerson
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +31,7 @@ class ExpensesDetailsActivity : AppCompatActivity() {
     lateinit var tvTime: TextView
     lateinit var tvDate: TextView
     lateinit var ivDelete: ImageView
+    lateinit var ivUpdate: ImageView
     lateinit var tvdescription: TextView
     private var oweOwedList = mutableListOf<OweOrOwedWithPerson>()
     lateinit var splitAmountAdapter: SplitAmountAdapter
@@ -33,11 +39,15 @@ class ExpensesDetailsActivity : AppCompatActivity() {
 
     @Inject
     lateinit var sharedPref: SharedPref
+
+    @Inject
+    lateinit var actionProcessor: ActionProcessor
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_expenses_details)
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
         val expensesId: Long = intent.extras?.getLong(EXPENSES_ID) ?: -1
+        val groupId: Long = intent.extras?.getLong(GROUP_ID) ?: -1
 
         init()
         setUpRecyclerView(personId)
@@ -74,6 +84,19 @@ class ExpensesDetailsActivity : AppCompatActivity() {
             viewModel.deleteExpenses(expensesId)
             finish()
         }
+
+        ivUpdate.setOnClickListener {
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.ADD_EXPENSES.name,
+                    hashMapOf(
+                        UPDATE_EXPENSES to true,
+                        EXPENSES_ID to expensesId,
+                        GROUP_ID to groupId,
+                    )
+                )
+            )
+        }
     }
 
     private fun init() {
@@ -84,6 +107,7 @@ class ExpensesDetailsActivity : AppCompatActivity() {
         tvTime = findViewById(R.id.tv_time)
         tvdescription = findViewById(R.id.tv_description)
         ivDelete = findViewById(R.id.iv_delete_expenses)
+        ivUpdate = findViewById(R.id.iv_edit_expenses)
     }
 
     private fun setUpRecyclerView(personId: Long) {

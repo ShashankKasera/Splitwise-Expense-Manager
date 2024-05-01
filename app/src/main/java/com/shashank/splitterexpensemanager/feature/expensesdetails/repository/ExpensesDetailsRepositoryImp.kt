@@ -25,7 +25,7 @@ class ExpensesDetailsRepositoryImp @Inject constructor(
         }
 
     override fun loadAllOweOrOwedByExpensesId(expensesId: Long) =
-        oweOrOwedDao.loadAllOweOwedByExpensesId(expensesId).map {
+        oweOrOwedDao.loadAllOweOwedWithPersonByExpensesId(expensesId).map {
             oweOrOwedWithPersonListMapper.map(it)
         }
 }
