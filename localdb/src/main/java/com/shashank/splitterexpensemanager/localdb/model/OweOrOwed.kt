@@ -32,9 +32,9 @@ import androidx.room.PrimaryKey
 data class OweOrOwed(
     @PrimaryKey(autoGenerate = true)
     val id: Long?,
-    val expensesId: Long,
-    val personOweId: Long,
-    val personOwedId: Long,
-    val groupId: Long,
-    val amount: Double,
+    val expensesId: Long?,
+    val personOweId: Long?,
+    val personOwedId: Long?,
+    val groupId: Long?,
+    val amount: Double?,
 )

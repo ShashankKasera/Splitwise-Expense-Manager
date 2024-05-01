@@ -10,10 +10,10 @@ import com.shashank.splitterexpensemanager.localdb.model.OweOrOwedWithPerson as 
 class OweOrOwedWithPersonMapper @Inject constructor(
     val personMapper: PersonMapper,
     val oweOrOwedMapper: OweOrOwedMapper,
-) : Mapper<OweOrOwedWithPersonEntity, OweOrOwedWithPerson> {
-    override fun map(input: OweOrOwedWithPersonEntity) = OweOrOwedWithPerson(
-        oweOrOwed = oweOrOwedMapper.map(input.oweOrOwed),
-        personOwe = personMapper.map(input.personOwe),
-        personOwed = personMapper.map(input.personOwed)
+) : Mapper<OweOrOwedWithPersonEntity?, OweOrOwedWithPerson> {
+    override fun map(input: OweOrOwedWithPersonEntity?) = OweOrOwedWithPerson(
+        oweOrOwed = oweOrOwedMapper.map(input?.oweOrOwed),
+        personOwe = personMapper.map(input?.personOwe),
+        personOwed = personMapper.map(input?.personOwed)
     )
 }

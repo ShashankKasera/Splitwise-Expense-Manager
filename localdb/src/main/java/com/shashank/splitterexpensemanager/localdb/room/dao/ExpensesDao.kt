@@ -33,9 +33,12 @@ interface ExpensesDao {
 
     @Transaction
     @Query("SELECT * FROM Expenses WHERE Expenses.groupId = :groupId")
-    fun loadAllExpensesByGroupId(groupId: Long): List<ExpenseWithCategoryAndPerson>
+    fun loadAllExpensesByGroupId(groupId: Long): List<ExpenseWithCategoryAndPerson?>?
 
     @Transaction
     @Query("SELECT * FROM Expenses WHERE Expenses.id == :expensesId")
-    fun loadExpensesByExpensesId(expensesId: Long): Flow<ExpenseWithCategoryAndPerson>
+    fun loadExpensesByExpensesId(expensesId: Long): Flow<ExpenseWithCategoryAndPerson?>
+
+    @Query("DELETE FROM `Expenses` WHERE `Expenses`.id = :expensesId;")
+    fun deleteExpenses(expensesId: Long)
 }
