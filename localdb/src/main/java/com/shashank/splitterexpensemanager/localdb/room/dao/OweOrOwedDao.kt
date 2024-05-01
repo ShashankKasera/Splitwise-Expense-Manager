@@ -37,4 +37,7 @@ interface OweOrOwedDao {
 
     @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.expensesId == :expensesId")
     fun loadAllOweOwedByExpensesId(expensesId: Long): List<OweOrOwed>
+
+    @Query("SELECT * FROM OweOrOwed WHERE OweOrOwed.groupId == :groupId")
+    fun loadAllOweOwedByGroupId(groupId: Long): List<OweOrOwedWithPerson>
 }

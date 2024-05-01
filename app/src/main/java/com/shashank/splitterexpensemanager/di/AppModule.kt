@@ -18,6 +18,8 @@ import com.shashank.splitterexpensemanager.feature.groupdetails.repository.Group
 import com.shashank.splitterexpensemanager.feature.groupdetails.repository.GroupDetailsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.groupmember.repository.GroupMemberRepository
 import com.shashank.splitterexpensemanager.feature.groupmember.repository.GroupMemberRepositoryImp
+import com.shashank.splitterexpensemanager.feature.groupsettings.repository.GroupSettingsRepository
+import com.shashank.splitterexpensemanager.feature.groupsettings.repository.GroupSettingsRepositoryImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -63,4 +65,8 @@ class AppModule {
     @Singleton
     @Provides
     fun getExpensesDetailsRepository(repo: ExpensesDetailsRepositoryImp): ExpensesDetailsRepository = repo
+
+    @Singleton
+    @Provides
+    fun getGroupSettingsRepository(repo: GroupSettingsRepositoryImp): GroupSettingsRepository = repo
 }

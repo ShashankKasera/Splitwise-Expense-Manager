@@ -1,6 +1,7 @@
 package com.shashank.splitterexpensemanager.feature.groupdetails
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -46,6 +47,7 @@ class GroupDetailsActivity : AppCompatActivity() {
     lateinit var expensesAdapter: ExpensesAdapter
     lateinit var oweOwedAdapter: OweOwedAdapter
     lateinit var tvOweOrOwedOther: TextView
+    lateinit var ivSetting: ImageView
     lateinit var llAddGroupMember: LinearLayout
     private var expensesList = mutableListOf<ExpenseWithCategoryAndPerson>()
     private var oweOwedList = mutableListOf<Pair<Person, Double>>()
@@ -58,11 +60,11 @@ class GroupDetailsActivity : AppCompatActivity() {
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
         init()
         recyclerViewSetUp(personId)
+        navigationForGroupSettings(groupId)
         navigationForAddFriends(groupId)
         navigationForGroupMember(groupId)
         getData()
         navigationForAddExpenses(groupId)
-        getData()
     }
 
     private fun init() {
@@ -76,6 +78,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         tvOweOrOwedOther = findViewById(R.id.tv_other_member)
         clOweOwed = findViewById(R.id.cl_amount)
         tvYouAreTheOnlyOneHere = findViewById(R.id.tv_you_re_the_only_one_here)
+        ivSetting = findViewById(R.id.iv_setting_groupDetails)
 
         val groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
@@ -89,6 +92,18 @@ class GroupDetailsActivity : AppCompatActivity() {
         viewModel.groupDetails(groupId, personId)
     }
 
+    private fun navigationForGroupSettings(groupId: Long) {
+        ivSetting.setOnClickListener {
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.GROUP_SETTING.name,
+                    hashMapOf(
+                        GROUP_ID to (groupId)
+                    )
+                )
+            )
+        }
+    }
 
     private fun navigationForAddFriends(groupId: Long) {
         llAddGroupMember.setOnClickListener {
@@ -217,7 +232,6 @@ class GroupDetailsActivity : AppCompatActivity() {
         oweOwedAdapter = OweOwedAdapter(this, oweOwedList)
         rvOweOwed.layoutManager = LinearLayoutManager(this)
         rvOweOwed.adapter = oweOwedAdapter
-
         expensesAdapter = ExpensesAdapter(actionProcessor, personId, expensesList)
         val layoutManager = LinearLayoutManager(this)
         layoutManager.setReverseLayout(true)

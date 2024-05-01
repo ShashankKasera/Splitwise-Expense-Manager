@@ -18,3 +18,4 @@
 #81: Showing Expenses Details in UI
 #83: Delete Expenses
 #85: Update Expenses
+#87: Group Settings

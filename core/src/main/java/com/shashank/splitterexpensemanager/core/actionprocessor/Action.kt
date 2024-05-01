@@ -15,7 +15,8 @@ enum class ActionType {
     GROUP_MEMBER,
     ADD_EXPENSES,
     CATEGORY,
-    EXPENSES_DETAILS
+    EXPENSES_DETAILS,
+    GROUP_SETTING
 }
 
 interface Action {

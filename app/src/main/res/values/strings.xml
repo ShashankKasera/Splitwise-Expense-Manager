@@ -62,4 +62,9 @@
     <string name="description_expensese_details">Description %1$s</string>
     <string name="owes">%1$s owes</string>
     <string name="you_owes_group_details">You owes %1$s</string>
+    <string name="delete_group">Delete Group</string>
+    <string name="group_member">Group Member</string>
+    <string name="add_people_to_group">Add People to Group</string>
+    <string name="get_back">Get Back</string>
+    <string name="owes_group_member">Owes</string>
 </resources>
