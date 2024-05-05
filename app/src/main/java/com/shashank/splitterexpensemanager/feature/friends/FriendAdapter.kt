@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
@@ -18,10 +20,14 @@ import com.shashank.splitterexpensemanager.model.Friends
 class FriendAdapter(
     private val context: FriendsFragment,
     private val allFriendsList: MutableList<Friends>,
+    private val onItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<FriendAdapter.ViewHolder>() {
 
     lateinit var friendOweOwedAdapter: FriendOweOwedAdapter
     private var oweOwedList = mutableListOf<FriendOweOrOwed>()
+    interface OnItemClickListener {
+        fun onItemClick(friend: Person)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.friend_item, parent, false)
         return ViewHolder(view)
@@ -55,6 +61,10 @@ class FriendAdapter(
             friends.overallOweOrOwed < 0 -> {
                 setupOwesView(holder, context, R.string.you_owes, R.color.primary_dark, -friends.overallOweOrOwed)
             }
+        }
+
+        holder.cvFriend.setOnClickListener {
+            onItemClickListener.onItemClick(allFriendsList[position].friend)
         }
     }
 
@@ -91,6 +101,7 @@ class FriendAdapter(
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val cvFriend: CardView = itemView.findViewById(R.id.cv_friend)
         val rvFriendOweOwed: RecyclerView = itemView.findViewById(R.id.rv_friend_owe_owed_friend)
         val civFriendImage: ImageView = itemView.findViewById(R.id.civ_friend)
         val tvFriendName: TextView = itemView.findViewById(R.id.tv_friend_name)

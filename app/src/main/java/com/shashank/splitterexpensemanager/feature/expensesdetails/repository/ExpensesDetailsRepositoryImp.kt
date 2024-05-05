@@ -3,7 +3,7 @@ package com.shashank.splitterexpensemanager.feature.expensesdetails.repository
 import com.shashank.splitterexpensemanager.localdb.room.dao.ExpensesDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.OweOrOwedDao
 import com.shashank.splitterexpensemanager.mapper.expensecategorypersonmapper.ExpenseWithCategoryAndPersonMapper
-import com.shashank.splitterexpensemanager.mapper.oweorowedwitpersonmapper.OweOrOwedWithPersonListMapper
+import com.shashank.splitterexpensemanager.mapper.oweorowedwithpersonmapper.OweOrOwedWithPersonListMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext

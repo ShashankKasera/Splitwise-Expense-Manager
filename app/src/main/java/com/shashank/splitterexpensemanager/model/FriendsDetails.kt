@@ -5,9 +5,9 @@ import com.shashank.splitterexpensemanager.authentication.model.Person
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class FriendOweOrOwed(
-
+data class FriendsDetails(
     val friend: Person = Person(),
-    val group: Group = Group(),
-    val groupOweOwed: Double = 0.0,
+    val friendsHashMap: HashMap<Group, Double> = hashMapOf(),
+    val friendOweOwedList: List<FriendOweOrOwed> = listOf(),
+    val overallOweOrOwed: Double = 0.0,
 ) : Parcelable

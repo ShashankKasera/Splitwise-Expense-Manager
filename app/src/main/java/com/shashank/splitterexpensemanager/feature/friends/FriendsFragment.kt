@@ -12,6 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.authentication.model.Person
+import com.shashank.splitterexpensemanager.core.FRIEND_ID
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
@@ -72,10 +74,27 @@ class FriendsFragment : Fragment() {
     }
 
     fun setUpRecyclerView() {
-        friendAdapter = FriendAdapter(this, allFriendsList)
+        friendAdapter = FriendAdapter(
+            this,
+            allFriendsList,
+            object : FriendAdapter.OnItemClickListener {
+                override fun onItemClick(friend: Person) {
+                    val id: Long = friend.id ?: -1
+                    actionProcessor.process(
+                        ActionRequestSchema(
+                            ActionType.FRIENDS_DETAILS.name,
+                            hashMapOf(
+                                FRIEND_ID to id,
+                            )
+                        )
+                    )
+                }
+            }
+        )
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = friendAdapter
     }
+
 
     private fun getData() {
         lifecycleScope.launch {

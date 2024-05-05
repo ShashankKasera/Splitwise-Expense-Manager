@@ -33,7 +33,7 @@ class AddExpensesRepositoryImp @Inject constructor(
         groupMapper.map(it)
     }
 
-    override fun loadPerson(personId: Long) = personDao.loadPersonById(personId).map {
+    override fun loadPerson(personId: Long) = personDao.loadPersonByIdFlow(personId).map {
         personMapper.map(it)
     }
 

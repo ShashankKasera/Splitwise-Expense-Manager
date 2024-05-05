@@ -7,7 +7,7 @@ import com.shashank.splitterexpensemanager.localdb.room.dao.GroupMemberDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.OweOrOwedDao
 import com.shashank.splitterexpensemanager.mapper.expensecategorypersonmapper.ExpenseWithCategoryAndPersonListMapper
 import com.shashank.splitterexpensemanager.mapper.groupmapper.GroupMapper
-import com.shashank.splitterexpensemanager.mapper.oweorowedwitpersonmapper.OweOrOwedWithPersonListMapper
+import com.shashank.splitterexpensemanager.mapper.oweorowedwithpersonmapper.OweOrOwedWithPersonListMapper
 import javax.inject.Inject
 
 class GroupDetailsRepositoryImp @Inject constructor(

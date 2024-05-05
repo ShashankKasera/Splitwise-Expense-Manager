@@ -1,4 +1,4 @@
-package com.shashank.splitterexpensemanager.mapper.oweorowedwitpersonmapper
+package com.shashank.splitterexpensemanager.mapper.oweorowedwithpersonmapper
 
 import com.shashank.splitterexpensemanager.authentication.personmapper.PersonMapper
 import com.shashank.splitterexpensemanager.core.mapper.Mapper
