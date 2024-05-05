@@ -33,10 +33,10 @@ class GroupSettingsViewModel @Inject constructor(var groupSettingRepository: Gro
                     HashMap(groupMemberDeferred.await().associate { it to 0.0 })
 
                 oweOwedDeferred.await().forEach {
-                    groupMembersHashMap[it.personOwe] =
-                        ((groupMembersHashMap[it.personOwe]) ?: 0.0).plus(it.oweOrOwed.amount)
                     groupMembersHashMap[it.personOwed] =
-                        ((groupMembersHashMap[it.personOwed]) ?: 0.0).minus(it.oweOrOwed.amount)
+                        ((groupMembersHashMap[it.personOwed]) ?: 0.0).plus(it.oweOrOwed.amount)
+                    groupMembersHashMap[it.personOwe] =
+                        ((groupMembersHashMap[it.personOwe]) ?: 0.0).minus(it.oweOrOwed.amount)
                 }
                 val data = GroupSettings(
                     group = groupDeferred.await(),

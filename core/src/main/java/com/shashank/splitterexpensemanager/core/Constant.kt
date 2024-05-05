@@ -2,6 +2,9 @@ package com.shashank.splitterexpensemanager.core
 
 const val ROOM_DB: String = "RoomDb"
 const val GROUP_ID: String = "GroupId"
+const val PAYER_ID: String = "PayerId"
+const val RECEIVER_ID: String = "ReceiverId"
+const val AMOUNT: String = "Amount"
 const val EXPENSES_ID: String = "ExpensesId"
 const val PERSON_ID: String = "PersonId"
 const val FRIEND_ID: String = "FriendId"

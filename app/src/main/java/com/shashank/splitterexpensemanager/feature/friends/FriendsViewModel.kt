@@ -38,31 +38,31 @@ class FriendsViewModel @Inject constructor(
 
                         val oweDeferred = async {
                             friendsRepository.loadAllOweByOweIdAndOwedId(
-                                personId,
                                 friend.id ?: -1,
+                                personId,
                                 group.id ?: -1
                             )
                         }
                         val owedDeferred = async {
                             friendsRepository.loadAllOwedByOweIdAndOwedId(
-                                friend.id ?: -1,
                                 personId,
+                                friend.id ?: -1,
                                 group.id ?: -1
                             )
                         }
                         val owe = oweDeferred.await()
                         val owed = owedDeferred.await()
 
-                        if ((owe - owed) != 0.0) {
+                        if ((owed - owe) != 0.0) {
                             friendOweOwedList.add(
                                 FriendOweOrOwed(
                                     friend,
                                     group,
-                                    (owe - owed)
+                                    (owed - owe)
                                 )
                             )
                         }
-                        amount += (owe - owed)
+                        amount += (owed - owe)
                     }
                     youOverallOweOrOwed += amount
                     friendList.add(

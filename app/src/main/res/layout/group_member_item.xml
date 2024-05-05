@@ -38,7 +38,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="@+id/civ_group_member"
-
                 app:layout_constraintEnd_toStartOf="@+id/tv_get_back"
                 app:layout_constraintStart_toEndOf="@+id/civ_group_member"
                 app:layout_constraintTop_toTopOf="@+id/civ_group_member">

@@ -13,7 +13,7 @@ class OweOrOwedWithPersonMapper @Inject constructor(
 ) : Mapper<OweOrOwedWithPersonEntity?, OweOrOwedWithPerson> {
     override fun map(input: OweOrOwedWithPersonEntity?) = OweOrOwedWithPerson(
         oweOrOwed = oweOrOwedMapper.map(input?.oweOrOwed),
+        personOwed = personMapper.map(input?.personOwed),
         personOwe = personMapper.map(input?.personOwe),
-        personOwed = personMapper.map(input?.personOwed)
     )
 }

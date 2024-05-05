@@ -7,6 +7,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class OweOrOwedWithPerson(
     val oweOrOwed: OweOrOwed,
+    val personOwed: Person,
     val personOwe: Person,
-    val personOwed: Person
 ) : Parcelable

@@ -99,6 +99,7 @@
                     android:text="@string/you_owe_or_owed_amount_overall"
                     android:textColor="@color/primary_dark"
                     android:textSize="16sp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/gl_right_owe"
                     app:layout_constraintStart_toStartOf="@+id/gl_left_cwe"
                     app:layout_constraintTop_toTopOf="@+id/cl_amount" />
@@ -108,6 +109,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/gl_right_owe"
                     app:layout_constraintStart_toStartOf="@+id/gl_left_cwe"
                     app:layout_constraintTop_toBottomOf="@+id/tv_overall_owe" />
@@ -118,6 +120,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14dp"
                     android:text="@string/plus_other_balances"
+                    android:visibility="gone"
                     android:textColor="@color/dark_grey"
                     app:layout_constraintEnd_toStartOf="@+id/gl_right_owe"
                     app:layout_constraintStart_toStartOf="@+id/gl_left_cwe"

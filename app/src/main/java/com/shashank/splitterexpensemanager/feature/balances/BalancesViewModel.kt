@@ -35,15 +35,15 @@ class BalancesViewModel @Inject constructor(
 
                     oweOwedDeferred.await().forEach { oweOwed ->
                         when {
-                            oweOwed.personOwe == person -> {
-                                amount += oweOwed.oweOrOwed.amount
-                                groupMembersHashMap[oweOwed.personOwed] =
-                                    ((groupMembersHashMap[oweOwed.personOwed]) ?: 0.0).plus(oweOwed.oweOrOwed.amount)
-                            }
                             oweOwed.personOwed == person -> {
-                                amount -= oweOwed.oweOrOwed.amount
+                                amount += oweOwed.oweOrOwed.amount
                                 groupMembersHashMap[oweOwed.personOwe] =
-                                    ((groupMembersHashMap[oweOwed.personOwe]) ?: 0.0).minus(oweOwed.oweOrOwed.amount)
+                                    ((groupMembersHashMap[oweOwed.personOwe]) ?: 0.0).plus(oweOwed.oweOrOwed.amount)
+                            }
+                            oweOwed.personOwe == person -> {
+                                amount -= oweOwed.oweOrOwed.amount
+                                groupMembersHashMap[oweOwed.personOwed] =
+                                    ((groupMembersHashMap[oweOwed.personOwed]) ?: 0.0).minus(oweOwed.oweOrOwed.amount)
                             }
                         }
                     }
