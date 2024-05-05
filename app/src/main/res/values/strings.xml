@@ -65,6 +65,7 @@
     <string name="time_expensese_details">Time %1$s</string>
     <string name="description_expensese_details">Description %1$s</string>
     <string name="owes">%1$s owes</string>
+    <string name="owes_balances">owes</string>
     <string name="you_owes_group_details">You owes %1$s</string>
     <string name="delete_group">Delete Group</string>
     <string name="group_member">Group Member</string>
@@ -77,4 +78,8 @@
     <string name="owes_you_in_group">%1$s owes You in  \"%2$s\"</string>
     <string name="you_owes_in_group">You owes %1$s in  \"%2$s\"</string>
     <string name="add_friends">Add Friends</string>
+    <string name="remind">REMIND</string>
+    <string name="settle_up_balances">SETTLE UP</string>
+    <string name="owe">owe</string>
+    <string name="in_total">in total</string>
 </resources>

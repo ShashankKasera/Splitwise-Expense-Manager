@@ -89,8 +89,8 @@ class ExpensesAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvName: TextView = itemView.findViewById(R.id.tv_persian_name)
         val tvAmount: TextView = itemView.findViewById(R.id.tv_paid_amount)
-        val tvDate: TextView = itemView.findViewById(R.id.tv_date_activity)
-        val tvTime: TextView = itemView.findViewById(R.id.tv_time_activity)
+        val tvDate: TextView = itemView.findViewById(R.id.tv_date_expenses)
+        val tvTime: TextView = itemView.findViewById(R.id.tv_time_expenses)
         val tvDescription: TextView = itemView.findViewById(R.id.tv_description)
         val tvBorrowed: TextView = itemView.findViewById(R.id.tv_you_borrowed)
         val tvBorrowedAmount: TextView = itemView.findViewById(R.id.tv_you_borrowed_amount)
