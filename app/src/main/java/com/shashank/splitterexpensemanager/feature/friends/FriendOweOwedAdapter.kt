@@ -1,6 +1,5 @@
 package com.shashank.splitterexpensemanager.feature.friends
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,7 +51,6 @@ class FriendOweOwedAdapter(
 
 
     override fun getItemCount(): Int {
-        Log.i("qhj", "getItemCount: ${friendOweOwedList.size}")
         return if (friendOweOwedList.size <= 3) friendOweOwedList.size else 2
     }
 
