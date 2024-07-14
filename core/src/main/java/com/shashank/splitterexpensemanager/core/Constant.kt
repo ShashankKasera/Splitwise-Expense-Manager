@@ -18,6 +18,7 @@ const val SHARED_PREFERENCES: String = "mySharedPreferences"
 const val UPDATE_EXPENSES: String = "UpdateExpense"
 const val UPDATE_REPAY: String = "UpdateRepay"
 const val UPDATE_GROUP: String = "UpdateGroup"
+const val UPDATE_FRIEND: String = "UpdateFriend"
 const val MALE: String = "Male"
 const val FEMALE: String = "Female"
 

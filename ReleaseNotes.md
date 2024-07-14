@@ -7,3 +7,4 @@
 #123: Add Image
 #125: Add Validation
 #127: Modify UI
+#129: Edit Friend

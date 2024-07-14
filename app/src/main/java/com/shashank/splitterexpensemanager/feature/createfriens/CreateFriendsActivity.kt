@@ -9,13 +9,20 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.CommonImages
+import com.shashank.splitterexpensemanager.core.FEMALE
+import com.shashank.splitterexpensemanager.core.FRIEND_ID
+import com.shashank.splitterexpensemanager.core.MALE
+import com.shashank.splitterexpensemanager.core.UPDATE_FRIEND
 import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.core.extension.capitalizeFirstLetter
 import com.shashank.splitterexpensemanager.core.extension.isValidMobileNumber
+import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CreateFriendsActivity : AppCompatActivity() {
@@ -36,13 +43,34 @@ class CreateFriendsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_friends)
+        val friendId: Long = intent.extras?.getLong(FRIEND_ID) ?: 0
+        val updateFriendFlag: Boolean = intent.extras?.getBoolean(UPDATE_FRIEND) ?: false
+
         inti()
+        if (updateFriendFlag) {
+            getDataForUpdateFriend(friendId)
+        }
         tvDone.setOnClickListener {
             val sName = etName.text.toString().trim()
             val sNumber = etNumber.text.toString().trim()
-            if (validation(sName, sNumber)) {
-                viewModel.insertPerson(sName.capitalizeFirstLetter(sName), sNumber, gender)
-                finish()
+            if (updateFriendFlag) {
+                if (validation(sName, sNumber)) {
+                    viewModel.updatePerson(
+                        Person(
+                            friendId,
+                            sName.capitalizeFirstLetter(sName),
+                            String.EMPTY,
+                            sNumber,
+                            gender
+                        )
+                    )
+                    finish()
+                }
+            } else {
+                if (validation(sName, sNumber)) {
+                    viewModel.insertPerson(sName.capitalizeFirstLetter(sName), sNumber, gender)
+                    finish()
+                }
             }
         }
 
@@ -132,4 +160,31 @@ class CreateFriendsActivity : AppCompatActivity() {
                 true
             }
         }
+
+    private fun getDataForUpdateFriend(friendId: Long) {
+        lifecycleScope.launch {
+            viewModel.loadPerson(friendId)
+            viewModel.person.collect {
+                etName.setText(it.name)
+                etNumber.setText(it.number)
+                if (it.gender == MALE) {
+                    gender = getString(R.string.male)
+                    tvFemale.setTextColor(tvFemale.context.getResources().getColor(R.color.black))
+                    tvMale.setTextColor(tvMale.context.getResources().getColor(R.color.white))
+                    llMale.setBackgroundResource(R.drawable.main_gradient)
+                    llFemale.setBackgroundResource(R.drawable.red_border)
+                    ivFemale.setColorFilter(getColor(R.color.primary_mid), PorterDuff.Mode.SRC_IN)
+                    ivMale.setColorFilter(getColor(R.color.white), PorterDuff.Mode.SRC_IN)
+                } else if (it.gender == FEMALE) {
+                    gender = getString(R.string.female)
+                    tvFemale.setTextColor(tvFemale.context.getResources().getColor(R.color.white))
+                    tvMale.setTextColor(tvMale.context.getResources().getColor(R.color.black))
+                    llMale.setBackgroundResource(R.drawable.red_border)
+                    ivFemale.setColorFilter(getColor(R.color.white), PorterDuff.Mode.SRC_IN)
+                    ivMale.setColorFilter(getColor(R.color.primary_mid), PorterDuff.Mode.SRC_IN)
+                    llFemale.setBackgroundResource(R.drawable.main_gradient)
+                }
+            }
+        }
+    }
 }
