@@ -1,6 +1,5 @@
 package com.shashank.splitterexpensemanager.feature.balances
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +23,6 @@ import de.hdodenhof.circleimageview.CircleImageView
 class UnderBalancesAdapter(
     private val uPerson: Person,
     private val groupId: Long,
-    private val personId: Long,
     private val actionProcessor: ActionProcessor,
     private val underBalancesList: List<Pair<Person, Double>>
 ) : RecyclerView.Adapter<UnderBalancesAdapter.ViewHolder>() {
@@ -62,8 +60,6 @@ class UnderBalancesAdapter(
         holder.cvSettleUp.setOnClickListener {
             when {
                 amount > 0 -> {
-                    Log.i("efhfhk", "onBindViewHolder: + ${person.id ?: -1} $personId ")
-
                     actionProcessor.process(
                         ActionRequestSchema(
                             ActionType.ADD_PAYMENT.name,
@@ -78,7 +74,6 @@ class UnderBalancesAdapter(
                 }
 
                 amount < 0 -> {
-                    Log.i("efhfhk", "onBindViewHolder: - $personId ${person.id ?: -1}")
                     actionProcessor.process(
                         ActionRequestSchema(
                             ActionType.ADD_PAYMENT.name,

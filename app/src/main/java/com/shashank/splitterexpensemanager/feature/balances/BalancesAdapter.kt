@@ -22,7 +22,6 @@ import de.hdodenhof.circleimageview.CircleImageView
 class BalancesAdapter(
     private val actionProcessor: ActionProcessor,
     private val groupId: Long,
-    private val personId: Long,
     private val balances: MutableList<Balances>,
 ) : RecyclerView.Adapter<BalancesAdapter.ViewHolder>() {
 
@@ -54,7 +53,7 @@ class BalancesAdapter(
         oweOwedList: List<Pair<Person, Double>>
     ) {
         val underBalancesAdapter =
-            UnderBalancesAdapter(person, groupId, personId, actionProcessor, oweOwedList)
+            UnderBalancesAdapter(person, groupId, actionProcessor, oweOwedList)
         holder.rvUnderBalances.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = underBalancesAdapter
