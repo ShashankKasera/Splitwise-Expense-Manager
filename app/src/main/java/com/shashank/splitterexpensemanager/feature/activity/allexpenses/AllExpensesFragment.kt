@@ -1,7 +1,6 @@
 package com.shashank.splitterexpensemanager.feature.activity.allexpenses
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,7 +69,6 @@ class AllExpensesFragment : Fragment() {
             viewModel.allExpenses.collect {
                 expensesList.clear()
                 expensesList.addAll(it)
-                Log.i("whbja", "getData  AllExpensesFragment : $it")
                 expensesAdapter.notifyDataSetChanged()
                 rvExpenses.layoutManager?.scrollToPosition(expensesList.size - 1)
             }
