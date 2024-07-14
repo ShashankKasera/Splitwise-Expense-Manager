@@ -14,22 +14,22 @@ class TotalViewModel @Inject constructor(
     private val totalRepository: TotalRepository
 ) : ViewModel() {
 
-    private val _totalGroupSpending = MutableStateFlow<Double>(0.0)
+    private val _totalGroupSpending = MutableStateFlow<Double>(-1.0)
     val totalGroupSpending = _totalGroupSpending.asStateFlow()
 
-    private val _totalGroupSpendingForByMonthAndYear = MutableStateFlow<Double>(0.0)
+    private val _totalGroupSpendingForByMonthAndYear = MutableStateFlow<Double>(-1.0)
     val totalGroupSpendingForByMonthAndYear = _totalGroupSpendingForByMonthAndYear.asStateFlow()
 
-    private val _totalYouPaidFor = MutableStateFlow<Double>(0.0)
+    private val _totalYouPaidFor = MutableStateFlow<Double>(-1.0)
     val totalYouPaidFor = _totalYouPaidFor.asStateFlow()
 
-    private val _totalYouPaidForForByMonthAndYear = MutableStateFlow<Double>(0.0)
-    val totalYouPaidForForByMonthandYear = _totalYouPaidForForByMonthAndYear.asStateFlow()
+    private val _totalYouPaidForForByMonthAndYear = MutableStateFlow<Double>(-1.0)
+    val totalYouPaidForForByMonthAndYear = _totalYouPaidForForByMonthAndYear.asStateFlow()
 
-    private val _yourTotalShare = MutableStateFlow<Double>(0.0)
+    private val _yourTotalShare = MutableStateFlow<Double>(-1.0)
     val yourTotalShare = _yourTotalShare.asStateFlow()
 
-    private val _yourTotalShareByMonthAndYear = MutableStateFlow<Double>(0.0)
+    private val _yourTotalShareByMonthAndYear = MutableStateFlow<Double>(-1.0)
     val yourTotalShareByMonthAndYear = _yourTotalShareByMonthAndYear.asStateFlow()
     fun getTotalGroupSpending(groupId: Long) {
         viewModelScope.launch {

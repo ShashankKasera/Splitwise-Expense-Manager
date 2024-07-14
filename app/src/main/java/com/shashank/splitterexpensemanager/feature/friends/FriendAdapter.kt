@@ -25,9 +25,11 @@ class FriendAdapter(
 
     lateinit var friendOweOwedAdapter: FriendOweOwedAdapter
     private var oweOwedList = mutableListOf<FriendOweOrOwed>()
+
     interface OnItemClickListener {
         fun onItemClick(friend: Person)
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.friend_item, parent, false)
         return ViewHolder(view)
@@ -40,6 +42,7 @@ class FriendAdapter(
         holder.tvFriendName.text = friends.friend.name
         oweOwedList.clear()
         oweOwedList.addAll(friends.friendsOweOwedList)
+        oweOwedList.removeIf { it.groupOweOwed == 0.0 }
         if (oweOwedList.size > 3) {
             holder.tvPlusOther.visible()
             holder.tvPlusOther.text =
@@ -55,11 +58,23 @@ class FriendAdapter(
             }
 
             friends.overallOweOrOwed > 0 -> {
-                setupOwesView(holder, context, R.string.owes_you_friends, R.color.green, friends.overallOweOrOwed)
+                setupOwesView(
+                    holder,
+                    context,
+                    R.string.owes_you_friends,
+                    R.color.green,
+                    friends.overallOweOrOwed
+                )
             }
 
             friends.overallOweOrOwed < 0 -> {
-                setupOwesView(holder, context, R.string.you_owes, R.color.primary_dark, -friends.overallOweOrOwed)
+                setupOwesView(
+                    holder,
+                    context,
+                    R.string.you_owes,
+                    R.color.primary_dark,
+                    -friends.overallOweOrOwed
+                )
             }
         }
 
@@ -84,6 +99,8 @@ class FriendAdapter(
         amount: Double
     ) {
         holder.tvSettledUp.gone()
+        holder.tvFriendOweOrOwed.visible()
+        holder.tvFriendOweOrOwedAmount.visible()
         holder.tvFriendOweOrOwed.text = context.getString(textResId)
         holder.tvFriendOweOrOwed.setTextColor(context.getColor(textColorResId))
         holder.tvFriendOweOrOwedAmount.text = context.getString(R.string.rs, amount.formatNumber(2))

@@ -5,6 +5,7 @@ import com.shashank.splitterexpensemanager.localdb.room.dao.GroupDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.OweOrOwedDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.PersonDao
 import com.shashank.splitterexpensemanager.mapper.groupmapper.GroupListMapper
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class FriendsRepositoryImp @Inject constructor(
@@ -25,4 +26,8 @@ class FriendsRepositoryImp @Inject constructor(
 
     override fun loadAllOwedByOweIdAndOwedId(friendId: Long, personId: Long, groupId: Long) =
         oweOrOwedDao.loadAllOwedByOweIdAndOwedId(friendId, personId, groupId)
+
+    override fun loadPersonExcept(personId: Long) = personDao.getAllPersonsExceptFlow(personId).map {
+        personListMapper.map(it)
+    }
 }
