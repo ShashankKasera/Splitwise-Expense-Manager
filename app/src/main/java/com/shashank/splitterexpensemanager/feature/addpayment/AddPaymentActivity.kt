@@ -87,7 +87,6 @@ class AddPaymentActivity : AppCompatActivity() {
         cvSave.setOnClickListener {
             val amount = etAmount.text.toString().trim().toDouble()
             val date = tvDate.text.toString().trim()
-//            val date = tvDate.text.toString().trim().stringToDate("dd/mm/yyyy")?:Date()
             val time = tvTime.text.toString().trim()
             val description = tvDescription.text.toString().trim()
 
@@ -302,7 +301,6 @@ class AddPaymentActivity : AppCompatActivity() {
             viewModel.repayDetails.collect {
                 etAmount.setText(it?.repay?.amount.toString())
                 tvDate.text = it?.repay?.date
-//                tvDate.text = it?.repay?.date?.dateToString((it.repay.date),"dd/mm/yyyy")
                 tvTime.text = it?.repay?.time
                 tvDescription.setText(it?.repay?.description)
                 tvPayerName.text = it?.payer?.name
