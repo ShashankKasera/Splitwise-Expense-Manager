@@ -1,6 +1,5 @@
 package com.shashank.splitterexpensemanager.feature.group
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,12 +39,6 @@ class GroupAdapter(
         val groupData = groups[position]
         with(holder) {
             tvGroupName.text = groupData.group.groupName
-            Log.i("erhuri", "onBindViewHolder: ")
-
-//            val layoutParamsIv = holder.ivGroup.layoutParams
-//            layoutParamsIv.height = if (groupData.overall == 0.0) 250 else 500
-//            holder.ivGroup.layoutParams = layoutParamsIv
-
             val layoutParamsCv = holder.cvGroup.layoutParams
             layoutParamsCv.height = if (groupData.overall == 0.0) 300 else 550
             holder.cvGroup.layoutParams = layoutParamsCv
@@ -114,11 +107,6 @@ class GroupAdapter(
     private fun handleSingleSizeOverall(holder: ViewHolder, overall: Double) {
         with(holder) {
             tvOveOrOved.visible()
-//            val layoutParamsIv = holder.ivGroup.layoutParams
-//            layoutParamsIv.height = 300
-//            holder.ivGroup.layoutParams = layoutParamsIv
-
-            Log.i("erhuri", "handleSingleSizeOverall: ")
             val layoutParamsCv = holder.cvGroup.layoutParams
             layoutParamsCv.height = 350
             holder.cvGroup.layoutParams = layoutParamsCv
