@@ -42,6 +42,7 @@ class GroupDetailsActivity : AppCompatActivity() {
     lateinit var tvGroupName: TextView
     lateinit var cvAddExpenses: CardView
     lateinit var cvBalances: CardView
+    lateinit var cvTotal: CardView
     lateinit var cvSettleUp: CardView
     lateinit var tvOverallOweOrOwed: TextView
     lateinit var tvNoExpenses: TextView
@@ -67,6 +68,7 @@ class GroupDetailsActivity : AppCompatActivity() {
 
 
         recyclerViewSetUp()
+        navigationForTotal(groupId)
         navigationForBalances(groupId)
         navigationForSettleUp(groupId)
         navigationForGroupSettings(groupId)
@@ -89,12 +91,26 @@ class GroupDetailsActivity : AppCompatActivity() {
         }
     }
 
+    private fun navigationForTotal(groupId: Long) {
+        cvTotal.setOnClickListener {
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.TOTAL.name,
+                    hashMapOf(
+                        GROUP_ID to (groupId)
+                    )
+                )
+            )
+        }
+    }
+
     private fun init() {
         rvOweOwed = findViewById(R.id.rv_owe_owed)
         tvNoExpenses = findViewById(R.id.tv_no_expenses_here_yet)
         tvGroupName = findViewById(R.id.tv_group_Name_in_detail)
         cvAddExpenses = findViewById(R.id.cv_add_expenses)
         cvBalances = findViewById(R.id.cv_balance)
+        cvTotal = findViewById(R.id.cv_totals)
         cvSettleUp = findViewById(R.id.cv_settle_up)
         tvOverallOweOrOwed = findViewById(R.id.tv_overall_owe)
         llAddGroupMember = findViewById(R.id.ll_group_member)

@@ -18,6 +18,7 @@ import com.shashank.splitterexpensemanager.actionprocessor.action.GroupDetailsAc
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupMemberActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupSettingsActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.SettleUpActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.TotalActionProcessor
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -113,4 +114,9 @@ internal abstract class ActionsMultiBinderModule {
     @IntoMap
     @ActionTypeKey(ActionType.ADD_PAYMENT)
     internal abstract fun bindAddPaymentAction(action: AddPaymentActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.TOTAL)
+    internal abstract fun bindTotalAction(action: TotalActionProcessor): Action
 }

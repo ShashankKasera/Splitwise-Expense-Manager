@@ -21,6 +21,7 @@ enum class ActionType {
     BALANCES,
     SETTLE_UP,
     ADD_PAYMENT,
+    TOTAL,
 }
 
 interface Action {
