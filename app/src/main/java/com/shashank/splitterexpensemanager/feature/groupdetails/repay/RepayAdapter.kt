@@ -37,7 +37,6 @@ class RepayAdapter(
             tvReceiverName.text = repayItem?.receiver?.name
             tvAmount.text = repayItem?.repay?.amount?.formatNumber(2)
             tvDate.text = repayItem?.repay?.date
-//            tvDate.text = repayItem?.repay?.date?.dateToString(repayItem.repay.date,"dd/mm/yyyy")
             tvTime.text = repayItem?.repay?.time
 
 

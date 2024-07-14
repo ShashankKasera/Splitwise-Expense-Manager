@@ -37,7 +37,6 @@ class ExpensesAdapter(
             tvName.text = expenseItem?.person?.name
             tvAmount.text = expenseItem?.expense?.amount.toString()
             tvDate.text = expenseItem?.expense?.date
-//            tvDate.text = expenseItem?.expense?.date?.dateToString(expenseItem.expense.date,"dd/mm/yyyy")
             tvTime.text = expenseItem?.expense?.time
 
             clExpenses.setOnClickListener {

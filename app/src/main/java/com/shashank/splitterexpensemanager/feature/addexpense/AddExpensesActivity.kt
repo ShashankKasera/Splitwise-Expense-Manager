@@ -128,7 +128,6 @@ class AddExpensesActivity : AppCompatActivity() {
         cvSave.setOnClickListener {
             val amount = etAmount.text.toString().trim().toDouble()
             val date = tvDate.text.toString().trim()
-//            val date = tvDate.text.toString().trim().stringToDate("dd/mm/yyyy")?:Date()
             val time = tvTime.text.toString().trim()
             val description = tvDescription.text.toString().trim()
             val name = tvWhoPay.text.toString().trim()
@@ -276,7 +275,6 @@ class AddExpensesActivity : AppCompatActivity() {
                 tvCategoryName.text = it?.category?.categoryName
                 ivCategoryImage.setImageResource(it?.category?.categoryImage ?: 0)
                 tvDate.text = (it?.expense?.date)
-//                tvDate.text = (it?.expense?.date)?.dateToString((it.expense.date),"dd/mm/yyyy")
                 tvTime.text = it?.expense?.time
                 tvDescription.setText(it?.expense?.description)
                 tvWhoPay.text = it?.person?.name
