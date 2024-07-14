@@ -17,6 +17,7 @@ import com.shashank.splitterexpensemanager.actionprocessor.action.FriendsDetails
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupDetailsActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupMemberActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupSettingsActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.GroupSettledUpActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.RepayDetailsActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.SelectRepayActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.SettleUpActionProcessor
@@ -131,4 +132,9 @@ internal abstract class ActionsMultiBinderModule {
     @IntoMap
     @ActionTypeKey(ActionType.REPAY_DETAILS)
     internal abstract fun bindRepayDetailsAction(action: RepayDetailsActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.GROUP_SETTLED_UP)
+    internal abstract fun bindGroupSettledUpAction(action: GroupSettledUpActionProcessor): Action
 }
