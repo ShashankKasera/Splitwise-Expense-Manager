@@ -1,6 +1,7 @@
 package com.shashank.splitterexpensemanager.feature.friendsdetails
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -36,6 +37,7 @@ class FriendsDetailsActivity : AppCompatActivity() {
     lateinit var tvOverallOweOrOwed: TextView
     lateinit var cvSettledUp: CardView
     lateinit var tvPlus: TextView
+    lateinit var ivSetting: ImageView
     lateinit var rvFriendOweOwed: RecyclerView
     lateinit var groupOweOwedAdapter: GroupOweOwedAdapter
     lateinit var friendOweOwedAdapter: FriendOweOwedAdapter
@@ -50,7 +52,7 @@ class FriendsDetailsActivity : AppCompatActivity() {
         val personId: Long = sharedPref.getValue(PERSON_ID, 0L) as Long
 
         init(friendId, personId)
-
+        navigationForFriendSettings(friendId)
         cvSettledUp.setOnClickListener {
             actionProcessor.process(
                 ActionRequestSchema(
@@ -75,6 +77,7 @@ class FriendsDetailsActivity : AppCompatActivity() {
     private fun init(friendId: Long, personId: Long) {
         rvGroupOweOwed = findViewById(R.id.rv_group_owe_owed_friend_details)
         tvFriendName = findViewById(R.id.tv_friends_Name)
+        ivSetting = findViewById(R.id.iv_setting_friendDetails)
         tvOverallOweOrOwed = findViewById(R.id.tv_overall_owe_friend_details)
         rvFriendOweOwed = findViewById(R.id.rv_owe_owed_friend_details)
         tvPlus = findViewById(R.id.tv_other_member_friend_details)
@@ -173,6 +176,19 @@ class FriendsDetailsActivity : AppCompatActivity() {
             }
 
             else -> tvOverallOweOrOwed.gone()
+        }
+    }
+
+    private fun navigationForFriendSettings(friendId: Long) {
+        ivSetting.setOnClickListener {
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.FRIEND_SETTING.name,
+                    hashMapOf(
+                        FRIEND_ID to (friendId)
+                    )
+                )
+            )
         }
     }
 }
