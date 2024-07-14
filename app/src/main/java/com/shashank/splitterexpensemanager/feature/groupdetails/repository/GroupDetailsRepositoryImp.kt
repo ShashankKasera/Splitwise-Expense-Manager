@@ -5,19 +5,23 @@ import com.shashank.splitterexpensemanager.localdb.room.dao.ExpensesDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.GroupDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.GroupMemberDao
 import com.shashank.splitterexpensemanager.localdb.room.dao.OweOrOwedDao
+import com.shashank.splitterexpensemanager.localdb.room.dao.RepayDao
 import com.shashank.splitterexpensemanager.mapper.expensecategorypersonmapper.ExpenseWithCategoryAndPersonListMapper
 import com.shashank.splitterexpensemanager.mapper.groupmapper.GroupMapper
 import com.shashank.splitterexpensemanager.mapper.oweorowedwithpersonmapper.OweOrOwedWithPersonListMapper
+import com.shashank.splitterexpensemanager.mapper.repaywithpersonmapper.RepayWithPersonListMapper
 import javax.inject.Inject
 
 class GroupDetailsRepositoryImp @Inject constructor(
     private val groupDao: GroupDao,
     private val expensesDao: ExpensesDao,
     private val oweOrOwedDao: OweOrOwedDao,
+    private val repayDao: RepayDao,
     private val groupMemberDao: GroupMemberDao,
     private val groupMapper: GroupMapper,
     private val personListMapper: PersonListMapper,
     private val expenseWithCategoryAndPersonListMapper: ExpenseWithCategoryAndPersonListMapper,
+    private val repayWithPersonListMapper: RepayWithPersonListMapper,
     private val oweOrOwedWithPersonListMapper: OweOrOwedWithPersonListMapper,
 ) : GroupDetailsRepository {
     override fun loadGroup(groupId: Long) =
@@ -25,6 +29,9 @@ class GroupDetailsRepositoryImp @Inject constructor(
 
     override fun loadGroupExpenses(groupId: Long) =
         expenseWithCategoryAndPersonListMapper.map(expensesDao.loadAllExpensesByGroupId(groupId))
+
+    override fun loadGroupRepay(groupId: Long) =
+        repayWithPersonListMapper.map(repayDao.loadAllRepayByGroupId(groupId))
 
     override fun loadAllOweByGroupId(groupId: Long, personId: Long) =
         oweOrOwedWithPersonListMapper.map(oweOrOwedDao.loadAllOweByGroupId(groupId, personId))
