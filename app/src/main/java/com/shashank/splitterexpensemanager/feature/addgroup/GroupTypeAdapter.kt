@@ -1,6 +1,5 @@
 package com.shashank.splitterexpensemanager.feature.addgroup
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,8 +34,6 @@ class GroupTypeAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvName.text = groupTypeList[position].name
         holder.civImage.setImageResource(groupTypeList[position].image)
-
-        Log.i("gerjnge", "onBindViewHolder: $position $selectPosition")
         if (position == selectPosition) {
             holder.llGroupType.setBackgroundColor(
                 holder.llGroupType.context.getResources().getColor(R.color.primary_mid)
