@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.PAYER_ID
@@ -13,6 +14,7 @@ import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.RECEIVER_ID
 import com.shashank.splitterexpensemanager.core.REPAY_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
+import com.shashank.splitterexpensemanager.core.TotalImages
 import com.shashank.splitterexpensemanager.core.UPDATE_REPAY
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
@@ -21,6 +23,7 @@ import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,6 +33,7 @@ class RepayDetailsActivity : AppCompatActivity() {
     @Inject
     lateinit var sharedPref: SharedPref
     lateinit var tvAmount: TextView
+    lateinit var civRepay: CircleImageView
     lateinit var tvname: TextView
     lateinit var tvDateTime: TextView
     lateinit var ivDelete: ImageView
@@ -60,6 +64,8 @@ class RepayDetailsActivity : AppCompatActivity() {
                     payerId = it.payer.id ?: -1
                     receiverId = it.receiver.id ?: -1
                     tvAmount.text = it.repay.amount?.formatNumber(2)
+                    Glide.with(this@RepayDetailsActivity).load(TotalImages.TOTAL_YOU_PAID_FOR)
+                        .into(civRepay)
                     tvname.text = if (it.payer.id == personId) {
                         getString(R.string.you_paid, it.receiver.name)
                     } else {
@@ -99,6 +105,7 @@ class RepayDetailsActivity : AppCompatActivity() {
 
     private fun init() {
         tvAmount = findViewById(R.id.tv_amount_repay_details)
+        civRepay = findViewById(R.id.civ_repay)
         tvname = findViewById(R.id.tv_name_repay_details)
         tvDateTime = findViewById(R.id.tv_date_time)
 

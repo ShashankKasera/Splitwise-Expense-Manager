@@ -1,11 +1,13 @@
 package com.shashank.splitterexpensemanager.feature.friendsdetails
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
@@ -15,6 +17,7 @@ import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.model.Group
+import de.hdodenhof.circleimageview.CircleImageView
 
 class GroupOweOwedAdapter(
     private val actionProcessor: ActionProcessor,
@@ -34,7 +37,6 @@ class GroupOweOwedAdapter(
         with(holder) {
             tvName.text = group.groupName
             tvGroupType.text = group.groupType
-
             if (amount == 0.0) {
                 tvSettledUp.visible()
                 tvAmount.gone()
@@ -55,22 +57,30 @@ class GroupOweOwedAdapter(
                     text = context.getString(lentOrBorrowedString)
                     setTextColor(context.resources.getColor(if (isLent) R.color.green else R.color.primary_dark))
                 }
-
                 tvAmount.setTextColor(context.resources.getColor(if (isLent) R.color.green else R.color.primary_dark))
             }
+            setImage(context, group, civGroupImage)
+            navigationForGroupDetails(cvGroup, group)
+        }
+    }
 
-            cvGroup.setOnClickListener {
-                val groupId = group.id ?: -1
-                actionProcessor.process(
-                    ActionRequestSchema(
-                        ActionType.GROUP_DETAILS.name,
-                        hashMapOf(
-                            GROUP_ID to groupId,
-                        )
+    private fun navigationForGroupDetails(cvGroup: CardView, group: Group) {
+        cvGroup.setOnClickListener {
+            val groupId = group.id ?: -1
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.GROUP_DETAILS.name,
+                    hashMapOf(
+                        GROUP_ID to groupId,
                     )
                 )
-            }
+            )
         }
+    }
+
+    private fun setImage(context: Context, group: Group, civGroupImage: CircleImageView) {
+        Glide.with(context).load(group.groupImage)
+            .into(civGroupImage)
     }
 
     override fun getItemCount(): Int {
@@ -80,6 +90,7 @@ class GroupOweOwedAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvName: TextView = itemView.findViewById(R.id.tv_friend_name)
         val tvGroupType: TextView = itemView.findViewById(R.id.tv_group_type_friend)
+        val civGroupImage: CircleImageView = itemView.findViewById(R.id.civ_friends_image)
         val tvLentOrBorrowedAmount: TextView = itemView.findViewById(R.id.tv_you_borrowed_friends)
         val tvAmount: TextView = itemView.findViewById(R.id.tv_you_borrowed_amount_friends)
         val tvSettledUp: TextView = itemView.findViewById(R.id.tv_settled_up_friends)

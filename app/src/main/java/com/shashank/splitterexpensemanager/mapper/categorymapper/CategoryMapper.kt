@@ -10,6 +10,6 @@ class CategoryMapper @Inject constructor() : Mapper<CategoryEntity?, Category> {
     override fun map(input: CategoryEntity?) = Category(
         id = input?.id ?: -1,
         categoryName = input?.categoryName ?: String.EMPTY,
-        categoryImage = input?.categoryImage ?: -1,
+        categoryImage = input?.categoryImage ?: String.EMPTY,
     )
 }

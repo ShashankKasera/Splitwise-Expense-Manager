@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.EXPENSES_ID
 import com.shashank.splitterexpensemanager.core.GROUP_ID
@@ -20,6 +21,7 @@ import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequ
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.model.OweOrOwedWithPerson
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,6 +29,7 @@ import javax.inject.Inject
 class ExpensesDetailsActivity : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
     lateinit var tvAmount: TextView
+    lateinit var civCategory: CircleImageView
     lateinit var tvPaidBy: TextView
     lateinit var tvTime: TextView
     lateinit var tvDate: TextView
@@ -62,6 +65,8 @@ class ExpensesDetailsActivity : AppCompatActivity() {
                             R.string.paid_amount_expensese_details,
                             (it.expense.amount).formatNumber(2)
                         )
+                    Glide.with(this@ExpensesDetailsActivity).load(it.category.categoryImage)
+                        .into(civCategory)
                     tvPaidBy.text = getString(R.string.paid_by_expensese_details, it.expense.name)
                     tvDate.text = getString(R.string.date_expensese_details, it.expense.date)
                     tvTime.text = getString(R.string.time_expensese_details, it.expense.time)
@@ -103,6 +108,7 @@ class ExpensesDetailsActivity : AppCompatActivity() {
     private fun init() {
         recyclerView = findViewById(R.id.rv_group_expense)
         tvAmount = findViewById(R.id.tv_paid_amount_expenses_details)
+        civCategory = findViewById(R.id.civ_category_expenses_details)
         tvPaidBy = findViewById(R.id.tv_paid_by)
         tvDate = findViewById(R.id.tv_date)
         tvTime = findViewById(R.id.tv_time)

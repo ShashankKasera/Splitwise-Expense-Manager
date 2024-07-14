@@ -7,8 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
+import com.shashank.splitterexpensemanager.core.CommonImages
 import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
@@ -44,7 +46,7 @@ class SettleUpActivity : AppCompatActivity() {
         }
         setupRecyclerView(groupId, personId)
 
-
+        Glide.with(this).load(CommonImages.CANCEL_ICON).into(ivCancel)
         viewModel.settleUp(groupId, personId)
         lifecycleScope.launch {
             viewModel.settleUp.collect {

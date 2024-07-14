@@ -53,7 +53,6 @@
         android:layout_height="80dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/add_image_png"
         app:civ_circle_background_color="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_tb_create_group" />
@@ -102,6 +101,9 @@
         android:id="@+id/rv_group_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="13dp"
+        android:layout_marginStart="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_group_type"
         tools:itemCount="10"

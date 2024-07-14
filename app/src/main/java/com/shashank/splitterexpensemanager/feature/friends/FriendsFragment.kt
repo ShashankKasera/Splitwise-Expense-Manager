@@ -13,9 +13,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
+import com.shashank.splitterexpensemanager.core.CommonImages
 import com.shashank.splitterexpensemanager.core.FRIEND_ID
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
@@ -58,6 +60,7 @@ class FriendsFragment : Fragment() {
     private var filterList = ArrayList<String>()
     lateinit var filterAdapter: FilterAdapter
     lateinit var tvFilter: TextView
+    lateinit var ivFirstTime: ImageView
     private var selectPosition: Int = 0
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,6 +86,7 @@ class FriendsFragment : Fragment() {
                     filter(personId)
                     clearFilter(personId)
                 }
+                llAddFriends.visible()
             }
         }
 
@@ -125,6 +129,7 @@ class FriendsFragment : Fragment() {
         tvClearFilter = v.findViewById(R.id.tv_clear_filter_friends)
         llFirstTime = v.findViewById(R.id.ll_first_time_friend)
         ivAddfriends = v.findViewById(R.id.iv_add_friends)
+        ivFirstTime = v.findViewById(R.id.iv_first_time_friend)
         filterList.add(getString(R.string.all_friends))
         filterList.add(getString(R.string.outstanding_balance))
         filterList.add(getString(R.string.friends_you_owe))
@@ -133,6 +138,9 @@ class FriendsFragment : Fragment() {
         toolbar = v.findViewById(R.id.tb_friends)
 
         toolbar.setTitle(getString(R.string.dashboard))
+        Glide.with(this).load(CommonImages.FILTER_NORMAL_ICON).into(ivFilter)
+        Glide.with(this).load(CommonImages.GIRL_CHILLING_OUT_ICON).into(ivManChillingOut)
+        Glide.with(this).load(CommonImages.FRIENDS_MEET_EACH_OTHER_ICON).into(ivFirstTime)
     }
 
     fun setUpRecyclerView() {

@@ -3,6 +3,7 @@ package com.shashank.splitterexpensemanager.feature.total
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.feature.total.repository.TotalRepository
+import com.shashank.splitterexpensemanager.model.Group
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -31,6 +32,16 @@ class TotalViewModel @Inject constructor(
 
     private val _yourTotalShareByMonthAndYear = MutableStateFlow<Double>(-1.0)
     val yourTotalShareByMonthAndYear = _yourTotalShareByMonthAndYear.asStateFlow()
+
+    private val _group = MutableStateFlow<Group?>(null)
+    val group = _group.asStateFlow()
+    fun getGroup(groupId: Long) {
+        viewModelScope.launch {
+            totalRepository.loadGroup(groupId).collect {
+                _group.emit(it)
+            }
+        }
+    }
     fun getTotalGroupSpending(groupId: Long) {
         viewModelScope.launch {
             totalRepository.getTotalGroupSpending(groupId).collect {

@@ -46,6 +46,7 @@ class CategoryActivity : AppCompatActivity() {
 
     private fun setUpRecyclerView() {
         categoryAdapter = CategoryAdapter(
+            this,
             categoryList,
             object : CategoryAdapter.OnItemClickListener {
                 override fun onItemClick(position: Int, data: Category) {

@@ -43,7 +43,6 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/filter_normal"
         app:layout_constraintBottom_toBottomOf="@+id/tv_overall_you_owe_friends"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_overall_you_owe_friends" />
@@ -88,8 +87,7 @@
                 android:id="@+id/iv_man_chilling_out_friend"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
-                android:layout_gravity="center"
-                android:src="@drawable/girl_chilling_out" />
+                android:layout_gravity="center" />
 
 
             <TextView
@@ -126,8 +124,7 @@
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="34sp"
-                android:src="@drawable/friends_meet_each_other" />
+                android:layout_marginTop="34sp" />
 
 
             <TextView
@@ -155,6 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16sp"
+            android:visibility="gone"
             android:background="@drawable/red_border">
 
             <ImageView

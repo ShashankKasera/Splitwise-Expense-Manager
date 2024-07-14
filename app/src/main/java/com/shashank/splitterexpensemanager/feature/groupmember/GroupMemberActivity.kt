@@ -57,7 +57,6 @@ class GroupMemberActivity : AppCompatActivity() {
     private fun init() {
         recyclerView = findViewById(R.id.rv_group_member)
         tvAddFriends = findViewById(R.id.cv_add_group_member)
-
         toolbar = findViewById(R.id.tv_tb_group_member)
         ivBack = findViewById(R.id.iv_tb_group_member)
 

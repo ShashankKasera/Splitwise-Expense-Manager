@@ -35,7 +35,6 @@
                 android:id="@+id/civ_friends_image"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/trip_png"
                 app:civ_circle_background_color="@color/primary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

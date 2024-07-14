@@ -51,7 +51,7 @@ class AllRepayFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        allRepayAdapter = AllRepayAdapter(repayList)
+        allRepayAdapter = AllRepayAdapter(actionProcessor, repayList)
         val layoutManager = LinearLayoutManager(context)
         layoutManager.setReverseLayout(true)
         layoutManager.setStackFromEnd(true)

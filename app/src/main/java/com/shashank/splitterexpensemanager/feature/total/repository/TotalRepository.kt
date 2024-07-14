@@ -1,9 +1,11 @@
 package com.shashank.splitterexpensemanager.feature.total.repository
 
+import com.shashank.splitterexpensemanager.model.Group
 import kotlinx.coroutines.flow.Flow
 
 interface TotalRepository {
 
+    fun loadGroup(groupId: Long): Flow<Group>
     fun getTotalGroupSpending(groupId: Long): Flow<Double>
 
     fun getTotalGroupSpendingByMonthAndYear(

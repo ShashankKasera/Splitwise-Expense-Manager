@@ -15,8 +15,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.AMOUNT
+import com.shashank.splitterexpensemanager.core.AddExpensesImages
+import com.shashank.splitterexpensemanager.core.CommonImages
 import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.PAYER_ID
 import com.shashank.splitterexpensemanager.core.RECEIVER_ID
@@ -30,6 +33,7 @@ import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 import java.util.Locale
 import javax.inject.Inject
@@ -44,9 +48,12 @@ class AddPaymentActivity : AppCompatActivity() {
     lateinit var sharedPref: SharedPref
     lateinit var toolbar: TextView
     lateinit var ivBack: ImageView
+    lateinit var ivArrow: ImageView
     lateinit var llDatePicker: LinearLayout
     lateinit var tvPayerName: TextView
     lateinit var tvReceiverName: TextView
+    lateinit var civPayerImage: CircleImageView
+    lateinit var civReceiverImage: CircleImageView
     lateinit var tvWhoPayName: TextView
     lateinit var tvWhoSplitName: TextView
     lateinit var tvDate: TextView
@@ -59,6 +66,10 @@ class AddPaymentActivity : AppCompatActivity() {
     lateinit var etAmount: EditText
     lateinit var tvDescription: EditText
     lateinit var cvSave: CardView
+    lateinit var civRsImage: CircleImageView
+    lateinit var civDateImage: CircleImageView
+    lateinit var civTimeImage: CircleImageView
+    lateinit var civDescriptionImage: CircleImageView
     private val viewModel: AddPaymentViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +83,8 @@ class AddPaymentActivity : AppCompatActivity() {
         val selectRepay: Boolean = intent.extras?.getBoolean(SELECT_REPAY) ?: false
         val updateFlag: Boolean = intent.extras?.getBoolean(UPDATE_REPAY) ?: false
         init()
-
+        Glide.with(this).load(CommonImages.USER_ICON).into(civPayerImage)
+        Glide.with(this).load(CommonImages.USER_ICON).into(civReceiverImage)
         if (updateFlag) {
             viewModel.loadOweOrOwed(repayId)
             getInitialDataRepayForUpdate(repayId)
@@ -133,6 +145,9 @@ class AddPaymentActivity : AppCompatActivity() {
     private fun init() {
         tvPayerName = findViewById(R.id.tv_payer_name_repay)
         tvReceiverName = findViewById(R.id.tv_receiver_name_repay)
+        ivArrow = findViewById(R.id.iv_arrow)
+        civPayerImage = findViewById(R.id.civ_payer)
+        civReceiverImage = findViewById(R.id.civ_receiver)
         clDate = findViewById(R.id.cl_date)
         tvDate = findViewById(R.id.tv_date_repay_activity)
         llDatePicker = findViewById(R.id.ll_dp_repay)
@@ -145,6 +160,10 @@ class AddPaymentActivity : AppCompatActivity() {
         tvDescription = findViewById(R.id.et_description_repay)
         tvWhoPayName = findViewById(R.id.tv_who_pay_repay)
         tvWhoSplitName = findViewById(R.id.tv_who_split)
+        civRsImage = findViewById(R.id.civ_rs)
+        civDateImage = findViewById(R.id.civ_date)
+        civTimeImage = findViewById(R.id.civ_time)
+        civDescriptionImage = findViewById(R.id.civ_description)
         cvSave = findViewById(R.id.cv_save_repay)
 
         toolbar = findViewById(R.id.tv_tb_add_payment)
@@ -154,6 +173,11 @@ class AddPaymentActivity : AppCompatActivity() {
         ivBack.setOnClickListener {
             finish()
         }
+        Glide.with(this).load(CommonImages.ARROW_ICON).into(ivArrow)
+        Glide.with(this).load(AddExpensesImages.RS_ICON).into(civRsImage)
+        Glide.with(this).load(AddExpensesImages.CALENDAR_ICON).into(civDateImage)
+        Glide.with(this).load(AddExpensesImages.CLOCK_ICON).into(civTimeImage)
+        Glide.with(this).load(AddExpensesImages.DESCRIPTION_ICON).into(civDescriptionImage)
     }
 
     private fun getPayer(payerId: Long) {

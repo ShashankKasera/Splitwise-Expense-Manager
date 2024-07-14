@@ -16,8 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
+import com.shashank.splitterexpensemanager.core.AddExpensesImages
 import com.shashank.splitterexpensemanager.core.CATEGORY
 import com.shashank.splitterexpensemanager.core.EXPENSES_ID
 import com.shashank.splitterexpensemanager.core.GROUP_ID
@@ -57,8 +59,13 @@ class AddExpensesActivity : AppCompatActivity() {
     lateinit var tvTime: TextView
     lateinit var clTime: ConstraintLayout
     lateinit var timePicker: TimePicker
+    lateinit var civGroup: CircleImageView
     lateinit var tvCategoryName: TextView
     lateinit var ivCategoryImage: CircleImageView
+    lateinit var civRsImage: CircleImageView
+    lateinit var civDateImage: CircleImageView
+    lateinit var civTimeImage: CircleImageView
+    lateinit var civDescriptionImage: CircleImageView
     lateinit var etAmount: EditText
     lateinit var tvDescription: EditText
     lateinit var tvWhoPay: TextView
@@ -75,7 +82,7 @@ class AddExpensesActivity : AppCompatActivity() {
             val receivedCategory = data?.getParcelableExtra<Category>(CATEGORY)
 
             tvCategoryName.text = receivedCategory?.categoryName
-            ivCategoryImage.setImageResource(receivedCategory?.categoryImage ?: 0)
+            Glide.with(this).load(receivedCategory?.categoryImage ?: "").into(ivCategoryImage)
             categoryId = receivedCategory?.id ?: 0
         }
     }
@@ -156,6 +163,11 @@ class AddExpensesActivity : AppCompatActivity() {
         timePicker = findViewById(R.id.timePicker_expenses)
         tvCategoryName = findViewById(R.id.tv_category_name_expenses)
         ivCategoryImage = findViewById(R.id.civ_category_image_expenses)
+        civGroup = findViewById(R.id.civ_group_image_add_expenses)
+        civRsImage = findViewById(R.id.civ_rs)
+        civDateImage = findViewById(R.id.civ_date)
+        civTimeImage = findViewById(R.id.civ_time)
+        civDescriptionImage = findViewById(R.id.civ_description)
         etAmount = findViewById(R.id.et_amount_expenses)
         tvDescription = findViewById(R.id.et_description_expenses)
         tvWhoPay = findViewById(R.id.tv_who_pay_expenses)
@@ -167,10 +179,18 @@ class AddExpensesActivity : AppCompatActivity() {
         ivBack.setOnClickListener {
             finish()
         }
+
+        Glide.with(this).load(AddExpensesImages.RS_ICON).into(civRsImage)
+        Glide.with(this).load(AddExpensesImages.CATEGORY_ICON).into(ivCategoryImage)
+        Glide.with(this).load(AddExpensesImages.CALENDAR_ICON).into(civDateImage)
+        Glide.with(this).load(AddExpensesImages.CLOCK_ICON).into(civTimeImage)
+        Glide.with(this).load(AddExpensesImages.DESCRIPTION_ICON).into(civDescriptionImage)
         viewModel.getGroup(groupId)
         lifecycleScope.launch {
             viewModel.group.collect {
                 if (it != null) tvGroupName.text = it.groupName
+                Glide.with(this@AddExpensesActivity).load(it?.groupImage ?: "")
+                    .into(civGroup)
             }
         }
     }
@@ -281,8 +301,10 @@ class AddExpensesActivity : AppCompatActivity() {
             viewModel.loadExpensesDetails(expensesId)
             viewModel.expensesDetails.collect {
                 etAmount.setText(it?.expense?.amount.toString())
+
                 tvCategoryName.text = it?.category?.categoryName
-                ivCategoryImage.setImageResource(it?.category?.categoryImage ?: 0)
+                Glide.with(this@AddExpensesActivity).load(it?.category?.categoryImage ?: "")
+                    .into(ivCategoryImage)
                 tvDate.text = (it?.expense?.date)
                 tvTime.text = it?.expense?.time
                 tvDescription.setText(it?.expense?.description)

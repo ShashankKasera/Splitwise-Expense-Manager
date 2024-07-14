@@ -10,12 +10,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.GROUP_ID
+import com.shashank.splitterexpensemanager.core.SharedPref
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.model.Balances
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class BalancesActivity : AppCompatActivity() {
+    @Inject
+    lateinit var sharedPref: SharedPref
+
+    @Inject
+    lateinit var actionProcessor: ActionProcessor
     lateinit var balancesAdapter: BalancesAdapter
     lateinit var recyclerView: RecyclerView
     lateinit var toolbar: TextView
@@ -34,11 +42,12 @@ class BalancesActivity : AppCompatActivity() {
         ivBack.setOnClickListener {
             finish()
         }
-        setUpRecyclerView()
+        setUpRecyclerView(groupId)
         viewModel.getBalances(groupId)
         lifecycleScope.launch {
             viewModel.allBalance.collect {
                 if (it.isNotEmpty()) {
+                    groupMemberList.clear()
                     groupMemberList.addAll(it)
                     balancesAdapter.notifyDataSetChanged()
                 }
@@ -46,8 +55,14 @@ class BalancesActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUpRecyclerView() {
-        balancesAdapter = BalancesAdapter(this, groupMemberList)
+    override fun onRestart() {
+        super.onRestart()
+        val groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
+        viewModel.getBalances(groupId)
+    }
+
+    private fun setUpRecyclerView(groupId: Long) {
+        balancesAdapter = BalancesAdapter(actionProcessor, groupId, groupMemberList)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = balancesAdapter
     }

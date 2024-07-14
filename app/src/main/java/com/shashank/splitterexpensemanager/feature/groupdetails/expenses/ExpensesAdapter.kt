@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.EXPENSES_ID
 import com.shashank.splitterexpensemanager.core.GROUP_ID
@@ -56,8 +57,8 @@ class ExpensesAdapter(
             }
 
             val categoryImage = expenseItem?.category?.categoryImage
-            if (categoryImage != null && categoryImage != 0) {
-                civCategory.setImageResource(categoryImage)
+            if (categoryImage != null && !categoryImage.equals("")) {
+                Glide.with(context).load(categoryImage).into(civCategory)
             }
 
             val isPersonIdMatch = personId == expenseItem?.person?.id

@@ -9,14 +9,17 @@ import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
+import com.shashank.splitterexpensemanager.core.TotalImages
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.ui.FilterAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -31,7 +34,13 @@ class TotalActivity : AppCompatActivity() {
     lateinit var tvTotalGroupSpending: TextView
     lateinit var tvTotalYouPaid: TextView
     lateinit var tvYourTotalShare: TextView
+    lateinit var tvGroupName: TextView
     lateinit var tvFilter: TextView
+    lateinit var civFilter: CircleImageView
+    lateinit var civGroupImage: CircleImageView
+    lateinit var civTotalGroupSpending: CircleImageView
+    lateinit var civTotalYouPaid: CircleImageView
+    lateinit var civTotalYourShare: CircleImageView
     lateinit var filter: CardView
     lateinit var toolbar: TextView
     lateinit var ivBack: ImageView
@@ -49,11 +58,12 @@ class TotalActivity : AppCompatActivity() {
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
 
         init()
-
+        getGroup(groupId)
         allTime(groupId, personId)
         filterList.add(getString(R.string.all_time))
         filterList.add(getString(R.string.this_month))
         filterList.add(getString(R.string.last_month))
+
 
         filter(personId, groupId)
     }
@@ -107,11 +117,32 @@ class TotalActivity : AppCompatActivity() {
         filter = findViewById(R.id.cv_total_filter)
         ivBack = findViewById(R.id.iv_tb_total)
         toolbar = findViewById(R.id.tv_tb_total)
+        civFilter = findViewById(R.id.civ_filter_image)
+        civTotalGroupSpending = findViewById(R.id.civ_total_group_spending)
+        civTotalYouPaid = findViewById(R.id.civ_total_you_paid)
+        civTotalYourShare = findViewById(R.id.civ_total_your_share)
+        civGroupImage = findViewById(R.id.civ_group_image_total)
+        tvGroupName = findViewById(R.id.tv_group_name_total)
         toolbar.text = getString(R.string.total)
         ivBack.setOnClickListener {
             finish()
         }
+        Glide.with(this).load(TotalImages.TOTAL_FILTER).into(civFilter)
+        Glide.with(this).load(TotalImages.TOTAL).into(civTotalGroupSpending)
+        Glide.with(this).load(TotalImages.TOTAL_YOU_PAID_FOR).into(civTotalYouPaid)
+        Glide.with(this).load(TotalImages.YOUR_SHARE).into(civTotalYourShare)
         tvFilter.text = getString(R.string.all_time)
+    }
+
+    private fun getGroup(groupId: Long) {
+        viewModel.getGroup(groupId)
+        lifecycleScope.launch {
+            viewModel.group.collect {
+                if (it != null) tvGroupName.text = it.groupName
+                Glide.with(this@TotalActivity).load(it?.groupImage ?: "")
+                    .into(civGroupImage)
+            }
+        }
     }
 
     private fun totalGroupSpending() {

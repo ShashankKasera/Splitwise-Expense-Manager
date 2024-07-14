@@ -60,7 +60,6 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/setting_icon"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_name_friend_details"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_name_friend_details" />
@@ -70,7 +69,7 @@
                     android:layout_height="80dp"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="60dp"
-                    android:src="@drawable/utrakhnd"
+                    app:civ_circle_background_color="@color/primary_dark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -142,7 +141,7 @@
                     app:cardCornerRadius="20dp"
                     app:cardElevation="8dp"
                     app:layout_constraintBottom_toBottomOf="@id/gl_bottom_cwe_friend_details"
-                    app:layout_constraintEnd_toStartOf="@+id/cv_totals_friend_details"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/gl_left_cwe_friend_details"
                     app:layout_constraintTop_toBottomOf="@+id/tv_other_member_friend_details">
 
@@ -158,75 +157,14 @@
                             android:layout_marginRight="8dp"
                             android:gravity="center"
                             android:padding="4dp"
+                            android:paddingStart="50dp"
+                            android:paddingEnd="50dp"
                             android:text="@string/settle_up"
                             android:textColor="@color/white"
                             android:textSize="16sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_totals_friend_details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="8dp"
-                    app:cardCornerRadius="20dp"
-
-                    app:cardElevation="8dp"
-                    app:layout_constraintBottom_toBottomOf="@id/gl_bottom_cwe_friend_details"
-                    app:layout_constraintEnd_toStartOf="@+id/cv_balance_friend_details"
-                    app:layout_constraintStart_toEndOf="@+id/cv_settle_up_friend_details"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_other_member_friend_details">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/main_gradient">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:gravity="center"
-                            android:padding="4dp"
-                            android:text="@string/tottls"
-                            android:textColor="@color/white"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_balance_friend_details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    app:cardCornerRadius="20dp"
-
-                    app:cardElevation="8dp"
-                    app:layout_constraintBottom_toBottomOf="@id/gl_bottom_cwe_friend_details"
-                    app:layout_constraintEnd_toEndOf="@id/gl_right_owe_friend_details"
-                    app:layout_constraintStart_toEndOf="@+id/cv_totals_friend_details"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_other_member_friend_details">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/main_gradient">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:gravity="center"
-                            android:padding="4dp"
-                            android:text="@string/balances"
-                            android:textColor="@color/white"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
