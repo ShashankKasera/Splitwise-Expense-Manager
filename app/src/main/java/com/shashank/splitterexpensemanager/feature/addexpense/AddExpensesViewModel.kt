@@ -1,6 +1,5 @@
 package com.shashank.splitterexpensemanager.feature.addexpense
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.authentication.model.Person
@@ -149,11 +148,8 @@ class AddExpensesViewModel @Inject constructor(
                         description
                     )
                 )
-                Log.i("grkebgh", "updateExpenses: 1 $allOweOrOwedList $splitAmount")
 
                 allOweOrOwedList.forEach {
-                    Log.i("grkebgh", "updateExpenses: $allOweOrOwedList $splitAmount")
-
                     addExpensesRepository.updateOweOrOwed(
                         OweOrOwedEntity(
                             id = it.id,
