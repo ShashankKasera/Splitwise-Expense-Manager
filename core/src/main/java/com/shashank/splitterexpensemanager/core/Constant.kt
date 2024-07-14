@@ -18,6 +18,8 @@ const val SHARED_PREFERENCES: String = "mySharedPreferences"
 const val UPDATE_EXPENSES: String = "UpdateExpense"
 const val UPDATE_REPAY: String = "UpdateRepay"
 const val UPDATE_GROUP: String = "UpdateGroup"
+const val MALE: String = "Male"
+const val FEMALE: String = "Female"
 
 object GroupTypeImages {
     const val TRIP_CREATE_GROUP: String =
@@ -142,7 +144,7 @@ object AddExpensesImages {
 object CommonImages {
     const val USER_ICON: String =
         "https://firebasestorage.googleapis.com/v0/b/splitter-expense-manager.appspot.com/o/" +
-            "user_image.png?alt=media&token=4bacf03d-5039-4024-9bcd-2180f6cac0d0"
+            "Common%2Fuser_image.png?alt=media&token=2197d632-f2d4-4878-8c3d-d67681dd5c5e"
     const val ARROW_ICON: String =
         "https://firebasestorage.googleapis.com/v0/b/splitter-expense-manager.appspot.com/o/" +
             "Common%2Farrow.png?alt=media&token=5a8abed8-1d08-4407-9473-e14b4cdfd2e2"
@@ -164,4 +166,18 @@ object CommonImages {
     const val SETTING_ICON: String =
         "https://firebasestorage.googleapis.com/v0/b/splitter-expense-manager.appspot.com/o/" +
             "Common%2Fsetting_icon.png?alt=media&token=3c2c5813-2c73-4957-9bcc-2f31746d861f"
+    const val ADD_NEW_GROUP: String =
+        "https://firebasestorage.googleapis.com/v0/b/splitter-expense-manager.appspot.com/o/" +
+            "Common%2Fadd%20new%20group.png?alt=media&token=f971b4b4-8f61-400a-af19-84e8435cbe8b"
+    const val MALE: String =
+        "https://firebasestorage.googleapis.com/v0/b/splitter-expense-manager.appspot.com/o/" +
+            "Common%2Fmale.png?alt=media&token=3015241b-9015-4dd1-b16d-8367a7f9f7f4"
+
+    const val FEMALE: String =
+        "https://firebasestorage.googleapis.com/v0/b/splitter-expense-manager.appspot.com/o/" +
+            "Common%2Ffemale.png?alt=media&token=90705933-35b8-4013-a884-787590d117fb"
+
+    const val GIRL: String =
+        "https://firebasestorage.googleapis.com/v0/b/splitter-expense-manager.appspot.com/o/" +
+            "Common%2Fgir.png?alt=media&token=5cf52772-dc8c-466f-a535-5e5a09e6ea2d"
 }

@@ -11,7 +11,9 @@ import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.AMOUNT
 import com.shashank.splitterexpensemanager.core.CommonImages
+import com.shashank.splitterexpensemanager.core.FEMALE
 import com.shashank.splitterexpensemanager.core.GROUP_ID
+import com.shashank.splitterexpensemanager.core.MALE
 import com.shashank.splitterexpensemanager.core.PAYER_ID
 import com.shashank.splitterexpensemanager.core.RECEIVER_ID
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
@@ -40,9 +42,18 @@ class UnderBalancesAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val (person, amount) = underBalancesList[position]
         val context = holder.itemView.context
-        Glide.with(context).load(CommonImages.USER_ICON).into(holder.civFriendImage)
+        if (person.gender == MALE) {
+            Glide.with(context).load(CommonImages.USER_ICON).into(holder.civFriendImage)
+        } else if (person.gender == FEMALE) {
+            Glide.with(context).load(CommonImages.GIRL).into(holder.civFriendImage)
+        }
         if (amount > 0) {
             with(holder) {
+                if (person.gender == MALE) {
+                    Glide.with(context).load(CommonImages.USER_ICON).into(holder.civFriendImage)
+                } else if (person.gender == FEMALE) {
+                    Glide.with(context).load(CommonImages.GIRL).into(holder.civFriendImage)
+                }
                 tvOwedPerson.text = uPerson.name
                 tvOwePerson.text = person.name
                 tvAmount.text = context.getString(R.string.rs, amount.formatNumber(2))
@@ -50,6 +61,11 @@ class UnderBalancesAdapter(
             }
         } else if (amount < 0) {
             with(holder) {
+                if (uPerson.gender == MALE) {
+                    Glide.with(context).load(CommonImages.USER_ICON).into(holder.civFriendImage)
+                } else if (uPerson.gender == FEMALE) {
+                    Glide.with(context).load(CommonImages.GIRL).into(holder.civFriendImage)
+                }
                 tvOwePerson.text = uPerson.name
                 tvOwedPerson.text = person.name
                 tvAmount.text = context.getString(R.string.rs, (-amount).formatNumber(2))

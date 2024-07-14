@@ -21,7 +21,6 @@
             android:id="@+id/iv_add_group"
             android:layout_width="30sp"
             android:layout_height="30sp"
-            android:src="@drawable/add_group_member"
             android:tint="@color/white"
             android:layout_marginEnd="6dp"
             android:layout_gravity="end"/>
@@ -63,21 +62,27 @@
         android:layout_margin="8sp"
         app:layout_constraintTop_toBottomOf="@+id/tv_overall_you_owe_group" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_group"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_filter_group"
+        tools:itemCount="1"
+        tools:listitem="@layout/group_item" />
+
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_filter_group">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_group"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:itemCount="1"
-            tools:listitem="@layout/group_item" />
 
         <LinearLayout
             android:id="@+id/ll_empty_list_group"
@@ -120,7 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/iv_first_time_group"
@@ -150,34 +155,36 @@
                 android:textSize="16sp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_add_groups"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16sp"
-            android:visibility="gone"
-            android:background="@drawable/red_border">
+            android:background="@drawable/red_border"
+            android:visibility="gone">
 
             <ImageView
+                android:id="@+id/iv_add_group_ll"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/add_group_member"
-                android:tint="@color/primary_dark"
+                android:layout_gravity="center"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8sp"
                 android:layout_marginBottom="8sp"
-                android:layout_gravity="center"/>
+                android:tint="@color/primary_dark" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/start_a_new_group"
-                android:layout_marginStart="16dp"
-                android:textSize="18sp"
                 android:layout_gravity="center"
-                android:textColor="@color/primary_dark"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8sp"
                 android:layout_marginEnd="16sp"
-                android:layout_marginBottom="8sp"/>
+                android:layout_marginBottom="8sp"
+                android:text="@string/start_a_new_group"
+                android:textColor="@color/primary_dark"
+                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
 

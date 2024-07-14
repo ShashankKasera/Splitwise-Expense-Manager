@@ -49,7 +49,10 @@
                 android:layout_marginStart="8dp"
                 android:text="@string/name"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginEnd="8sp"
                 app:layout_constraintEnd_toStartOf="@+id/tv_you_borrowed_friends"
                 app:layout_constraintStart_toEndOf="@+id/civ_friends_image"
                 app:layout_constraintTop_toTopOf="@+id/civ_friends_image" />

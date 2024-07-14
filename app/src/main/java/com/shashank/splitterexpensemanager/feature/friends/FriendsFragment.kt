@@ -78,15 +78,15 @@ class FriendsFragment : Fragment() {
             viewModel.allPersonExcept.collect {
                 if (it == 0) {
                     llFirstTime.visible()
+                    llAddFriends.visible()
                 } else if (it != -1) {
                     llFirstTime.gone()
-
+                    llAddFriends.gone()
                     viewModel.loadAllFriends(personId)
                     getData()
                     filter(personId)
                     clearFilter(personId)
                 }
-                llAddFriends.visible()
             }
         }
 

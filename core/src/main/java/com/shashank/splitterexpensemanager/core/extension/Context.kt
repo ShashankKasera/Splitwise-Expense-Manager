@@ -63,7 +63,7 @@ fun Context.showPermissionSnackBar(view: View, title: String, action: String) {
     }.show()
 }
 
-fun Context.sendMail(emailTo: String = "", subject: String = "", body: String = "") {
+fun Context.sendMail(emailTo: String = String.EMPTY, subject: String = String.EMPTY, body: String = String.EMPTY) {
     try {
         val selectorIntent = Intent(Intent.ACTION_SENDTO).apply {
             data = Uri.parse("mailto:")
@@ -76,7 +76,7 @@ fun Context.sendMail(emailTo: String = "", subject: String = "", body: String = 
             selector = selectorIntent
         }
 
-        startActivity(Intent.createChooser(emailIntent, ""))
+        startActivity(Intent.createChooser(emailIntent, String.EMPTY))
     } catch (runtimeException: RuntimeException) {
         Log.i("runtimeException", "sendMail: ")
     }

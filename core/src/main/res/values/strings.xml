@@ -20,4 +20,11 @@
     <string name="Insurance">Insurance</string>
     <string name="Medical_Expenses">Medical Expenses</string>
     <string name="Taxes">Taxes</string>
+
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="enter_a_name">Enter a name</string>
+    <string name="enter_a_valid_mobile_number">Enter a valid mobile number</string>
+    <string name="select_gender">Select gender</string>
 </resources>

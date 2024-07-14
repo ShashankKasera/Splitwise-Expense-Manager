@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.CommonImages
+import com.shashank.splitterexpensemanager.core.FEMALE
+import com.shashank.splitterexpensemanager.core.MALE
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.gone
@@ -43,7 +45,11 @@ class BalancesAdapter(
         setUpRecycleView(context, holder, balances.person, balances.oweOwedList)
         setVisibility(holder, balances.amount)
         setData(context, holder, balances.amount, balances.person.name)
-        Glide.with(context).load(CommonImages.USER_ICON).into(holder.civImage)
+        if (balances.person.gender == MALE) {
+            Glide.with(context).load(CommonImages.USER_ICON).into(holder.civImage)
+        } else if (balances.person.gender == FEMALE) {
+            Glide.with(context).load(CommonImages.GIRL).into(holder.civImage)
+        }
     }
 
     private fun setUpRecycleView(

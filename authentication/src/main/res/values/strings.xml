@@ -15,4 +15,5 @@
     <string name="please_enter_valid_email_id">please enter valid email id</string>
     <string name="please_enter_valid_password">please enter valid password</string>
     <string name="please_enter_valid_user_name">please enter valid user name</string>
+    <string name="select_a_gender">Select a gender</string>
 </resources>

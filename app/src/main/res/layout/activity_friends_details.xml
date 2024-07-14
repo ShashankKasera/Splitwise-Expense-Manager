@@ -44,15 +44,17 @@
                     android:id="@+id/tv_name_friend_details"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:text="@string/name"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:layout_marginStart="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/civ_friends_image"
+                    android:layout_marginStart="8sp"
+                    android:layout_marginEnd="8sp"
                     app:layout_constraintEnd_toStartOf="@+id/iv_setting_friendDetails"
-                    app:layout_constraintStart_toEndOf="@+id/iv_back_friend_details" />
+                    app:layout_constraintStart_toEndOf="@+id/iv_back_friend_details"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <ImageView
@@ -138,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    app:cardCornerRadius="20dp"
+                    app:cardCornerRadius="8dp"
                     app:cardElevation="8dp"
                     app:layout_constraintBottom_toBottomOf="@id/gl_bottom_cwe_friend_details"
                     app:layout_constraintEnd_toEndOf="parent"

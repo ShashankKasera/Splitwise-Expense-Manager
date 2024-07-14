@@ -27,7 +27,7 @@ import com.shashank.splitterexpensemanager.localdb.room.dao.RepayDao
         OweOrOwed::class,
         Repay::class
     ],
-    version = 18,
+    version = 19,
     exportSchema = false
 )
 abstract class SplitterDatabase : RoomDatabase() {

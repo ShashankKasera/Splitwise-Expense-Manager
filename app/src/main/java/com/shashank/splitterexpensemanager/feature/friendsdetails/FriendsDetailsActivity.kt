@@ -12,12 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.CommonImages
+import com.shashank.splitterexpensemanager.core.FEMALE
 import com.shashank.splitterexpensemanager.core.FRIEND_ID
+import com.shashank.splitterexpensemanager.core.MALE
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
@@ -95,7 +98,6 @@ class FriendsDetailsActivity : AppCompatActivity() {
         tvPlus = findViewById(R.id.tv_other_member_friend_details)
         cvSettledUp = findViewById(R.id.cv_settle_up_friend_details)
         recyclerViewSetUp()
-        Glide.with(this).load(CommonImages.USER_ICON).into(civFriend)
 
         viewModel.loadAllFriends(personId, friendId)
         Glide.with(this).load(CommonImages.SETTING_ICON).into(ivSetting)
@@ -118,6 +120,14 @@ class FriendsDetailsActivity : AppCompatActivity() {
             viewModel.allFriends.collect { friendDetails ->
                 toolbar.text = friendDetails.friend.name
 
+                val gender = friendDetails.friend.gender ?: String.EMPTY
+
+                if (gender == MALE) {
+                    Glide.with(this@FriendsDetailsActivity).load(CommonImages.USER_ICON)
+                        .into(civFriend)
+                } else if (gender == FEMALE) {
+                    Glide.with(this@FriendsDetailsActivity).load(CommonImages.GIRL).into(civFriend)
+                }
                 groupOweOwedList.apply {
                     clear()
                     addAll(friendDetails.friendsHashMap.toList())

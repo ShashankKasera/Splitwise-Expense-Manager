@@ -1,12 +1,16 @@
 package com.shashank.splitterexpensemanager.authentication.registration
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.shashank.splitterexpensemanager.authentication.R
@@ -14,6 +18,7 @@ import com.shashank.splitterexpensemanager.core.CategoryImages
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.isValidGmail
 import com.shashank.splitterexpensemanager.core.extension.isValidUserName
@@ -32,15 +37,24 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var password: EditText
     private lateinit var singUpBtn: TextView
     private lateinit var logInUpBtn: TextView
+    private lateinit var clMale: ConstraintLayout
+    private lateinit var clFemale: ConstraintLayout
+    private lateinit var tvMale: TextView
+    private lateinit var tvFemale: TextView
     private lateinit var loader: View
     private lateinit var sUserName: String
     private lateinit var sEmailAddress: String
     private lateinit var sPassword: String
+    private lateinit var ivMale: ImageView
+    private lateinit var ivFemale: ImageView
+    private lateinit var llIvMale: LinearLayout
+    private lateinit var llIvFemale: LinearLayout
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
     private lateinit var auth: FirebaseAuth
     private val viewModel: RegistrationViewModel by viewModels()
+    private var gender = String.EMPTY
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
@@ -52,14 +66,45 @@ class RegistrationActivity : AppCompatActivity() {
         singUpBtn = findViewById(R.id.tv_Registration)
         logInUpBtn = findViewById(R.id.tv_Login)
         loader = findViewById(R.id.loader_Registration)
+        clMale = findViewById(R.id.cl_male)
+        clFemale = findViewById(R.id.cl_female)
+        tvMale = findViewById(R.id.tv_male)
+        tvFemale = findViewById(R.id.tv_female)
+        ivMale = findViewById(R.id.iv_male)
+        ivFemale = findViewById(R.id.iv_female)
+        llIvMale = findViewById(R.id.ll_male_logo)
+        llIvFemale = findViewById(R.id.ll_female_logo)
         auth = FirebaseAuth.getInstance()
         singUpBtn.setOnClickListener {
             sUserName = userName.text.toString().trim()
             sEmailAddress = emailAddress.text.toString().trim()
             sPassword = password.text.toString().trim()
             if (validation()) {
-                viewModel.registration(sUserName, sEmailAddress, sPassword)
+                viewModel.registration(sUserName, sEmailAddress, sPassword, gender)
             }
+        }
+
+        clMale.setOnClickListener {
+            gender = getString(RCore.string.male)
+            tvFemale.setTextColor(tvFemale.context.getResources().getColor(R.color.white))
+            tvMale.setTextColor(tvMale.context.getResources().getColor(R.color.primary_mid))
+            clMale.setBackgroundResource(R.color.white)
+            clFemale.setBackgroundResource(R.color.primary_mid)
+            ivFemale.setColorFilter(getColor(R.color.primary_mid), PorterDuff.Mode.SRC_IN)
+            ivMale.setColorFilter(getColor(R.color.white), PorterDuff.Mode.SRC_IN)
+            llIvFemale.setBackgroundResource(R.color.white)
+            llIvMale.setBackgroundResource(R.color.primary_mid)
+        }
+        clFemale.setOnClickListener {
+            gender = getString(RCore.string.male)
+            tvFemale.setTextColor(tvFemale.context.getResources().getColor(R.color.primary_mid))
+            tvMale.setTextColor(tvMale.context.getResources().getColor(R.color.white))
+            clMale.setBackgroundResource(R.color.primary_mid)
+            clFemale.setBackgroundResource(R.color.white)
+            ivFemale.setColorFilter(getColor(R.color.white), PorterDuff.Mode.SRC_IN)
+            ivMale.setColorFilter(getColor(R.color.primary_mid), PorterDuff.Mode.SRC_IN)
+            llIvMale.setBackgroundResource(R.color.white)
+            llIvFemale.setBackgroundResource(R.color.primary_mid)
         }
 
         lifecycleScope.launch {
@@ -232,6 +277,15 @@ class RegistrationActivity : AppCompatActivity() {
                 Toast.makeText(
                     this,
                     getString(R.string.please_enter_valid_password),
+                    Toast.LENGTH_LONG
+                ).show()
+                false
+            }
+
+            gender.isEmpty() -> {
+                Toast.makeText(
+                    this,
+                    getString(R.string.select_a_gender),
                     Toast.LENGTH_LONG
                 ).show()
                 false

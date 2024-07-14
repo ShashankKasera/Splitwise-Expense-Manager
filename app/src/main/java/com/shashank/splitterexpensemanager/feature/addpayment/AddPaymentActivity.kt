@@ -21,7 +21,9 @@ import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.AMOUNT
 import com.shashank.splitterexpensemanager.core.AddExpensesImages
 import com.shashank.splitterexpensemanager.core.CommonImages
+import com.shashank.splitterexpensemanager.core.FEMALE
 import com.shashank.splitterexpensemanager.core.GROUP_ID
+import com.shashank.splitterexpensemanager.core.MALE
 import com.shashank.splitterexpensemanager.core.PAYER_ID
 import com.shashank.splitterexpensemanager.core.RECEIVER_ID
 import com.shashank.splitterexpensemanager.core.REPAY_ID
@@ -29,8 +31,10 @@ import com.shashank.splitterexpensemanager.core.SELECT_REPAY
 import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.UPDATE_REPAY
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.gone
+import com.shashank.splitterexpensemanager.core.extension.shortenName
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -84,8 +88,6 @@ class AddPaymentActivity : AppCompatActivity() {
         val selectRepay: Boolean = intent.extras?.getBoolean(SELECT_REPAY) ?: false
         val updateFlag: Boolean = intent.extras?.getBoolean(UPDATE_REPAY) ?: false
         init()
-        Glide.with(this).load(CommonImages.USER_ICON).into(civPayerImage)
-        Glide.with(this).load(CommonImages.USER_ICON).into(civReceiverImage)
         if (updateFlag) {
             viewModel.loadOweOrOwed(repayId)
             getInitialDataRepayForUpdate(repayId)
@@ -196,8 +198,15 @@ class AddPaymentActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.payer.collect {
                 if (it?.name?.isNotEmpty() == true) {
-                    tvPayerName.text = it.name
-                    tvWhoPayName.text = it.name
+                    tvPayerName.text = it.name?.shortenName(it.name ?: String.EMPTY)
+                    tvWhoPayName.text = it.name?.shortenName(it.name ?: String.EMPTY)
+                    if (it.gender == MALE) {
+                        Glide.with(this@AddPaymentActivity).load(CommonImages.USER_ICON)
+                            .into(civPayerImage)
+                    } else if (it.gender == FEMALE) {
+                        Glide.with(this@AddPaymentActivity).load(CommonImages.GIRL)
+                            .into(civPayerImage)
+                    }
                 }
             }
         }
@@ -208,8 +217,15 @@ class AddPaymentActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.receiver.collect {
                 if (it?.name?.isNotEmpty() == true) {
-                    tvReceiverName.text = it.name
-                    tvWhoSplitName.text = it.name
+                    tvReceiverName.text = it.name?.shortenName(it.name ?: String.EMPTY)
+                    tvWhoSplitName.text = it.name?.shortenName(it.name ?: String.EMPTY)
+                    if (it.gender == MALE) {
+                        Glide.with(this@AddPaymentActivity).load(CommonImages.USER_ICON)
+                            .into(civReceiverImage)
+                    } else if (it.gender == FEMALE) {
+                        Glide.with(this@AddPaymentActivity).load(CommonImages.GIRL)
+                            .into(civReceiverImage)
+                    }
                 }
             }
         }
@@ -245,7 +261,7 @@ class AddPaymentActivity : AppCompatActivity() {
         llTimePicker.visible()
         timePicker.setOnTimeChangedListener { _, hour, minute ->
             var hour = hour
-            var ampm = ""
+            var ampm = String.EMPTY
             when {
                 hour == 0 -> {
                     hour += 12
@@ -349,10 +365,25 @@ class AddPaymentActivity : AppCompatActivity() {
                 tvDate.text = it?.repay?.date
                 tvTime.text = it?.repay?.time
                 tvDescription.setText(it?.repay?.description)
-                tvPayerName.text = it?.payer?.name
-                tvWhoPayName.text = it?.payer?.name
-                tvReceiverName.text = it?.receiver?.name
-                tvWhoSplitName.text = it?.receiver?.name
+                tvPayerName.text = it?.payer?.name?.shortenName(it.payer.name ?: String.EMPTY)
+                tvWhoPayName.text = it?.payer?.name?.shortenName(it.payer.name ?: String.EMPTY)
+                tvReceiverName.text = it?.receiver?.name?.shortenName(it.receiver.name ?: String.EMPTY)
+                tvWhoSplitName.text = it?.receiver?.name?.shortenName(it.receiver.name ?: String.EMPTY)
+
+                if (it?.payer?.gender == MALE) {
+                    Glide.with(this@AddPaymentActivity).load(CommonImages.USER_ICON)
+                        .into(civPayerImage)
+                } else if (it?.payer?.gender == FEMALE) {
+                    Glide.with(this@AddPaymentActivity).load(CommonImages.GIRL)
+                        .into(civReceiverImage)
+                }
+                if (it?.receiver?.gender == MALE) {
+                    Glide.with(this@AddPaymentActivity).load(CommonImages.USER_ICON)
+                        .into(civReceiverImage)
+                } else if (it?.receiver?.gender == FEMALE) {
+                    Glide.with(this@AddPaymentActivity).load(CommonImages.GIRL)
+                        .into(civReceiverImage)
+                }
             }
         }
     }

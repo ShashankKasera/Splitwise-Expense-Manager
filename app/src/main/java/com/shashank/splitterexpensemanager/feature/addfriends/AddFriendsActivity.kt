@@ -27,7 +27,7 @@ class AddFriendsActivity : AppCompatActivity() {
     private var personList = mutableListOf<Person>()
     private var groupMemberList = mutableListOf<GroupMember>()
     lateinit var recyclerView: RecyclerView
-    lateinit var tvAddFriends: TextView
+    lateinit var ivAddFriends: ImageView
     lateinit var addFriendsAdapter: AddFriendsAdapter
     lateinit var toolbar: TextView
     lateinit var ivBack: ImageView
@@ -47,14 +47,14 @@ class AddFriendsActivity : AppCompatActivity() {
         getAllPersonExcept(personId)
         getAllGroupMember()
 
-        tvAddFriends.setOnClickListener {
+        ivAddFriends.setOnClickListener {
             actionProcessor.process(ActionRequestSchema(ActionType.CREATE_FRIENDS.name))
         }
     }
 
     private fun init() {
         recyclerView = findViewById(R.id.rv_add_friends)
-        tvAddFriends = findViewById(R.id.tv_add_User)
+        ivAddFriends = findViewById(R.id.tv_add_friend)
         toolbar = findViewById(R.id.tv_tb_add_friends)
         ivBack = findViewById(R.id.iv_tb_add_friends)
 

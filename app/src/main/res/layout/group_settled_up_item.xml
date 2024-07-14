@@ -39,6 +39,8 @@
                 android:text="@string/name"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 app:layout_constraintBottom_toBottomOf="@+id/civ_group_settled_up"
                 app:layout_constraintEnd_toStartOf="@+id/ll_owe_lent_amount"
                 app:layout_constraintStart_toEndOf="@+id/civ_group_settled_up"

@@ -10,6 +10,7 @@ import com.shashank.splitterexpensemanager.authentication.registration.repositor
 import com.shashank.splitterexpensemanager.core.PERSON
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.shashank.splitterexpensemanager.localdb.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,16 +32,16 @@ class RegistrationViewModel @Inject constructor(
     private val _networkState = MutableStateFlow<NetworkCallState>(NetworkCallState.Init)
     var networkState = _networkState.asStateFlow()
 
-    fun registration(name: String, email: String, password: String) {
+    fun registration(name: String, email: String, password: String, gender: String) {
         viewModelScope.launch {
             try {
                 _networkState.emit(NetworkCallState.Loading)
                 auth.createUserWithEmailAndPassword(email, password).await()
                 val currentUser = auth.currentUser
                 currentUser?.let { user ->
-                    setUser(user, name, email)
+                    setUser(user, name, email, gender)
                 }
-                registrationRepository.insertPerson(PersonEntity(null, name, email, ""))
+                registrationRepository.insertPerson(PersonEntity(null, name, email, String.EMPTY, gender))
                 loadPersonByEmail(email)
                 _networkState.emit(NetworkCallState.Success)
             } catch (e: Exception) {
@@ -49,12 +50,12 @@ class RegistrationViewModel @Inject constructor(
         }
     }
 
-    private suspend fun setUser(user: FirebaseUser, name: String, email: String) {
+    private suspend fun setUser(user: FirebaseUser, name: String, email: String, gender: String) {
         val personKey = databaseReference.child(PERSON).child(user.uid)
 
         if (personKey != null) {
             try {
-                personKey.setValue(Person(null, name, email, "")).await()
+                personKey.setValue(Person(null, name, email, String.EMPTY, gender)).await()
             } catch (e: Exception) {
                 _networkState.emit(NetworkCallState.Error(e.message.toString()))
             }

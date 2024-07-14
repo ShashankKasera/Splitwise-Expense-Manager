@@ -18,6 +18,7 @@ import com.shashank.splitterexpensemanager.core.GroupTypeImages
 import com.shashank.splitterexpensemanager.core.UPDATE_GROUP
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.extension.EMPTY
+import com.shashank.splitterexpensemanager.core.extension.capitalizeFirstLetter
 import com.shashank.splitterexpensemanager.core.extension.showToast
 import com.shashank.splitterexpensemanager.feature.addgroup.model.GroupType
 import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
@@ -110,11 +111,11 @@ class AddGroupActivity : AppCompatActivity() {
     }
 
     private fun updateGroup(groupId: Long) {
-        viewModel.updateGroup(Group(groupId, sGroupName, sGroupType, sGroupImage))
+        viewModel.updateGroup(Group(groupId, sGroupName.capitalizeFirstLetter(sGroupName), sGroupType, sGroupImage))
     }
 
     private fun createGroup() {
-        viewModel.insertGroup(this.sGroupName, sGroupType, sGroupImage)
+        viewModel.insertGroup(this.sGroupName.capitalizeFirstLetter(sGroupName), sGroupType, sGroupImage)
     }
 
     private fun setUpRecyclerView() {
@@ -130,7 +131,7 @@ class AddGroupActivity : AppCompatActivity() {
             object : GroupTypeAdapter.OnItemClickListener {
                 override fun onItemClick(position: Int, data: GroupType) {
                     sGroupType = data.name
-                    if (!sGroupType.equals("")) {
+                    if (!sGroupType.equals(String.EMPTY)) {
                         when (sGroupType) {
                             getString(R.string.trip) -> {
                                 Glide.with(this@AddGroupActivity)

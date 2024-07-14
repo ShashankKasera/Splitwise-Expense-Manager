@@ -16,6 +16,7 @@ import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.TotalImages
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.ui.FilterAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -139,7 +140,7 @@ class TotalActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.group.collect {
                 if (it != null) tvGroupName.text = it.groupName
-                Glide.with(this@TotalActivity).load(it?.groupImage ?: "")
+                Glide.with(this@TotalActivity).load(it?.groupImage ?: String.EMPTY)
                     .into(civGroupImage)
             }
         }

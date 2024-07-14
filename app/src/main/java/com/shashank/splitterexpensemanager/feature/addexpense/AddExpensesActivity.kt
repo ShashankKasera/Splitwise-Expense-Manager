@@ -28,7 +28,9 @@ import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
 import com.shashank.splitterexpensemanager.core.UPDATE_EXPENSES
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.core.extension.gone
+import com.shashank.splitterexpensemanager.core.extension.shortenName
 import com.shashank.splitterexpensemanager.core.extension.showToast
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.feature.category.CategoryActivity
@@ -83,7 +85,7 @@ class AddExpensesActivity : AppCompatActivity() {
             val receivedCategory = data?.getParcelableExtra<Category>(CATEGORY)
 
             tvCategoryName.text = receivedCategory?.categoryName
-            Glide.with(this).load(receivedCategory?.categoryImage ?: "").into(ivCategoryImage)
+            Glide.with(this).load(receivedCategory?.categoryImage ?: String.EMPTY).into(ivCategoryImage)
             categoryId = receivedCategory?.id ?: 0
         }
     }
@@ -94,7 +96,7 @@ class AddExpensesActivity : AppCompatActivity() {
             val data: Intent? = result.data
             val receivedPerson = data?.getParcelableExtra<Person>(GROUP_MEMBER)
             personId = receivedPerson?.id ?: 0
-            tvWhoPay.text = receivedPerson?.name
+            tvWhoPay.text = receivedPerson?.name?.shortenName(receivedPerson.name ?: String.EMPTY)
         }
     }
 
@@ -143,8 +145,17 @@ class AddExpensesActivity : AppCompatActivity() {
                     else -> etAmount.text.toString()
                         .trim().toDouble()
                 }
-            val date = tvDate.text.toString().trim()
-            val time = tvTime.text.toString().trim()
+            val date = if (tvDate.text.toString().trim().equals(String.EMPTY)) {
+                tvDate.hint.toString().trim()
+            } else {
+                tvDate.text.toString().trim()
+            }
+            val time = if (tvTime.text.toString().trim().equals(String.EMPTY)) {
+                tvTime.hint.toString()
+                    .trim()
+            } else {
+                tvTime.text.toString().trim()
+            }
             val description = tvDescription.text.toString().trim()
             val name = tvWhoPay.text.toString().trim()
             when {
@@ -162,6 +173,7 @@ class AddExpensesActivity : AppCompatActivity() {
                         )
                     }
                 }
+
                 else -> {
                     when {
                         validation(amount, categoryId) -> addExpenses(
@@ -219,17 +231,17 @@ class AddExpensesActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.group.collect {
                 if (it != null) tvGroupName.text = it.groupName
-                Glide.with(this@AddExpensesActivity).load(it?.groupImage ?: "").into(civGroup)
+                Glide.with(this@AddExpensesActivity).load(it?.groupImage ?: String.EMPTY).into(civGroup)
             }
         }
     }
 
     private fun getInitialDataExpensesForInsert() {
-        tvDate.text = getCurrentDate()
-        tvTime.text = getCurrentTime()
+        tvDate.hint = getCurrentDate()
+        tvTime.hint = getCurrentTime()
         lifecycleScope.launch {
             viewModel.whoPayPerson.collect {
-                if (it != null) tvWhoPay.text = it.name
+                if (it != null) tvWhoPay.text = it.name?.shortenName(it.name ?: String.EMPTY)
             }
         }
     }
@@ -264,7 +276,7 @@ class AddExpensesActivity : AppCompatActivity() {
         llTimePicker.visible()
         timePicker.setOnTimeChangedListener { _, hour, minute ->
             var hour = hour
-            var ampm = ""
+            var ampm = String.EMPTY
             when {
                 hour == 0 -> {
                     hour += 12
@@ -332,12 +344,12 @@ class AddExpensesActivity : AppCompatActivity() {
                 etAmount.setText(it?.expense?.amount.toString())
 
                 tvCategoryName.text = it?.category?.categoryName
-                Glide.with(this@AddExpensesActivity).load(it?.category?.categoryImage ?: "")
+                Glide.with(this@AddExpensesActivity).load(it?.category?.categoryImage ?: String.EMPTY)
                     .into(ivCategoryImage)
                 tvDate.text = (it?.expense?.date)
                 tvTime.text = it?.expense?.time
                 tvDescription.setText(it?.expense?.description)
-                tvWhoPay.text = it?.person?.name
+                tvWhoPay.text = it?.person?.name?.shortenName(it.person.name ?: String.EMPTY)
                 categoryId = it?.category?.id ?: -1
                 personId = it?.expense?.personId ?: -1
             }
