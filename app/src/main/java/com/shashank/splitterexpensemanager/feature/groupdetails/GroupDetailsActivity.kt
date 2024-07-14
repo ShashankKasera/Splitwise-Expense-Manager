@@ -40,7 +40,6 @@ class GroupDetailsActivity : AppCompatActivity() {
     lateinit var actionProcessor: ActionProcessor
     lateinit var rvOweOwed: RecyclerView
     lateinit var tvGroupName: TextView
-    lateinit var cvAddExpenses: CardView
     lateinit var cvBalances: CardView
     lateinit var cvTotal: CardView
     lateinit var cvSettleUp: CardView
@@ -61,6 +60,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_details)
         var groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
+        groupId = intent.getLongExtra(GROUP_ID, -1)
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
         viewModel.groupId = groupId
         viewModel.personId = personId
@@ -75,7 +75,6 @@ class GroupDetailsActivity : AppCompatActivity() {
         navigationForAddFriends(groupId)
         navigationForGroupMember(groupId)
         getData()
-        navigationForAddExpenses(groupId)
     }
 
     private fun navigationForSettleUp(groupId: Long) {
@@ -108,7 +107,6 @@ class GroupDetailsActivity : AppCompatActivity() {
         rvOweOwed = findViewById(R.id.rv_owe_owed)
         tvNoExpenses = findViewById(R.id.tv_no_expenses_here_yet)
         tvGroupName = findViewById(R.id.tv_group_Name_in_detail)
-        cvAddExpenses = findViewById(R.id.cv_add_expenses)
         cvBalances = findViewById(R.id.cv_balance)
         cvTotal = findViewById(R.id.cv_totals)
         cvSettleUp = findViewById(R.id.cv_settle_up)
@@ -185,18 +183,7 @@ class GroupDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigationForAddExpenses(groupId: Long) {
-        cvAddExpenses.setOnClickListener {
-            actionProcessor.process(
-                ActionRequestSchema(
-                    ActionType.ADD_EXPENSES.name,
-                    hashMapOf(
-                        GROUP_ID to (groupId),
-                    )
-                )
-            )
-        }
-    }
+
 
     private fun getData() {
         lifecycleScope.launch {
@@ -208,10 +195,8 @@ class GroupDetailsActivity : AppCompatActivity() {
 
                 if (groupMemberCount > 1) {
                     tvYouAreTheOnlyOneHere.gone()
-                    cvAddExpenses.visible()
                 } else {
                     tvYouAreTheOnlyOneHere.visible()
-                    cvAddExpenses.gone()
                 }
 
                 llAddGroupMember.visibility =

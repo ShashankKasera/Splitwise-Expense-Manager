@@ -90,4 +90,7 @@
     <string name="add_expenses">Add Expenses</string>
     <string name="expenses">Expenses</string>
     <string name="repay">Repay</string>
+    <string name="add_repay">Add Repay</string>
+    <string name="select_payer">Select Payer</string>
+    <string name="select_recipient">Select Recipient</string>
 </resources>
