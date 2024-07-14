@@ -23,6 +23,7 @@
         tools:ignore="MissingConstraints">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@+id/cv_categorys"
@@ -36,7 +37,6 @@
                 android:layout_height="60dp"
                 android:padding="8dp"
                 android:src="@drawable/dining_icon_png"
-                app:civ_border_color="#FF000000"
                 app:civ_circle_background_color="@color/primary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
                 android:id="@+id/tv_category_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Games"
+                android:text="@string/category"
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"

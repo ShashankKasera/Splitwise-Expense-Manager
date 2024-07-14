@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
-
+        android:id="@+id/cv_friend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -28,7 +29,8 @@
                 android:layout_width="68dp"
                 android:layout_height="68dp"
                 android:padding="8dp"
-                android:src="@drawable/mayank"
+                android:src="@drawable/user"
+                app:civ_circle_background_color="@color/primary_dark"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,7 +38,7 @@
                 android:id="@+id/tv_friend_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Mayank Gupta"
+                android:text="@string/name"
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/civ_friend"
@@ -48,18 +50,19 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/civ_friend"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="@+id/civ_friend">
 
                 <TextView
                     android:id="@+id/tv_friend_owe_or_owed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="You owe"
+                    android:text="@string/you_owe"
                     android:textColor="@color/primary_dark" />
 
                 <TextView
@@ -67,10 +70,45 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="Rs. 1137"
+                    android:text="@string/amount"
                     android:textColor="@color/primary_dark"
                     android:textSize="16dp" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_settled_up_friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/civ_friend"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/civ_friend" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_friend_owe_owed_friend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/civ_friend"
+                tools:listitem="@layout/owe_owed_item" />
+
+            <TextView
+                android:id="@+id/tv_plus_friend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/plus_other_balances"
+                android:textColor="@color/dark_grey"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_friend_owe_owed_friend" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

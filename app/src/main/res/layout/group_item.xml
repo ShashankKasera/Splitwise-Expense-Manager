@@ -1,133 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cl_group"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_group_image"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_group_icon_1"
+        <ImageView
             android:layout_width="100dp"
-            android:layout_height="150dp"
-            app:cardCornerRadius="10dp"
-            android:layout_margin="8dp"
+            android:layout_height="130dp"
+            android:id="@+id/iv_group_icon"
+            android:scaleType="centerCrop"
+            android:src="@drawable/utrakhnd"
+            android:adjustViewBounds="true"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/iv_group_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/maharastra"
-                app:layout_constraintBottom_toBottomOf="parent" />
 
-        </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:layout_width="0dp"
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_group_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cv_group_image"
+        app:layout_constraintTop_toTopOf="@+id/cv_group_image">
+
+        <TextView
+            android:id="@+id/tv_group_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/cv_group_icon_1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cv_group_icon_1"
-            app:layout_constraintTop_toTopOf="@+id/cv_group_icon_1">
-
-            <TextView
-                android:id="@+id/tv_group_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Maharastra Trip"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+            android:text="@string/group_name"
+            android:textColor="@color/light_black"
+            android:textSize="20sp" />
 
 
-            <TextView
-                android:id="@+id/tv_no_expenses"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="No Expenses"
-                android:textSize="16sp"
-                />
+        <TextView
+            android:id="@+id/tv_no_expenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/no_expenses"
+            android:textColor="@color/dark_grey"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tv_ove_or_oved"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="You owe Rs. 5000"
-                android:textSize="16sp"
-                android:layout_marginTop="4dp"
-                android:textColor="@color/primary_dark"/>
+        <TextView
+            android:id="@+id/tv_ove_or_oved"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/you_settled_up"
+            android:textColor="@color/primary_dark"
+            android:textSize="16sp"
+            android:visibility="gone" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginTop="4dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_owe_owed_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone" />
 
-                <TextView
-
-                    android:id="@+id/tv_you_owe_fist"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="You owe Mayank Gupta"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_owe_amount_fist"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_owe_amount_fist"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rs. 50000"
-                    android:textColor="@color/primary_dark"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginTop="4dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tv_you_owe_second"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="You owe Piyush Gupta"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_owe_amount_second"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_owe_amount_second"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rs. 50000"
-                    android:textColor="@color/primary_dark"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/tv_plus"
-                android:layout_marginTop="4dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Plus 2 other balance"/>
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_plus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_grey"
+            android:text="@string/plus_other_balances"
+            android:visibility="gone" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

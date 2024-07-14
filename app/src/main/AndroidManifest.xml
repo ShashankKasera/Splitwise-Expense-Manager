@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".BaseApp"
         android:allowBackup="true"
@@ -14,8 +17,65 @@
         android:theme="@style/Theme.SplitwiseExpenseManager"
         tools:targetApi="31">
         <activity
-            android:name=".activity.TotalActivity"
-            android:exported="true" >
+            android:name=".feature.repaydetails.RepayDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.selectrepay.SelectRepayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.addpayment.AddPaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.settleup.SettleUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.balances.BalancesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.friendsdetails.FriendsDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.groupsettings.GroupSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.addgroup.AddGroupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.createfriens.CreateFriendsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.addfriends.AddFriendsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.addgroup.AddGroupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.groupmember.GroupMemberActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.total.TotalActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".feature.expensesdetails.ExpensesDetailsActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".feature.groupdetails.GroupDetailsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".feature.splash.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,50 +87,26 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.ExpensesDetailsActivity"
-            android:exported="true">
-
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.GroupDetailsActivity"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.SplashActivity"
+            android:name=".feature.DashboardActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
-            android:name=".activity.MainActivity"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.CategoryActivity"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.AddExpenseActivity"
+            android:name=".feature.category.CategoryActivity"
             android:exported="false">
-
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".feature.addexpense.AddExpensesActivity"
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
     </application>
+
 </manifest>
