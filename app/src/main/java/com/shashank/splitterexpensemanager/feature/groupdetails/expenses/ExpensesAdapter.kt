@@ -35,7 +35,7 @@ class ExpensesAdapter(
 
         with(holder) {
             tvName.text = expenseItem?.person?.name
-            tvAmount.text = expenseItem?.expense?.amount.toString()
+            tvAmount.text = expenseItem?.expense?.amount?.formatNumber(2)
             tvDate.text = expenseItem?.expense?.date
             tvTime.text = expenseItem?.expense?.time
 

@@ -107,12 +107,24 @@
     <string name="friends_you_owe">Friends You Owe</string>
     <string name="friends_who_owe_you">Friends Who Owe You</string>
     <string name="showing_friends_with_outstanding_balances">Showing friends with outstanding balances</string>
+    <string name="showing_groups_with_outstanding_balances">Showing groups with outstanding balances</string>
     <string name="showing_only_friends_you_owe">Showing only friends you owe</string>
+    <string name="showing_only_groups_you_owe">Showing only groups you owe</string>
     <string name="showing_only_friends_who_owe_you">Showing only friends who owe you</string>
+    <string name="showing_only_groups_that_owe_you">Showing only groups that owe you</string>
     <string name="no_one_to_see_here">No one to see here</string>
     <string name="clear_filter">Clear filter</string>
     <string name="you_do_not_owe_any_friends">You do not owe any friends</string>
     <string name="you_do_not_owed_any_friends">You do not owed any friends</string>
     <string name="as_you_use_splitwise_friends_and">As you use Splitwise, friends and</string>
     <string name="group_mates_will_show_here">group mates will show here</string>
+    <string name="group">Group</string>
+    <string name="start_a_new_group">Start a new group</string>
+    <string name="all_groups">All groups</string>
+    <string name="group_you_owe">Group you owe</string>
+    <string name="group_that_owe_you">Group that owe you</string>
+
+    <string name="you_do_not_owe_any_group">You do not owe any group</string>
+    <string name="no_group_owe_you">No group owe you</string>
+    <string name="dashboard">Dashboard</string>
 </resources>
