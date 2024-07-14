@@ -25,7 +25,8 @@ class AllExpensesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.expenses_activity_item, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.expenses_activity_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -95,8 +96,10 @@ class AllExpensesAdapter(
         val tvTime: TextView = itemView.findViewById(R.id.tv_time_expenses_activity)
         val tvDescription: TextView = itemView.findViewById(R.id.tv_description_expenses_activity)
         val tvBorrowed: TextView = itemView.findViewById(R.id.tv_you_borrowed_expenses_activity)
-        val tvBorrowedAmount: TextView = itemView.findViewById(R.id.tv_you_borrowed_amount_expenses_activity)
-        val civCategory: CircleImageView = itemView.findViewById(R.id.civ_category_expenses_activity)
+        val tvBorrowedAmount: TextView =
+            itemView.findViewById(R.id.tv_you_borrowed_amount_expenses_activity)
+        val civCategory: CircleImageView =
+            itemView.findViewById(R.id.civ_category_expenses_activity)
         val cvExpenses: CardView = itemView.findViewById(R.id.cv_group_expenses_activity)
     }
 }

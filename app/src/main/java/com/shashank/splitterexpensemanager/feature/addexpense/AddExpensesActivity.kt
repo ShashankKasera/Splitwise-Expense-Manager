@@ -189,11 +189,9 @@ class AddExpensesActivity : AppCompatActivity() {
             today.get(Calendar.YEAR),
             today.get(Calendar.MONTH),
             today.get(Calendar.DAY_OF_MONTH)
-
         ) { view, year, month, day ->
-            val month = month + 1
-            val msg = "$day/$month/$year"
-            tvDate.text = msg
+            val formattedDate = String.format("%02d/%02d/%d", day, month + 1, year)
+            tvDate.text = formattedDate
             llDatePicker.gone()
         }
     }
@@ -276,7 +274,7 @@ class AddExpensesActivity : AppCompatActivity() {
                 etAmount.setText(it?.expense?.amount.toString())
                 tvCategoryName.text = it?.category?.categoryName
                 ivCategoryImage.setImageResource(it?.category?.categoryImage ?: 0)
-                tvDate.text = it?.expense?.date
+                tvDate.text = (it?.expense?.date)
                 tvTime.text = it?.expense?.time
                 tvDescription.setText(it?.expense?.description)
                 tvWhoPay.text = it?.person?.name

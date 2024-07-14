@@ -1,6 +1,5 @@
 package com.shashank.splitterexpensemanager.feature.groupdetails.repay
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +46,6 @@ class RepayAdapter(
             }
 
             cvRepay.setOnClickListener {
-                Log.i("qfbhj", "onBindViewHolder: ${repayItem?.repay?.id ?: -1}")
                 actionProcessor.process(
                     ActionRequestSchema(
                         ActionType.REPAY_DETAILS.name,
