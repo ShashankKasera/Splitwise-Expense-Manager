@@ -5,3 +5,4 @@
 #119: Groups Filter
 #121: Add Toolbar
 #123: Add Image
+#125: Add Validation

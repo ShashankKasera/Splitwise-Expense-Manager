@@ -9,7 +9,7 @@ fun String.shortenName(fullName: String): String {
         val lastName = names.last()
         "$firstName ${lastName.first()}."
     } else {
-        fullName // Return the original name if it doesn't have a last name
+        fullName
     }
 }
 
@@ -20,3 +20,16 @@ fun String.capitalizeFirstLetter(input: String): String {
         input
     }
 }
+
+fun String.isValidGmail(email: String): Boolean {
+    val gmailPattern = "[a-zA-Z0-9._%+-]+@gmail\\.com"
+    val regex = Regex(gmailPattern)
+    return regex.matches(email)
+}
+
+fun String.isValidUserName(username: String): Boolean {
+    val usernameRegex = "^[a-zA-Z]+\$".toRegex()
+    return username.matches(usernameRegex)
+}
+
+

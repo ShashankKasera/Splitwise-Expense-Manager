@@ -1,9 +1,7 @@
 package com.shashank.splitterexpensemanager.authentication.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
@@ -12,7 +10,7 @@ import com.shashank.splitterexpensemanager.authentication.model.Person
 import com.shashank.splitterexpensemanager.core.PERSON
 import com.shashank.splitterexpensemanager.core.PERSON_ID
 import com.shashank.splitterexpensemanager.core.SharedPref
-import com.shashank.splitterexpensemanager.localdb.model.Person as PersonEntity
+import com.shashank.splitterexpensemanager.core.network.NetworkCallState
 import com.shashank.splitterexpensemanager.localdb.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,6 +18,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+import com.shashank.splitterexpensemanager.localdb.model.Person as PersonEntity
+
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository,
@@ -74,10 +74,11 @@ class LoginViewModel @Inject constructor(
                 loginRepository.insertPerson(PersonEntity(null, userName, userEmailAddress, ""))
                 loadPersonByEmail(userEmailAddress)
             } catch (e: Exception) {
-                Log.i("LoginViewModel", "getUser: ${e.message}")
+                _networkState.emit(NetworkCallState.Error(e.message.toString()))
             }
         }
     }
+
     suspend fun insertAllCategory(vararg category: Category) = viewModelScope.launch {
         loginRepository.insertAllCategory(*category)
     }
