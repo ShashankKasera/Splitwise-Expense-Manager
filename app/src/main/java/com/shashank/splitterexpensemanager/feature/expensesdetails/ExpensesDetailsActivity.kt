@@ -33,6 +33,7 @@ class ExpensesDetailsActivity : AppCompatActivity() {
     lateinit var ivDelete: ImageView
     lateinit var ivUpdate: ImageView
     lateinit var tvdescription: TextView
+    lateinit var ivBack: ImageView
     private var oweOwedList = mutableListOf<OweOrOwedWithPerson>()
     lateinit var splitAmountAdapter: SplitAmountAdapter
     private val viewModel: ExpensesDetailsViewModel by viewModels()
@@ -108,6 +109,12 @@ class ExpensesDetailsActivity : AppCompatActivity() {
         tvdescription = findViewById(R.id.tv_description)
         ivDelete = findViewById(R.id.iv_delete_expenses)
         ivUpdate = findViewById(R.id.iv_edit_expenses)
+
+        ivBack = findViewById(R.id.iv_back_expenses_details)
+
+        ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setUpRecyclerView(personId: Long) {

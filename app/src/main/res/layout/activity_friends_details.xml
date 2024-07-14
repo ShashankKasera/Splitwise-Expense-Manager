@@ -28,19 +28,31 @@
                 android:layout_height="230dp"
                 android:background="@drawable/wave_shap">
 
+                <ImageView
+                    android:id="@+id/iv_back_friend_details"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16sp"
+                    android:src="@drawable/back_icon"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_name_friend_details"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_name_friend_details" />
+
                 <TextView
-                    android:id="@+id/tv_friends_Name"
+                    android:id="@+id/tv_name_friend_details"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
                     android:layout_marginBottom="24dp"
                     android:text="@string/name"
                     android:textColor="@color/white"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
+                    android:layout_marginStart="16sp"
                     app:layout_constraintBottom_toTopOf="@+id/civ_friends_image"
                     app:layout_constraintEnd_toStartOf="@+id/iv_setting_friendDetails"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toEndOf="@+id/iv_back_friend_details" />
 
 
                 <ImageView
@@ -49,9 +61,9 @@
                     android:layout_height="24dp"
                     android:layout_marginEnd="16dp"
                     android:src="@drawable/setting_icon"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_friends_Name"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_name_friend_details"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tv_friends_Name" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_name_friend_details" />
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civ_friends_image"
                     android:layout_width="80dp"

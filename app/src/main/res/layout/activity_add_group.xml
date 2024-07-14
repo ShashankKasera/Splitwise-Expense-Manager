@@ -8,7 +8,7 @@
     android:background="@drawable/main_gradient">
 
     <LinearLayout
-        android:id="@+id/ll_toolbar"
+        android:id="@+id/ll_tb_create_group"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -19,10 +19,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_back"
+            android:id="@+id/iv_back_group"
             android:layout_gravity="center"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_weight="1"
             android:layout_marginLeft="8dp"
             android:src="@drawable/back_icon"/>
@@ -38,7 +38,7 @@
             android:layout_gravity="center"/>
 
         <TextView
-            android:id="@+id/tv_done"
+            android:id="@+id/tv_done_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/done"
@@ -56,7 +56,7 @@
         android:src="@drawable/add_image_png"
         app:civ_circle_background_color="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/ll_tb_create_group" />
 
     <TextView
         android:id="@+id/tv_group_name_text"

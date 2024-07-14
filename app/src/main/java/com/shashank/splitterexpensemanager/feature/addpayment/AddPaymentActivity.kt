@@ -6,6 +6,7 @@ import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.DatePicker
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.TimePicker
@@ -41,6 +42,8 @@ class AddPaymentActivity : AppCompatActivity() {
 
     @Inject
     lateinit var sharedPref: SharedPref
+    lateinit var toolbar: TextView
+    lateinit var ivBack: ImageView
     lateinit var llDatePicker: LinearLayout
     lateinit var tvPayerName: TextView
     lateinit var tvReceiverName: TextView
@@ -143,6 +146,14 @@ class AddPaymentActivity : AppCompatActivity() {
         tvWhoPayName = findViewById(R.id.tv_who_pay_repay)
         tvWhoSplitName = findViewById(R.id.tv_who_split)
         cvSave = findViewById(R.id.cv_save_repay)
+
+        toolbar = findViewById(R.id.tv_tb_add_payment)
+        ivBack = findViewById(R.id.iv_tb_add_payment)
+
+        toolbar.text = getString(R.string.add_payment)
+        ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun getPayer(payerId: Long) {

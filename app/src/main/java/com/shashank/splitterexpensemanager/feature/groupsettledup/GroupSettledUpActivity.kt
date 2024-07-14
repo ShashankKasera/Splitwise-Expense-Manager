@@ -1,6 +1,7 @@
 package com.shashank.splitterexpensemanager.feature.groupsettledup
 
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -24,6 +25,7 @@ class GroupSettledUpActivity : AppCompatActivity() {
     @Inject
     lateinit var actionProcessor: ActionProcessor
     lateinit var recyclerView: RecyclerView
+    lateinit var ivCancel: ImageView
     lateinit var groupSettleUpAdapter: GroupSettleUpAdapter
     private var settledUpList = mutableListOf<FriendOweOrOwed>()
     private val viewModel: GroupSettledUpViewModel by viewModels()
@@ -33,6 +35,11 @@ class GroupSettledUpActivity : AppCompatActivity() {
         var friendId: Long = intent.extras?.getLong(FRIEND_ID) ?: -1
         val personId: Long = sharedPref.getValue(PERSON_ID, 0L) as Long
         recyclerView = findViewById(R.id.rv_group_settle_up)
+        ivCancel = findViewById(R.id.iv_cancel_group_settle_up)
+
+        ivCancel.setOnClickListener {
+            finish()
+        }
         setupRecyclerView(personId)
         viewModel.loadAllFriends(personId, friendId)
         getData()

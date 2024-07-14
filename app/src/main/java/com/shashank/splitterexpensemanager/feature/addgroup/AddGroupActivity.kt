@@ -3,6 +3,7 @@ package com.shashank.splitterexpensemanager.feature.addgroup
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,7 @@ class AddGroupActivity : AppCompatActivity() {
     private val viewModel: AddGroupViewModel by viewModels()
     private lateinit var groupName: EditText
     private lateinit var tvDone: TextView
+    private lateinit var ivBack: ImageView
     private lateinit var sGroupName: String
     private lateinit var sGroupType: String
     private lateinit var groupTypeAdapter: GroupTypeAdapter
@@ -71,8 +73,13 @@ class AddGroupActivity : AppCompatActivity() {
 
     private fun init() {
         groupName = findViewById(R.id.et_group_name)
-        tvDone = findViewById(R.id.tv_done)
+        tvDone = findViewById(R.id.tv_done_group)
+        ivBack = findViewById(R.id.iv_back_group)
         recyclerView = findViewById(R.id.rv_group_type)
+
+        ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun getDataForUpdateGroup(groupId: Long) {

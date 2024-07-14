@@ -9,27 +9,31 @@
     <LinearLayout
         android:id="@+id/ll_toolbar_select_repay"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:background="@color/primary_mid"
+        android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="30dp"
+            android:id="@+id/iv_tb_back_select_payer_or_receiver"
+            android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/back_icon"
+            android:tint="@color/white"
             android:layout_gravity="center"
-            android:layout_marginStart="8sp"
-            android:tint="@color/dark_grey"/>
+            android:layout_marginStart="24sp"/>
         <TextView
             android:id="@+id/tv_select_payer_or_receiver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="20sp"
             android:layout_marginStart="16dp"
-            android:text="@string/select_payer"/>
+            android:layout_gravity="center"
+            android:text="@string/select_payer"
+            android:textSize="20sp"
+            android:textColor="@color/white" />
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_group_member_select_repay"

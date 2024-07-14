@@ -6,6 +6,7 @@ import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.DatePicker
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.TimePicker
@@ -44,6 +45,8 @@ class AddExpensesActivity : AppCompatActivity() {
 
     @Inject
     lateinit var sharedPref: SharedPref
+    lateinit var toolbar: TextView
+    lateinit var ivBack: ImageView
     lateinit var clCategory: ConstraintLayout
     lateinit var llDatePicker: LinearLayout
     lateinit var tvGroupName: TextView
@@ -157,7 +160,13 @@ class AddExpensesActivity : AppCompatActivity() {
         tvDescription = findViewById(R.id.et_description_expenses)
         tvWhoPay = findViewById(R.id.tv_who_pay_expenses)
         cvSave = findViewById(R.id.cv_save_expenses)
+        toolbar = findViewById(R.id.tv_tb_add_expenses)
+        ivBack = findViewById(R.id.iv_tb_add_expenses)
 
+        toolbar.text = getString(R.string.add_expenses)
+        ivBack.setOnClickListener {
+            finish()
+        }
         viewModel.getGroup(groupId)
         lifecycleScope.launch {
             viewModel.group.collect {

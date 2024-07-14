@@ -6,6 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".feature.friendsetting.FriendSettingActivity">
 
+    <LinearLayout
+        android:id="@+id/tb_friend_setting"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:background="@color/primary_mid"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_tb_friend_setting"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back_icon"
+            android:tint="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginStart="24sp"/>
+        <TextView
+            android:id="@+id/tv_tb_friend_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/white" />
+    </LinearLayout>
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civ_group_image_friend_settings"
         android:layout_width="60dp"
@@ -15,7 +43,7 @@
         android:src="@drawable/user"
         app:civ_circle_background_color="@color/primary_dark"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_friend_setting" />
 
     <LinearLayout
         android:id="@+id/ll_friend_setting"

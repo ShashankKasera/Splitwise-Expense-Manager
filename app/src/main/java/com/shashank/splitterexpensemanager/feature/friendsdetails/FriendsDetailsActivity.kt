@@ -32,8 +32,9 @@ class FriendsDetailsActivity : AppCompatActivity() {
 
     @Inject
     lateinit var actionProcessor: ActionProcessor
+    lateinit var toolbar: TextView
+    lateinit var ivBack: ImageView
     lateinit var rvGroupOweOwed: RecyclerView
-    lateinit var tvFriendName: TextView
     lateinit var tvOverallOweOrOwed: TextView
     lateinit var cvSettledUp: CardView
     lateinit var tvPlus: TextView
@@ -76,7 +77,13 @@ class FriendsDetailsActivity : AppCompatActivity() {
 
     private fun init(friendId: Long, personId: Long) {
         rvGroupOweOwed = findViewById(R.id.rv_group_owe_owed_friend_details)
-        tvFriendName = findViewById(R.id.tv_friends_Name)
+        toolbar = findViewById(R.id.tv_name_friend_details)
+        ivBack = findViewById(R.id.iv_back_friend_details)
+
+        toolbar.text = getString(R.string.friend_details)
+        ivBack.setOnClickListener {
+            finish()
+        }
         ivSetting = findViewById(R.id.iv_setting_friendDetails)
         tvOverallOweOrOwed = findViewById(R.id.tv_overall_owe_friend_details)
         rvFriendOweOwed = findViewById(R.id.rv_owe_owed_friend_details)
@@ -102,7 +109,7 @@ class FriendsDetailsActivity : AppCompatActivity() {
     private fun getData() {
         lifecycleScope.launch {
             viewModel.allFriends.collect { friendDetails ->
-                tvFriendName.text = friendDetails.friend.name
+                toolbar.text = friendDetails.friend.name
 
                 groupOweOwedList.apply {
                     clear()

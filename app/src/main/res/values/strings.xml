@@ -32,6 +32,7 @@
     <string name="settle_up">Settle Up</string>
     <string name="tottls">Tottls</string>
     <string name="balances">Balances</string>
+    <string name="create_friend">Create Friend</string>
     <string name="you_borrowed_or_lent">You Borrowed or Lent</string>
     <string name="amount">amount</string>
     <string name="filter">filter</string>
@@ -88,6 +89,7 @@
     <string name="select_a_balance_to_settle">Select a balance to settle</string>
     <string name="to">to</string>
     <string name="add_expenses">Add Expenses</string>
+    <string name="add_payment">Add Payment</string>
     <string name="expenses">Expenses</string>
     <string name="repay">Repay</string>
     <string name="add_repay">Add Repay</string>
@@ -127,4 +129,9 @@
     <string name="you_do_not_owe_any_group">You do not owe any group</string>
     <string name="no_group_owe_you">No group owe you</string>
     <string name="dashboard">Dashboard</string>
+    <string name="friend_details">Friend Details</string>
+    <string name="friend_setting">Friend Setting</string>
+    <string name="group_setting">Group Setting</string>
+    <string name="repay_details">Repay Details</string>
+    <string name="total">Total</string>
 </resources>

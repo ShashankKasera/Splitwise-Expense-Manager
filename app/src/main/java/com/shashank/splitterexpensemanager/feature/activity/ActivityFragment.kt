@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -20,6 +21,7 @@ class ActivityFragment : Fragment() {
     lateinit var recyclerView: RecyclerView
     lateinit var viewPager: ViewPager
     lateinit var tabLayout: TabLayout
+    lateinit var toolbar: Toolbar
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,6 +37,9 @@ class ActivityFragment : Fragment() {
     private fun init(v: View) {
         viewPager = v.findViewById(R.id.vp_activity)
         tabLayout = v.findViewById(R.id.tl_activity)
+        toolbar = v.findViewById(R.id.tb_activity)
+
+        toolbar.setTitle(getString(R.string.dashboard))
     }
 
     private fun setUpRecyclerView() {

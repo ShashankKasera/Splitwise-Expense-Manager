@@ -1,6 +1,8 @@
 package com.shashank.splitterexpensemanager.feature.balances
 
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +18,8 @@ import kotlinx.coroutines.launch
 class BalancesActivity : AppCompatActivity() {
     lateinit var balancesAdapter: BalancesAdapter
     lateinit var recyclerView: RecyclerView
+    lateinit var toolbar: TextView
+    lateinit var ivBack: ImageView
     private var groupMemberList = mutableListOf<Balances>()
     private val viewModel: BalancesViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +27,13 @@ class BalancesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_balances)
         val groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
         recyclerView = findViewById(R.id.rv_balances)
+        toolbar = findViewById(R.id.tv_tb_balances)
+        ivBack = findViewById(R.id.iv_tb_balances)
+
+        toolbar.text = getString(R.string.balances)
+        ivBack.setOnClickListener {
+            finish()
+        }
         setUpRecyclerView()
         viewModel.getBalances(groupId)
         lifecycleScope.launch {

@@ -108,7 +108,8 @@
         </activity>
         <activity
             android:name=".feature.addexpense.AddExpensesActivity"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".feature.groupdetails.GroupDetailsActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

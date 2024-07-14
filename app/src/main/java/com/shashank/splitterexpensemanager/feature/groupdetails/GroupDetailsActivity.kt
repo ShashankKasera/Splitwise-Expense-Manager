@@ -54,6 +54,7 @@ class GroupDetailsActivity : AppCompatActivity() {
     lateinit var llAddGroupMember: LinearLayout
     lateinit var viewPager: ViewPager
     lateinit var tabLayout: TabLayout
+    lateinit var ivBack: ImageView
     private var oweOwedList = mutableListOf<Pair<Person, Double>>()
     private val viewModel: GroupDetailViewModel by viewModels()
 
@@ -117,7 +118,11 @@ class GroupDetailsActivity : AppCompatActivity() {
         ivSetting = findViewById(R.id.iv_setting_groupDetails)
         viewPager = findViewById(R.id.viewPager)
         tabLayout = findViewById(R.id.tablayout)
+        ivBack = findViewById(R.id.iv_back_group_details)
 
+        ivBack.setOnClickListener {
+            finish()
+        }
         val groupId: Long = intent.extras?.getLong(GROUP_ID) ?: 0
         val personId = sharedPref.getValue(PERSON_ID, 0L) as Long
         viewModel.groupDetails(groupId, personId)

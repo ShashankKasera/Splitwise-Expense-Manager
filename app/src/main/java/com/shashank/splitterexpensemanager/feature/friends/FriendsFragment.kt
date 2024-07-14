@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -38,6 +39,7 @@ class FriendsFragment : Fragment() {
 
     @Inject
     lateinit var sharedPref: SharedPref
+    lateinit var toolbar: Toolbar
     lateinit var recyclerView: RecyclerView
     lateinit var ivManChillingOut: ImageView
     lateinit var tvNoOneToSeeHare: TextView
@@ -47,6 +49,7 @@ class FriendsFragment : Fragment() {
     lateinit var tvClearFilter: TextView
     lateinit var ivFilter: ImageView
     lateinit var llAddFriends: LinearLayout
+    lateinit var ivAddfriends: ImageView
     lateinit var friendAdapter: FriendAdapter
     private val viewModel: FriendsViewModel by viewModels()
     private var allFriendsList = mutableListOf<Friends>()
@@ -86,6 +89,14 @@ class FriendsFragment : Fragment() {
         llAddFriends.setOnClickListener {
             actionProcessor.process(ActionRequestSchema(ActionType.CREATE_FRIENDS.name))
         }
+
+        ivAddfriends.setOnClickListener {
+            actionProcessor.process(
+                ActionRequestSchema(
+                    ActionType.CREATE_FRIENDS.name,
+                )
+            )
+        }
         return v
     }
 
@@ -113,11 +124,15 @@ class FriendsFragment : Fragment() {
         llEmptyList = v.findViewById(R.id.ll_empty_list_friend)
         tvClearFilter = v.findViewById(R.id.tv_clear_filter_friends)
         llFirstTime = v.findViewById(R.id.ll_first_time_friend)
-
+        ivAddfriends = v.findViewById(R.id.iv_add_friends)
         filterList.add(getString(R.string.all_friends))
         filterList.add(getString(R.string.outstanding_balance))
         filterList.add(getString(R.string.friends_you_owe))
         filterList.add(getString(R.string.friends_who_owe_you))
+
+        toolbar = v.findViewById(R.id.tb_friends)
+
+        toolbar.setTitle(getString(R.string.dashboard))
     }
 
     fun setUpRecyclerView() {
