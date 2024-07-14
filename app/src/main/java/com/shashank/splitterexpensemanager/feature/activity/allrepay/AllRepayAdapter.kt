@@ -1,4 +1,4 @@
-package com.shashank.splitterexpensemanager.feature.groupdetails.repay
+package com.shashank.splitterexpensemanager.feature.activity.allrepay
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,16 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.visible
-import com.shashank.splitterexpensemanager.model.RepayWithPerson
+import com.shashank.splitterexpensemanager.model.RepayWithPersonAndGroup
 
-class RepayAdapter(
-    private val repayList: List<RepayWithPerson?>
-) : RecyclerView.Adapter<RepayAdapter.ViewHolder>() {
+class AllRepayAdapter(
+    private val repayList: List<RepayWithPersonAndGroup?>
+) : RecyclerView.Adapter<AllRepayAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.repay_group_details_item, parent, false)
+                .inflate(R.layout.repay_activity_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -27,6 +27,7 @@ class RepayAdapter(
         val context = holder.itemView.context
 
         with(holder) {
+            tvGroupName.text = repayItem?.group?.groupName
             tvPayerName.text = repayItem?.payer?.name
             tvReceiverName.text = repayItem?.receiver?.name
             tvAmount.text = repayItem?.repay?.amount?.formatNumber(2)
@@ -46,12 +47,13 @@ class RepayAdapter(
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvPayerName: TextView = itemView.findViewById(R.id.tv_payer_name)
-        val tvReceiverName: TextView = itemView.findViewById(R.id.tv_receiver_name_repay)
-        val tvAmount: TextView = itemView.findViewById(R.id.tv_amount_repay)
-        val tvDate: TextView = itemView.findViewById(R.id.tv_date_repay)
-        val tvTime: TextView = itemView.findViewById(R.id.tv_time_repay)
-        val tvDescription: TextView = itemView.findViewById(R.id.tv_description_repay)
-        val cvRepay: CardView = itemView.findViewById(R.id.cv_group_repay)
+        val tvGroupName: TextView = itemView.findViewById(R.id.tv_group_name_repay_activity)
+        val tvPayerName: TextView = itemView.findViewById(R.id.tv_payer_name_repay_activity)
+        val tvReceiverName: TextView = itemView.findViewById(R.id.tv_receiver_name_repay_activity)
+        val tvAmount: TextView = itemView.findViewById(R.id.tv_amount_repay_activity)
+        val tvDate: TextView = itemView.findViewById(R.id.tv_date_repay_activity)
+        val tvTime: TextView = itemView.findViewById(R.id.tv_time_repay_activity)
+        val tvDescription: TextView = itemView.findViewById(R.id.tv_description_repay_activity)
+        val cvRepay: CardView = itemView.findViewById(R.id.cv_activity_repay)
     }
 }
