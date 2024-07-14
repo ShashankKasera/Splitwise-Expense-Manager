@@ -1,7 +1,6 @@
 package com.shashank.splitterexpensemanager.feature.groupdetails
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -214,8 +213,6 @@ class GroupDetailsActivity : AppCompatActivity() {
                     if (expensesNotEmpty || repayNotEmpty) View.GONE else View.VISIBLE
 
                 if (oweOwedNotEmpty) {
-                    Log.i("jhjh", "groupDetails a: ${groupDetails.hashMap}")
-
                     tvNoExpenses.gone()
                     clOweOwed.visible()
                     oweOwedList.clear()
