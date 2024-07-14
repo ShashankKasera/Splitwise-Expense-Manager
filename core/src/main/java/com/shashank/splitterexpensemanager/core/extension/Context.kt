@@ -78,6 +78,6 @@ fun Context.sendMail(emailTo: String = String.EMPTY, subject: String = String.EM
 
         startActivity(Intent.createChooser(emailIntent, String.EMPTY))
     } catch (runtimeException: RuntimeException) {
-        Log.i("uihwr", "sendMail: ")
+        Log.i("runtimeException", "sendMail: ")
     }
 }

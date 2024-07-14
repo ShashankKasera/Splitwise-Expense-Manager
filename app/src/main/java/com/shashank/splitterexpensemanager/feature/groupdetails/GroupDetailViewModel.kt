@@ -1,6 +1,5 @@
 package com.shashank.splitterexpensemanager.feature.groupdetails
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.authentication.model.Person
@@ -54,8 +53,6 @@ class GroupDetailViewModel @Inject constructor(var groupDetailsRepository: Group
                     }
                 }
 
-
-                Log.i("jhjh", "groupDetails: $hashMap")
                 val data = GroupDetails(
                     group = groupDeferred.await(),
                     groupMember = groupMemberDeferred.await(),

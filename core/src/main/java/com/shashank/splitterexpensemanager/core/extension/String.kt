@@ -9,7 +9,7 @@ fun String.shortenName(fullName: String): String {
         val lastName = names.last()
         "$firstName ${lastName.first()}."
     } else {
-        fullName // Return the original name if it doesn't have a last name
+        fullName
     }
 }
 

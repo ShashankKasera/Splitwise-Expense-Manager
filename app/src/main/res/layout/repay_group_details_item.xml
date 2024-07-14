@@ -36,7 +36,6 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 app:civ_circle_background_color="@color/primary"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -47,7 +46,7 @@
                 android:id="@+id/tv_payer_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:text="@string/name"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/civ_repay"
