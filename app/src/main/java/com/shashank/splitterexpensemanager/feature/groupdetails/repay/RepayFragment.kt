@@ -48,7 +48,7 @@ class RepayFragment : Fragment() {
         init(v, groupId, personId)
         setupRecyclerView()
         getData()
-        navigationForAddExpenses(groupId)
+        navigationForSelectRepay(groupId)
         return v
     }
 
@@ -59,7 +59,7 @@ class RepayFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        repayAdapter = RepayAdapter(repayList)
+        repayAdapter = RepayAdapter(actionProcessor, repayList)
         val layoutManager = LinearLayoutManager(context)
         layoutManager.setReverseLayout(true)
         layoutManager.setStackFromEnd(true)
@@ -84,7 +84,7 @@ class RepayFragment : Fragment() {
         }
     }
 
-    private fun navigationForAddExpenses(groupId: Long) {
+    private fun navigationForSelectRepay(groupId: Long) {
         cvAddRepay.setOnClickListener {
             actionProcessor.process(
                 ActionRequestSchema(

@@ -8,7 +8,7 @@ import com.shashank.splitterexpensemanager.localdb.model.OweOrOwed as OweOrOwedE
 class OweOrOwedMapper @Inject constructor() :
     Mapper<OweOrOwedEntity?, OweOrOwed> {
     override fun map(input: OweOrOwedEntity?) = OweOrOwed(
-        id = input?.id,
+        id = input?.id ?: -1,
         expensesId = input?.expensesId ?: -1,
         repayId = input?.expensesId ?: -1,
         personOwedId = input?.personOweId ?: -1,

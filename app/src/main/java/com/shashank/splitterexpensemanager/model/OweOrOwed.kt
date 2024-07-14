@@ -5,11 +5,11 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class OweOrOwed(
-    var id: Long?,
-    val expensesId: Long,
-    val repayId: Long,
-    var personOwedId: Long,
-    var personOweId: Long,
-    var groupId: Long,
-    var amount: Double,
+    var id: Long = -1,
+    val expensesId: Long = -1,
+    val repayId: Long = -1,
+    var personOwedId: Long = -1,
+    var personOweId: Long = -1,
+    var groupId: Long = -1,
+    var amount: Double = 0.0,
 ) : Parcelable

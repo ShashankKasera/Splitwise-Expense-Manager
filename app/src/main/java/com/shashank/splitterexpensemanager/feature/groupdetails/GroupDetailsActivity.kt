@@ -184,7 +184,6 @@ class GroupDetailsActivity : AppCompatActivity() {
     }
 
 
-
     private fun getData() {
         lifecycleScope.launch {
             viewModel.groupDetails.collect { groupDetails ->
@@ -221,6 +220,7 @@ class GroupDetailsActivity : AppCompatActivity() {
                             getString(R.string.plus_other_balance, (oweOwedList.size - 2))
                     } else {
                         rvOweOwed.gone()
+                        tvOweOrOwedOther.gone()
                     }
                 } else {
                     tvNoExpenses.visible()
