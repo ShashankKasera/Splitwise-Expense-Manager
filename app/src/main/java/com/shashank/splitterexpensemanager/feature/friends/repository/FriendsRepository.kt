@@ -8,7 +8,6 @@ interface FriendsRepository {
 
     fun getAllPersonsExcept(personId: Long): List<Person>
 
-
     fun loadAllGroupByFriendId(friendId: Long): List<Group>
     fun loadAllOweByOweIdAndOwedId(personId: Long, friendId: Long, groupId: Long): Double
 

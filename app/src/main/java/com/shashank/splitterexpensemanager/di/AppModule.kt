@@ -1,5 +1,7 @@
 package com.shashank.splitterexpensemanager.di
 
+import com.shashank.splitterexpensemanager.feature.account.repository.AccountRepository
+import com.shashank.splitterexpensemanager.feature.account.repository.AccountRepositoryImp
 import com.shashank.splitterexpensemanager.feature.activity.repository.ActivityRepository
 import com.shashank.splitterexpensemanager.feature.activity.repository.ActivityRepositoryImp
 import com.shashank.splitterexpensemanager.feature.addexpense.repository.AddExpensesRepository
@@ -129,4 +131,8 @@ class AppModule {
     @Singleton
     @Provides
     fun getFriendSettingRepository(repo: FriendSettingRepositoryImp): FriendSettingRepository = repo
+
+    @Singleton
+    @Provides
+    fun getAccountRepository(repo: AccountRepositoryImp): AccountRepository = repo
 }
