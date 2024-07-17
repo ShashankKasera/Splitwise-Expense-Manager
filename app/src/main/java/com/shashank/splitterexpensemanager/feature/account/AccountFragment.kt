@@ -18,7 +18,7 @@ class AccountFragment : Fragment() {
         val v: View = inflater.inflate(R.layout.fragment_account, container, false)
         toolbar = v.findViewById(R.id.tb_account)
 
-        toolbar.setTitle(getString(R.string.dashboard))
+        toolbar.setTitle(getString(R.string.account))
         return v
     }
 }

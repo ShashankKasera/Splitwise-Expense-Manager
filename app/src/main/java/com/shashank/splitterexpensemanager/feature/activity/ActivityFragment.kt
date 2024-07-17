@@ -39,7 +39,7 @@ class ActivityFragment : Fragment() {
         tabLayout = v.findViewById(R.id.tl_activity)
         toolbar = v.findViewById(R.id.tb_activity)
 
-        toolbar.setTitle(getString(R.string.dashboard))
+        toolbar.setTitle(getString(R.string.activity))
     }
 
     private fun setUpRecyclerView() {

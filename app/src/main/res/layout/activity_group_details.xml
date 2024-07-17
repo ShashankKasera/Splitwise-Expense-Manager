@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".feature.groupdetails.GroupDetailsActivity">
 
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_top"
         android:layout_width="match_parent"
@@ -244,7 +245,6 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
 
 
     <com.google.android.material.tabs.TabLayout
