@@ -10,3 +10,4 @@
 #129: Edit Friend
 #133: Create Account UI
 #135: Get Data for Account
+#135: Log Out

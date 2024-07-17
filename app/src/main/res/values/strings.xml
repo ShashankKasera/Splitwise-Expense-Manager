@@ -152,4 +152,6 @@
     <string name="enter_a_valid_mobile_number">Enter a valid mobile number</string>
     <string name="select_gender">Select gender</string>
     <string name="enter_a_number">Enter a number</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
 </resources>

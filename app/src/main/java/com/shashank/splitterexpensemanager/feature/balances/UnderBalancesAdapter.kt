@@ -19,7 +19,9 @@ import com.shashank.splitterexpensemanager.core.RECEIVER_ID
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
+import com.shashank.splitterexpensemanager.core.extension.shortenName
 import de.hdodenhof.circleimageview.CircleImageView
 
 class UnderBalancesAdapter(
@@ -54,8 +56,8 @@ class UnderBalancesAdapter(
                 } else if (person.gender == FEMALE) {
                     Glide.with(context).load(CommonImages.GIRL).into(holder.civFriendImage)
                 }
-                tvOwedPerson.text = uPerson.name
-                tvOwePerson.text = person.name
+                tvOwedPerson.text = uPerson.name?.shortenName(uPerson.name ?: String.EMPTY)
+                tvOwePerson.text = person.name?.shortenName(person.name ?: String.EMPTY)
                 tvAmount.text = context.getString(R.string.rs, amount.formatNumber(2))
                 tvAmount.setTextColor(context.getColor(R.color.green))
             }
@@ -66,8 +68,8 @@ class UnderBalancesAdapter(
                 } else if (uPerson.gender == FEMALE) {
                     Glide.with(context).load(CommonImages.GIRL).into(holder.civFriendImage)
                 }
-                tvOwePerson.text = uPerson.name
-                tvOwedPerson.text = person.name
+                tvOwePerson.text = uPerson.name?.shortenName(uPerson.name ?: String.EMPTY)
+                tvOwedPerson.text = person.name?.shortenName(person.name ?: String.EMPTY)
                 tvAmount.text = context.getString(R.string.rs, (-amount).formatNumber(2))
                 tvAmount.setTextColor(context.getColor(R.color.primary_dark))
             }

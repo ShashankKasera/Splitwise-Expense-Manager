@@ -24,6 +24,9 @@ class AddGroupViewModel @Inject constructor(
     val group = _group.asStateFlow()
     private val _groupAdded = MutableStateFlow<Boolean>(false)
     val groupAdded = _groupAdded.asStateFlow()
+
+    private val _updateGroup = MutableStateFlow<Boolean>(false)
+    val updateGroup = _updateGroup.asStateFlow()
     var groupId: Long = -1
     fun insertGroup(groupName: String, groupType: String, groupImage: String) {
         viewModelScope.launch {
@@ -39,6 +42,7 @@ class AddGroupViewModel @Inject constructor(
     fun updateGroup(group: GroupEntity) {
         viewModelScope.launch {
             addGroupRepository.updateGroup(group)
+            _updateGroup.emit(true)
         }
     }
 
