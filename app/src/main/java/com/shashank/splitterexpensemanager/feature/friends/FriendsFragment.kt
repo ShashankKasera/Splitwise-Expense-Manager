@@ -138,7 +138,7 @@ class FriendsFragment : Fragment() {
 
         toolbar = v.findViewById(R.id.tb_friends)
 
-        toolbar.setTitle(getString(R.string.dashboard))
+        toolbar.setTitle(getString(R.string.friends))
         Glide.with(this).load(CommonImages.FILTER_NORMAL_ICON).into(ivFilter)
         Glide.with(this).load(CommonImages.GIRL_CHILLING_OUT_ICON).into(ivManChillingOut)
         Glide.with(this).load(CommonImages.FRIENDS_MEET_EACH_OTHER_ICON).into(ivFirstTime)

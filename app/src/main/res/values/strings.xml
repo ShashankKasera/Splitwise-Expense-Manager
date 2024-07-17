@@ -130,6 +130,9 @@
     <string name="you_do_not_owe_any_group">You do not owe any group</string>
     <string name="no_group_owe_you">No group owe you</string>
     <string name="dashboard">Dashboard</string>
+    <string name="friends">Friends</string>
+    <string name="activity">Activity</string>
+    <string name="account">Account</string>
     <string name="friend_details">Friend Details</string>
     <string name="friend_setting">Friend Setting</string>
     <string name="group_setting">Group Setting</string>
