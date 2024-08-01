@@ -13,10 +13,12 @@ import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.actionprocessor.action.RegistrationActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.DashboardActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.ExpensesDetailsActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.FriendSettingActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.FriendsDetailsActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupDetailsActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupMemberActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.GroupSettingsActionProcessor
+import com.shashank.splitterexpensemanager.actionprocessor.action.GroupSettledUpActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.RepayDetailsActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.SelectRepayActionProcessor
 import com.shashank.splitterexpensemanager.actionprocessor.action.SettleUpActionProcessor
@@ -131,4 +133,14 @@ internal abstract class ActionsMultiBinderModule {
     @IntoMap
     @ActionTypeKey(ActionType.REPAY_DETAILS)
     internal abstract fun bindRepayDetailsAction(action: RepayDetailsActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.GROUP_SETTLED_UP)
+    internal abstract fun bindGroupSettledUpAction(action: GroupSettledUpActionProcessor): Action
+
+    @Binds
+    @IntoMap
+    @ActionTypeKey(ActionType.FRIEND_SETTING)
+    internal abstract fun bindFriendSettingAction(action: FriendSettingActionProcessor): Action
 }

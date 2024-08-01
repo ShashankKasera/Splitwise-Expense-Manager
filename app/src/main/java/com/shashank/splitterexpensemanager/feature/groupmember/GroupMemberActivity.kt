@@ -2,6 +2,8 @@ package com.shashank.splitterexpensemanager.feature.groupmember
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -27,6 +29,8 @@ class GroupMemberActivity : AppCompatActivity() {
     private var groupId: Long = 0
     lateinit var recyclerView: RecyclerView
     lateinit var tvAddFriends: CardView
+    lateinit var toolbar: TextView
+    lateinit var ivBack: ImageView
     private var groupMemberList = mutableListOf<Person>()
     lateinit var groupMemberAdapter: GroupMemberAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +57,13 @@ class GroupMemberActivity : AppCompatActivity() {
     private fun init() {
         recyclerView = findViewById(R.id.rv_group_member)
         tvAddFriends = findViewById(R.id.cv_add_group_member)
+        toolbar = findViewById(R.id.tv_tb_group_member)
+        ivBack = findViewById(R.id.iv_tb_group_member)
+
+        toolbar.text = getString(R.string.group_member)
+        ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun recyclerViewSetup() {

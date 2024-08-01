@@ -1,5 +1,7 @@
 package com.shashank.splitterexpensemanager.di
 
+import com.shashank.splitterexpensemanager.feature.account.repository.AccountRepository
+import com.shashank.splitterexpensemanager.feature.account.repository.AccountRepositoryImp
 import com.shashank.splitterexpensemanager.feature.activity.repository.ActivityRepository
 import com.shashank.splitterexpensemanager.feature.activity.repository.ActivityRepositoryImp
 import com.shashank.splitterexpensemanager.feature.addexpense.repository.AddExpensesRepository
@@ -22,6 +24,8 @@ import com.shashank.splitterexpensemanager.feature.friends.repository.FriendsRep
 import com.shashank.splitterexpensemanager.feature.friends.repository.FriendsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.friendsdetails.repository.FriendsDetailsRepository
 import com.shashank.splitterexpensemanager.feature.friendsdetails.repository.FriendsDetailsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.friendsetting.repository.FriendSettingRepository
+import com.shashank.splitterexpensemanager.feature.friendsetting.repository.FriendSettingRepositoryImp
 import com.shashank.splitterexpensemanager.feature.group.repository.GroupRepository
 import com.shashank.splitterexpensemanager.feature.group.repository.GroupRepositoryImp
 import com.shashank.splitterexpensemanager.feature.groupdetails.repository.GroupDetailsRepository
@@ -30,6 +34,8 @@ import com.shashank.splitterexpensemanager.feature.groupmember.repository.GroupM
 import com.shashank.splitterexpensemanager.feature.groupmember.repository.GroupMemberRepositoryImp
 import com.shashank.splitterexpensemanager.feature.groupsettings.repository.GroupSettingsRepository
 import com.shashank.splitterexpensemanager.feature.groupsettings.repository.GroupSettingsRepositoryImp
+import com.shashank.splitterexpensemanager.feature.groupsettledup.repository.GroupSettledUpRepository
+import com.shashank.splitterexpensemanager.feature.groupsettledup.repository.GroupSettledUpRepositoryImp
 import com.shashank.splitterexpensemanager.feature.repaydetails.repository.RepayDetailsRepository
 import com.shashank.splitterexpensemanager.feature.repaydetails.repository.RepayDetailsRepositoryImp
 import com.shashank.splitterexpensemanager.feature.settleup.repository.SettleUpRepository
@@ -117,4 +123,16 @@ class AppModule {
     @Singleton
     @Provides
     fun getRepayDetailsRepository(repo: RepayDetailsRepositoryImp): RepayDetailsRepository = repo
+
+    @Singleton
+    @Provides
+    fun getGroupSettledUpRepository(repo: GroupSettledUpRepositoryImp): GroupSettledUpRepository = repo
+
+    @Singleton
+    @Provides
+    fun getFriendSettingRepository(repo: FriendSettingRepositoryImp): FriendSettingRepository = repo
+
+    @Singleton
+    @Provides
+    fun getAccountRepository(repo: AccountRepositoryImp): AccountRepository = repo
 }

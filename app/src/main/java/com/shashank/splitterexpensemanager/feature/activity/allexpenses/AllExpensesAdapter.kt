@@ -6,12 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.core.EXPENSES_ID
 import com.shashank.splitterexpensemanager.core.GROUP_ID
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.model.ExpenseWithCategoryAndPersonAndGroup
@@ -25,7 +27,8 @@ class AllExpensesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.expenses_activity_item, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.expenses_activity_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -57,8 +60,8 @@ class AllExpensesAdapter(
             }
 
             val categoryImage = expenseItem?.category?.categoryImage
-            if (categoryImage != null && categoryImage != 0) {
-                civCategory.setImageResource(categoryImage)
+            if (categoryImage != null && !categoryImage.equals(String.EMPTY)) {
+                Glide.with(context).load(categoryImage).into(civCategory)
             }
 
             val isPersonIdMatch = personId == expenseItem?.person?.id
@@ -95,8 +98,10 @@ class AllExpensesAdapter(
         val tvTime: TextView = itemView.findViewById(R.id.tv_time_expenses_activity)
         val tvDescription: TextView = itemView.findViewById(R.id.tv_description_expenses_activity)
         val tvBorrowed: TextView = itemView.findViewById(R.id.tv_you_borrowed_expenses_activity)
-        val tvBorrowedAmount: TextView = itemView.findViewById(R.id.tv_you_borrowed_amount_expenses_activity)
-        val civCategory: CircleImageView = itemView.findViewById(R.id.civ_category_expenses_activity)
+        val tvBorrowedAmount: TextView =
+            itemView.findViewById(R.id.tv_you_borrowed_amount_expenses_activity)
+        val civCategory: CircleImageView =
+            itemView.findViewById(R.id.civ_category_expenses_activity)
         val cvExpenses: CardView = itemView.findViewById(R.id.cv_group_expenses_activity)
     }
 }

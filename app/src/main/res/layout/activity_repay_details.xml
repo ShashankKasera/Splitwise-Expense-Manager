@@ -7,7 +7,7 @@
     tools:context=".feature.repaydetails.RepayDetailsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ll_toolbar"
+        android:id="@+id/ll_tb_repay_details"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
@@ -18,16 +18,28 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_back"
+            android:id="@+id/iv_back_repay_details"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
             android:src="@drawable/back_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tv_tb_repay_details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_back_repay_details"
+            app:layout_constraintEnd_toStartOf="@+id/iv_edit_repay_details"
+            app:layout_constraintStart_toEndOf="@+id/iv_back_repay_details"
+            app:layout_constraintTop_toTopOf="@+id/iv_back_repay_details" />
         <ImageView
             android:id="@+id/iv_delete_repay_details"
             android:layout_width="24dp"
@@ -54,15 +66,14 @@
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/circleImageView10"
+        android:id="@+id/civ_repay"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/dining_icon_png"
         android:layout_marginTop="50dp"
         app:civ_circle_background_color="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_tb_repay_details" />
 
 
     <TextView
@@ -75,7 +86,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageView10" />
+        app:layout_constraintTop_toBottomOf="@+id/civ_repay" />
 
     <TextView
         android:id="@+id/tv_amount_repay_details"

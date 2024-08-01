@@ -6,11 +6,13 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.feature.addgroup.model.GroupType
 import de.hdodenhof.circleimageview.CircleImageView
 
 class GroupTypeAdapter(
+    private val context: AddGroupActivity,
     private var selectPosition: Int,
     private var groupTypeList: ArrayList<GroupType>,
     private val onItemClickListener: OnItemClickListener
@@ -33,17 +35,14 @@ class GroupTypeAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvName.text = groupTypeList[position].name
-        holder.civImage.setImageResource(groupTypeList[position].image)
+        Glide.with(context).load(groupTypeList[position].image).into(holder.civImage)
+
         if (position == selectPosition) {
-            holder.llGroupType.setBackgroundColor(
-                holder.llGroupType.context.getResources().getColor(R.color.primary_mid)
-            )
+            holder.llGroupType.setBackgroundResource(R.drawable.main_gradient)
             holder.tvName.setTextColor(holder.tvName.context.getResources().getColor(R.color.white))
         } else {
-            holder.llGroupType.setBackgroundColor(
-                holder.llGroupType.context.getResources().getColor(R.color.white)
-            )
-            holder.tvName.setTextColor(holder.tvName.context.getResources().getColor(R.color.black))
+            holder.llGroupType.setBackgroundResource(R.drawable.red_border)
+            holder.tvName.setTextColor(holder.tvName.context.getResources().getColor(R.color.dark_grey))
         }
         holder.tvName.setOnClickListener {
             selectPosition = position

@@ -17,8 +17,10 @@ import com.shashank.splitterexpensemanager.feature.category.CategoryActivity
 import com.shashank.splitterexpensemanager.feature.createfriens.CreateFriendsActivity
 import com.shashank.splitterexpensemanager.feature.expensesdetails.ExpensesDetailsActivity
 import com.shashank.splitterexpensemanager.feature.friendsdetails.FriendsDetailsActivity
+import com.shashank.splitterexpensemanager.feature.friendsetting.FriendSettingActivity
 import com.shashank.splitterexpensemanager.feature.groupdetails.GroupDetailsActivity
 import com.shashank.splitterexpensemanager.feature.groupsettings.GroupSettingsActivity
+import com.shashank.splitterexpensemanager.feature.groupsettledup.GroupSettledUpActivity
 import com.shashank.splitterexpensemanager.feature.repaydetails.RepayDetailsActivity
 import com.shashank.splitterexpensemanager.feature.selectrepay.SelectRepayActivity
 import com.shashank.splitterexpensemanager.feature.settleup.SettleUpActivity
@@ -52,6 +54,8 @@ class DefaultNavigator @Inject constructor(@ActivityContext private val context:
             Route.TOTAL -> Intent(context, TotalActivity::class.java)
             Route.SELECT_REPAY -> Intent(context, SelectRepayActivity::class.java)
             Route.REPAY_DETAILS -> Intent(context, RepayDetailsActivity::class.java)
+            Route.GROUP_SETTLED_UP -> Intent(context, GroupSettledUpActivity::class.java)
+            Route.FRIEND_SETTING -> Intent(context, FriendSettingActivity::class.java)
         }.apply {
             actionParams?.data?.toBundle()?.let {
                 putExtras(it)
@@ -82,4 +86,6 @@ enum class Route {
     TOTAL,
     SELECT_REPAY,
     REPAY_DETAILS,
+    GROUP_SETTLED_UP,
+    FRIEND_SETTING,
 }

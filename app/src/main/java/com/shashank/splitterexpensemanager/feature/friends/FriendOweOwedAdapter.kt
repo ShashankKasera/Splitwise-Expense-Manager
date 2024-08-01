@@ -1,5 +1,6 @@
 package com.shashank.splitterexpensemanager.feature.friends
 
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,8 @@ class FriendOweOwedAdapter(
 
         val amount = friendOweOrOwed.groupOweOwed
         with(holder) {
+            tvName.maxLines = 1
+            tvName.ellipsize = TextUtils.TruncateAt.END
             when {
                 amount > 0 -> {
                     tvName.text = context.getString(

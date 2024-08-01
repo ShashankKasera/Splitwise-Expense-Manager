@@ -1,6 +1,7 @@
 package com.shashank.splitterexpensemanager.feature.selectrepay
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,7 @@ class SelectRepayActivity : AppCompatActivity() {
     lateinit var groupMemberAdapter: GroupMemberAdapter
     lateinit var recyclerView: RecyclerView
     lateinit var tvSelectPayerReceiver: TextView
+    lateinit var ivBack: ImageView
     private var selectPayer: Int = -1
     private var selectRecipient: Int = -1
 
@@ -51,6 +53,10 @@ class SelectRepayActivity : AppCompatActivity() {
     private fun init() {
         recyclerView = findViewById(R.id.rv_group_member_select_repay)
         tvSelectPayerReceiver = findViewById(R.id.tv_select_payer_or_receiver)
+        ivBack = findViewById(R.id.iv_tb_back_select_payer_or_receiver)
+        ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun recyclerViewSetup(groupId: Long) {

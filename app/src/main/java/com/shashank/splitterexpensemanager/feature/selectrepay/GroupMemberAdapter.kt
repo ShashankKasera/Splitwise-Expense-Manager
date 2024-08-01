@@ -7,8 +7,13 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
+import com.shashank.splitterexpensemanager.core.CommonImages
+import com.shashank.splitterexpensemanager.core.FEMALE
+import com.shashank.splitterexpensemanager.core.MALE
+import de.hdodenhof.circleimageview.CircleImageView
 
 class GroupMemberAdapter(
     private var selectPayer: Int,
@@ -37,6 +42,8 @@ class GroupMemberAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val context = holder.itemView.context
+
         holder.tvName.text = person[position].name
         holder.tvNumber.text = person[position].number
 
@@ -44,6 +51,11 @@ class GroupMemberAdapter(
 
         holder.checkBox.setOnClickListener {
             onItemClickListener.onItemClick(position, person[position], holder.checkBox.isChecked)
+        }
+        if (person[position].gender == MALE) {
+            Glide.with(context).load(CommonImages.USER_ICON).into(holder.civGroupMember)
+        } else if (person[position].gender == FEMALE) {
+            Glide.with(context).load(CommonImages.GIRL).into(holder.civGroupMember)
         }
     }
 
@@ -56,5 +68,6 @@ class GroupMemberAdapter(
         val tvNumber: TextView = itemView.findViewById(R.id.tv_user_number)
         val cvGroupMember: CardView = itemView.findViewById(R.id.cv_user)
         val checkBox: CheckBox = itemView.findViewById(R.id.cb_add_friends)
+        val civGroupMember: CircleImageView = itemView.findViewById(R.id.civ_user)
     }
 }

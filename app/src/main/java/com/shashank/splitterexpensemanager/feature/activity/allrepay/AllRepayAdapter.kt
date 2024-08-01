@@ -6,12 +6,21 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.core.GROUP_ID
+import com.shashank.splitterexpensemanager.core.REPAY_ID
+import com.shashank.splitterexpensemanager.core.TotalImages
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
+import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.model.RepayWithPersonAndGroup
+import de.hdodenhof.circleimageview.CircleImageView
 
 class AllRepayAdapter(
+    private val actionProcessor: ActionProcessor,
     private val repayList: List<RepayWithPersonAndGroup?>
 ) : RecyclerView.Adapter<AllRepayAdapter.ViewHolder>() {
 
@@ -31,6 +40,7 @@ class AllRepayAdapter(
             tvPayerName.text = repayItem?.payer?.name
             tvReceiverName.text = repayItem?.receiver?.name
             tvAmount.text = repayItem?.repay?.amount?.formatNumber(2)
+            Glide.with(context).load(TotalImages.TOTAL_YOU_PAID_FOR).into(civRepay)
             tvDate.text = repayItem?.repay?.date
             tvTime.text = repayItem?.repay?.time
 
@@ -38,6 +48,18 @@ class AllRepayAdapter(
             if (!repayItem?.repay?.description.isNullOrEmpty()) {
                 tvDescription.visible()
                 tvDescription.text = repayItem?.repay?.description
+            }
+
+            cvRepay.setOnClickListener {
+                actionProcessor.process(
+                    ActionRequestSchema(
+                        ActionType.REPAY_DETAILS.name,
+                        hashMapOf(
+                            REPAY_ID to (repayItem?.repay?.id ?: -1),
+                            GROUP_ID to (repayItem?.repay?.groupId ?: -1)
+                        )
+                    )
+                )
             }
         }
     }
@@ -55,5 +77,6 @@ class AllRepayAdapter(
         val tvTime: TextView = itemView.findViewById(R.id.tv_time_repay_activity)
         val tvDescription: TextView = itemView.findViewById(R.id.tv_description_repay_activity)
         val cvRepay: CardView = itemView.findViewById(R.id.cv_activity_repay)
+        val civRepay: CircleImageView = itemView.findViewById(R.id.civ_repay_activity)
     }
 }

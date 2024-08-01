@@ -49,14 +49,14 @@ class DefaultSharedPref @Inject constructor(
                 if (retryCount < 1) {
                     getSharedPref(retryCount + 1)
                 } else {
-                    Log.i("SharedPref", e.message ?: "")
+                    Log.i("SharedPref", e.message ?: String.EMPTY)
                 }
             } catch (e: IOException) {
                 deleteSharedPreferences()
                 if (retryCount < 1) {
                     getSharedPref(retryCount + 1)
                 } else {
-                    Log.i("SharedPref", e.message ?: "")
+                    Log.i("SharedPref", e.message ?: String.EMPTY)
                 }
             }
         }
@@ -161,7 +161,7 @@ class DefaultSharedPref @Inject constructor(
                 else -> defaultValue
             }
         } catch (e: ClassCastException) {
-            Log.i("SharedPref", e.message ?: "")
+            Log.i("SharedPref", e.message ?: String.EMPTY)
             return defaultValue
         }
     }

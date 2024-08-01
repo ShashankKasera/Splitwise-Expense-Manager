@@ -3,6 +3,7 @@ package com.shashank.splitterexpensemanager.feature.total
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shashank.splitterexpensemanager.feature.total.repository.TotalRepository
+import com.shashank.splitterexpensemanager.model.Group
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,15 +15,34 @@ class TotalViewModel @Inject constructor(
     private val totalRepository: TotalRepository
 ) : ViewModel() {
 
-    private val _totalGroupSpending = MutableStateFlow<Double>(0.0)
+    private val _totalGroupSpending = MutableStateFlow<Double>(-1.0)
     val totalGroupSpending = _totalGroupSpending.asStateFlow()
 
-    private val _totalYouPaidFor = MutableStateFlow<Double>(0.0)
+    private val _totalGroupSpendingForByMonthAndYear = MutableStateFlow<Double>(-1.0)
+    val totalGroupSpendingForByMonthAndYear = _totalGroupSpendingForByMonthAndYear.asStateFlow()
+
+    private val _totalYouPaidFor = MutableStateFlow<Double>(-1.0)
     val totalYouPaidFor = _totalYouPaidFor.asStateFlow()
 
-    private val _yourTotalShare = MutableStateFlow<Double>(0.0)
+    private val _totalYouPaidForForByMonthAndYear = MutableStateFlow<Double>(-1.0)
+    val totalYouPaidForForByMonthAndYear = _totalYouPaidForForByMonthAndYear.asStateFlow()
+
+    private val _yourTotalShare = MutableStateFlow<Double>(-1.0)
     val yourTotalShare = _yourTotalShare.asStateFlow()
-    fun getTotalGroupSpendingExpenses(groupId: Long) {
+
+    private val _yourTotalShareByMonthAndYear = MutableStateFlow<Double>(-1.0)
+    val yourTotalShareByMonthAndYear = _yourTotalShareByMonthAndYear.asStateFlow()
+
+    private val _group = MutableStateFlow<Group?>(null)
+    val group = _group.asStateFlow()
+    fun getGroup(groupId: Long) {
+        viewModelScope.launch {
+            totalRepository.loadGroup(groupId).collect {
+                _group.emit(it)
+            }
+        }
+    }
+    fun getTotalGroupSpending(groupId: Long) {
         viewModelScope.launch {
             totalRepository.getTotalGroupSpending(groupId).collect {
                 _totalGroupSpending.emit(it)
@@ -30,7 +50,15 @@ class TotalViewModel @Inject constructor(
         }
     }
 
-    fun getTotalYouPaidForExpenses(groupId: Long, personId: Long) {
+    fun getTotalGroupSpendingByMonthAndYear(groupId: Long, month: String, year: String) {
+        viewModelScope.launch {
+            totalRepository.getTotalGroupSpendingByMonthAndYear(groupId, month, year).collect {
+                _totalGroupSpendingForByMonthAndYear.emit(it)
+            }
+        }
+    }
+
+    fun getTotalYouPaidFor(groupId: Long, personId: Long) {
         viewModelScope.launch {
             totalRepository.getTotalYouPaidFor(personId, groupId).collect {
                 _totalYouPaidFor.emit(it)
@@ -38,10 +66,33 @@ class TotalViewModel @Inject constructor(
         }
     }
 
+    fun getTotalYouPaidForByMonthAndYear(
+        groupId: Long,
+        personId: Long,
+        month: String,
+        year: String
+    ) {
+        viewModelScope.launch {
+            totalRepository.getTotalYouPaidForByMonthAndYear(personId, groupId, month, year)
+                .collect {
+                    _totalYouPaidForForByMonthAndYear.emit(it)
+                }
+        }
+    }
+
+
     fun getYourTotalShare(groupId: Long) {
         viewModelScope.launch {
             totalRepository.getYouTotalShare(groupId).collect {
                 _yourTotalShare.emit(it)
+            }
+        }
+    }
+
+    fun getYourTotalShareByMonthAndYear(groupId: Long, month: String, year: String) {
+        viewModelScope.launch {
+            totalRepository.getYouTotalShareByMonthAndYear(groupId, month, year).collect {
+                _yourTotalShareByMonthAndYear.emit(it)
             }
         }
     }

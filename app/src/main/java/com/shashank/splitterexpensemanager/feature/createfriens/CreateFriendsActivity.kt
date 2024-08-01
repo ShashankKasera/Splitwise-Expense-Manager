@@ -1,39 +1,190 @@
 package com.shashank.splitterexpensemanager.feature.createfriens
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
+import com.shashank.splitterexpensemanager.core.CommonImages
+import com.shashank.splitterexpensemanager.core.FEMALE
+import com.shashank.splitterexpensemanager.core.FRIEND_ID
+import com.shashank.splitterexpensemanager.core.MALE
+import com.shashank.splitterexpensemanager.core.UPDATE_FRIEND
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
+import com.shashank.splitterexpensemanager.core.extension.capitalizeFirstLetter
+import com.shashank.splitterexpensemanager.core.extension.isValidMobileNumber
+import com.shashank.splitterexpensemanager.localdb.model.Person
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CreateFriendsActivity : AppCompatActivity() {
     private val viewModel: CreateFriendsViewModel by viewModels()
 
-    lateinit var etName: EditText
-    lateinit var etNumber: EditText
-    lateinit var tvSave: TextView
+    private lateinit var etName: EditText
+    private lateinit var etNumber: EditText
+    private lateinit var tvDone: TextView
+    private lateinit var toolbar: TextView
+    private lateinit var ivBack: ImageView
+    private lateinit var llMale: ConstraintLayout
+    private lateinit var llFemale: ConstraintLayout
+    private lateinit var tvMale: TextView
+    private lateinit var tvFemale: TextView
+    private lateinit var ivMale: ImageView
+    private lateinit var ivFemale: ImageView
+    private var gender = String.EMPTY
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_friends)
+        val friendId: Long = intent.extras?.getLong(FRIEND_ID) ?: 0
+        val updateFriendFlag: Boolean = intent.extras?.getBoolean(UPDATE_FRIEND) ?: false
+
         inti()
-        tvSave.setOnClickListener {
-            insertPerson()
-            finish()
+        if (updateFriendFlag) {
+            getDataForUpdateFriend(friendId)
+        }
+        tvDone.setOnClickListener {
+            val sName = etName.text.toString().trim()
+            val sNumber = etNumber.text.toString().trim()
+            if (updateFriendFlag) {
+                if (validation(sName, sNumber)) {
+                    viewModel.updatePerson(
+                        Person(
+                            friendId,
+                            sName.capitalizeFirstLetter(sName),
+                            String.EMPTY,
+                            sNumber,
+                            gender
+                        )
+                    )
+                    finish()
+                }
+            } else {
+                if (validation(sName, sNumber)) {
+                    viewModel.insertPerson(sName.capitalizeFirstLetter(sName), sNumber, gender)
+                    finish()
+                }
+            }
+        }
+
+        llMale.setOnClickListener {
+            gender = getString(R.string.male)
+            tvFemale.setTextColor(tvFemale.context.getResources().getColor(R.color.black))
+            tvMale.setTextColor(tvMale.context.getResources().getColor(R.color.white))
+            llMale.setBackgroundResource(R.drawable.main_gradient)
+            llFemale.setBackgroundResource(R.drawable.red_border)
+            ivFemale.setColorFilter(getColor(R.color.primary_mid), PorterDuff.Mode.SRC_IN)
+            ivMale.setColorFilter(getColor(R.color.white), PorterDuff.Mode.SRC_IN)
+        }
+        llFemale.setOnClickListener {
+            gender = getString(R.string.female)
+            tvFemale.setTextColor(tvFemale.context.getResources().getColor(R.color.white))
+            tvMale.setTextColor(tvMale.context.getResources().getColor(R.color.black))
+            llMale.setBackgroundResource(R.drawable.red_border)
+            ivFemale.setColorFilter(getColor(R.color.white), PorterDuff.Mode.SRC_IN)
+            ivMale.setColorFilter(getColor(R.color.primary_mid), PorterDuff.Mode.SRC_IN)
+            llFemale.setBackgroundResource(R.drawable.main_gradient)
         }
     }
 
     private fun inti() {
         etName = findViewById(R.id.et_name)
         etNumber = findViewById(R.id.et_number)
-        tvSave = findViewById(R.id.tv_save_User)
+        tvDone = findViewById(R.id.iv_done)
+        llMale = findViewById(R.id.ll_male)
+        llFemale = findViewById(R.id.ll_female)
+        tvMale = findViewById(R.id.tv_male)
+        tvFemale = findViewById(R.id.tv_female)
+        ivMale = findViewById(R.id.iv_male)
+        ivFemale = findViewById(R.id.iv_female)
+        toolbar = findViewById(R.id.tv_tb_create_friend)
+        ivBack = findViewById(R.id.iv_tb_create_friend)
+
+        toolbar.text = getString(R.string.create_friend)
+        ivBack.setOnClickListener {
+            finish()
+        }
+
+        Glide.with(this@CreateFriendsActivity).load(CommonImages.MALE)
+            .into(ivMale)
+        Glide.with(this@CreateFriendsActivity).load(CommonImages.FEMALE)
+            .into(ivFemale)
     }
 
-    private fun insertPerson() {
-        var sName = etName.text.toString().trim()
-        var sNumber = etNumber.text.toString().trim()
-        viewModel.insertPerson(sName, sNumber)
+    private fun validation(sName: String, sNumber: String) =
+        when {
+            sName.isEmpty() -> {
+                Toast.makeText(
+                    this@CreateFriendsActivity,
+                    getString(R.string.enter_a_name),
+                    Toast.LENGTH_LONG
+                ).show()
+                false
+            }
+
+            sNumber.isEmpty() -> {
+                Toast.makeText(
+                    this@CreateFriendsActivity,
+                    getString(R.string.enter_a_number),
+                    Toast.LENGTH_LONG
+                ).show()
+                false
+            }
+
+            !sNumber.isValidMobileNumber(sNumber) -> {
+                Toast.makeText(
+                    this@CreateFriendsActivity,
+                    getString(R.string.enter_a_valid_mobile_number),
+                    Toast.LENGTH_LONG
+                ).show()
+                false
+            }
+
+            gender.isEmpty() -> {
+                Toast.makeText(
+                    this@CreateFriendsActivity,
+                    getString(R.string.select_gender),
+                    Toast.LENGTH_LONG
+                ).show()
+                false
+            }
+
+            else -> {
+                true
+            }
+        }
+
+    private fun getDataForUpdateFriend(friendId: Long) {
+        lifecycleScope.launch {
+            viewModel.loadPerson(friendId)
+            viewModel.person.collect {
+                etName.setText(it.name)
+                etNumber.setText(it.number)
+                if (it.gender == MALE) {
+                    gender = getString(R.string.male)
+                    tvFemale.setTextColor(tvFemale.context.getResources().getColor(R.color.black))
+                    tvMale.setTextColor(tvMale.context.getResources().getColor(R.color.white))
+                    llMale.setBackgroundResource(R.drawable.main_gradient)
+                    llFemale.setBackgroundResource(R.drawable.red_border)
+                    ivFemale.setColorFilter(getColor(R.color.primary_mid), PorterDuff.Mode.SRC_IN)
+                    ivMale.setColorFilter(getColor(R.color.white), PorterDuff.Mode.SRC_IN)
+                } else if (it.gender == FEMALE) {
+                    gender = getString(R.string.female)
+                    tvFemale.setTextColor(tvFemale.context.getResources().getColor(R.color.white))
+                    tvMale.setTextColor(tvMale.context.getResources().getColor(R.color.black))
+                    llMale.setBackgroundResource(R.drawable.red_border)
+                    ivFemale.setColorFilter(getColor(R.color.white), PorterDuff.Mode.SRC_IN)
+                    ivMale.setColorFilter(getColor(R.color.primary_mid), PorterDuff.Mode.SRC_IN)
+                    llFemale.setBackgroundResource(R.drawable.main_gradient)
+                }
+            }
+        }
     }
 }

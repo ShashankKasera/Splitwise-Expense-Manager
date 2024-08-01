@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".feature.groupdetails.GroupDetailsActivity">
 
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_top"
         android:layout_width="match_parent"
@@ -27,35 +28,49 @@
                 android:layout_height="230dp"
                 android:background="@drawable/wave_shap">
 
+                <ImageView
+                    android:id="@+id/iv_back_group_details"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/back_icon"
+                    android:tint="@color/white"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_group_Name_in_detail"
+                    app:layout_constraintTop_toTopOf="@+id/tv_group_Name_in_detail"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
                 <TextView
                     android:id="@+id/tv_group_Name_in_detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginBottom="24dp"
                     android:text="@string/group_name"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:textColor="@color/white"
-                    android:textSize="24dp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/civ_group"
                     app:layout_constraintEnd_toStartOf="@+id/iv_setting_groupDetails"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toEndOf="@+id/iv_back_group_details" />
 
                 <ImageView
                     android:id="@+id/iv_setting_groupDetails"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="16dp"
-                    android:src="@drawable/edit_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_group_Name_in_detail"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_group_Name_in_detail" />
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civ_group"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginLeft="50dp"
                     android:layout_marginTop="60dp"
-                    android:src="@drawable/utrakhnd"
+                    app:civ_circle_background_color="@color/primary_dark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,7 +88,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_amount"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-60dp">
@@ -118,7 +133,7 @@
                     android:id="@+id/tv_other_member"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:text="@string/plus_other_balances"
                     android:visibility="gone"
                     android:textColor="@color/dark_grey"
@@ -190,7 +205,7 @@
                             android:layout_marginRight="8dp"
                             android:gravity="center"
                             android:padding="4dp"
-                            android:text="@string/tottls"
+                            android:text="@string/total"
                             android:textColor="@color/white"
                             android:textSize="16dp" />
                     </LinearLayout>
@@ -232,7 +247,6 @@
     </androidx.cardview.widget.CardView>
 
 
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
@@ -265,31 +279,38 @@
         app:layout_constraintBottom_toTopOf="@+id/ll_group_member"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
     <LinearLayout
         android:id="@+id/ll_group_member"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/red_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_top">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/civ_add_group_member"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:civ_circle_background_color="@color/primary_mid"
-            android:src="@drawable/add_group_member_png"
-            app:layout_constraintStart_toStartOf="parent" />
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8sp"
+            android:layout_marginBottom="8sp"
+            android:src="@drawable/add_group_member"
+            android:tint="@color/primary_dark" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="16sp"
+            android:layout_marginBottom="8sp"
             android:text="@string/add_group_members"
-            android:gravity="center"
-            android:textColor="@color/primary_mid"
-            android:layout_marginStart="8dp"/>
+            android:textColor="@color/primary_dark"
+            android:textSize="18sp" />
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

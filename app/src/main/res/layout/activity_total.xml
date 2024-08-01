@@ -6,304 +6,336 @@
     android:layout_height="match_parent"
     tools:context=".feature.total.TotalActivity">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_curve_group"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_top_total"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:cardCornerRadius="100dp"
-        app:cardElevation="16dp"
-        android:layout_marginTop="-90dp"
+        android:layout_height="wrap_content"
+        app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="80dp"
-            android:gravity="center"
-            android:background="@drawable/main_gradient">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/utrakhnd"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="24dp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"
-                android:text="@string/group_name"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_top_total"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:background="@drawable/wave_shap">
+
+                <ImageView
+                    android:id="@+id/iv_tb_total"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16sp"
+                    android:src="@drawable/back_icon"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_tb_total"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_tb_total" />
+
+                <TextView
+                    android:id="@+id/tv_tb_total"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/name"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="8sp"
+                    android:layout_marginEnd="8sp"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_setting_friendDetails"
+                    app:layout_constraintStart_toEndOf="@+id/iv_tb_total"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/iv_setting_friendDetails"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_tb_total"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_tb_total" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civ_group_image_total"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="60dp"
+                    app:civ_circle_background_color="@color/primary_dark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_group_name_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/group_name"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/civ_group_image_total" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </LinearLayout>
 
+    </androidx.cardview.widget.CardView>
 
-    </com.google.android.material.card.MaterialCardView>
-
-    <androidx.cardview.widget.CardView
-
-        app:cardCornerRadius="50dp"
-        android:id="@+id/cv_filter"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:cardElevation="8dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_curve_group"
-        >
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/cv_top_total">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_filter"
+
+
+        <androidx.cardview.widget.CardView
+
+            android:id="@+id/cv_total_filter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginRight="24dp"
+            android:background="@color/white"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="8dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/civ_filter_image"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="8dp"
-                android:src="@drawable/filter_icon_png"
-                app:civ_circle_background_color="@color/primary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civ_filter_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="8dp"
+                    app:civ_circle_background_color="@color/primary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
-                android:id="@+id/tv_filter"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:hint="@string/filter"
-                android:lines="1"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/iv_filter_expend"
-                app:layout_constraintStart_toEndOf="@+id/civ_filter_image"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/tv_total_filter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:hint="@string/filter"
+                    android:lines="1"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_filter_expend"
+                    app:layout_constraintStart_toEndOf="@+id/civ_filter_image"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/iv_filter_expend"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/expand_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/civ_filter_image"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/civ_filter_image" />
+                <ImageView
+                    android:id="@+id/iv_filter_expend"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/expand_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/civ_filter_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/civ_filter_image" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
+        <androidx.cardview.widget.CardView
 
-        app:cardCornerRadius="8dp"
-        android:id="@+id/cv_total_group_spending"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:cardElevation="8dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_filter"
-        >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_total_group_spending"
+            android:id="@+id/cv_total_group_spending"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/cv_cv_category"
-            app:layout_constraintStart_toStartOf="@+id/cv_cv_category"
-            app:layout_constraintTop_toTopOf="@+id/cv_cv_category">
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginRight="24dp"
+            android:background="@color/white"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_total_group_spending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/civ_total_group_spending"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/total_icon"
-                app:civ_circle_background_color="@color/primary"
-                android:padding="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civ_total_group_spending"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:padding="8dp"
+                    android:rotation="90"
+                    app:civ_circle_background_color="@color/primary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_total_group_spending"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/dark_grey"
-                android:lines="1"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/total_group_spending"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/civ_total_group_spending"
-                app:layout_constraintTop_toTopOf="@id/civ_total_group_spending" />
+                <TextView
+                    android:id="@+id/tv_total_group_spending"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:lines="1"
+                    android:text="@string/total_group_spending"
+                    android:textColor="@color/dark_grey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/civ_total_group_spending"
+                    app:layout_constraintTop_toTopOf="@id/civ_total_group_spending" />
 
-            <TextView
-                android:id="@+id/tv_total_group_spending_amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/amount"
-                android:lines="1"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/civ_total_group_spending"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/civ_total_group_spending" />
+                <TextView
+                    android:id="@+id/tv_total_group_spending_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:lines="1"
+                    android:text="@string/amount"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/civ_total_group_spending"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/civ_total_group_spending" />
 
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
 
-    <androidx.cardview.widget.CardView
-
-        app:cardCornerRadius="8dp"
-        android:id="@+id/cv_total_you_paid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:cardElevation="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_total_group_spending"
-        >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_total_you_paid"
+            android:id="@+id/cv_total_you_paid"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@color/white"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_total_you_paid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/civ_total_you_paid"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/you_paid_icon_png"
-                android:padding="8dp"
-                app:civ_circle_background_color="@color/primary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civ_total_you_paid"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:padding="8dp"
+                    app:civ_circle_background_color="@color/primary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
+                <TextView
+                    android:id="@+id/tv_total_you_paid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:lines="1"
+                    android:text="@string/total_you_paid_for"
+                    android:textColor="@color/dark_grey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/civ_total_you_paid"
+                    app:layout_constraintTop_toTopOf="@id/civ_total_you_paid" />
 
-            <TextView
-                android:id="@+id/tv_total_you_paid"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/dark_grey"
-                android:lines="1"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/total_you_paid_for"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/civ_total_you_paid"
-                app:layout_constraintTop_toTopOf="@id/civ_total_you_paid" />
-
-            <TextView
-                android:id="@+id/tv_total_you_paid_amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/amount"
-                android:lines="1"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/civ_total_you_paid"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/civ_total_you_paid" />
-
+                <TextView
+                    android:id="@+id/tv_total_you_paid_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:lines="1"
+                    android:text="@string/amount"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/civ_total_you_paid"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/civ_total_you_paid" />
 
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
 
-    <androidx.cardview.widget.CardView
-
-        app:cardCornerRadius="8dp"
-        android:id="@+id/cv_total_your_share"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:cardElevation="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_total_you_paid"
-        >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_total_your_share"
+            android:id="@+id/cv_total_your_share"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@color/white"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            android:layout_marginBottom="24dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_total_your_share"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/civ_total_your_share"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/your_share_icon"
-                android:padding="8dp"
-                app:civ_circle_background_color="@color/primary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civ_total_your_share"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:padding="8dp"
+                    app:civ_circle_background_color="@color/primary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
+                <TextView
+                    android:id="@+id/tv_total_your_share"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:lines="1"
+                    android:text="@string/your_total_share"
+                    android:textColor="@color/dark_grey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/civ_total_your_share"
+                    app:layout_constraintTop_toTopOf="@id/civ_total_your_share" />
 
-            <TextView
-                android:id="@+id/tv_total_your_share"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/dark_grey"
-                android:lines="1"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/your_total_share"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/civ_total_your_share"
-                app:layout_constraintTop_toTopOf="@id/civ_total_your_share" />
+                <TextView
+                    android:id="@+id/tv_total_your_share_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:lines="1"
+                    android:text="@string/amount"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/civ_total_your_share"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/civ_total_your_share" />
 
-            <TextView
-                android:id="@+id/tv_total_your_share_amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/amount"
-                android:lines="1"
-                android:textColor="@color/black"
-                android:textSize="18dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/civ_total_your_share"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/civ_total_your_share" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

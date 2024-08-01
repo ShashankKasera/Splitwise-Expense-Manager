@@ -17,6 +17,12 @@
         android:theme="@style/Theme.SplitwiseExpenseManager"
         tools:targetApi="31">
         <activity
+            android:name=".feature.friendsetting.FriendSettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.groupsettledup.GroupSettledUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".feature.repaydetails.RepayDetailsActivity"
             android:exported="false" />
         <activity
@@ -102,7 +108,8 @@
         </activity>
         <activity
             android:name=".feature.addexpense.AddExpensesActivity"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".feature.groupdetails.GroupDetailsActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

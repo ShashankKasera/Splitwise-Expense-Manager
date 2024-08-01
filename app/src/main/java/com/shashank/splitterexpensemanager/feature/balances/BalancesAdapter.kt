@@ -8,15 +8,22 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shashank.splitterexpensemanager.R
 import com.shashank.splitterexpensemanager.authentication.model.Person
+import com.shashank.splitterexpensemanager.core.CommonImages
+import com.shashank.splitterexpensemanager.core.FEMALE
+import com.shashank.splitterexpensemanager.core.MALE
+import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
 import com.shashank.splitterexpensemanager.core.extension.gone
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.model.Balances
+import de.hdodenhof.circleimageview.CircleImageView
 
 class BalancesAdapter(
-    private val balancesActivity: BalancesActivity,
+    private val actionProcessor: ActionProcessor,
+    private val groupId: Long,
     private val balances: MutableList<Balances>,
 ) : RecyclerView.Adapter<BalancesAdapter.ViewHolder>() {
 
@@ -35,19 +42,26 @@ class BalancesAdapter(
         val balances = balances[position]
         val context = holder.itemView.context
 
-        setUpRecycleView(holder, balances.person.name, balances.oweOwedList)
+        setUpRecycleView(context, holder, balances.person, balances.oweOwedList)
         setVisibility(holder, balances.amount)
         setData(context, holder, balances.amount, balances.person.name)
+        if (balances.person.gender == MALE) {
+            Glide.with(context).load(CommonImages.USER_ICON).into(holder.civImage)
+        } else if (balances.person.gender == FEMALE) {
+            Glide.with(context).load(CommonImages.GIRL).into(holder.civImage)
+        }
     }
 
     private fun setUpRecycleView(
+        context: Context,
         holder: ViewHolder,
-        name: String?,
+        person: Person,
         oweOwedList: List<Pair<Person, Double>>
     ) {
-        val underBalancesAdapter = UnderBalancesAdapter(name, oweOwedList)
+        val underBalancesAdapter =
+            UnderBalancesAdapter(person, groupId, actionProcessor, oweOwedList)
         holder.rvUnderBalances.apply {
-            layoutManager = LinearLayoutManager(balancesActivity)
+            layoutManager = LinearLayoutManager(context)
             adapter = underBalancesAdapter
         }
     }
@@ -116,5 +130,6 @@ class BalancesAdapter(
         val ivMoreOpen: ImageView = itemView.findViewById(R.id.iv_more_open_balance)
         val ivMoreClose: ImageView = itemView.findViewById(R.id.iv_more_close_balance)
         val rvUnderBalances: RecyclerView = itemView.findViewById(R.id.rv_under_balances)
+        val civImage: CircleImageView = itemView.findViewById(R.id.civ_person_image_balancer)
     }
 }

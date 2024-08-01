@@ -2,6 +2,8 @@ package com.shashank.splitterexpensemanager.feature.category
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +22,8 @@ class CategoryActivity : AppCompatActivity() {
     private var categoryList = mutableListOf<Category>()
     private val viewModel: CategoryViewModel by viewModels()
     lateinit var categoryAdapter: CategoryAdapter
+    lateinit var toolbar: TextView
+    lateinit var ivBack: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +35,18 @@ class CategoryActivity : AppCompatActivity() {
 
     private fun init() {
         recyclerView = findViewById(R.id.rv_category)
+        toolbar = findViewById(R.id.tv_tb_category)
+        ivBack = findViewById(R.id.iv_tb_category)
+
+        toolbar.text = getString(R.string.category)
+        ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setUpRecyclerView() {
         categoryAdapter = CategoryAdapter(
+            this,
             categoryList,
             object : CategoryAdapter.OnItemClickListener {
                 override fun onItemClick(position: Int, data: Category) {
