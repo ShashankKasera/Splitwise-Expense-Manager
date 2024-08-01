@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".feature.account.AccountFragment"
     android:id="@+id/account_fragment">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_account"
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
         android:layout_width="150dp"
         android:layout_height="200dp"
         android:src="@drawable/splitter"
-        android:tint="@color/primary_mid"
+        app:civ_circle_background_color="@color/primary_mid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb_account" />
@@ -32,8 +33,6 @@
         android:id="@+id/cl_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        app:layout_constraintBottom_toTopOf="@+id/cv_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/civ_account">
