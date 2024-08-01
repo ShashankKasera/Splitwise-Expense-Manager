@@ -63,17 +63,20 @@ class AddGroupActivity : AppCompatActivity() {
             sGroupName = groupName.text.toString().trim()
             if (updateGroupFlag) {
                 if (validation()) updateGroup(groupId)
+                lifecycleScope.launch {
+                    viewModel.updateGroup.collect {
+                        if (it) {
+                            navigateGroupDetails()
+                        }
+                    }
+                }
             } else {
                 if (validation()) createGroup()
-            }
-            lifecycleScope.launch {
-                viewModel.groupAdded.collect {
-                    if (it) {
-                        val intent = Intent(this@AddGroupActivity, GroupDetailsActivity::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                        intent.putExtra(GROUP_ID, viewModel.groupId)
-                        startActivity(intent)
-                        finish()
+                lifecycleScope.launch {
+                    viewModel.groupAdded.collect {
+                        if (it) {
+                            navigateGroupDetails()
+                        }
                     }
                 }
             }
@@ -98,6 +101,7 @@ class AddGroupActivity : AppCompatActivity() {
             viewModel.loadGroup(groupId)
             viewModel.group.collect {
                 groupName.setText(it.groupName)
+                sGroupImage = it.groupImage
                 Glide.with(this@AddGroupActivity).load(it.groupImage).into(civGroupImage)
 
                 sGroupType = it.groupType
@@ -111,17 +115,43 @@ class AddGroupActivity : AppCompatActivity() {
     }
 
     private fun updateGroup(groupId: Long) {
-        viewModel.updateGroup(Group(groupId, sGroupName.capitalizeFirstLetter(sGroupName), sGroupType, sGroupImage))
+        viewModel.updateGroup(
+            Group(
+                groupId,
+                sGroupName.capitalizeFirstLetter(sGroupName),
+                sGroupType,
+                sGroupImage
+            )
+        )
     }
 
     private fun createGroup() {
-        viewModel.insertGroup(this.sGroupName.capitalizeFirstLetter(sGroupName), sGroupType, sGroupImage)
+        viewModel.insertGroup(
+            this.sGroupName.capitalizeFirstLetter(sGroupName),
+            sGroupType,
+            sGroupImage
+        )
     }
 
     private fun setUpRecyclerView() {
-        groupTypeList.add(GroupType(getString(R.string.trip), GroupTypeImages.TRIP_CREATE_GROUP))
-        groupTypeList.add(GroupType(getString(R.string.home), GroupTypeImages.HOME_CREATE_GROUP))
-        groupTypeList.add(GroupType(getString(R.string.couple), GroupTypeImages.COUPLE_CREATE_GROUP))
+        groupTypeList.add(
+            GroupType(
+                getString(R.string.trip),
+                GroupTypeImages.TRIP_CREATE_GROUP
+            )
+        )
+        groupTypeList.add(
+            GroupType(
+                getString(R.string.home),
+                GroupTypeImages.HOME_CREATE_GROUP
+            )
+        )
+        groupTypeList.add(
+            GroupType(
+                getString(R.string.couple),
+                GroupTypeImages.COUPLE_CREATE_GROUP
+            )
+        )
         groupTypeList.add(GroupType(getString(R.string.other), GroupTypeImages.OTHER_CREATE_GROUP))
 
         groupTypeAdapter = GroupTypeAdapter(
@@ -179,5 +209,13 @@ class AddGroupActivity : AppCompatActivity() {
         }
 
         else -> true
+    }
+
+    private fun navigateGroupDetails() {
+        val intent = Intent(this@AddGroupActivity, GroupDetailsActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        intent.putExtra(GROUP_ID, viewModel.groupId)
+        startActivity(intent)
+        finish()
     }
 }

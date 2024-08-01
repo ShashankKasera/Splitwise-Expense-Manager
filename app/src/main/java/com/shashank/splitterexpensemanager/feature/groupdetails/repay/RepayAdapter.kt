@@ -14,7 +14,9 @@ import com.shashank.splitterexpensemanager.core.TotalImages
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionProcessor
 import com.shashank.splitterexpensemanager.core.actionprocessor.ActionType
 import com.shashank.splitterexpensemanager.core.actionprocessor.model.ActionRequestSchema
+import com.shashank.splitterexpensemanager.core.extension.EMPTY
 import com.shashank.splitterexpensemanager.core.extension.formatNumber
+import com.shashank.splitterexpensemanager.core.extension.shortenName
 import com.shashank.splitterexpensemanager.core.extension.visible
 import com.shashank.splitterexpensemanager.model.RepayWithPerson
 import de.hdodenhof.circleimageview.CircleImageView
@@ -25,9 +27,8 @@ class RepayAdapter(
 ) : RecyclerView.Adapter<RepayAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.repay_group_details_item, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.repay_group_details_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -36,8 +37,10 @@ class RepayAdapter(
         val context = holder.itemView.context
 
         with(holder) {
-            tvPayerName.text = repayItem?.payer?.name
-            tvReceiverName.text = repayItem?.receiver?.name
+            tvPayerName.text =
+                repayItem?.payer?.name?.shortenName(repayItem.payer.name ?: String.EMPTY)
+            tvReceiverName.text =
+                repayItem?.receiver?.name?.shortenName(repayItem.receiver.name ?: String.EMPTY)
             tvAmount.text = repayItem?.repay?.amount?.formatNumber(2)
             Glide.with(context).load(TotalImages.TOTAL_YOU_PAID_FOR).into(civRepay)
             tvDate.text = repayItem?.repay?.date

@@ -239,7 +239,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_login"
+        android:id="@+id/cv_log_out"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center"
