@@ -4,6 +4,7 @@
     <string name="email_address">Email Address</string>
     <string name="possword">Possword</string>
     <string name="sing_up_btn">SING UP</string>
+    <string name="log_out_btn">LOG OUT</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="login_in_registration">Login</string>
     <string name="contect_for_support">Contect for Support</string>
