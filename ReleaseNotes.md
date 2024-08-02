@@ -1,13 +1,1 @@
-#111: Group Settled Up
-#113: Friend Setting
-#115: Totals Filter
-#117: Friends Filter
-#119: Groups Filter
-#121: Add Toolbar
-#123: Add Image
-#125: Add Validation
-#127: Modify UI
-#129: Edit Friend
-#133: Create Account UI
-#135: Get Data for Account
-#135: Log Out
+#142: GIF bug fix
