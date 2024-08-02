@@ -8,7 +8,8 @@ In this project, I have used Android with Kotlin, MVVM, Dagger Hilt, Coroutines,
 
 ## Demo of Splitter app
 
-<img width="200px"   src="https://https://github.com/ShashankKasera/Splitwise-Expense-Manager/blob/develop/media/GIF-240801_162036.gif"></br>
+<img width="200px"   src="https://github.com/ShashankKasera/Splitwise-Expense-Manager/blob/master/media/GIF-240801_162036.gif"></br>
+
 
 ## Features
 
